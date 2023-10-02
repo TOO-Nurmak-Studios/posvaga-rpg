@@ -14,6 +14,7 @@ var current_callable_on_finish: Callable
 
 func _ready():
 	health.zero_health.connect(die)
+	
 	pass
 	
 func shoot(char: TestCharacter):

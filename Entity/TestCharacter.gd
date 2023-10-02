@@ -29,7 +29,6 @@ func shoot(char: TestCharacter):
 	var position = crosshair.global_position
 	projectile.position = position
 	projectile.damage = bullet_damage
-	#var velocity_vector = (point - crosshair.global_position).normalized() * bullet_speed;
 	add_sibling(projectile)
 	var tween: Tween = get_tree().create_tween()
 	tween.tween_property(projectile, "position", char.position, 0.5)
