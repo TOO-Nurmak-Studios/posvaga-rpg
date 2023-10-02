@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://bl2en8v232bj7"]
+[gd_scene load_steps=15 format=3 uid="uid://bl2en8v232bj7"]
 
-[ext_resource type="Script" path="res://Entity/TestPlayer.gd" id="1_h3hmi"]
+[ext_resource type="Script" path="res://Entity/Player.gd" id="1_6rtbr"]
 [ext_resource type="PackedScene" uid="uid://qy81h3pjkt1f" path="res://EntityPrototype/HealthNode.tscn" id="3_jn1an"]
 [ext_resource type="Texture2D" uid="uid://1r0unrf3f13u" path="res://sprites/chel_shoot.png" id="4_lmuxm"]
 
@@ -21,6 +21,26 @@ atlas = ExtResource("4_lmuxm")
 region = Rect2(128, 128, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5ensw"]
+atlas = ExtResource("4_lmuxm")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qsut0"]
+atlas = ExtResource("4_lmuxm")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o7til"]
+atlas = ExtResource("4_lmuxm")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glhfr"]
+atlas = ExtResource("4_lmuxm")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5b5cg"]
+atlas = ExtResource("4_lmuxm")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_313qe"]
 atlas = ExtResource("4_lmuxm")
 region = Rect2(0, 256, 128, 128)
 
@@ -53,19 +73,51 @@ animations = [{
 "loop": false,
 "name": &"shoot",
 "speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qsut0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o7til")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_glhfr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5b5cg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_313qe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5b5cg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_313qe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5b5cg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_313qe")
+}],
+"loop": false,
+"name": &"shoot_shotgun",
+"speed": 20.0
 }]
 
-[node name="DefaultPlayerCharacter" type="Node2D"]
+[node name="Player" type="Node2D"]
 position = Vector2(760, 324)
-script = ExtResource("1_h3hmi")
+script = ExtResource("1_6rtbr")
 
 [node name="HealthNode" parent="." instance=ExtResource("3_jn1an")]
+position = Vector2(-209, -244)
 
 [node name="Crosshair" type="Marker2D" parent="."]
-position = Vector2(284, -91)
+position = Vector2(123, -27)
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(123, -59)
-scale = Vector2(4.46875, 4.9375)
+scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_g04c6")
-animation = &"shoot"
+animation = &"shoot_shotgun"

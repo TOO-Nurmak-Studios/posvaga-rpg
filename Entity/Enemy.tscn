@@ -1,18 +1,19 @@
 [gd_scene load_steps=4 format=3 uid="uid://dibuna7voay6e"]
 
-[ext_resource type="Script" path="res://Entity/TestCharacter.gd" id="1_a3bi5"]
+[ext_resource type="Script" path="res://Entity/Enemy.gd" id="1_u122h"]
 [ext_resource type="Texture2D" uid="uid://c5rkryl0auyov" path="res://sprites/chel.png" id="2_sh65v"]
 [ext_resource type="PackedScene" uid="uid://qy81h3pjkt1f" path="res://EntityPrototype/HealthNode.tscn" id="3_2ecs2"]
 
-[node name="DefaultCharacter" type="Node2D"]
+[node name="Enemy" type="Node2D"]
 position = Vector2(760, 324)
-script = ExtResource("1_a3bi5")
+script = ExtResource("1_u122h")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(84, 3)
 texture = ExtResource("2_sh65v")
 
 [node name="HealthNode" parent="." instance=ExtResource("3_2ecs2")]
+position = Vector2(-105, -284)
 
 [node name="Crosshair" type="Marker2D" parent="."]
 position = Vector2(284, -91)
