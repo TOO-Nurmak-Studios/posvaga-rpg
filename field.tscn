@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://obv5cxfs5qx2"]
+
+[ext_resource type="PackedScene" uid="uid://dibuna7voay6e" path="res://Entity/TestCharacter.tscn" id="1_15674"]
+[ext_resource type="Script" path="res://field.gd" id="1_pgtap"]
+[ext_resource type="Script" path="res://HUDManager.gd" id="2_b5wph"]
+[ext_resource type="Script" path="res://BattleManager.gd" id="4_xdpp7"]
+[ext_resource type="PackedScene" uid="uid://bl2en8v232bj7" path="res://Entity/TestPlayer.tscn" id="5_6ravn"]
+
+[node name="Field" type="Node2D"]
+script = ExtResource("1_pgtap")
+
+[node name="DefaultCharacter2" parent="." groups=["enemy"] instance=ExtResource("1_15674")]
+position = Vector2(1565, 210)
+scale = Vector2(-0.6, 0.6)
+
+[node name="DefaultCharacter3" parent="." groups=["enemy"] instance=ExtResource("1_15674")]
+position = Vector2(1591, 815)
+scale = Vector2(-0.6, 0.6)
+
+[node name="HUDManager" type="Node" parent="."]
+script = ExtResource("2_b5wph")
+
+[node name="BattleManager" type="Node" parent="."]
+script = ExtResource("4_xdpp7")
+
+[node name="DefaultPlayerCharacter" parent="." groups=["player"] instance=ExtResource("5_6ravn")]
+position = Vector2(237, 501)
+scale = Vector2(0.56, 0.56)

@@ -1,0 +1,79 @@
+[gd_scene load_steps=11 format=3 uid="uid://bl2en8v232bj7"]
+
+[ext_resource type="Script" path="res://Entity/TestPlayer.gd" id="1_h3hmi"]
+[ext_resource type="PackedScene" uid="uid://qy81h3pjkt1f" path="res://EntityPrototype/HealthNode.tscn" id="3_jn1an"]
+[ext_resource type="Texture2D" uid="uid://1r0unrf3f13u" path="res://sprites/chel_shoot.png" id="4_lmuxm"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rnljh"]
+radius = 142.0
+height = 530.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pt56t"]
+atlas = ExtResource("4_lmuxm")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5h112"]
+atlas = ExtResource("4_lmuxm")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_co6ki"]
+atlas = ExtResource("4_lmuxm")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jv4vb"]
+atlas = ExtResource("4_lmuxm")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ensw"]
+atlas = ExtResource("4_lmuxm")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g04c6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pt56t")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pt56t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5h112")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_co6ki")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jv4vb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ensw")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 20.0
+}]
+
+[node name="DefaultPlayerCharacter" type="Area2D"]
+position = Vector2(760, 324)
+script = ExtResource("1_h3hmi")
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_rnljh")
+
+[node name="HealthNode" parent="." instance=ExtResource("3_jn1an")]
+
+[node name="Crosshair" type="Marker2D" parent="."]
+position = Vector2(284, -91)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(123, -59)
+scale = Vector2(4.46875, 4.9375)
+sprite_frames = SubResource("SpriteFrames_g04c6")
+animation = &"shoot"
