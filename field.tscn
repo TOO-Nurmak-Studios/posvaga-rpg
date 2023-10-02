@@ -26,3 +26,5 @@ script = ExtResource("4_xdpp7")
 [node name="DefaultPlayerCharacter" parent="." groups=["player"] instance=ExtResource("5_6ravn")]
 position = Vector2(237, 501)
 scale = Vector2(0.56, 0.56)
+bullet_speed = null
+bullet_damage = null

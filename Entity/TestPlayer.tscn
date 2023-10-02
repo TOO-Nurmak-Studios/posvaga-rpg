@@ -1,12 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://bl2en8v232bj7"]
+[gd_scene load_steps=10 format=3 uid="uid://bl2en8v232bj7"]
 
 [ext_resource type="Script" path="res://Entity/TestPlayer.gd" id="1_h3hmi"]
 [ext_resource type="PackedScene" uid="uid://qy81h3pjkt1f" path="res://EntityPrototype/HealthNode.tscn" id="3_jn1an"]
 [ext_resource type="Texture2D" uid="uid://1r0unrf3f13u" path="res://sprites/chel_shoot.png" id="4_lmuxm"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rnljh"]
-radius = 142.0
-height = 530.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pt56t"]
 atlas = ExtResource("4_lmuxm")
@@ -59,13 +55,9 @@ animations = [{
 "speed": 20.0
 }]
 
-[node name="DefaultPlayerCharacter" type="Area2D"]
+[node name="DefaultPlayerCharacter" type="Node2D"]
 position = Vector2(760, 324)
 script = ExtResource("1_h3hmi")
-
-[node name="Shape" type="CollisionShape2D" parent="."]
-position = Vector2(0, 4)
-shape = SubResource("CapsuleShape2D_rnljh")
 
 [node name="HealthNode" parent="." instance=ExtResource("3_jn1an")]
 

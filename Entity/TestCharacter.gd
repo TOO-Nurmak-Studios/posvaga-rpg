@@ -1,5 +1,5 @@
 class_name TestCharacter
-extends MovableArea2D
+extends Node2D
 
 @onready var crosshair: Marker2D = $Crosshair
 @onready var health: HealthNode = $HealthNode as HealthNode
