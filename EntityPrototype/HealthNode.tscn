@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://EntityPrototype/Health.gd" id="1_gnp2t"]
 
-[node name="HealthNode" type="Node" groups=["health_node"]]
+[node name="HealthNode" type="Node2D" groups=["health_node"]]
 script = ExtResource("1_gnp2t")

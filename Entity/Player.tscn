@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://bl2en8v232bj7"]
+[gd_scene load_steps=16 format=3 uid="uid://bl2en8v232bj7"]
 
 [ext_resource type="Script" path="res://Entity/Player.gd" id="1_6rtbr"]
 [ext_resource type="PackedScene" uid="uid://qy81h3pjkt1f" path="res://EntityPrototype/HealthNode.tscn" id="3_jn1an"]
+[ext_resource type="Texture2D" uid="uid://gxhc2beb4jw" path="res://sprites/chel_player_selected.png" id="4_aep1t"]
 [ext_resource type="Texture2D" uid="uid://1r0unrf3f13u" path="res://sprites/chel_shoot.png" id="4_lmuxm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pt56t"]
@@ -53,6 +54,14 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_aep1t")
+}],
+"loop": true,
+"name": &"idle_selected",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -120,4 +129,4 @@ position = Vector2(123, -27)
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_g04c6")
-animation = &"shoot_shotgun"
+animation = &"idle"

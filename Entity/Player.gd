@@ -24,3 +24,9 @@ func attack(index: int, enemy_to_attack):
 		sprite.animation_finished.disconnect(in_flight_attack)
 		attacks[index].attack(enemy_to_attack, gunpoint)
 	sprite.animation_finished.connect(in_flight_attack)
+
+func select():
+	sprite.animation = "idle_selected"
+
+func unselect():
+	sprite.animation = "idle"
