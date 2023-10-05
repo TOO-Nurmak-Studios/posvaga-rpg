@@ -11,3 +11,4 @@ scale = Vector2(1, 0.5)
 texture_under = ExtResource("1_h20fa")
 texture_progress = ExtResource("2_hm60y")
 script = ExtResource("3_cha7l")
+metadata/_edit_use_anchors_ = true
