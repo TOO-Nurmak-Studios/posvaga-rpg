@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dibuna7voay6e"]
+
+[ext_resource type="Script" path="res://battle_scene/Entity/Enemy.gd" id="1_j8jfm"]
+[ext_resource type="Texture2D" uid="uid://c5rkryl0auyov" path="res://sprites/chel.png" id="2_qd6e1"]
+[ext_resource type="PackedScene" uid="uid://qy81h3pjkt1f" path="res://battle_scene/EntityPrototype/HealthNode.tscn" id="3_qlayh"]
+
+[node name="Enemy" type="Node2D"]
+position = Vector2(760, 324)
+script = ExtResource("1_j8jfm")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(84, 3)
+texture = ExtResource("2_qd6e1")
+
+[node name="HealthNode" parent="." instance=ExtResource("3_qlayh")]
+position = Vector2(-105, -284)
+
+[node name="Crosshair" type="Marker2D" parent="."]
+position = Vector2(284, -91)

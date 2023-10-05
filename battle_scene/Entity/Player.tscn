@@ -1,48 +1,48 @@
 [gd_scene load_steps=16 format=3 uid="uid://bl2en8v232bj7"]
 
-[ext_resource type="Script" path="res://Entity/Player.gd" id="1_6rtbr"]
-[ext_resource type="PackedScene" uid="uid://qy81h3pjkt1f" path="res://EntityPrototype/HealthNode.tscn" id="3_jn1an"]
-[ext_resource type="Texture2D" uid="uid://gxhc2beb4jw" path="res://sprites/chel_player_selected.png" id="4_aep1t"]
-[ext_resource type="Texture2D" uid="uid://1r0unrf3f13u" path="res://sprites/chel_shoot.png" id="4_lmuxm"]
+[ext_resource type="Script" path="res://battle_scene/Entity/Player.gd" id="1_ohray"]
+[ext_resource type="PackedScene" uid="uid://qy81h3pjkt1f" path="res://battle_scene/EntityPrototype/HealthNode.tscn" id="2_tk0td"]
+[ext_resource type="Texture2D" uid="uid://1r0unrf3f13u" path="res://sprites/chel_shoot.png" id="3_1mpnq"]
+[ext_resource type="Texture2D" uid="uid://gxhc2beb4jw" path="res://sprites/chel_player_selected.png" id="4_t8se7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pt56t"]
-atlas = ExtResource("4_lmuxm")
+atlas = ExtResource("3_1mpnq")
 region = Rect2(0, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5h112"]
-atlas = ExtResource("4_lmuxm")
+atlas = ExtResource("3_1mpnq")
 region = Rect2(128, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_co6ki"]
-atlas = ExtResource("4_lmuxm")
+atlas = ExtResource("3_1mpnq")
 region = Rect2(0, 128, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jv4vb"]
-atlas = ExtResource("4_lmuxm")
+atlas = ExtResource("3_1mpnq")
 region = Rect2(128, 128, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5ensw"]
-atlas = ExtResource("4_lmuxm")
+atlas = ExtResource("3_1mpnq")
 region = Rect2(0, 256, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qsut0"]
-atlas = ExtResource("4_lmuxm")
+atlas = ExtResource("3_1mpnq")
 region = Rect2(0, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o7til"]
-atlas = ExtResource("4_lmuxm")
+atlas = ExtResource("3_1mpnq")
 region = Rect2(128, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_glhfr"]
-atlas = ExtResource("4_lmuxm")
+atlas = ExtResource("3_1mpnq")
 region = Rect2(0, 128, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5b5cg"]
-atlas = ExtResource("4_lmuxm")
+atlas = ExtResource("3_1mpnq")
 region = Rect2(128, 128, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_313qe"]
-atlas = ExtResource("4_lmuxm")
+atlas = ExtResource("3_1mpnq")
 region = Rect2(0, 256, 128, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g04c6"]
@@ -57,7 +57,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_aep1t")
+"texture": ExtResource("4_t8se7")
 }],
 "loop": true,
 "name": &"idle_selected",
@@ -118,9 +118,9 @@ animations = [{
 
 [node name="Player" type="Node2D"]
 position = Vector2(760, 324)
-script = ExtResource("1_6rtbr")
+script = ExtResource("1_ohray")
 
-[node name="HealthNode" parent="." instance=ExtResource("3_jn1an")]
+[node name="HealthNode" parent="." instance=ExtResource("2_tk0td")]
 position = Vector2(-209, -244)
 
 [node name="Crosshair" type="Marker2D" parent="."]

@@ -5,7 +5,7 @@ extends Attack
 @export var bullet_damage: float = 5
 @export var bullet_scale = Vector2(0.15, 0.15)
 
-var bullet_scene: Resource = preload("res://Entity/Bullet.tscn")
+var bullet_scene: Resource = preload("res://battle_scene/Entity/Bullet.tscn")
 
 var _projectiles_hit_target: int = 0
 

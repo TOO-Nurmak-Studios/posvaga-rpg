@@ -3,14 +3,14 @@ class_name HUDManager
 extends Node
 
 #resources
-var health_bar_scene: Resource = preload("res://HUD/HealthBar.tscn")
+var health_bar_scene: Resource = preload("res://battle_scene/HUD/HealthBar.tscn")
 
 # used nodes
 var main_scene: Node
 var attack_containers: Dictionary
 var current_attack_container: Container
 var tooltip_label: Label
-@onready var battle_manager: BattleManager = $/root/Field/BattleManager as BattleManager
+@onready var battle_manager: BattleManager = $/root/BattleField/BattleManager as BattleManager
 
 # state machine
 enum State {SELECT_ATTACK, SELECT_ENEMY, NOTHING}

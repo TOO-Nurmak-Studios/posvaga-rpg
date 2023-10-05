@@ -3,7 +3,7 @@ extends Attack
 
 @export var bullet_speed: float = 0.5
 @export var bullet_damage: float = 10
-var bullet_scene: Resource = preload("res://Entity/Bullet.tscn")
+var bullet_scene: Resource = preload("res://battle_scene/Entity/Bullet.tscn")
 var current_callable_on_finish: Callable
 
 func _init():
