@@ -6,27 +6,35 @@ extends CharacterBody2D
 @onready var animation_node = $AnimatedSprite2D
 
 var speed = default_speed
+var speed_modifier = 1
 var direction_name = "down"
+var animation_name
 
-func _physics_process(delta):
-	
-	var velocity = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	
-	if Input.is_action_just_pressed("ui_sprint"):
-		speed = default_speed * sprint_speed_modifier
-		animation_node.speed_scale *= sprint_speed_modifier
-	elif Input.is_action_just_released("ui_sprint"):
-		speed = default_speed
-		animation_node.speed_scale = 1
-	
-	velocity = velocity.normalized() * speed * delta;
-	
+
+func _ready():
+	EventBus.player_move_pressed.connect(process_movement)
+	EventBus.player_sprint_pressed.connect(process_sprint_pressed)
+	EventBus.player_sprint_released.connect(process_sprint_released)
+
+
+func process_sprint_pressed():
+	speed = default_speed * sprint_speed_modifier
+	animation_node.speed_scale *= sprint_speed_modifier
+
+
+func process_sprint_released():
+	speed = default_speed
+	animation_node.speed_scale = 1
+
+
+func process_movement(delta, new_velocity):
+	velocity = new_velocity.normalized() * speed * delta;
 	move_and_collide(velocity)
 	play_animation(velocity)
 
 
 func play_animation(new_direction : Vector2):
-	var animation_name
+	var new_animation_name
 	
 	if new_direction != Vector2.ZERO:
 		
@@ -39,11 +47,13 @@ func play_animation(new_direction : Vector2):
 			animation_node.flip_h = false
 			direction_name = "side"
 			
-		animation_name = "walk_" + direction_name
+		new_animation_name = "walk_" + direction_name
 	else:
-		animation_name = "idle_" + direction_name
+		new_animation_name = "idle_" + direction_name
 	
-	animation_node.play(animation_name)
+	if (animation_name != new_animation_name):
+		animation_name = new_animation_name
+		animation_node.play(animation_name)
 
 
 func get_direction_name(direction : Vector2):
