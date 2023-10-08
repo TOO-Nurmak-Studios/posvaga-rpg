@@ -9,7 +9,7 @@ func remove_health(i: int):
 	var old_hp = health
 	health -= i
 	health_changed.emit(old_hp, health)
-	if health <= 0:
+	if old_hp > 0 && health <= 0:
 		zero_health.emit()
 	pass	
 	

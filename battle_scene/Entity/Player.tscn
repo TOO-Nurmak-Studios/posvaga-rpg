@@ -51,7 +51,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_pt56t")
 }],
-"loop": true,
+"loop": false,
 "name": &"idle",
 "speed": 1.0
 }, {
@@ -59,9 +59,9 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("4_t8se7")
 }],
-"loop": true,
+"loop": false,
 "name": &"idle_selected",
-"speed": 5.0
+"speed": 1.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -117,16 +117,14 @@ animations = [{
 }]
 
 [node name="Player" type="Node2D"]
-position = Vector2(760, 324)
 script = ExtResource("1_ohray")
 
 [node name="HealthNode" parent="." instance=ExtResource("2_tk0td")]
-position = Vector2(-209, -244)
-
-[node name="Crosshair" type="Marker2D" parent="."]
-position = Vector2(123, -27)
+position = Vector2(-64, -64)
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
-scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_g04c6")
-animation = &"idle"
+animation = &"shoot"
+
+[node name="Crosshair" type="Marker2D" parent="."]
+position = Vector2(30, -5)

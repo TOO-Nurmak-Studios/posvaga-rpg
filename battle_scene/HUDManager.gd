@@ -10,7 +10,7 @@ var main_scene: Node
 var attack_containers: Dictionary
 var current_attack_container: Container
 var tooltip_label: Label
-@onready var battle_manager: BattleManager = $/root/BattleField/BattleManager as BattleManager
+@onready var select_manager: SelectManager = $/root/BattleField/SelectManager as SelectManager
 
 # state machine
 enum State {SELECT_ATTACK, SELECT_ENEMY, NOTHING}
@@ -21,50 +21,71 @@ var selected_attack: int = -1
 func _ready():
 	main_scene = get_parent()
 	
-	_create_attack_menu(battle_manager.selected_player())
+	_create_attack_menu(select_manager.selected_player())
+	_flip_enemies()
 	_create_tooltip_label()
 	_create_health_bars()
 	
-	EventBus.action_button_pressed.connect(action_pressed)
-	EventBus.player_attack_landed.connect(back_to_default_state)
-	battle_manager.player_selected.connect(_create_attack_menu)
-	
+	EventBus.action_button_pressed.connect(_action_pressed)
+	EventBus.battle_scene_end.connect(_on_battle_scene_end)
+	select_manager.player_selected.connect(_create_attack_menu)
 
-func action_pressed():
+func _on_battle_scene_end():
+	change_state(State.NOTHING)
+	tooltip_label.text = "Battle finished!"
+	tooltip_label.show()	
+
+func _action_pressed():
 	if current_state == State.SELECT_ENEMY:
-		battle_manager.on_shoot_pressed(selected_attack)
+		select_manager.on_shoot_pressed(selected_attack)
 		change_state(State.NOTHING)
 	return	
 
-func attack_pressed(i: int):
+func _attack_pressed(i: int):
 	change_state(State.SELECT_ENEMY)
 	selected_attack = i
 
-func back_to_default_state(_attack: Attack):
+func prepare_player_attack(attacker: AbstractCharacter = null, attacked: Array[AbstractCharacter] = [], attack: Attack = null):
+	back_to_default_state()
+	if attack != null:
+		var attacked_str = ", ".join(attacked.map(func(a): return a.char_name))
+		tooltip_label.text = attack.attack_postmessage % [attacker.char_name, attacked_str]
+		if tooltip_label != null:
+			tooltip_label.show()
+
+func back_to_default_state():
 	change_state(State.SELECT_ATTACK)
 	
 func change_state(state: State):
 	match state:
 		State.SELECT_ATTACK:
 			current_state = State.SELECT_ATTACK
-			battle_manager.set_select_state(BattleManager.SelectState.PLAYER)
-			current_attack_container.show()
+			select_manager.set_select_state(SelectManager.SelectState.PLAYER)
+			_create_attack_menu(select_manager.selected_player())
 			tooltip_label.hide()
 			return
 		State.SELECT_ENEMY:
 			current_state = State.SELECT_ENEMY
-			battle_manager.set_select_state(BattleManager.SelectState.ENEMY)
+			select_manager.set_select_state(SelectManager.SelectState.ENEMY)
 			current_attack_container.hide()
 			tooltip_label.show()
 			return
 		State.NOTHING:
 			current_state = State.NOTHING
 			selected_attack = -1
-			battle_manager.set_select_state(BattleManager.SelectState.DISABLED)
-			current_attack_container.hide()
-			tooltip_label.hide()
+			select_manager.set_select_state(SelectManager.SelectState.DISABLED)
+			if current_attack_container != null:
+				current_attack_container.hide()
+			if tooltip_label != null:
+				tooltip_label.hide()
 			return
 			
+func _flip_enemies():
+	var enemies: Array[Node] = get_tree().get_nodes_in_group("enemy")
+	for enemy in enemies:
+		var sprite: AnimatedSprite2D = enemy.get_node("Sprite") as AnimatedSprite2D
+		sprite.flip_h = true
+	
 func _create_health_bars():
 	var health_nodes: Array[Node] = get_tree().get_nodes_in_group("health_node")
 	for health_node in health_nodes:
@@ -88,19 +109,20 @@ func _attach_remote_transform(transformed_node: Node, sibling_node: Node2D):
 	rt.position = sibling_node.position
 	rt.remote_path = transformed_node.get_path()
 	rt.update_rotation = false
+	rt.update_scale = false
 	sibling_node.add_sibling(rt)
 	
 func _create_tooltip_label():
 	tooltip_label = Label.new()
-	tooltip_label.add_theme_font_size_override("font_size", 24)
+	tooltip_label.add_theme_font_size_override("font_size", 16)
 	tooltip_label.text = "Use arrows to select enemy, Enter to attack."
-	tooltip_label.position = Vector2(10, 10)
+	tooltip_label.position = Vector2(8, 8)
 	tooltip_label.hide()
 	add_sibling.call_deferred(tooltip_label)
 	
 	
 func _create_attack_menu(character: Player):
-	if battle_manager.select_state == BattleManager.SelectState.DISABLED:
+	if select_manager.select_state == SelectManager.SelectState.DISABLED:
 		return
 	if current_attack_container != null:
 		current_attack_container.hide()
@@ -112,7 +134,7 @@ func _create_attack_menu(character: Player):
 	var sprite = character.get_node("Sprite") as AnimatedSprite2D
 	var global_pos = sprite.global_position
 	var rect2size = sprite.sprite_frames.get_frame_texture("shoot", 0).get_size() * sprite.scale * character.scale
-	var attack_menu_position = global_pos + Vector2(rect2size.x / 2, 0) + Vector2(10, -20)
+	var attack_menu_position = global_pos + Vector2(rect2size.x / 2, 0) + Vector2(4, -8)
 	
 	current_attack_container = VBoxContainer.new()
 	current_attack_container.position = attack_menu_position
@@ -120,10 +142,10 @@ func _create_attack_menu(character: Player):
 	for i in range(character.attacks.size()):
 		var attack = character.attacks[i]
 		var button: Button = Button.new()
-		button.scale = Vector2(2, 2) 
+		button.scale = Vector2(1, 1) 
 		button.text = attack.attack_name
-		button.add_theme_font_size_override("font_size", 24)
-		button.pressed.connect(func(): attack_pressed(i))
+		button.add_theme_font_size_override("font_size", 12)
+		button.pressed.connect(func(): _attack_pressed(i))
 		current_attack_container.add_child(button)
 	
 	add_sibling.call_deferred(current_attack_container)

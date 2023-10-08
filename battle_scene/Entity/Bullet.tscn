@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://bkvn2dg4b3cc8" path="res://sprites/bullet.png" id="2_3xs5l"]
 
 [node name="Bullet" type="Node2D"]
-scale = Vector2(0.200001, 0.200001)
 script = ExtResource("1_i6px5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.125, 0.125)
 texture = ExtResource("2_3xs5l")

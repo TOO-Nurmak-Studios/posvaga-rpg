@@ -1,102 +1,68 @@
-class_name BattleManager
 extends Node
 
-var chars: Dictionary # <CharType, Array[AbstractCharacter]>
-var selected_char: Dictionary # <CharType, AbstractCharacter>
-var selected_char_index: Dictionary # <CharType, int>
+var all_characters: Array[AbstractCharacter]
+@onready var select_manager: SelectManager = $/root/BattleField/SelectManager as SelectManager
+@onready var hud_manager: HUDManager = $/root/BattleField/HUDManager as HUDManager
 
-enum Select {NEXT, PREV}
-enum SelectState {DISABLED, ENEMY, PLAYER}
-enum CharType {ENEMY, PLAYER}
-var select_state: SelectState
+var current_move: int = -1
 
-signal player_selected(player: Player)
-
+# initiative-based turn system
 func _ready():
-	selected_char_index[CharType.ENEMY] = -1
-	selected_char_index[CharType.PLAYER] = -1
-	selected_char[CharType.ENEMY] = null
-	selected_char[CharType.PLAYER] = null
-	chars[CharType.ENEMY] = get_tree().get_nodes_in_group("enemy")
-	chars[CharType.PLAYER] = get_tree().get_nodes_in_group("player")
-	for ch in chars[CharType.ENEMY]: 
-		ch.death.connect(remove_enemy)
-	for ch in chars[CharType.PLAYER]: 
-		ch.death.connect(remove_player)
-		
-		
-	EventBus.select_next_button_pressed.connect(_select_next)
-	EventBus.select_prev_button_pressed.connect(_select_prev)
+	var enemies: Array[Node] = get_tree().get_nodes_in_group("enemy")
+	var allies: Array[Node] = get_tree().get_nodes_in_group("player")
 	
-	select_state = SelectState.PLAYER
-	_select_next()
-	select_state = SelectState.ENEMY
-	_select_next()
-	set_select_state(SelectState.PLAYER)
+	all_characters = []
+	all_characters.append_array(enemies)
+	all_characters.append_array(allies)
+	all_characters.sort_custom(_sort_by_initiative)
+	
+	for char in all_characters:
+		char.death.connect(func(x): 
+			var index = all_characters.find(x)
+			if index <= current_move:
+				current_move -= 1
+			all_characters.erase(x)
+		)
+	
+	EventBus.attack_landed.connect(_on_attack_land)
+	EventBus.battle_scene_fully_ready.connect(next_move)
 	pass 
-	
-	
-func _select_next():
-	select(Select.NEXT)
-	
-func _select_prev():
-	select(Select.PREV)
-					
 
-func select(select_type: Select, force: bool = false, force_type: SelectState = SelectState.DISABLED):
-	if select_state == SelectState.DISABLED && !force:
+func next_move():
+	current_move += 1
+	if current_move >= all_characters.size():
+		current_move = 0
+	var char = all_characters[current_move]
+	var char_type = char.get_type()
+	if char_type == AbstractCharacter.CharacterType.PLAYER:
+		select_manager.set_select_state(SelectManager.SelectState.PLAYER)
+		hud_manager.prepare_player_attack()
 		return
-	
-	var modifier: int = 1 if select_type == Select.NEXT else -1
-	var cur_select_state = force_type if force else select_state
-	
-	var char_type = CharType.ENEMY if cur_select_state == SelectState.ENEMY else CharType.PLAYER
-	
-	if selected_char[char_type] != null:
-		selected_char[char_type].unselect()
-	selected_char_index[char_type] += 1
-	if selected_char_index[char_type] >= chars[char_type].size():
-		selected_char_index[char_type] = 0
-	var index = selected_char_index[char_type]
-	selected_char[char_type] = chars.get(char_type)[index]
-	if select_state != SelectState.DISABLED:
-		selected_char[char_type].select()
-	if char_type == CharType.PLAYER:
-		player_selected.emit(selected_player())
+	if char_type == AbstractCharacter.CharacterType.ENEMY:
+		var enemy = char as Enemy
+		enemy.do_move(select_manager.players(), select_manager.enemies())
+		return
 
-func remove_enemy(enemy: Enemy):
-	if enemy == selected_enemy():
-		select(Select.NEXT, true, SelectState.ENEMY)
-	chars[CharType.ENEMY].erase(enemy)
+func _sort_by_initiative(a: AbstractCharacter, b: AbstractCharacter):
+	return a.initiative > b.initiative
 
-func remove_player(player: Player):
-	if player == selected_player():
-		select(Select.NEXT, true, SelectState.PLAYER)
-	chars[CharType.PLAYER].erase(player)
+func _on_attack_pressed():
+	select_manager.mark_selected_player_moved()
 
-func on_shoot_pressed(attack_index: int):
-	selected_player().attack(attack_index, selected_enemy())
-	
-func set_select_state(new_state: SelectState):
-	select_state = new_state
-	match new_state:
-		SelectState.DISABLED:
-			if selected_enemy() != null:
-				selected_enemy().unselect()
-		SelectState.ENEMY:
-			if selected_enemy() != null:
-				selected_enemy().select()
-			if selected_player() != null:
-				selected_player().unselect()
-		SelectState.PLAYER:
-			if selected_enemy() != null:
-				selected_enemy().unselect()
-			if selected_player() != null:
-				selected_player().select()
-
-func selected_player() -> Player:
-	return selected_char[CharType.PLAYER]
-
-func selected_enemy():
-	return selected_char[CharType.ENEMY]
-	
+func _on_attack_land(attacker: AbstractCharacter, attacked: Array[AbstractCharacter], attack: Attack):
+	if attacker.get_type() == AbstractCharacter.CharacterType.PLAYER:
+		var enemies_left = select_manager.enemy_amount()
+		if enemies_left == 0:
+			EventBus.emit_battle_scene_end()
+			return
+		select_manager.mark_selected_player_moved()
+		if select_manager.player_moves_left() == 0:
+			select_manager.reset_player_moves()
+		else: 
+			select_manager.select(SelectManager.Select.NEXT, true)
+	else: if attacker.get_type() == AbstractCharacter.CharacterType.ENEMY:
+		var players_left = select_manager.players_amount()
+		if players_left == 0:
+			EventBus.emit_battle_scene_end()
+			return
+	next_move()

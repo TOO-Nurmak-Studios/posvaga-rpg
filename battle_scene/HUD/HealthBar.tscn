@@ -5,8 +5,11 @@
 [ext_resource type="Script" path="res://battle_scene/HUD/HealthBar.gd" id="3_cha7l"]
 
 [node name="HealthBar" type="TextureProgressBar"]
-offset_right = 300.0
-offset_bottom = 64.0
+anchors_preset = -1
+anchor_left = -0.332812
+anchor_right = -0.332812
+offset_right = 341.0
+offset_bottom = 16.0
 scale = Vector2(1, 0.5)
 texture_under = ExtResource("1_h20fa")
 texture_progress = ExtResource("2_hm60y")
