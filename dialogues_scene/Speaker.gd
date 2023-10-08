@@ -2,8 +2,6 @@ extends Node2D
 
 class_name Speaker
 
-enum Location { LEFT, RIGHT }
-
 var appear_pos_x: float
 var disappear_pos_x: float
 
@@ -15,7 +13,7 @@ func _ready():
 func _process(delta):
 	pass
 
-func init(t: Texture2D, location: Location, bottom: float, viewport_size: Vector2):
+func init(t: Texture2D, location: SpeakerData.Location, bottom: float, viewport_size: Vector2):
 	$Sprite2D.texture = t
 	
 	var texture_size = t.get_size()
@@ -33,10 +31,10 @@ func init(t: Texture2D, location: Location, bottom: float, viewport_size: Vector
 	position.y = bottom - texture_size_y / 2
 	
 	match(location):
-		Location.LEFT:
+		SpeakerData.Location.LEFT:
 			appear_pos_x = texture_size_x / 2
 			disappear_pos_x = -1 * (texture_size_x / 2)
-		Location.RIGHT:
+		SpeakerData.Location.RIGHT:
 			appear_pos_x = viewport_size.x - texture_size_x / 2
 			disappear_pos_x = viewport_size.x + texture_size_x / 2
 	
