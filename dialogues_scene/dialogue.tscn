@@ -40,5 +40,6 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Next"
 
+[connection signal="option_chosen" from="." to="." method="_on_option_chosen"]
 [connection signal="option_chosen" from="CanvasLayer/ChoicesBox" to="." method="_on_choices_box_option_chosen"]
 [connection signal="pressed" from="CanvasLayer/NextButton" to="." method="next"]

@@ -1,12 +1,10 @@
 class_name ChoiceOptionData
 
-enum Type { REPLICA, ACTION }
-
-var type: Type
+var id: String
 var text: String
 var next_unit_id: int
 
-func _init(_type: Type, _text: String, _next_unit_id: int):
-	type = _type
+func _init(_id: String, _text: String, _next_unit_id: int):
+	id = _id
 	text = _text
 	next_unit_id = _next_unit_id
