@@ -1,22 +1,20 @@
-extends Node2D
-
 class_name Speaker
+
+extends Node2D
 
 var appear_pos_x: float
 var disappear_pos_x: float
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
-func init(t: Texture2D, location: SpeakerData.Location, bottom: float, viewport_size: Vector2):
-	$Sprite2D.texture = t
+func init(texture: Texture2D, location: SpeakerData.Location, bottom: float, viewport_size: Vector2):
+	$Sprite2D.texture = texture
 	
-	var texture_size = t.get_size()
+	var texture_size = texture.get_size()
 	var texture_size_x = texture_size.x
 	var texture_size_y = texture_size.y
 	

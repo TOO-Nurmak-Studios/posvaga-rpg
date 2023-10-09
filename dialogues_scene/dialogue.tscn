@@ -1,14 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://clah0tnwu35b8"]
 
 [ext_resource type="Script" path="res://dialogues_scene/Dialogue.gd" id="1_42uhe"]
-[ext_resource type="PackedScene" uid="uid://bbruyt65lcvvv" path="res://dialogues_scene/speech_box.tscn" id="1_n5grt"]
+[ext_resource type="PackedScene" uid="uid://bbruyt65lcvvv" path="res://dialogues_scene/replicas_box.tscn" id="1_n5grt"]
 
 [node name="Dialogue" type="Node2D"]
 script = ExtResource("1_42uhe")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="SpeechBox" parent="CanvasLayer" instance=ExtResource("1_n5grt")]
+[node name="ReplicasBox" parent="CanvasLayer" instance=ExtResource("1_n5grt")]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -33,4 +33,4 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Next"
 
-[connection signal="pressed" from="CanvasLayer/NextButton" to="." method="next_speech_unit"]
+[connection signal="pressed" from="CanvasLayer/NextButton" to="." method="next_replica"]

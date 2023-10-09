@@ -1,5 +1,3 @@
-extends Node
-
 class_name SpeakerData
 
 enum Location { LEFT, RIGHT }
