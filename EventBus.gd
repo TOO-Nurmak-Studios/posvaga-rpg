@@ -16,6 +16,7 @@ signal player_sprint_released()
 
 func _ready():
 	var root_scene = $/root/BattleField as Node
+	## TODO: recomment before merge
 	##root_scene.ready.connect(_emit_battle_scene_fully_ready)
 
 func _emit_battle_scene_fully_ready():

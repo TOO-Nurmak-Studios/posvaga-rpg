@@ -1,5 +1,7 @@
 extends Node2D
 
+signal dialogue_finished
+
 var replicas_box: ReplicasBox
 var speaker_scene: PackedScene = load("res://dialogues_scene/speaker.tscn")
 
@@ -13,8 +15,8 @@ func _ready():
 	replicas_box = get_node("CanvasLayer/ReplicasBox")
 	var data = create_dialogue_data()
 	init_speakers(data)
-	init_replias(data)
-	current_replica_idx = -1
+	init_replicas(data)
+	current_replica_idx = 0
 	next_replica()
 
 func _process(delta):
@@ -24,9 +26,9 @@ func _process(delta):
 func create_dialogue_data():
 	var _replicas: Array
 	_replicas.resize(3)
-	_replicas[0] = Replica.new("Дима", "Вы знаете, зачем мы здесь собрались?")
-	_replicas[1] = Replica.new("Гриша", "Нет.")
-	_replicas[2] = Replica.new("Дима", "Ваши успехи в учёбе оставляют желать лучшего. Нам нужно решить этот вопрос..")
+	_replicas[0] = ReplicaData.new("Дима", "Вы знаете, зачем мы здесь собрались?")
+	_replicas[1] = ReplicaData.new("Гриша", "Нет.")
+	_replicas[2] = ReplicaData.new("Дима", "Ваши успехи в учёбе оставляют желать лучшего. Нам нужно решить этот вопрос..")
 	var _speakers: Array
 	_speakers.resize(2)
 	_speakers[0] = SpeakerData.new("Дима", "res://sprites/dima.png", SpeakerData.Location.LEFT)
@@ -45,16 +47,24 @@ func init_speakers(data: DialogueData):
 		add_child(speaker_instance)
 		counter += 1
 
-func init_replias(data: DialogueData):
+func init_replicas(data: DialogueData):
 	replicas = data.replicas
 
 func next_replica():
-	if (current_replica_idx >= 0):
-		current_speaker.disappear()
+	if current_replica_idx == replicas.size():
+		finish()
+		return
 		
-	current_replica_idx += 1
+	if current_replica_idx >= 1:
+		current_speaker.disappear()
 	
 	var current_replica = replicas[current_replica_idx]
 	replicas_box.set_replica(current_replica)
 	current_speaker = speakers[speakers_to_indices[current_replica.speaker_name]]
 	current_speaker.appear()
+	
+	current_replica_idx += 1
+
+func finish():
+	print("dialogue finished")
+	dialogue_finished.emit()

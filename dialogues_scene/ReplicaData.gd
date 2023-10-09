@@ -1,4 +1,4 @@
-class_name Replica
+class_name ReplicaData
 
 var speaker_name: String
 var text: String

@@ -8,6 +8,6 @@ func _ready():
 func _process(delta):
 	pass
 
-func set_replica(replica: Replica):
+func set_replica(replica: ReplicaData):
 	$Rect/SpeakerNameLabel.text = replica.speaker_name + ":"
 	$Rect/TextLabel.text = replica.text
