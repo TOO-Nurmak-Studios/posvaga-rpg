@@ -1,0 +1,60 @@
+[gd_scene load_steps=2 format=3 uid="uid://rqc1ucjcp3qg"]
+
+[ext_resource type="Script" path="res://dialogues_scene/ChoicesBox.gd" id="1_iv7ck"]
+
+[node name="ChoicesBox" type="Control"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -35.0
+offset_right = 600.0
+grow_vertical = 0
+script = ExtResource("1_iv7ck")
+
+[node name="Rect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 35.0
+color = Color(0.482353, 0.482353, 0.482353, 0)
+
+[node name="Option1" type="Button" parent="Rect"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -35.0
+offset_right = 195.0
+grow_vertical = 0
+text = "Option 1"
+
+[node name="Option2" type="Button" parent="Rect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -97.5
+offset_top = -35.0
+offset_right = 97.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "Option 2"
+
+[node name="Option3" type="Button" parent="Rect"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -195.0
+offset_top = -35.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Option 3"
+
+[connection signal="pressed" from="Rect/Option1" to="." method="_on_option_pressed" binds= [0]]
+[connection signal="pressed" from="Rect/Option2" to="." method="_on_option_pressed" binds= [1]]
+[connection signal="pressed" from="Rect/Option3" to="." method="_on_option_pressed" binds= [2]]

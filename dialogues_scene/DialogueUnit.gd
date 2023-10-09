@@ -1,8 +1,11 @@
 class_name DialogueUnit
 
+var id: int
 var replica: ReplicaData
-var choice: ChoiceData
+## of type ChoiceOptionData
+var choice_options: Array
 
-func _init(_replica: ReplicaData, _choice: ChoiceData):
+func _init(_id: int, _replica: ReplicaData, _choice_options: Array):
+	id = _id
 	replica = _replica
-	choice = _choice
+	choice_options = _choice_options
