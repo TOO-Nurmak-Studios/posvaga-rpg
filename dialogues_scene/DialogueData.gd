@@ -3,9 +3,9 @@ class_name DialogueData
 ## of type SpeakerData
 var speakers: Array
 
-## of type Replica
-var replicas: Array
+## of type DialogueUnit
+var units: Array
 
-func _init(s: Array, r: Array):
-	speakers = s
-	replicas = r
+func _init(_speakers: Array, _units: Array):
+	speakers = _speakers
+	units = _units

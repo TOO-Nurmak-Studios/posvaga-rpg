@@ -6,7 +6,7 @@ var speaker_name: String
 var texture_path: String
 var location: Location
 
-func _init(sn: String, tp: String, l: Location):
-	speaker_name = sn
-	texture_path = tp
-	location = l
+func _init(_speaker_name: String, _texture_path: String, _location: Location):
+	speaker_name = _speaker_name
+	texture_path = _texture_path
+	location = _location
