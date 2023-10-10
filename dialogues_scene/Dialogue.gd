@@ -1,6 +1,6 @@
 extends Node2D
 
-signal dialogue_finished
+signal dialogue_finished()
 signal option_chosen(option_id: String)
 
 var replicas_box: ReplicasBox
@@ -8,10 +8,10 @@ var choices_box: ChoicesBox
 var next_button: Button
 var speaker_scene: PackedScene = load("res://dialogues_scene/speaker.tscn")
 
-var speakers: Array
+var speakers: Array[Speaker]
 var speakers_to_indices = {}
 var current_speaker: Speaker
-var units: Array
+var units: Array[DialogueUnit]
 var next_unit_id: int
 
 func _ready():
@@ -30,7 +30,7 @@ func _process(delta):
 
 ## TODO: replace with loading
 func create_dialogue_data():
-	var _units: Array
+	var _units: Array[DialogueUnit]
 	_units.resize(6)
 	_units[0] = DialogueUnit.new(0, ReplicaData.new("Дима", "Вы знаете, зачем мы здесь собрались?", 20), [], 1)
 	_units[1] = DialogueUnit.new(1, ReplicaData.new("Гриша", "Нет.", 10), [], 2)
@@ -38,7 +38,7 @@ func create_dialogue_data():
 	_units[3] = DialogueUnit.new(3, ReplicaData.new("Гриша", "...", 2), [ChoiceOptionData.new("grisha-pls-no", "Не надо...", 4), ChoiceOptionData.new("grisha-eff", "Щас тебя порешаю", 5)], -1)
 	_units[4] = DialogueUnit.new(4, ReplicaData.new("Дима", "<Взрыв>", 30), [], 6)
 	_units[5] = DialogueUnit.new(5, ReplicaData.new("Дима", "Чё тявкнул, Бобик?", 5), [], 7)
-	var _speakers: Array
+	var _speakers: Array[SpeakerData]
 	_speakers.resize(2)
 	_speakers[0] = SpeakerData.new("Дима", "res://sprites/dima.png", SpeakerData.Location.LEFT)
 	_speakers[1] = SpeakerData.new("Гриша", "res://sprites/grisha.png", SpeakerData.Location.RIGHT)

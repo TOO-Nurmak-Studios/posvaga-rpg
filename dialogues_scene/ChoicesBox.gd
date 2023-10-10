@@ -2,10 +2,10 @@ class_name ChoicesBox
 
 extends Control
 
-signal option_chosen
+signal option_chosen()
 
-var option_buttons: Array
-var choice_options: Array
+var option_buttons: Array[Button]
+var choice_options: Array[ChoiceOptionData]
 var chosen_option: ChoiceOptionData
 
 func _ready():

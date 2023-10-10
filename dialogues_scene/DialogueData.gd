@@ -1,11 +1,8 @@
 class_name DialogueData
 
-## of type SpeakerData
-var speakers: Array
+var speakers: Array[SpeakerData]
+var units: Array[DialogueUnit]
 
-## of type DialogueUnit
-var units: Array
-
-func _init(_speakers: Array, _units: Array):
+func _init(_speakers: Array[SpeakerData], _units: Array[DialogueUnit]):
 	speakers = _speakers
 	units = _units
