@@ -26,6 +26,7 @@ func _ready():
 	
 	EventBus.attack_landed.connect(_on_attack_land)
 	EventBus.battle_scene_fully_ready.connect(next_move)
+	print(all_characters.map(func(x): return x.char_name))
 	pass 
 
 func next_move():
@@ -56,13 +57,15 @@ func _on_attack_land(attacker: AbstractCharacter, attacked: Array[AbstractCharac
 			EventBus.emit_battle_scene_end()
 			return
 		select_manager.mark_selected_player_moved()
-		if select_manager.player_moves_left() == 0:
+		if select_manager.player_moves_left() <= 0:
 			select_manager.reset_player_moves()
-		else: 
+		else:
 			select_manager.select(SelectManager.Select.NEXT, true)
 	else: if attacker.get_type() == AbstractCharacter.CharacterType.ENEMY:
 		var players_left = select_manager.players_amount()
 		if players_left == 0:
 			EventBus.emit_battle_scene_end()
 			return
+		if select_manager.player_moves_left() <= 0:
+			select_manager.reset_player_moves()	
 	next_move()

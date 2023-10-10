@@ -75,10 +75,12 @@ func select(select_type: Select, force: bool = false, force_type: SelectState = 
 	while true:
 		# i need do..while but gdscript does not support it :D
 		# increment index of selected char
-		selected_char_index[char_type] += 1
+		selected_char_index[char_type] += modifier
 		# loop char array
 		if selected_char_index[char_type] >= chars[char_type].size():
 			selected_char_index[char_type] = 0
+		if selected_char_index[char_type] < 0:
+			selected_char_index[char_type] = chars[char_type].size() - 1
 		if force || !moved_chars.get(char_type).has(chars.get(char_type)[selected_char_index[char_type]]):
 			break
 	
@@ -139,6 +141,9 @@ func player_moves_left() -> int:
 func reset_player_moves():
 	moved_chars.get(CharType.PLAYER).clear()
 
+func reset_enemy_moves():
+	moved_chars.get(CharType.ENEMY).clear()
+	
 func player_amount() -> int:
 	return players().size()
 	
