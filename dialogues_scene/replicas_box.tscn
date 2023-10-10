@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbruyt65lcvvv"]
+
+[ext_resource type="Script" path="res://dialogues_scene/ReplicasBox.gd" id="1_ncb7m"]
+
+[node name="ReplicasBox" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ncb7m")
+
+[node name="Rect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -100.0
+offset_right = 300.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.482353, 0.482353, 0.482353, 0.482353)
+
+[node name="SpeakerNameLabel" type="Label" parent="Rect"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 590.0
+offset_bottom = 40.0
+text = "Ryan Gosling"
+
+[node name="TextLabel" type="Label" parent="Rect"]
+layout_mode = 1
+offset_left = 10.0
+offset_top = 40.0
+offset_right = 590.0
+offset_bottom = 90.0
+text = "Sample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample text"
+autowrap_mode = 2
