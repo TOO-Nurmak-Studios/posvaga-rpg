@@ -32,12 +32,12 @@ func _process(delta):
 func create_dialogue_data():
 	var _units: Array
 	_units.resize(6)
-	_units[0] = DialogueUnit.new(0, ReplicaData.new("Дима", "Вы знаете, зачем мы здесь собрались?"), [], 1)
-	_units[1] = DialogueUnit.new(1, ReplicaData.new("Гриша", "Нет."), [], 2)
-	_units[2] = DialogueUnit.new(2, ReplicaData.new("Дима", "Ваши успехи в учёбе оставляют желать лучшего. Нам нужно решить этот вопрос.."), [], 3)
-	_units[3] = DialogueUnit.new(3, ReplicaData.new("Гриша", "..."), [ChoiceOptionData.new("grisha-pls-no", "Не надо...", 4), ChoiceOptionData.new("grisha-eff", "Щас тебя порешаю", 5)], -1)
-	_units[4] = DialogueUnit.new(4, ReplicaData.new("Дима", "<Взрыв>"), [], 6)
-	_units[5] = DialogueUnit.new(5, ReplicaData.new("Дима", "Чё тявкнул, Бобик?"), [], 7)
+	_units[0] = DialogueUnit.new(0, ReplicaData.new("Дима", "Вы знаете, зачем мы здесь собрались?", 20), [], 1)
+	_units[1] = DialogueUnit.new(1, ReplicaData.new("Гриша", "Нет.", 10), [], 2)
+	_units[2] = DialogueUnit.new(2, ReplicaData.new("Дима", "Ваши успехи в учёбе оставляют желать лучшего. Нам нужно решить этот вопрос..", 20), [], 3)
+	_units[3] = DialogueUnit.new(3, ReplicaData.new("Гриша", "...", 2), [ChoiceOptionData.new("grisha-pls-no", "Не надо...", 4), ChoiceOptionData.new("grisha-eff", "Щас тебя порешаю", 5)], -1)
+	_units[4] = DialogueUnit.new(4, ReplicaData.new("Дима", "<Взрыв>", 30), [], 6)
+	_units[5] = DialogueUnit.new(5, ReplicaData.new("Дима", "Чё тявкнул, Бобик?", 5), [], 7)
 	var _speakers: Array
 	_speakers.resize(2)
 	_speakers[0] = SpeakerData.new("Дима", "res://sprites/dima.png", SpeakerData.Location.LEFT)
@@ -60,6 +60,10 @@ func init_units(data: DialogueData):
 	units = data.units
 
 func next():
+	if replicas_box.is_printing:
+		replicas_box.show_full_text()
+		return
+	
 	if next_unit_id >= units.size():
 		finish()
 		return
