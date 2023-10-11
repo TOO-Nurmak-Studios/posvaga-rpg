@@ -37,3 +37,5 @@ offset_right = 590.0
 offset_bottom = 90.0
 text = "Sample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample text"
 autowrap_mode = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
