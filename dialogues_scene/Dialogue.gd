@@ -3,6 +3,7 @@ extends Node2D
 signal dialogue_finished()
 signal option_chosen(option_id: String)
 
+var canvas_layer: CanvasLayer
 var replicas_box: ReplicasBox
 var choices_box: ChoicesBox
 var next_button: Button
@@ -15,18 +16,28 @@ var units: Array[DialogueUnit]
 var next_unit_id: int
 
 func _ready():
+	canvas_layer = get_node("CanvasLayer")
 	next_button = get_node("CanvasLayer/NextButton")
 	replicas_box = get_node("CanvasLayer/ReplicasBox")
 	choices_box = get_node("CanvasLayer/ChoicesBox")
+	
+	canvas_layer.hide()
 	choices_box.hide()
+	
+	# для отладки самой сцены стартуем сразу, 
+	# иначе показываем только при вызове open
+	if get_tree().current_scene == self:
+		start()
+
+func start():
 	var data = create_dialogue_data()
 	init_speakers(data)
 	init_units(data)
 	next_unit_id = 0
+	
+	get_tree().paused = true
+	canvas_layer.show()
 	next()
-
-func _process(delta):
-	pass
 
 ## TODO: replace with loading
 func create_dialogue_data():
@@ -45,6 +56,9 @@ func create_dialogue_data():
 	return DialogueData.new(_speakers, _units)
 
 func init_speakers(data: DialogueData):
+	for speaker in speakers:
+		speaker.queue_free()
+	
 	var counter = 0
 	speakers.resize(data.speakers.size())
 	for speaker_data in data.speakers:
@@ -53,7 +67,7 @@ func init_speakers(data: DialogueData):
 		speaker_instance.init(load(speaker_data.texture_path), speaker_data.location, 320, get_viewport_rect().size)
 		speakers[counter] = speaker_instance
 		speakers_to_indices[speaker_data.speaker_name] = counter
-		add_child(speaker_instance)
+		canvas_layer.add_child(speaker_instance)
 		counter += 1
 
 func init_units(data: DialogueData):
@@ -85,6 +99,8 @@ func next():
 
 func finish():
 	print("dialogue finished")
+	get_tree().paused = false
+	canvas_layer.hide()
 	dialogue_finished.emit()
 
 func _on_choices_box_option_chosen():

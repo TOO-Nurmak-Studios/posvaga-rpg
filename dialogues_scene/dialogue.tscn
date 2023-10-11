@@ -4,12 +4,15 @@
 [ext_resource type="PackedScene" uid="uid://bbruyt65lcvvv" path="res://dialogues_scene/replicas_box.tscn" id="1_n5grt"]
 [ext_resource type="PackedScene" uid="uid://rqc1ucjcp3qg" path="res://dialogues_scene/choices_box.tscn" id="3_ifti7"]
 
-[node name="Dialogue" type="Node2D"]
+[node name="Dialogue" type="CanvasGroup"]
+process_mode = 3
 script = ExtResource("1_42uhe")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
 
 [node name="ReplicasBox" parent="CanvasLayer" instance=ExtResource("1_n5grt")]
+process_mode = 3
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -21,12 +24,14 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="ChoicesBox" parent="CanvasLayer" instance=ExtResource("3_ifti7")]
+process_mode = 3
 offset_left = 20.0
 offset_top = -165.0
 offset_right = 420.0
 offset_bottom = -130.0
 
 [node name="NextButton" type="Button" parent="CanvasLayer"]
+process_mode = 3
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0

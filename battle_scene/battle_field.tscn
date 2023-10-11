@@ -15,27 +15,21 @@ texture = ExtResource("1_svqol")
 
 [node name="Enemy1" parent="." groups=["enemy"] instance=ExtResource("1_l2fyf")]
 position = Vector2(566, 270)
-char_name = "Enemy1"
 
 [node name="Enemy3" parent="." groups=["enemy"] instance=ExtResource("1_l2fyf")]
 position = Vector2(552, 392)
-char_name = "Enemy3"
 
 [node name="Enemy2" parent="." groups=["enemy"] instance=ExtResource("1_l2fyf")]
 position = Vector2(438, 407)
-char_name = "Enemy2"
 
 [node name="Player3" parent="." groups=["player"] instance=ExtResource("2_eg6e8")]
 position = Vector2(249, 285)
-char_name = "Player3"
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("2_eg6e8")]
 position = Vector2(168, 370)
-char_name = "Player1"
 
 [node name="Player2" parent="." groups=["player"] instance=ExtResource("2_eg6e8")]
 position = Vector2(70, 408)
-char_name = "Player2"
 
 [node name="SelectManager" type="Node" parent="."]
 script = ExtResource("3_3i5y2")

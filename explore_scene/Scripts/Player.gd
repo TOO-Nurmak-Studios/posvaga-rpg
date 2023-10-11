@@ -4,6 +4,8 @@ extends CharacterBody2D
 @export var sprint_speed_modifier = 1.75
 
 @onready var animation_node = $AnimatedSprite2D
+@onready var ray_cast = $RayCast2D
+@onready var dialog_popup = $UI/DialogPopup
 
 var speed = default_speed
 var speed_modifier = 1
@@ -15,6 +17,8 @@ func _ready():
 	EventBus.player_move_pressed.connect(process_movement)
 	EventBus.player_sprint_pressed.connect(process_sprint_pressed)
 	EventBus.player_sprint_released.connect(process_sprint_released)
+	EventBus.player_interact_pressed.connect(process_interaction)
+	EventBus.dialog_start.connect(start_dialog)
 
 
 func process_sprint_pressed():
@@ -31,6 +35,15 @@ func process_movement(delta, new_velocity):
 	velocity = new_velocity.normalized() * speed * delta;
 	move_and_collide(velocity)
 	play_animation(velocity)
+	if new_velocity != Vector2.ZERO:
+		ray_cast.target_position = new_velocity.normalized() * 50
+
+
+func process_interaction():
+	var target = ray_cast.get_collider()
+	if target != null:
+		if target.is_in_group("NPC"):
+			target.interact()
 
 
 func play_animation(new_direction : Vector2):
@@ -69,3 +82,7 @@ func get_direction_name(direction : Vector2):
 		return "left"
 		
 	return default
+
+
+func start_dialog(data: DialogueData):
+	dialog_popup.start()
