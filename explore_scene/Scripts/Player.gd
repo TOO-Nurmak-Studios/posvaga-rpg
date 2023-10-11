@@ -84,5 +84,5 @@ func get_direction_name(direction : Vector2):
 	return default
 
 
-func start_dialog(data: DialogueData):
+func start_dialog(data: DialogData):
 	dialog_popup.start()

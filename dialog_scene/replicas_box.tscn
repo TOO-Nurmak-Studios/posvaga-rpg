@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bbruyt65lcvvv"]
 
-[ext_resource type="Script" path="res://dialogues_scene/ReplicasBox.gd" id="1_ncb7m"]
+[ext_resource type="Script" path="res://dialog_scene/ReplicasBox.gd" id="1_ncb7m"]
 
 [node name="ReplicasBox" type="Control"]
 layout_mode = 3

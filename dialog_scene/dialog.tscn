@@ -1,17 +1,17 @@
 [gd_scene load_steps=4 format=3 uid="uid://clah0tnwu35b8"]
 
-[ext_resource type="Script" path="res://dialogues_scene/Dialogue.gd" id="1_42uhe"]
-[ext_resource type="PackedScene" uid="uid://bbruyt65lcvvv" path="res://dialogues_scene/replicas_box.tscn" id="1_n5grt"]
-[ext_resource type="PackedScene" uid="uid://rqc1ucjcp3qg" path="res://dialogues_scene/choices_box.tscn" id="3_ifti7"]
+[ext_resource type="Script" path="res://dialog_scene/Dialog.gd" id="1_c3xrl"]
+[ext_resource type="PackedScene" uid="uid://bbruyt65lcvvv" path="res://dialog_scene/replicas_box.tscn" id="2_8vg63"]
+[ext_resource type="PackedScene" uid="uid://rqc1ucjcp3qg" path="res://dialog_scene/choices_box.tscn" id="3_0xo40"]
 
 [node name="Dialogue" type="CanvasGroup"]
 process_mode = 3
-script = ExtResource("1_42uhe")
+script = ExtResource("1_c3xrl")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
 
-[node name="ReplicasBox" parent="CanvasLayer" instance=ExtResource("1_n5grt")]
+[node name="ReplicasBox" parent="CanvasLayer" instance=ExtResource("2_8vg63")]
 process_mode = 3
 anchors_preset = 7
 anchor_left = 0.5
@@ -23,7 +23,7 @@ offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="ChoicesBox" parent="CanvasLayer" instance=ExtResource("3_ifti7")]
+[node name="ChoicesBox" parent="CanvasLayer" instance=ExtResource("3_0xo40")]
 process_mode = 3
 offset_left = 20.0
 offset_top = -165.0
