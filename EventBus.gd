@@ -13,10 +13,14 @@ signal battle_scene_fully_ready()
 signal player_move_pressed(delta: float, vector: Vector2)
 signal player_sprint_pressed()
 signal player_sprint_released()
+signal player_interact_pressed()
+
+signal dialog_start(data: DialogueData)
 
 func _ready():
 	var root_scene = $/root/BattleField as Node
-	root_scene.ready.connect(_emit_battle_scene_fully_ready)
+	if root_scene != null:
+		root_scene.ready.connect(_emit_battle_scene_fully_ready)
 
 func _emit_battle_scene_fully_ready():
 	battle_scene_fully_ready.emit()
@@ -33,6 +37,9 @@ func _process(delta):
 		player_sprint_pressed.emit()
 	elif Input.is_action_just_released("ui_sprint"):
 		player_sprint_released.emit()
+	
+	if Input.is_action_just_pressed("ui_interact"):
+		player_interact_pressed.emit()
 	
 	var player_move_vector = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	player_move_pressed.emit(delta, player_move_vector)

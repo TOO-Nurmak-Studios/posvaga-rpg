@@ -1,9 +1,10 @@
-[gd_scene load_steps=82 format=3 uid="uid://cpyg0dy7ijwm2"]
+[gd_scene load_steps=83 format=3 uid="uid://cpyg0dy7ijwm2"]
 
 [ext_resource type="Script" path="res://explore_scene/Scripts/Player.gd" id="1_kwvig"]
 [ext_resource type="Texture2D" uid="uid://d0djok8y1fmuk" path="res://explore_scene/Assets/Player/Player Front Sheet.png" id="2_t44ym"]
 [ext_resource type="Texture2D" uid="uid://bkn51u0pped7v" path="res://explore_scene/Assets/Player/Player Side Sheet.png" id="3_l1pel"]
 [ext_resource type="Texture2D" uid="uid://d2j6cf5ctielj" path="res://explore_scene/Assets/Player/Player Back Sheet.png" id="4_na45n"]
+[ext_resource type="PackedScene" uid="uid://clah0tnwu35b8" path="res://dialogues_scene/dialogue.tscn" id="5_bqnrv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kphcj"]
 radius = 9.0
@@ -607,3 +608,10 @@ animation = &"walk_up"
 offset = Vector2(0, -15)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="DialogPopup" parent="UI" instance=ExtResource("5_bqnrv")]
+visible = false
