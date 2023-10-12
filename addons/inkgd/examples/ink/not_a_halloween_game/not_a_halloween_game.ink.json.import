@@ -1,0 +1,15 @@
+[remap]
+
+importer="inkgd.ink.json"
+type="Resource"
+uid="uid://co5mrdnmq54rt"
+path="res://.godot/imported/not_a_halloween_game.ink.json-d611c37e45f014e868243e47bac1e514.res"
+
+[deps]
+
+source_file="res://addons/inkgd/examples/ink/not_a_halloween_game/not_a_halloween_game.ink.json"
+dest_files=["res://.godot/imported/not_a_halloween_game.ink.json-d611c37e45f014e868243e47bac1e514.res"]
+
+[params]
+
+compress=true

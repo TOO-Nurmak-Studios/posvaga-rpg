@@ -1,104 +1,115 @@
-class_name Dialog
-
 extends Node2D
 
 signal dialog_finished()
 signal option_chosen(option_id: String)
 
-var canvas_layer: CanvasLayer
-var replicas_box: ReplicasBox
-var choices_box: ChoicesBox
-var next_button: Button
+@export var ink_file: Resource
+
+@onready var ink_player = $InkPlayer
+@onready var canvas_layer = $CanvasLayer
+@onready var replicas_box = $CanvasLayer/ReplicasBox
+@onready var choices_box = $CanvasLayer/ChoicesBox
+@onready var next_button = $CanvasLayer/NextButton
+
 var speaker_scene: PackedScene = load("res://dialog_scene/speaker.tscn")
 
+var speakers_data = {
+	"dean_angry"      : SpeakerData.new("dean_angry", "Декан"),
+	"dean_neutral"    : SpeakerData.new("dean_neutral", "Декан"),
+	"dean_smiling"    : SpeakerData.new("dean_smiling", "Декан"),
+
+	"student_neutral" : SpeakerData.new("student_neutral", "Студент"),
+	"student_welcome" : SpeakerData.new("student_welcome", "Студент")
+}
+
+# todo: сразу поставить на сцену?
 var speakers: Array[Speaker]
-var speakers_to_indices = {}
 var current_speaker: Speaker
-var units: Array[DialogUnit]
-var next_unit_id: int
 
 func _ready():
-	canvas_layer = get_node("CanvasLayer")
-	next_button = get_node("CanvasLayer/NextButton")
-	replicas_box = get_node("CanvasLayer/ReplicasBox")
-	choices_box = get_node("CanvasLayer/ChoicesBox")
-	
+	ink_player.loads_in_background = false
+
 	canvas_layer.hide()
 	choices_box.hide()
-	
-	# для отладки самой сцены стартуем сразу, 
+
+	EventBus.dialog_start.connect(start)
+
+	init_speakers()
+
+	# для отладки самой сцены стартуем сразу,
 	# иначе показываем только при вызове open
 	if get_tree().current_scene == self:
-		start()
+		start(ink_file, false)
 
-func start():
-	var data = create_dialog_data()
-	replicas_box.set_print_sound_path(data.print_sound_path)
-	init_speakers(data)
-	init_units(data)
-	next_unit_id = 0
-	
+func start(ink_file: Resource, is_cutscene: bool):
+	ink_player.ink_file = ink_file
+	ink_player.create_story()
+	await ink_player.loaded
+
 	get_tree().paused = true
 	canvas_layer.show()
 	next()
 
-## TODO: replace with loading
-func create_dialog_data():
-	var _units: Array[DialogUnit]
-	_units.resize(6)
-	_units[0] = DialogUnit.new(0, ReplicaData.new("Дима", "Вы знаете, зачем мы здесь собрались?", 10), [], 1)
-	_units[1] = DialogUnit.new(1, ReplicaData.new("Гриша", "Нет.", 10), [], 2)
-	_units[2] = DialogUnit.new(2, ReplicaData.new("Дима", "Ваши успехи в учёбе оставляют желать лучшего. Нам нужно решить этот вопрос...", 10), [], 3)
-	_units[3] = DialogUnit.new(3, ReplicaData.new("Гриша", "...", 10), [ChoiceOptionData.new("grisha-pls-no", "Не надо...", 4), ChoiceOptionData.new("grisha-eff", "Щас тебя порешаю", 5)], -1)
-	_units[4] = DialogUnit.new(4, ReplicaData.new("Дима", "<Взрыв>", 30), [], 6)
-	_units[5] = DialogUnit.new(5, ReplicaData.new("Дима", "Чё тявкнул, Бобик?", 10), [], 7)
-	var _speakers: Array[SpeakerData]
-	_speakers.resize(2)
-	_speakers[0] = SpeakerData.new("Дима", "res://sprites/dima.png", SpeakerData.Location.LEFT)
-	_speakers[1] = SpeakerData.new("Гриша", "res://sprites/grisha.png", SpeakerData.Location.RIGHT)
-	return DialogData.new(_speakers, _units, "res://dialog_scene/key_press.wav")
-
-func init_speakers(data: DialogData):
-	for speaker in speakers:
-		speaker.queue_free()
-	
-	var counter = 0
-	speakers.resize(data.speakers.size())
-	for speaker_data in data.speakers:
-		var speaker_instance = speaker_scene.instantiate()
-		speaker_instance.name = speaker_data.speaker_name
-		speaker_instance.init(load(speaker_data.texture_path), speaker_data.location, 320, get_viewport_rect().size)
-		speakers[counter] = speaker_instance
-		speakers_to_indices[speaker_data.speaker_name] = counter
-		canvas_layer.add_child(speaker_instance)
-		counter += 1
-
-func init_units(data: DialogData):
-	units = data.units
+func init_speakers():
+	var speaker_instance = speaker_scene.instantiate()
+	speaker_instance.init(400, get_viewport_rect().size)
+	canvas_layer.add_child(speaker_instance)
+	current_speaker = speaker_instance
 
 func next():
 	if replicas_box.is_printing:
 		replicas_box.show_full_text()
 		return
-	
-	if next_unit_id >= units.size():
+
+	if !ink_player.has_choices && !ink_player.can_continue:
 		finish()
 		return
-		
-	if next_unit_id >= 1:
-		current_speaker.disappear()
-	
-	var current_unit = units[next_unit_id]
-	replicas_box.set_replica(current_unit.replica)
-	current_speaker = speakers[speakers_to_indices[current_unit.replica.speaker_name]]
-	current_speaker.appear()
-	
-	if (current_unit.choice_options.size() > 0):
+
+	if ink_player.can_continue:
+		var next_replica_text = ink_player.continue_story()
+		var tags = ink_player.current_tags
+		display_next_replica(next_replica_text, tags)
+
+	if ink_player.has_choices:
 		next_button.hide()
+		choices_box.init(ink_player.current_choices)
 		choices_box.show()
-		choices_box.init(current_unit.choice_options)
-	else:
-		next_unit_id = current_unit.next_unit_id
+
+
+func display_next_replica(replica_text: String, tags: Array):
+	var replica = parse_next_replica(replica_text, tags)
+	replicas_box.set_replica(replica)
+	current_speaker.set_texture(replica.speaker.texture, replica.speaker_location)
+
+
+func parse_next_replica(replica_text: String, tags: Array) -> ReplicaData:
+	var speaker_id = null
+	var speaker_data = null
+	var location = ReplicaData.Location.LEFT
+	var text_speed = 20
+
+	# хочется использовать лейбл c html-форматированием, типа TextMeshPro
+	# пока варварским способом попробовал поддержать перенос строки
+	replica_text = replica_text.replace("<br>", "\n")
+
+	for tag in tags:
+		var split = tag.split(": ")
+		var tag_name = split[0]
+		var tag_value = split[1]
+
+		match tag_name:
+			"sid":
+				speaker_id = tag_value
+			"loc":
+				location = ReplicaData.Location.get(tag_value.to_upper())
+			"spd":
+				text_speed = tag_value.to_int()
+
+	if speaker_id != null:
+		speaker_data = speakers_data[speaker_id]
+
+	return ReplicaData.new(speaker_data, replica_text, location as ReplicaData.Location, text_speed)
+
 
 func finish():
 	print("dialog finished")
@@ -106,12 +117,11 @@ func finish():
 	canvas_layer.hide()
 	dialog_finished.emit()
 
-func _on_choices_box_option_chosen():
-	var chosen_option = choices_box.chosen_option
+func _on_choices_box_option_chosen(index: int):
+	ink_player.choose_choice_index(index)
 	choices_box.hide()
 	next_button.show()
-	next_unit_id = chosen_option.next_unit_id
-	option_chosen.emit(chosen_option.id)
+	option_chosen.emit(index)
 	next()
 
 ## TODO: for tests, remove

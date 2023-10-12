@@ -15,7 +15,7 @@ signal player_sprint_pressed()
 signal player_sprint_released()
 signal player_interact_pressed()
 
-signal dialog_start(data: DialogData)
+signal dialog_start(ink_story: Resource, is_cutscene: bool)
 
 func _ready():
 	var root_scene = $/root/BattleField as Node

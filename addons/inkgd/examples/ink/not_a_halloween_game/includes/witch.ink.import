@@ -1,0 +1,14 @@
+[remap]
+
+importer="inkgd.ink"
+type="Resource"
+uid="uid://bojftehi3aemp"
+path="res://.godot/imported/witch.ink-7eb70ce6675ec7f52fb5ba9fe78618e1.res"
+
+[deps]
+
+source_file="res://addons/inkgd/examples/ink/not_a_halloween_game/includes/witch.ink"
+dest_files=["res://.godot/imported/witch.ink-7eb70ce6675ec7f52fb5ba9fe78618e1.res"]
+
+[params]
+
