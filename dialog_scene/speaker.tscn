@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bgj6b0r2k00oq"]
 
-[ext_resource type="Script" path="res://dialogues_scene/Speaker.gd" id="1_qec73"]
+[ext_resource type="Script" path="res://dialog_scene/Speaker.gd" id="1_qec73"]
 
 [node name="Speaker" type="Node2D"]
 script = ExtResource("1_qec73")

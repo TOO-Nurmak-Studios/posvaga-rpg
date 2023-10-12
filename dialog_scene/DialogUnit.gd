@@ -1,4 +1,4 @@
-class_name DialogueUnit
+class_name DialogUnit
 
 var id: int
 var replica: ReplicaData
