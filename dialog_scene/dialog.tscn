@@ -1,37 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://clah0tnwu35b8"]
+[gd_scene load_steps=6 format=3 uid="uid://clah0tnwu35b8"]
 
-[ext_resource type="Script" path="res://dialog_scene/Dialog.gd" id="1_c3xrl"]
-[ext_resource type="PackedScene" uid="uid://bbruyt65lcvvv" path="res://dialog_scene/replicas_box.tscn" id="2_8vg63"]
-[ext_resource type="PackedScene" uid="uid://rqc1ucjcp3qg" path="res://dialog_scene/choices_box.tscn" id="3_0xo40"]
+[ext_resource type="Script" path="res://dialog_scene/Dialog.gd" id="1_42uhe"]
+[ext_resource type="PackedScene" uid="uid://bbruyt65lcvvv" path="res://dialog_scene/replicas_box.tscn" id="1_n5grt"]
+[ext_resource type="Resource" uid="uid://u8w7njkp8npl" path="res://dialog_scene/ink/test.ink.json" id="2_lkfr1"]
+[ext_resource type="PackedScene" uid="uid://rqc1ucjcp3qg" path="res://dialog_scene/choices_box.tscn" id="3_ifti7"]
+[ext_resource type="Script" path="res://addons/inkgd/ink_player.gd" id="4_pyt6a"]
 
 [node name="Dialogue" type="CanvasGroup"]
 process_mode = 3
-script = ExtResource("1_c3xrl")
+script = ExtResource("1_42uhe")
+ink_file = ExtResource("2_lkfr1")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
-
-[node name="ReplicasBox" parent="CanvasLayer" instance=ExtResource("2_8vg63")]
-process_mode = 3
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_top = -20.0
-offset_bottom = -20.0
-grow_horizontal = 2
-grow_vertical = 0
-delay_multiplier = 5.0
-min_pitch = 0.7
-max_pitch = 0.8
-
-[node name="ChoicesBox" parent="CanvasLayer" instance=ExtResource("3_0xo40")]
-process_mode = 3
-offset_left = 20.0
-offset_top = -165.0
-offset_right = 420.0
-offset_bottom = -130.0
 
 [node name="NextButton" type="Button" parent="CanvasLayer"]
 process_mode = 3
@@ -48,6 +29,29 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Next"
 
+[node name="ReplicasBox" parent="CanvasLayer" instance=ExtResource("1_n5grt")]
+process_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_top = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ChoicesBox" parent="CanvasLayer" instance=ExtResource("3_ifti7")]
+process_mode = 3
+offset_left = 20.0
+offset_top = -57.0
+offset_right = 420.0
+offset_bottom = -22.0
+
+[node name="InkPlayer" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("4_pyt6a")
+
 [connection signal="option_chosen" from="." to="." method="_on_option_chosen"]
-[connection signal="option_chosen" from="CanvasLayer/ChoicesBox" to="." method="_on_choices_box_option_chosen"]
 [connection signal="pressed" from="CanvasLayer/NextButton" to="." method="next"]
+[connection signal="option_chosen" from="CanvasLayer/ChoicesBox" to="." method="_on_choices_box_option_chosen"]

@@ -2,44 +2,46 @@ class_name Speaker
 
 extends Node2D
 
-var appear_pos_x: float
-var disappear_pos_x: float
+@onready var sprite = $Sprite2D
 
-func _ready():
-	pass
+var left_appear_pos_x: float
+var right_appear_pos_x: float
 
-func _process(delta):
-	pass
+var bottom: float
+var viewport_size: Vector2
 
-func init(texture: Texture2D, location: SpeakerData.Location, bottom: float, viewport_size: Vector2):
-	$Sprite2D.texture = texture
-	
+func init(_bottom: float, _viewport_size: Vector2):
+	bottom = _bottom
+	viewport_size = _viewport_size
+
+
+func set_texture(texture: Texture2D, location: ReplicaData.Location):
+	sprite.texture = texture
+
 	var texture_size = texture.get_size()
 	var texture_size_x = texture_size.x
 	var texture_size_y = texture_size.y
-	
-	if texture_size_x > viewport_size.x / 2:
-		scale.x = 0.5
-		texture_size_x /= 2
-	
-	if texture_size_y > viewport_size.y / 2:
-		scale.y = 0.5
-		texture_size_y /= 2
-	
-	position.y = bottom - texture_size_y / 2
-	
-	match(location):
-		SpeakerData.Location.LEFT:
-			appear_pos_x = texture_size_x / 2
-			disappear_pos_x = -1 * (texture_size_x / 2)
-		SpeakerData.Location.RIGHT:
-			appear_pos_x = viewport_size.x - texture_size_x / 2
-			disappear_pos_x = viewport_size.x + texture_size_x / 2
-	
-	disappear()
 
-func appear():
-	position.x = appear_pos_x
+	position.y = bottom - texture_size_y / 2
+
+	left_appear_pos_x = texture_size_x / 2 + 20
+	right_appear_pos_x = viewport_size.x - texture_size_x / 2 - 20
+
+	match(location):
+		ReplicaData.Location.LEFT:
+			position.x = left_appear_pos_x
+		ReplicaData.Location.RIGHT:
+			position.x = right_appear_pos_x
+
+
+func appear(location: ReplicaData.Location):
+	match(location):
+		ReplicaData.Location.LEFT:
+			position.x = left_appear_pos_x
+		ReplicaData.Location.RIGHT:
+			position.x = right_appear_pos_x
+	show()
+
 
 func disappear():
-	position.x = disappear_pos_x
+	hide()

@@ -9,6 +9,9 @@ var min_pitch: float = 0.75
 @export
 var max_pitch: float = 1.25
 
+@onready var speaker_name_label = $SpeakerNameLabel
+@onready var text_label = $TextLabel
+
 var full_text: String
 var seconds_before_next_symbol: float
 var is_printing: bool
@@ -27,8 +30,8 @@ func set_print_sound_path(_print_sound_path: String):
 		print_sound_path = _print_sound_path
 
 func set_replica(replica: ReplicaData):
-	$Rect/SpeakerNameLabel.text = replica.speaker_name + ":"
-	$Rect/TextLabel.text = ""
+	speaker_name_label.text = replica.speaker.name# + ":"
+	text_label.text = ""
 	full_text = replica.text
 	seconds_before_next_symbol = 1 / replica.speed
 	is_printing = true
@@ -42,12 +45,12 @@ func print_text():
 			play_sound()
 		if (not is_printing):
 			return
-		$Rect/TextLabel.text += char
+		text_label.text += char
 		prev_char = char
 	is_printing = false
 	
 func show_full_text():
-	$Rect/TextLabel.text = full_text
+	text_label.text = full_text
 	is_printing = false
 
 func play_sound():

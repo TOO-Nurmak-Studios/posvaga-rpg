@@ -18,7 +18,6 @@ func _ready():
 	EventBus.player_sprint_pressed.connect(process_sprint_pressed)
 	EventBus.player_sprint_released.connect(process_sprint_released)
 	EventBus.player_interact_pressed.connect(process_interaction)
-	EventBus.dialog_start.connect(start_dialog)
 
 
 func process_sprint_pressed():
@@ -83,6 +82,3 @@ func get_direction_name(direction : Vector2):
 		
 	return default
 
-
-func start_dialog(data: DialogData):
-	dialog_popup.start()
