@@ -1,7 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://bbruyt65lcvvv"]
+[gd_scene load_steps=6 format=3 uid="uid://bbruyt65lcvvv"]
 
 [ext_resource type="Script" path="res://dialog_scene/ReplicasBox.gd" id="1_ncb7m"]
-[ext_resource type="AudioStream" uid="uid://ch2e61jxduv8k" path="res://dialog_scene/key_press.wav" id="2_76bru"]
+[ext_resource type="AudioStream" uid="uid://c20lxqajotb1r" path="res://sfx/text-blip-low.wav" id="2_hpr6n"]
+[ext_resource type="FontFile" uid="uid://dsg3v8pxmy0f8" path="res://fonts/monogram-extended.ttf" id="2_yckqw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ygk3t"]
+font = ExtResource("2_yckqw")
+font_size = 28
+
+[sub_resource type="LabelSettings" id="LabelSettings_c8sbr"]
+font = ExtResource("2_yckqw")
+font_size = 38
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
 
 [node name="ReplicasBox" type="Control"]
 layout_mode = 3
@@ -43,16 +54,19 @@ offset_left = -290.0
 offset_top = -90.0
 offset_right = 290.0
 offset_bottom = -10.0
-text = "Sample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample text"
+text = "Sample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample text"
+label_settings = SubResource("LabelSettings_ygk3t")
 autowrap_mode = 2
 
 [node name="SpeakerNameLabel" type="Label" parent="."]
 layout_mode = 0
 offset_left = -290.0
-offset_top = -134.0
+offset_top = -140.0
 offset_right = 290.0
-offset_bottom = -104.0
+offset_bottom = -105.0
 text = "Ryan Gosling"
+label_settings = SubResource("LabelSettings_c8sbr")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_76bru")
+stream = ExtResource("2_hpr6n")
+volume_db = -25.0

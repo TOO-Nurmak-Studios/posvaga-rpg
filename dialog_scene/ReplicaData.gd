@@ -13,7 +13,7 @@ func _init(
 			_speaker: SpeakerData,
 			_text: String,
 			_speaker_location: Location = Location.LEFT,
-			_speed: float = 20):
+			_speed: float = 18):
 
 	speaker = _speaker
 	text = _text
