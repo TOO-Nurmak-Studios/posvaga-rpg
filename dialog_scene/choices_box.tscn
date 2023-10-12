@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://rqc1ucjcp3qg"]
+[gd_scene load_steps=3 format=3 uid="uid://rqc1ucjcp3qg"]
 
 [ext_resource type="Script" path="res://dialog_scene/ChoicesBox.gd" id="1_iv7ck"]
+[ext_resource type="FontFile" uid="uid://dsg3v8pxmy0f8" path="res://fonts/monogram-extended.ttf" id="2_xdefh"]
 
 [node name="ChoicesBox" type="Control"]
 layout_mode = 3
@@ -26,6 +27,8 @@ anchor_bottom = 1.0
 offset_top = -35.0
 offset_right = 195.0
 grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_xdefh")
+theme_override_font_sizes/font_size = 28
 text = "Option 1"
 
 [node name="Option2" type="Button" parent="Rect"]
@@ -40,6 +43,8 @@ offset_top = -35.0
 offset_right = 97.5
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_xdefh")
+theme_override_font_sizes/font_size = 28
 text = "Option 2"
 
 [node name="Option3" type="Button" parent="Rect"]
@@ -53,6 +58,8 @@ offset_left = -195.0
 offset_top = -35.0
 grow_horizontal = 0
 grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_xdefh")
+theme_override_font_sizes/font_size = 28
 text = "Option 3"
 
 [connection signal="pressed" from="Rect/Option1" to="." method="_on_option_pressed" binds= [0]]
