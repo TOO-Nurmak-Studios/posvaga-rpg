@@ -12,7 +12,7 @@ var max_pitch: float = 1.25
 var full_text: String
 var seconds_before_next_symbol: float
 var is_printing: bool
-var sound_path: String
+var print_sound_path: String
 var audio_source: AudioStreamPlayer
 
 func _ready():
@@ -21,11 +21,14 @@ func _ready():
 func _process(delta):
 	pass
 
+func set_print_sound_path(_print_sound_path: String):
+	if (print_sound_path != _print_sound_path):
+		audio_source.stream = load(_print_sound_path)
+		print_sound_path = _print_sound_path
+
 func set_replica(replica: ReplicaData):
 	$Rect/SpeakerNameLabel.text = replica.speaker_name + ":"
 	$Rect/TextLabel.text = ""
-	if sound_path != replica.sound_path:
-		audio_source.stream = load(replica.sound_path)
 	full_text = replica.text
 	seconds_before_next_symbol = 1 / replica.speed
 	is_printing = true
