@@ -1,6 +1,18 @@
+VAR test_dialog_visited = false
+
+{ not test_dialog_visited:
+    -> test_dialog
+- else:
+    -> test_dialog_alternative
+}
+
+=== test_dialog ===
+
+~ test_dialog_visited = true
+
 # sid: dean_neutral
 # loc: left
-- Добрый день.
+Добрый день.
 
 # sid: student_welcome
 # loc: right
@@ -48,3 +60,9 @@
         # loc: left
         Чё тявкнул, Бобик?
         -> END
+
+=== test_dialog_alternative ===
+# sid: dean_neutral
+# loc: left
+Нам больше не о чем говорить.
+-> END

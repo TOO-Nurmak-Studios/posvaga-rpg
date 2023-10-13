@@ -26,6 +26,8 @@ var speakers_data = {
 var speakers: Array[Speaker]
 var current_speaker: Speaker
 
+var dialog_data: DialogData
+
 func _ready():
 	ink_player.loads_in_background = false
 
@@ -37,14 +39,23 @@ func _ready():
 	init_speakers()
 
 	# для отладки самой сцены стартуем сразу,
-	# иначе показываем только при вызове open
+	# иначе показываем только при вызове start
 	if get_tree().current_scene == self:
-		start(ink_file, false)
+		var test_dialog = DialogData.new(ink_file, false, [])
+		start(test_dialog)
 
-func start(ink_file: Resource, is_cutscene: bool):
-	ink_player.ink_file = ink_file
+func start(_dialog_data: DialogData):
+	dialog_data = _dialog_data
+	
+	ink_player.ink_file = dialog_data.ink_file
 	ink_player.create_story()
 	await ink_player.loaded
+	
+	# загружаем игровые переменные в инк
+	for var_name in dialog_data.var_names:
+		var var_val = GameState.vars.get(var_name)
+		if var_val != null:
+			ink_player.set_variable(var_name, var_val)
 
 	get_tree().paused = true
 	canvas_layer.show()
@@ -68,7 +79,7 @@ func next():
 	if ink_player.can_continue:
 		var next_replica_text = ink_player.continue_story()
 		var tags = ink_player.current_tags
-		display_next_replica(next_replica_text, tags)
+		show_next_replica(next_replica_text, tags)
 
 	if ink_player.has_choices:
 		next_button.hide()
@@ -76,7 +87,7 @@ func next():
 		choices_box.show()
 
 
-func display_next_replica(replica_text: String, tags: Array):
+func show_next_replica(replica_text: String, tags: Array):
 	var replica = parse_next_replica(replica_text, tags)
 	replicas_box.set_replica(replica)
 	current_speaker.set_texture(replica.speaker.texture, replica.speaker_location)
@@ -112,10 +123,15 @@ func parse_next_replica(replica_text: String, tags: Array) -> ReplicaData:
 
 
 func finish():
-	print("dialog finished")
+	# выгружаем игровые переменные в глобальный стейт
+	for var_name in dialog_data.var_names:
+		var var_val = ink_player.get_variable(var_name)
+		GameState.vars[var_name] = var_val
+	
 	get_tree().paused = false
 	canvas_layer.hide()
 	dialog_finished.emit()
+	print("dialog finished")
 
 func _on_choices_box_option_chosen(index: int):
 	ink_player.choose_choice_index(index)
