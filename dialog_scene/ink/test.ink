@@ -54,11 +54,18 @@ VAR test_dialog_visited = false
         <Взрыв>
         -> END
 
-    ** [Щас тебя порешаю]
+    ** [<Харч на пол>]
 
         # sid: dean_angry
         # loc: left
-        Чё тявкнул, Бобик?
+        Скока можно опять эти лужи...
+        -> END
+		
+	** [<Харч на рукав>]
+
+        # sid: dean_angry
+        # loc: left
+        Б*****а???
         -> END
 
 === test_dialog_alternative ===
