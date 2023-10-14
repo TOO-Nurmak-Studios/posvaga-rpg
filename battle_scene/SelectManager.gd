@@ -2,10 +2,9 @@ class_name SelectManager
 extends Node
 
 var chars: Dictionary # <CharType, Array[AbstractCharacter]>
-var selected_char: Dictionary # <CharType, AbstractCharacter>
 var selected_char_index: Dictionary # <CharType, int>
 
-var moved_chars: Dictionary # <CharType, Array[AbstractCharacter]>
+var moved_players: Array[Player]
 
 enum Select {NEXT, PREV}
 enum SelectState {DISABLED, ENEMY, PLAYER}
@@ -15,7 +14,6 @@ var select_state: SelectState
 signal player_selected(player: Player)
 
 func _ready():
-		
 	EventBus.select_next_button_pressed.connect(_select_next)
 	EventBus.select_prev_button_pressed.connect(_select_prev)
 	
@@ -27,10 +25,7 @@ func _ready():
 func _init_chars():
 	selected_char_index[CharType.ENEMY] = -1
 	selected_char_index[CharType.PLAYER] = -1
-	selected_char[CharType.ENEMY] = null
-	selected_char[CharType.PLAYER] = null
-	moved_chars[CharType.ENEMY] = []
-	moved_chars[CharType.PLAYER] = []
+	moved_players = []
 	chars[CharType.ENEMY] = get_tree().get_nodes_in_group("enemy")
 	chars[CharType.PLAYER] = get_tree().get_nodes_in_group("player")
 	for ch in chars[CharType.ENEMY]: 
@@ -58,54 +53,65 @@ func select(select_type: Select, force: bool = false, force_type: SelectState = 
 	var cur_select_state = force_type if force else select_state
 	
 	var char_type = CharType.ENEMY if cur_select_state == SelectState.ENEMY else CharType.PLAYER
+	var is_player = (char_type == CharType.PLAYER)
 
-	if moved_chars.get(char_type).size() == chars.get(char_type).size() && !force:
+	if is_player && moved_players.size() == players().size() && !force:
 		print("trying to select char while all chars already did their move")
 		return
 	
 	# remove highlight from currently selected character
-	if selected_char[char_type] != null:
-		selected_char[char_type].unselect()
+	if selected_char_index[char_type] != -1:
+		chars[char_type][selected_char_index[char_type]].unselect()
 		
 	# if no-one to select - return	
 	if chars[char_type].size() == 0:
 		return
 		
 	# traverse through character list until we find non-moved character	
+	var index_of_selected = selected_char_index[char_type]
 	while true:
-		# i need do..while but gdscript does not support it :D
+		# i need do..while but gdscript does not support it
 		# increment index of selected char
-		selected_char_index[char_type] += modifier
+		index_of_selected += modifier
 		# loop char array
-		if selected_char_index[char_type] >= chars[char_type].size():
-			selected_char_index[char_type] = 0
-		if selected_char_index[char_type] < 0:
-			selected_char_index[char_type] = chars[char_type].size() - 1
-		if force || !moved_chars.get(char_type).has(chars.get(char_type)[selected_char_index[char_type]]):
-			break
-	
+		if index_of_selected >= chars[char_type].size():
+			index_of_selected = 0
+		if index_of_selected < 0:
+			index_of_selected = chars[char_type].size() - 1
+		if !is_player || force || !moved_players.has(players()[index_of_selected]):
+			break	
+			
 	# we selected a character	
-	var index = selected_char_index[char_type]
-	selected_char[char_type] = chars.get(char_type)[index]
+	selected_char_index[char_type] = index_of_selected
 	
 	# sometimes we just want to move selection but without highlighting
 	if select_state != SelectState.DISABLED:
-		selected_char[char_type].select()
+		chars[char_type][selected_char_index[char_type]].select()
 		
+	# emit player selection
 	if char_type == CharType.PLAYER:
 		player_selected.emit(selected_player())
 
 func remove_enemy(enemy: Enemy):
 	if enemy == selected_enemy():
 		select(Select.NEXT, true, SelectState.ENEMY)
-	chars[CharType.ENEMY].erase(enemy)
-	moved_chars[CharType.ENEMY].erase(enemy)
+		
+	var index = enemies().find(enemy)
+	if index <= selected_char_index[CharType.ENEMY]:
+		selected_char_index[CharType.ENEMY] -= 1
+		
+	enemies().erase(enemy)
 
 func remove_player(player: Player):
 	if player == selected_player():
 		select(Select.NEXT, true, SelectState.PLAYER)
-	chars[CharType.PLAYER].erase(player)
-	moved_chars[CharType.PLAYER].erase(player)
+		
+	var index = players().find(player)
+	if index <= selected_char_index[CharType.PLAYER]:
+		selected_char_index[CharType.PLAYER] -= 1
+		
+	players().erase(player)
+	moved_players.erase(player)
 
 func on_shoot_pressed(attack_index: int):
 	selected_player().attack(attack_index, selected_enemy())
@@ -125,24 +131,24 @@ func set_select_state(new_state: SelectState):
 				selected_player().unselect()
 		SelectState.PLAYER:
 			if selected_player() != null:
-				if moved_chars.get(CharType.PLAYER).has(selected_player()):
+				if moved_players.has(selected_player()):
 					select(Select.NEXT)
 				selected_player().select()
 
 func selected_player() -> Player:
-	return selected_char[CharType.PLAYER]
+	#return selected_char[CharType.PLAYER]
+	if selected_char_index[CharType.PLAYER] == -1:
+		return null
+	return players()[selected_char_index[CharType.PLAYER]]
 
 func mark_selected_player_moved():
-	moved_chars.get(CharType.PLAYER).push_back(selected_char.get(CharType.PLAYER))
+	moved_players.push_back(selected_player())
 	
 func player_moves_left() -> int:
-	return player_amount() - moved_chars.get(CharType.PLAYER).size()
+	return player_amount() - moved_players.size()
 	
 func reset_player_moves():
-	moved_chars.get(CharType.PLAYER).clear()
-
-func reset_enemy_moves():
-	moved_chars.get(CharType.ENEMY).clear()
+	moved_players.clear()
 	
 func player_amount() -> int:
 	return players().size()
@@ -160,7 +166,7 @@ func enemy_amount() -> int:
 	return enemies().size()
 	
 func selected_enemy() -> Enemy:
-	return selected_char[CharType.ENEMY]
-
-func mark_selected_enemy_moved():
-	moved_chars.get(CharType.ENEMY).push_back(selected_char.get(CharType.ENEMY))
+	#return selected_char[CharType.ENEMY]
+	if selected_char_index[CharType.ENEMY] == -1:
+		return null
+	return enemies()[selected_char_index[CharType.ENEMY]]

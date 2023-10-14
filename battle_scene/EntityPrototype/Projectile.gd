@@ -2,7 +2,6 @@ class_name Projectile
 extends Node2D
 
 var _visible_on_screen_notifier: VisibleOnScreenNotifier2D
-var damage: int
 var target: Vector2
 
 func _ready():
