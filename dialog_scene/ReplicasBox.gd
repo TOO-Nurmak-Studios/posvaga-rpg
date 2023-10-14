@@ -2,6 +2,8 @@ class_name ReplicasBox
 
 extends Control
 
+signal printing_finished()
+
 @export
 var delay_multiplier: float = 4
 @export
@@ -48,10 +50,12 @@ func print_text():
 		text_label.text += char
 		prev_char = char
 	is_printing = false
+	printing_finished.emit()
 	
 func show_full_text():
 	text_label.text = full_text
 	is_printing = false
+	printing_finished.emit()
 
 func play_sound():
 	audio_source.stop()
