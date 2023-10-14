@@ -26,12 +26,13 @@ func init(_choice_options: Array):
 	var options_num = _choice_options.size()
 	var rect_width = rect.size.x
 	var rect_height = rect.size.y
-	var button_width = (rect_width / options_num - px_between_buttons / 2) as int
+	var button_width = (rect_width / options_num - px_between_buttons) as int
 	
 	for i in range(options_num):
 		option_buttons[i].text = _choice_options[i].text
 		option_buttons[i].set_size(Vector2(button_width, rect_height))
-		var position_x = i * (button_width + px_between_buttons)
+		var position_x = px_between_buttons / 2 + i * (button_width + px_between_buttons)
+		print("button ", i, " pos x:", position_x)
 		option_buttons[i].set_position(Vector2(position_x, 0))
 		option_buttons[i].show()
 
