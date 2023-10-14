@@ -4,6 +4,10 @@ extends Control
 
 signal option_chosen(index: int)
 
+@export
+var px_between_buttons = 10
+
+@onready var rect = $Rect
 var option_buttons: Array[Button]
 
 func _ready():
@@ -19,8 +23,16 @@ func _process(delta):
 	pass
 
 func init(_choice_options: Array):
-	for i in range(_choice_options.size()):
+	var options_num = _choice_options.size()
+	var rect_width = rect.size.x
+	var rect_height = rect.size.y
+	var button_width = (rect_width / options_num - px_between_buttons / 2) as int
+	
+	for i in range(options_num):
 		option_buttons[i].text = _choice_options[i].text
+		option_buttons[i].set_size(Vector2(button_width, rect_height))
+		var position_x = i * (button_width + px_between_buttons)
+		option_buttons[i].set_position(Vector2(position_x, 0))
 		option_buttons[i].show()
 
 func _on_option_pressed(button_idx):
