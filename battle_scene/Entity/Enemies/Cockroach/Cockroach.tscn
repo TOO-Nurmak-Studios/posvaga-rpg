@@ -1,0 +1,163 @@
+[gd_scene load_steps=28 format=3 uid="uid://bgybbtokpmwlg"]
+
+[ext_resource type="Script" path="res://battle_scene/Entity/Enemies/Cockroach/Cockroach.gd" id="1_8o6um"]
+[ext_resource type="PackedScene" uid="uid://qy81h3pjkt1f" path="res://battle_scene/EntityPrototype/HealthNode.tscn" id="2_jicok"]
+[ext_resource type="Texture2D" uid="uid://cttptwn5m7bch" path="res://sprites/Enemies/big_cockroach/death1.png" id="3_l4044"]
+[ext_resource type="Texture2D" uid="uid://djhcvuq6cctaq" path="res://sprites/Enemies/big_cockroach/bite1_1 (1).png" id="3_wa7gi"]
+[ext_resource type="Texture2D" uid="uid://d2gtd3nliih07" path="res://sprites/Enemies/big_cockroach/bite2.png" id="4_m70lu"]
+[ext_resource type="Texture2D" uid="uid://d25dm2g0y2ca5" path="res://sprites/Enemies/big_cockroach/death2.png" id="4_u0ucp"]
+[ext_resource type="Texture2D" uid="uid://dg6ttvvmebt2x" path="res://sprites/Enemies/big_cockroach/death3.png" id="5_2nlna"]
+[ext_resource type="Texture2D" uid="uid://b6a8mbxsb2dhf" path="res://sprites/Enemies/big_cockroach/bite3.png" id="5_b4vpk"]
+[ext_resource type="Texture2D" uid="uid://cgi20qs6ckca3" path="res://sprites/Enemies/big_cockroach/bite4.png" id="6_j0vxg"]
+[ext_resource type="Texture2D" uid="uid://dv48lhlqe7iv3" path="res://sprites/Enemies/big_cockroach/death4.png" id="6_rn4io"]
+[ext_resource type="Texture2D" uid="uid://bvhya0ik88y0h" path="res://sprites/Enemies/big_cockroach/death5.png" id="7_shyq4"]
+[ext_resource type="Texture2D" uid="uid://bssmfmh1fegn7" path="res://sprites/Enemies/big_cockroach/bite5.png" id="7_wga6t"]
+[ext_resource type="Texture2D" uid="uid://32nkumsggh4h" path="res://sprites/Enemies/big_cockroach/death6.png" id="8_jue1v"]
+[ext_resource type="Texture2D" uid="uid://en2lq7u7g8fm" path="res://sprites/Enemies/big_cockroach/bite1_1 (2).png" id="8_pdptt"]
+[ext_resource type="Texture2D" uid="uid://dtpfe2xtpl8h4" path="res://sprites/Enemies/big_cockroach/bite1_1 (3).png" id="9_2ps40"]
+[ext_resource type="Texture2D" uid="uid://do73ns2e6fhid" path="res://sprites/Enemies/big_cockroach/bite1_1 (4).png" id="10_ys146"]
+[ext_resource type="Texture2D" uid="uid://s1mfds01nqe8" path="res://sprites/Enemies/big_cockroach/bite1_1 (5).png" id="11_ddi27"]
+[ext_resource type="Texture2D" uid="uid://c3y5iquv7522l" path="res://sprites/Enemies/big_cockroach/Sprite-0011.png" id="12_ct8wu"]
+[ext_resource type="Texture2D" uid="uid://c0jbtuxs46jjx" path="res://sprites/Enemies/big_cockroach/Sprite-0012.png" id="13_djlua"]
+[ext_resource type="Texture2D" uid="uid://c6doskvpgxoto" path="res://sprites/Enemies/big_cockroach/Sprite-0013.png" id="14_i3051"]
+[ext_resource type="Texture2D" uid="uid://b8fjugdt4vco7" path="res://sprites/Enemies/big_cockroach/Cockroach2.png" id="21_7uh7d"]
+[ext_resource type="Texture2D" uid="uid://dvgb6vjuu7n1y" path="res://sprites/Enemies/big_cockroach/idle_selected.png" id="22_65bva"]
+[ext_resource type="Texture2D" uid="uid://chfxat6dnf8g4" path="res://sprites/Enemies/big_cockroach/Sprite-0001.png" id="23_2rhmx"]
+[ext_resource type="Texture2D" uid="uid://c3xtfmlonkkur" path="res://sprites/Enemies/big_cockroach/Sprite-0002.png" id="24_620t0"]
+[ext_resource type="Texture2D" uid="uid://12oa3deuy8gf" path="res://sprites/Enemies/big_cockroach/Sprite-0003.png" id="25_6j63w"]
+[ext_resource type="Texture2D" uid="uid://bp25df6vlghhk" path="res://sprites/Enemies/big_cockroach/Sprite-0004.png" id="26_hh67c"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p1p8m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_wa7gi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_m70lu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_b4vpk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_j0vxg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_wga6t")
+}],
+"loop": false,
+"name": &"bite_funny",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_wa7gi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_pdptt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_2ps40")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ys146")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ddi27")
+}],
+"loop": false,
+"name": &"bite_normal",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_ct8wu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_djlua")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_i3051")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_i3051")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_djlua")
+}],
+"loop": false,
+"name": &"chant",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_l4044")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_u0ucp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_2nlna")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_rn4io")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_shyq4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_jue1v")
+}],
+"loop": false,
+"name": &"death",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_l4044")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_7uh7d")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("22_65bva")
+}],
+"loop": true,
+"name": &"idle_selected",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_2rhmx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_620t0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_6j63w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_hh67c")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 20.0
+}]
+
+[node name="Cockroach" type="Node2D" groups=["enemy"]]
+script = ExtResource("1_8o6um")
+
+[node name="HealthNode" parent="." instance=ExtResource("2_jicok")]
+position = Vector2(-64, -64)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_p1p8m")
+animation = &"walk"
+
+[node name="Crosshair" type="Marker2D" parent="."]
+position = Vector2(28, -4)
