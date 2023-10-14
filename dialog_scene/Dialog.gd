@@ -79,6 +79,7 @@ func next():
 		show_next_replica(next_replica_text, tags)
 
 	if ink_player.has_choices:
+		await replicas_box.printing_finished
 		next_button.hide()
 		choices_box.init(ink_player.current_choices)
 		choices_box.show()

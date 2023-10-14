@@ -32,7 +32,6 @@ func init(_choice_options: Array):
 		option_buttons[i].text = _choice_options[i].text
 		option_buttons[i].set_size(Vector2(button_width, rect_height))
 		var position_x = px_between_buttons / 2 + i * (button_width + px_between_buttons)
-		print("button ", i, " pos x:", position_x)
 		option_buttons[i].set_position(Vector2(position_x, 0))
 		option_buttons[i].show()
 
