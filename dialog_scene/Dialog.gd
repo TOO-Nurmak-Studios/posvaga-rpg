@@ -33,7 +33,7 @@ func _ready():
 
 	EventBus.dialog_start.connect(start)
 
-	init_speakers()
+	init_speaker()
 
 	# для отладки самой сцены стартуем сразу,
 	# иначе показываем только при вызове start
@@ -58,7 +58,7 @@ func start(_dialog_data: DialogData):
 	show()
 	next()
 
-func init_speakers():
+func init_speaker():
 	var speaker_instance = speaker_scene.instantiate()
 	speaker_instance.init(400, get_viewport().get_visible_rect().size)
 	add_child(speaker_instance)
@@ -87,8 +87,8 @@ func next():
 
 func show_next_replica(replica_text: String, tags: Array):
 	var replica = parse_next_replica(replica_text, tags)
+	await current_speaker.update(replica.speaker.name, replica.speaker.texture, replica.speaker_location)
 	replicas_box.set_replica(replica)
-	current_speaker.set_texture(replica.speaker.texture, replica.speaker_location)
 
 
 func parse_next_replica(replica_text: String, tags: Array) -> ReplicaData:
