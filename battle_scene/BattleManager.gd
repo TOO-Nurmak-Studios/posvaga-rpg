@@ -1,8 +1,8 @@
 extends Node
 
 var all_characters: Array[AbstractCharacter]
-@onready var select_manager: SelectManager = $/root/BattleField/SelectManager as SelectManager
-@onready var hud_manager: HUDManager = $/root/BattleField/HUDManager as HUDManager
+@onready var select_manager: SelectManager = $"../SelectManager" as SelectManager
+@onready var hud_manager: HUDManager = $"../HUDManager" as HUDManager
 var enemies: Array[Node]
 var allies: Array[Node]
 
@@ -17,21 +17,21 @@ func _ready():
 	all_characters.append_array(enemies)
 	all_characters.append_array(allies)
 	for char in all_characters:
-		char.death.connect(func(x): 
+		char.death.connect(func(x):
 			all_characters.erase(x)
 			if char.get_type() == AbstractCharacter.CharacterType.ENEMY:
 				enemies.erase(x)
 			else:
 				allies.erase(x)
 		)
-		
+
 	EventBus.attack_ended.connect(_on_attack_end)
-	EventBus.battle_scene_fully_ready.connect(_on_battle_scene_ready)
+	$"..".ready.connect(_on_battle_scene_ready)
 	pass 
-	
+
 func _on_battle_scene_ready():
 	get_tree().create_timer(1).timeout.connect(start_next_round)
-	
+
 func start_next_round():
 	for enemy in enemies:
 		enemy.has_moved = false
@@ -47,7 +47,7 @@ func next_move():
 			enemy.has_moved = true
 			enemy.do_move(allies, enemies)
 			return
-		
+
 	hud_manager.enable_player_movement()
 
 func _on_attack_pressed():

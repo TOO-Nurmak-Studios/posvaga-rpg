@@ -1,0 +1,75 @@
+[gd_scene load_steps=6 format=3 uid="uid://cgdpog5xw30dm"]
+
+[ext_resource type="Script" path="res://main_scene/SceneTransition.gd" id="1_tg1m2"]
+
+[sub_resource type="Animation" id="Animation_kfpxn"]
+resource_name = "RESET"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_s7l7x"]
+resource_name = "Fade"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_5rg65"]
+resource_name = "Fade_out"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d3d53"]
+_data = {
+"Fade": SubResource("Animation_s7l7x"),
+"Fade_out": SubResource("Animation_5rg65"),
+"RESET": SubResource("Animation_kfpxn")
+}
+
+[node name="SceneTransition" type="CanvasLayer"]
+layer = 15
+script = ExtResource("1_tg1m2")
+
+[node name="FadeRect" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_right = 641.0
+offset_bottom = 481.0
+mouse_filter = 2
+color = Color(0.0313726, 0.0313726, 0.0313726, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+method_call_mode = 1
+libraries = {
+"": SubResource("AnimationLibrary_d3d53")
+}

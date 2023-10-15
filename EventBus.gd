@@ -8,32 +8,37 @@ signal select_prev_button_pressed()
 #battle scene
 signal attack_ended(attacker: AbstractCharacter, attacked: Array[AbstractCharacter], attack: Attack)
 signal battle_scene_end()
-signal battle_scene_fully_ready()
+
+#explore scene, player controls
+var player_input_enabled = true
 
 signal player_move_pressed(delta: float, vector: Vector2)
 signal player_sprint_pressed()
 signal player_sprint_released()
 signal player_interact_pressed()
 
+#dialog
 signal dialog_start(dialog_data: DialogData)
+signal dialog_finished()
 
-func _ready():
-	var root_scene = $/root as Node
-	if root_scene != null:
-		root_scene.ready.connect(_emit_battle_scene_fully_ready)
-
-func _emit_battle_scene_fully_ready():
-	battle_scene_fully_ready.emit()
+#scene transitions
+signal teleport_request(scene: Resource, player_position: Vector2, player_direction: Vector2)
+signal battle_request(scene: Resource)
 
 func _process(delta):
-	if Input.is_action_just_pressed("debug_action_1"):
-		action_button_pressed.emit()
+
 	if Input.is_action_just_pressed("select_next"):
 		select_next_button_pressed.emit()
 	if Input.is_action_just_pressed("select_prev"):
 		select_prev_button_pressed.emit()
-	
-	if Input.is_action_just_pressed("ui_sprint"):
+	if Input.is_action_just_pressed("debug_action_1"):
+		action_button_pressed.emit()
+
+	if player_input_enabled:
+		process_player_input(delta)
+
+func process_player_input(delta):
+	if Input.is_action_pressed("ui_sprint"):
 		player_sprint_pressed.emit()
 	elif Input.is_action_just_released("ui_sprint"):
 		player_sprint_released.emit()
