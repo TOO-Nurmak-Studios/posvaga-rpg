@@ -2,20 +2,40 @@ class_name Speaker
 
 extends Node2D
 
+signal moving_finished()
+
 @onready var sprite = $Sprite2D
 
-var left_appear_pos_x: float
-var right_appear_pos_x: float
+const indent_size = 20
 
 var bottom: float
 var viewport_size: Vector2
+var move_speed: float
 
-func init(_bottom: float, _viewport_size: Vector2):
+var left_appear_pos_x: float
+var left_disappear_pos_x: float
+var right_appear_pos_x: float
+var right_disappear_pos_x: float
+var current_speed: float = 0
+var target_pos_x: float
+var current_location: ReplicaData.Location
+var current_name: String
+
+func init(_bottom: float, _viewport_size: Vector2, _move_speed: float):
 	bottom = _bottom
 	viewport_size = _viewport_size
+	move_speed = _move_speed
 
 
-func set_texture(texture: Texture2D, location: ReplicaData.Location):
+func update(name: String, texture: Texture2D, location: ReplicaData.Location):
+	var should_move = name != current_name
+	current_name = name
+	
+	if should_move:
+		disappear()
+		await moving_finished
+	
+	current_location = location
 	sprite.texture = texture
 
 	var texture_size = texture.get_size()
@@ -24,24 +44,44 @@ func set_texture(texture: Texture2D, location: ReplicaData.Location):
 
 	position.y = bottom - texture_size_y / 2
 
-	left_appear_pos_x = texture_size_x / 2 + 20
-	right_appear_pos_x = viewport_size.x - texture_size_x / 2 - 20
+	left_appear_pos_x = indent_size + texture_size_x / 2
+	left_disappear_pos_x = -1 * texture_size_x / 2
+	right_appear_pos_x = viewport_size.x - texture_size_x / 2 - indent_size
+	right_disappear_pos_x = viewport_size.x + texture_size_x / 2
 
-	match(location):
+	if should_move:
+		appear()
+
+
+func appear():
+	match(current_location):
 		ReplicaData.Location.LEFT:
-			position.x = left_appear_pos_x
+			position.x = left_disappear_pos_x
+			target_pos_x = left_appear_pos_x
+			current_speed = move_speed
 		ReplicaData.Location.RIGHT:
-			position.x = right_appear_pos_x
-
-
-func appear(location: ReplicaData.Location):
-	match(location):
-		ReplicaData.Location.LEFT:
-			position.x = left_appear_pos_x
-		ReplicaData.Location.RIGHT:
-			position.x = right_appear_pos_x
-	show()
+			position.x = right_disappear_pos_x
+			target_pos_x = right_appear_pos_x
+			current_speed = -1 * move_speed
 
 
 func disappear():
-	hide()
+	match(current_location):
+		ReplicaData.Location.LEFT:
+			target_pos_x = left_disappear_pos_x
+			current_speed = -1 * move_speed
+		ReplicaData.Location.RIGHT:
+			target_pos_x = right_disappear_pos_x
+			current_speed = move_speed
+
+
+func _process(delta):
+	if current_speed == 0:
+		return
+	
+	var is_more_right = position.x >= target_pos_x
+	position.x += current_speed * delta
+	if (position.x > target_pos_x) != is_more_right:
+		position.x = target_pos_x
+		current_speed = 0
+		moving_finished.emit()
