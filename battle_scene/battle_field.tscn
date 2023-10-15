@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://battle_scene/VBoxContainerTest.gd" id="7_x87fw"]
 [ext_resource type="Texture2D" uid="uid://cgpt7o1yiruk" path="res://sprites/container.png" id="10_iysgi"]
 
-[node name="BattleField" type="Node2D"]
+[node name="BattleField" type="CanvasLayer"]
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(320, 240)

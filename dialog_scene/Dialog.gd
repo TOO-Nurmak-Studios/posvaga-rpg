@@ -1,15 +1,13 @@
-extends Node2D
+extends CanvasLayer
 
-signal dialog_finished()
 signal option_chosen(option_id: String)
 
 @export var ink_file: Resource
 
 @onready var ink_player = $InkPlayer
-@onready var canvas_layer = $CanvasLayer
-@onready var replicas_box = $CanvasLayer/ReplicasBox
-@onready var choices_box = $CanvasLayer/ChoicesBox
-@onready var next_button = $CanvasLayer/NextButton
+@onready var replicas_box = $ReplicasBox
+@onready var choices_box = $ChoicesBox
+@onready var next_button = $NextButton
 
 var speaker_scene: PackedScene = load("res://dialog_scene/speaker.tscn")
 
@@ -31,8 +29,7 @@ var dialog_data: DialogData
 func _ready():
 	ink_player.loads_in_background = false
 
-	canvas_layer.hide()
-	choices_box.hide()
+	hide()
 
 	EventBus.dialog_start.connect(start)
 
@@ -58,13 +55,13 @@ func start(_dialog_data: DialogData):
 			ink_player.set_variable(var_name, var_val)
 
 	get_tree().paused = true
-	canvas_layer.show()
+	show()
 	next()
 
 func init_speakers():
 	var speaker_instance = speaker_scene.instantiate()
-	speaker_instance.init(400, get_viewport_rect().size)
-	canvas_layer.add_child(speaker_instance)
+	speaker_instance.init(400, get_viewport().get_visible_rect().size)
+	add_child(speaker_instance)
 	current_speaker = speaker_instance
 
 func next():
@@ -129,8 +126,8 @@ func finish():
 		GameState.vars[var_name] = var_val
 	
 	get_tree().paused = false
-	canvas_layer.hide()
-	dialog_finished.emit()
+	hide()
+	EventBus.dialog_finished.emit()
 	print("dialog finished")
 
 func _on_choices_box_option_chosen(index: int):

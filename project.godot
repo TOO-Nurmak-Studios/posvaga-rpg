@@ -13,6 +13,9 @@ config_version=5
 config/name="posvyaga-rpg"
 run/main_scene="res://battle_scene/battle_field.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/image="res://sprites/splash.png"
+boot_splash/use_filter=false
 config/icon="res://icon.svg"
 
 [autoload]
@@ -20,6 +23,7 @@ config/icon="res://icon.svg"
 EventBus="*res://EventBus.gd"
 __InkRuntime="*res://addons/inkgd/runtime/static/ink_runtime.gd"
 GameState="*res://GameState.gd"
+SceneTransition="*res://main_scene/SceneTransition.tscn"
 
 [debug]
 

@@ -1,11 +1,11 @@
 [gd_scene load_steps=6 format=3 uid="uid://byxh3m01kssxk"]
 
-[ext_resource type="Script" path="res://explore_scene/Scripts/NPC.gd" id="1_by55g"]
+[ext_resource type="Script" path="res://explore_scene/Scripts/Interactible.gd" id="1_11oeg"]
 [ext_resource type="Texture2D" uid="uid://d2j6cf5ctielj" path="res://explore_scene/Assets/Player/Player Back Sheet.png" id="2_0ipux"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c5k2m"]
-radius = 11.0
-height = 22.0
+radius = 8.0
+height = 16.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ixyyd"]
 atlas = ExtResource("2_0ipux")
@@ -27,9 +27,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="NPC" type="CharacterBody2D" groups=["NPC"]]
+[node name="Interactible" type="CharacterBody2D" groups=["NPC"]]
 y_sort_enabled = true
-script = ExtResource("1_by55g")
+script = ExtResource("1_11oeg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -2)
