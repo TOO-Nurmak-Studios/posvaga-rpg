@@ -7,7 +7,6 @@ signal option_chosen(option_id: String)
 @onready var ink_player = $InkPlayer
 @onready var replicas_box = $ReplicasBox
 @onready var choices_box = $ChoicesBox
-@onready var next_button = $NextButton
 
 var speaker_scene: PackedScene = load("res://dialog_scene/speaker.tscn")
 
@@ -23,8 +22,8 @@ var speakers_data = {
 # todo: сразу поставить на сцену?
 var speakers: Array[Speaker]
 var current_speaker: Speaker
-
 var dialog_data: DialogData
+var waiting_for_choice: bool
 
 func _ready():
 	ink_player.loads_in_background = false
@@ -40,6 +39,12 @@ func _ready():
 	if get_tree().current_scene == self:
 		var test_dialog = DialogData.new(ink_file, false, [])
 		start(test_dialog)
+
+
+func _process(delta):
+	if Input.is_action_just_pressed("dialog_next") and !waiting_for_choice:
+		next()
+
 
 func start(_dialog_data: DialogData):
 	dialog_data = _dialog_data
@@ -80,7 +85,7 @@ func next():
 
 	if ink_player.has_choices:
 		await replicas_box.printing_finished
-		next_button.hide()
+		waiting_for_choice = true
 		choices_box.init(ink_player.current_choices)
 		choices_box.show()
 
@@ -134,8 +139,8 @@ func finish():
 func _on_choices_box_option_chosen(index: int):
 	ink_player.choose_choice_index(index)
 	choices_box.hide()
-	next_button.show()
 	option_chosen.emit(index)
+	waiting_for_choice = false
 	next()
 
 ## TODO: for tests, remove

@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://clah0tnwu35b8"]
+[gd_scene load_steps=6 format=3 uid="uid://clah0tnwu35b8"]
 
 [ext_resource type="Script" path="res://dialog_scene/Dialog.gd" id="1_42uhe"]
 [ext_resource type="PackedScene" uid="uid://bbruyt65lcvvv" path="res://dialog_scene/replicas_box.tscn" id="1_n5grt"]
 [ext_resource type="Resource" uid="uid://u8w7njkp8npl" path="res://dialog_scene/ink/test.ink.json" id="2_lkfr1"]
-[ext_resource type="FontFile" uid="uid://dsg3v8pxmy0f8" path="res://fonts/monogram-extended.ttf" id="3_8xv3u"]
 [ext_resource type="PackedScene" uid="uid://rqc1ucjcp3qg" path="res://dialog_scene/choices_box.tscn" id="3_ifti7"]
 [ext_resource type="Script" path="res://addons/inkgd/ink_player.gd" id="4_pyt6a"]
 
@@ -15,23 +14,6 @@ ink_file = ExtResource("2_lkfr1")
 [node name="InkPlayer" type="Node" parent="."]
 process_mode = 3
 script = ExtResource("4_pyt6a")
-
-[node name="NextButton" type="Button" parent="."]
-process_mode = 3
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -120.0
-offset_top = -165.0
-offset_right = -20.0
-offset_bottom = -130.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_fonts/font = ExtResource("3_8xv3u")
-theme_override_font_sizes/font_size = 28
-text = "Next"
 
 [node name="ReplicasBox" parent="." instance=ExtResource("1_n5grt")]
 process_mode = 3
@@ -53,5 +35,4 @@ offset_right = 420.0
 offset_bottom = -22.0
 
 [connection signal="option_chosen" from="." to="." method="_on_option_chosen"]
-[connection signal="pressed" from="NextButton" to="." method="next"]
 [connection signal="option_chosen" from="ChoicesBox" to="." method="_on_choices_box_option_chosen"]
