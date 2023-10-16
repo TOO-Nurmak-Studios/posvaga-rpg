@@ -93,13 +93,13 @@ func next():
 func show_next_replica(replica_text: String, tags: Array):
 	var replica = parse_next_replica(replica_text, tags)
 	await current_speaker.update(replica.speaker.name, replica.speaker.texture, replica.speaker_location)
-	replicas_box.set_replica(replica)
+	replicas_box.new_replica(replica)
 
 
 func parse_next_replica(replica_text: String, tags: Array) -> ReplicaData:
 	var speaker_id = null
 	var speaker_data = null
-	var location = ReplicaData.Location.LEFT
+	var location = ReplicaData.SpeakerLocation.LEFT
 	var text_speed = 20
 
 	# хочется использовать лейбл c html-форматированием, типа TextMeshPro
@@ -115,14 +115,14 @@ func parse_next_replica(replica_text: String, tags: Array) -> ReplicaData:
 			"sid":
 				speaker_id = tag_value
 			"loc":
-				location = ReplicaData.Location.get(tag_value.to_upper())
+				location = ReplicaData.SpeakerLocation.get(tag_value.to_upper())
 			"spd":
 				text_speed = tag_value.to_int()
 
 	if speaker_id != null:
 		speaker_data = speakers_data[speaker_id]
 
-	return ReplicaData.new(speaker_data, replica_text, location as ReplicaData.Location, text_speed)
+	return ReplicaData.new(speaker_data, replica_text, location as ReplicaData.SpeakerLocation, text_speed)
 
 
 func finish():
@@ -136,10 +136,10 @@ func finish():
 	EventBus.dialog_finished.emit()
 	print("dialog finished")
 
-func _on_choices_box_option_chosen(index: int):
-	ink_player.choose_choice_index(index)
+func _on_choices_box_option_chosen(option_id: int):
+	ink_player.choose_choice_index(option_id)
 	choices_box.hide()
-	option_chosen.emit(index)
+	option_chosen.emit(option_id)
 	waiting_for_choice = false
 	next()
 

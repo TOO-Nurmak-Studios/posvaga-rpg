@@ -1,21 +1,21 @@
 class_name ReplicaData
 
-enum Location { LEFT, RIGHT }
+enum SpeakerLocation { LEFT, RIGHT }
 
 var speaker: SpeakerData
-var speaker_location: Location
+var speaker_location: SpeakerLocation
 var text: String
 ## symbols per second
-var speed: float
+var text_speed: float
 
 
 func _init(
 			_speaker: SpeakerData,
 			_text: String,
-			_speaker_location: Location = Location.LEFT,
-			_speed: float = 18):
+			_speaker_location: SpeakerLocation = SpeakerLocation.LEFT,
+			_text_speed: float = 18):
 
 	speaker = _speaker
 	text = _text
 	speaker_location = _speaker_location
-	speed = _speed
+	text_speed = _text_speed
