@@ -9,6 +9,7 @@ signal option_chosen(option_id: int)
 @onready var rect = $Rect
 
 var option_buttons: Array[Button]
+var is_focused: bool = false
 
 func _ready():
 	option_buttons.resize(3)
@@ -34,6 +35,14 @@ func init(_choice_options: Array):
 		var position_x = px_between_buttons / 2 + i * (button_width + px_between_buttons)
 		option_buttons[i].set_position(Vector2(position_x, 0))
 		option_buttons[i].show()
+		
+	is_focused = false
+
+
+func focus_on_first_option():
+	option_buttons[0].grab_focus()
+	is_focused = true
+
 
 func _on_option_pressed(button_id):
 	option_chosen.emit(button_id)

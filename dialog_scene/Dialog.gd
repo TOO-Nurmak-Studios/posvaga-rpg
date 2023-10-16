@@ -56,6 +56,9 @@ func _ready():
 func _process(delta):
 	if Input.is_action_just_pressed("dialog_next") and !waiting_for_choice:
 		next()
+	if Input.is_action_just_pressed("dialog_focus_options") and waiting_for_choice:
+		if not choices_box.is_focused:
+			choices_box.focus_on_first_option()
 
 
 func init_speakers():
@@ -151,13 +154,13 @@ func process_next_speaker(speaker_data: SpeakerData, location: ReplicaData.Speak
 	var speaker = speakers[speaker_name]
 	var is_new_speaker = !current_speakers_names.has(speaker_name)
 	
-	speaker.update(location, speaker_data.texture)
-	
 	if replace and not current_speakers_names.is_empty():
 		for current_speaker_name in current_speakers_names:
 			if current_speaker_name != speaker_name:
 				current_speakers_names.erase(current_speaker_name)
 				await speakers[current_speaker_name].disappear()
+	
+	speaker.update(location, speaker_data.texture)
 	
 	if is_new_speaker:
 		speaker.set_disappeared()
