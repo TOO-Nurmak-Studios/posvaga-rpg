@@ -12,68 +12,73 @@ var bottom: float
 var viewport_size: Vector2
 var move_speed: float
 
-var left_appear_pos_x: float
-var left_disappear_pos_x: float
-var right_appear_pos_x: float
-var right_disappear_pos_x: float
-var target_pos_x: float
+var appear_pos_x: float = 0
+var disappear_pos_x: float = 0
+var target_pos_x: float = 0
 var current_speed: float = 0
-var current_location: ReplicaData.SpeakerLocation
-var current_name: String
+var location: ReplicaData.SpeakerLocation
 
 
-func init(_bottom: float, _viewport_size: Vector2, _move_speed: float):
+func init(
+			_bottom: float,
+			_viewport_size: Vector2,
+			_move_speed: float):
+
 	bottom = _bottom
 	viewport_size = _viewport_size
 	move_speed = _move_speed
 
 
-func update(name: String, texture: Texture2D, location: ReplicaData.SpeakerLocation):
-	var should_move = name != current_name
-	current_name = name
-	
-	if should_move:
-		disappear()
-		await moving_finished
-	
-	current_location = location
-	sprite.texture = texture
+func update(_location: ReplicaData.SpeakerLocation, _texture: Texture2D):
+	location = _location
+	sprite.texture = _texture
 
-	var texture_size = texture.get_size()
+	var texture_size = _texture.get_size()
 	var texture_size_x = texture_size.x
 	var texture_size_y = texture_size.y
 
 	position.y = bottom - texture_size_y / 2
 
-	left_appear_pos_x = indent_size + texture_size_x / 2
-	left_disappear_pos_x = -1 * texture_size_x / 2
-	right_appear_pos_x = viewport_size.x - texture_size_x / 2 - indent_size
-	right_disappear_pos_x = viewport_size.x + texture_size_x / 2
+	match(location):
+		ReplicaData.SpeakerLocation.LEFT:
+			appear_pos_x = indent_size + texture_size_x / 2
+			disappear_pos_x = -1 * texture_size_x / 2
+		ReplicaData.SpeakerLocation.RIGHT:
+			appear_pos_x = viewport_size.x - texture_size_x / 2 - indent_size
+			disappear_pos_x = viewport_size.x + texture_size_x / 2
 
-	if should_move:
-		appear()
+
+func set_appeared():
+	position.x = appear_pos_x
+
+
+func set_disappeared():
+	position.x = disappear_pos_x
 
 
 func appear():
-	match(current_location):
+	position.x = disappear_pos_x
+	target_pos_x = appear_pos_x
+	
+	match(location):
 		ReplicaData.SpeakerLocation.LEFT:
-			position.x = left_disappear_pos_x
-			target_pos_x = left_appear_pos_x
 			current_speed = move_speed
 		ReplicaData.SpeakerLocation.RIGHT:
-			position.x = right_disappear_pos_x
-			target_pos_x = right_appear_pos_x
 			current_speed = -1 * move_speed
+			
+	await moving_finished
 
 
 func disappear():
-	match(current_location):
+	target_pos_x = disappear_pos_x
+	
+	match(location):
 		ReplicaData.SpeakerLocation.LEFT:
-			target_pos_x = left_disappear_pos_x
 			current_speed = -1 * move_speed
 		ReplicaData.SpeakerLocation.RIGHT:
-			target_pos_x = right_disappear_pos_x
 			current_speed = move_speed
+			
+	await moving_finished
 
 
 func _process(delta):
