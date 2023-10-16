@@ -4,24 +4,21 @@ extends Control
 
 signal printing_finished()
 
-@export
-var delay_multiplier: float = 4
-@export
-var min_pitch: float = 0.7
-@export
-var max_pitch: float = 0.8
+@export var delay_multiplier: float = 4
+@export var min_pitch: float = 0.7
+@export var max_pitch: float = 0.8
 
 @onready var speaker_name_label = $SpeakerNameLabel
 @onready var text_label = $TextLabel
+@onready var audio_source = $AudioStreamPlayer
 
 var full_text: String
 var seconds_before_next_symbol: float
 var is_printing: bool
 var print_sound_path: String
-var audio_source: AudioStreamPlayer
 
 func _ready():
-	audio_source = get_node("AudioStreamPlayer")
+	pass
 
 func _process(delta):
 	pass
@@ -31,11 +28,11 @@ func set_print_sound_path(_print_sound_path: String):
 		audio_source.stream = load(_print_sound_path)
 		print_sound_path = _print_sound_path
 
-func set_replica(replica: ReplicaData):
-	speaker_name_label.text = replica.speaker.name# + ":"
+func new_replica(replica: ReplicaData):
+	speaker_name_label.text = replica.speaker.name
 	text_label.text = ""
 	full_text = replica.text
-	seconds_before_next_symbol = 1 / replica.speed
+	seconds_before_next_symbol = 1 / replica.text_speed
 	is_printing = true
 	print_text()
 
@@ -44,7 +41,7 @@ func print_text():
 	for char in full_text:
 		await get_tree().create_timer(get_delay(prev_char, char)).timeout
 		if !is_space(char):
-			play_sound()
+			play_print_sound()
 		if (not is_printing):
 			return
 		text_label.text += char
@@ -57,7 +54,7 @@ func show_full_text():
 	is_printing = false
 	printing_finished.emit()
 
-func play_sound():
+func play_print_sound():
 	audio_source.stop()
 	audio_source.pitch_scale = randf_range(min_pitch, max_pitch)
 	audio_source.play()
