@@ -30,7 +30,6 @@ func init(
 
 
 func update(_location: ReplicaData.SpeakerLocation, _texture: Texture2D):
-	location = _location
 	sprite.texture = _texture
 
 	var texture_size = _texture.get_size()
@@ -38,6 +37,11 @@ func update(_location: ReplicaData.SpeakerLocation, _texture: Texture2D):
 	var texture_size_y = texture_size.y
 
 	position.y = bottom - texture_size_y / 2
+
+	if _location == ReplicaData.SpeakerLocation.DEFAULT:
+		return
+
+	location = _location
 
 	match(location):
 		ReplicaData.SpeakerLocation.LEFT:

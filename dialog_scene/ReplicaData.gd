@@ -1,6 +1,6 @@
 class_name ReplicaData
 
-enum SpeakerLocation { LEFT, RIGHT }
+enum SpeakerLocation { LEFT, RIGHT, DEFAULT }
 
 var speaker: SpeakerData
 var speaker_location: SpeakerLocation
