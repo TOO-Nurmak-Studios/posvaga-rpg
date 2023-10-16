@@ -14,9 +14,10 @@ var speaker_scene: PackedScene = load("res://dialog_scene/speaker.tscn")
 
 var speakers_data: Dictionary	## String to SpeakerData
 var speakers: Dictionary = {}	## String to Speaker
-var current_speaker_name: String = ""
+var current_speakers_names: Array[String]
 var dialog_data: DialogData
 var waiting_for_choice: bool
+var main_speaker_id: String
 
 
 ## TODO: replace with loading (from where?)
@@ -29,6 +30,11 @@ func create_speakers_data() -> Dictionary:
 		"student_neutral" : SpeakerData.new("student_neutral", "Студент"),
 		"student_welcome" : SpeakerData.new("student_welcome", "Студент")
 	}
+
+
+## TODO: replace with loading (from where?)
+func get_main_speaker_id():
+	return "student_neutral"
 
 
 func _ready():
@@ -54,6 +60,7 @@ func _process(delta):
 
 func init_speakers():
 	speakers_data = create_speakers_data()
+	main_speaker_id = get_main_speaker_id()
 	for speaker_data in speakers_data.values():
 		if speakers.get(speaker_data.name) == null:
 			var speaker_instance = speaker_scene.instantiate()
@@ -99,12 +106,14 @@ func next():
 		await replicas_box.printing_finished
 		waiting_for_choice = true
 		choices_box.init(ink_player.current_choices)
+		## TODO: what if that is not main speaker who's choosing?
+		await process_next_speaker(speakers_data[main_speaker_id], ReplicaData.SpeakerLocation.DEFAULT, false)
 		choices_box.show()
 
 
 func process_next_replica(replica_text: String, tags: Array):
 	var replica = parse_next_replica(replica_text, tags)
-	await process_next_speaker(replica.speaker, replica.speaker_location)
+	await process_next_speaker(replica.speaker, replica.speaker_location, true)
 	replicas_box.new_replica(replica)
 
 
@@ -137,23 +146,26 @@ func parse_next_replica(replica_text: String, tags: Array) -> ReplicaData:
 	return ReplicaData.new(speaker_data, replica_text, speaker_location as ReplicaData.SpeakerLocation, text_speed)
 
 
-func process_next_speaker(speaker_data: SpeakerData, location: ReplicaData.SpeakerLocation):
+func process_next_speaker(speaker_data: SpeakerData, location: ReplicaData.SpeakerLocation, replace: bool):
 	var speaker_name = speaker_data.name
 	var speaker = speakers[speaker_name]
-	var is_new_speaker = speaker_name != current_speaker_name
+	var is_new_speaker = !current_speakers_names.has(speaker_name)
 	
 	speaker.update(location, speaker_data.texture)
 	
+	if replace and not current_speakers_names.is_empty():
+		for current_speaker_name in current_speakers_names:
+			if current_speaker_name != speaker_name:
+				current_speakers_names.erase(current_speaker_name)
+				await speakers[current_speaker_name].disappear()
+	
 	if is_new_speaker:
-		if not current_speaker_name.is_empty():
-			await speakers[current_speaker_name].disappear()
 		speaker.set_disappeared()
 		speaker.show()
 		await speaker.appear()
+		current_speakers_names.append(speaker_name)
 	else:
 		speaker.set_appeared()
-	
-	current_speaker_name = speaker_name
 
 
 func finish():
