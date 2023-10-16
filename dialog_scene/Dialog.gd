@@ -3,6 +3,8 @@ extends CanvasLayer
 signal option_chosen(option_id: String)
 
 @export var ink_file: Resource
+@export var speakers_bottom: float = 400
+@export var speakers_speed: float = 1000
 
 @onready var ink_player = $InkPlayer
 @onready var replicas_box = $ReplicasBox
@@ -10,20 +12,24 @@ signal option_chosen(option_id: String)
 
 var speaker_scene: PackedScene = load("res://dialog_scene/speaker.tscn")
 
-var speakers_data = {
-	"dean_angry"      : SpeakerData.new("dean_angry", "Декан"),
-	"dean_neutral"    : SpeakerData.new("dean_neutral", "Декан"),
-	"dean_smiling"    : SpeakerData.new("dean_smiling", "Декан"),
-
-	"student_neutral" : SpeakerData.new("student_neutral", "Студент"),
-	"student_welcome" : SpeakerData.new("student_welcome", "Студент")
-}
-
-# todo: сразу поставить на сцену?
-var speakers: Array[Speaker]
-var current_speaker: Speaker
+var speakers_data: Dictionary	## String to SpeakerData
+var speakers: Dictionary = {}	## String to Speaker
+var current_speaker_name: String = ""
 var dialog_data: DialogData
 var waiting_for_choice: bool
+
+
+## TODO: replace with loading (from where?)
+func create_speakers_data() -> Dictionary:
+	return {
+		"dean_angry"      : SpeakerData.new("dean_angry", "Декан"),
+		"dean_neutral"    : SpeakerData.new("dean_neutral", "Декан"),
+		"dean_smiling"    : SpeakerData.new("dean_smiling", "Декан"),
+
+		"student_neutral" : SpeakerData.new("student_neutral", "Студент"),
+		"student_welcome" : SpeakerData.new("student_welcome", "Студент")
+	}
+
 
 func _ready():
 	ink_player.loads_in_background = false
@@ -32,7 +38,7 @@ func _ready():
 
 	EventBus.dialog_start.connect(start)
 
-	init_speaker()
+	init_speakers()
 
 	# для отладки самой сцены стартуем сразу,
 	# иначе показываем только при вызове start
@@ -44,6 +50,17 @@ func _ready():
 func _process(delta):
 	if Input.is_action_just_pressed("dialog_next") and !waiting_for_choice:
 		next()
+
+
+func init_speakers():
+	speakers_data = create_speakers_data()
+	for speaker_data in speakers_data.values():
+		if speakers.get(speaker_data.name) == null:
+			var speaker_instance = speaker_scene.instantiate()
+			speaker_instance.init(speakers_bottom, get_viewport_rect().size, speakers_speed)
+			canvas_layer.add_child(speaker_instance)
+			speaker_instance.hide()
+			speakers[speaker_data.name] = speaker_instance
 
 
 func start(_dialog_data: DialogData):
@@ -63,11 +80,6 @@ func start(_dialog_data: DialogData):
 	show()
 	next()
 
-func init_speaker():
-	var speaker_instance = speaker_scene.instantiate()
-	speaker_instance.init(400, get_viewport().get_visible_rect().size)
-	add_child(speaker_instance)
-	current_speaker = speaker_instance
 
 func next():
 	if replicas_box.is_printing:
@@ -81,7 +93,7 @@ func next():
 	if ink_player.can_continue:
 		var next_replica_text = ink_player.continue_story()
 		var tags = ink_player.current_tags
-		show_next_replica(next_replica_text, tags)
+		process_next_replica(next_replica_text, tags)
 
 	if ink_player.has_choices:
 		await replicas_box.printing_finished
@@ -90,16 +102,16 @@ func next():
 		choices_box.show()
 
 
-func show_next_replica(replica_text: String, tags: Array):
+func process_next_replica(replica_text: String, tags: Array):
 	var replica = parse_next_replica(replica_text, tags)
-	await current_speaker.update(replica.speaker.name, replica.speaker.texture, replica.speaker_location)
+	await process_next_speaker(replica.speaker, replica.speaker_location)
 	replicas_box.new_replica(replica)
 
 
 func parse_next_replica(replica_text: String, tags: Array) -> ReplicaData:
 	var speaker_id = null
 	var speaker_data = null
-	var location = ReplicaData.SpeakerLocation.LEFT
+	var speaker_location = ReplicaData.SpeakerLocation.LEFT
 	var text_speed = 20
 
 	# хочется использовать лейбл c html-форматированием, типа TextMeshPro
@@ -115,14 +127,33 @@ func parse_next_replica(replica_text: String, tags: Array) -> ReplicaData:
 			"sid":
 				speaker_id = tag_value
 			"loc":
-				location = ReplicaData.SpeakerLocation.get(tag_value.to_upper())
+				speaker_location = ReplicaData.SpeakerLocation.get(tag_value.to_upper())
 			"spd":
 				text_speed = tag_value.to_int()
 
 	if speaker_id != null:
 		speaker_data = speakers_data[speaker_id]
 
-	return ReplicaData.new(speaker_data, replica_text, location as ReplicaData.SpeakerLocation, text_speed)
+	return ReplicaData.new(speaker_data, replica_text, speaker_location as ReplicaData.SpeakerLocation, text_speed)
+
+
+func process_next_speaker(speaker_data: SpeakerData, location: ReplicaData.SpeakerLocation):
+	var speaker_name = speaker_data.name
+	var speaker = speakers[speaker_name]
+	var is_new_speaker = speaker_name != current_speaker_name
+	
+	speaker.update(location, speaker_data.texture)
+	
+	if is_new_speaker:
+		if not current_speaker_name.is_empty():
+			await speakers[current_speaker_name].disappear()
+		speaker.set_disappeared()
+		speaker.show()
+		await speaker.appear()
+	else:
+		speaker.set_appeared()
+	
+	current_speaker_name = speaker_name
 
 
 func finish():
@@ -142,6 +173,7 @@ func _on_choices_box_option_chosen(option_id: int):
 	option_chosen.emit(option_id)
 	waiting_for_choice = false
 	next()
+
 
 ## TODO: for tests, remove
 func _on_option_chosen(option_id):
