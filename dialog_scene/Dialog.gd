@@ -67,8 +67,8 @@ func init_speakers():
 	for speaker_data in speakers_data.values():
 		if speakers.get(speaker_data.name) == null:
 			var speaker_instance = speaker_scene.instantiate()
-			speaker_instance.init(speakers_bottom, get_viewport_rect().size, speakers_speed)
-			canvas_layer.add_child(speaker_instance)
+			speaker_instance.init(speakers_bottom, get_viewport().get_visible_rect().size, speakers_speed)
+			add_child(speaker_instance)
 			speaker_instance.hide()
 			speakers[speaker_data.name] = speaker_instance
 
