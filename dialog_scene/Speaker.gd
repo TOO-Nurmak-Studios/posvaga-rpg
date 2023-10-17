@@ -5,6 +5,7 @@ extends Node2D
 signal moving_finished()
 
 const indent_size = 20
+const dim_alpha = 0.3
 
 @onready var sprite = $Sprite2D
 
@@ -31,6 +32,7 @@ func init(
 
 func update(_location: ReplicaData.SpeakerLocation, _texture: Texture2D):
 	sprite.texture = _texture
+	sprite.modulate.a = 1
 
 	var texture_size = _texture.get_size()
 	var texture_size_x = texture_size.x
@@ -50,6 +52,10 @@ func update(_location: ReplicaData.SpeakerLocation, _texture: Texture2D):
 		ReplicaData.SpeakerLocation.RIGHT:
 			appear_pos_x = viewport_size.x - texture_size_x / 2 - indent_size
 			disappear_pos_x = viewport_size.x + texture_size_x / 2
+
+
+func dim():
+	sprite.modulate.a = dim_alpha
 
 
 func set_appeared():
