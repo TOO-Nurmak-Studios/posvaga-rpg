@@ -54,7 +54,6 @@ offset_left = -290.0
 offset_top = -90.0
 offset_right = 290.0
 offset_bottom = -10.0
-text = "Sample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample textSample text"
 label_settings = SubResource("LabelSettings_ygk3t")
 autowrap_mode = 2
 
@@ -64,7 +63,6 @@ offset_left = -290.0
 offset_top = -140.0
 offset_right = 290.0
 offset_bottom = -105.0
-text = "Ryan Gosling"
 label_settings = SubResource("LabelSettings_c8sbr")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

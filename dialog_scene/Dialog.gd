@@ -17,6 +17,7 @@ var speakers: Dictionary = {}	## String to Speaker
 var current_speakers_names: Array[String]
 var dialog_data: DialogData
 var waiting_for_choice: bool
+var may_show_next: bool
 var main_speaker_id: String
 
 
@@ -54,8 +55,8 @@ func _ready():
 
 
 func _process(delta):
-	if Input.is_action_just_pressed("dialog_next") and !waiting_for_choice:
-		next()
+	if Input.is_action_just_pressed("dialog_next"):
+		try_next()
 	if Input.is_action_just_pressed("dialog_focus_options") and waiting_for_choice:
 		if not choices_box.is_focused:
 			choices_box.focus_on_first_option()
@@ -91,11 +92,16 @@ func start(_dialog_data: DialogData):
 	next()
 
 
-func next():
+func try_next():
 	if replicas_box.is_printing:
 		replicas_box.show_full_text()
-		return
+	elif !waiting_for_choice and may_show_next:
+		next()
 
+
+func next():
+	may_show_next = false
+	
 	if !ink_player.has_choices && !ink_player.can_continue:
 		finish()
 		return
@@ -103,7 +109,7 @@ func next():
 	if ink_player.can_continue:
 		var next_replica_text = ink_player.continue_story()
 		var tags = ink_player.current_tags
-		process_next_replica(next_replica_text, tags)
+		await process_next_replica(next_replica_text, tags)
 
 	if ink_player.has_choices:
 		await replicas_box.printing_finished
@@ -112,6 +118,8 @@ func next():
 		## TODO: what if that is not main speaker who's choosing?
 		await process_next_speaker(speakers_data[main_speaker_id], ReplicaData.SpeakerLocation.DEFAULT, false)
 		choices_box.show()
+		
+	may_show_next = true
 
 
 func process_next_replica(replica_text: String, tags: Array):
