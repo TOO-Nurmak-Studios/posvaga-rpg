@@ -162,11 +162,14 @@ func process_next_speaker(speaker_data: SpeakerData, location: ReplicaData.Speak
 	var speaker = speakers[speaker_name]
 	var is_new_speaker = !current_speakers_names.has(speaker_name)
 	
-	if replace and not current_speakers_names.is_empty():
+	if not current_speakers_names.is_empty():
 		for current_speaker_name in current_speakers_names:
 			if current_speaker_name != speaker_name:
-				current_speakers_names.erase(current_speaker_name)
-				await speakers[current_speaker_name].disappear()
+				if replace:
+					current_speakers_names.erase(current_speaker_name)
+					await speakers[current_speaker_name].disappear()
+				else:
+					speakers[current_speaker_name].dim()
 	
 	speaker.update(location, speaker_data.texture)
 	
@@ -184,6 +187,9 @@ func finish():
 	for var_name in dialog_data.var_names:
 		var var_val = ink_player.get_variable(var_name)
 		GameState.vars[var_name] = var_val
+	
+	for speaker_name in current_speakers_names:
+		speakers[speaker_name].queue_free()
 	
 	get_tree().paused = false
 	hide()
