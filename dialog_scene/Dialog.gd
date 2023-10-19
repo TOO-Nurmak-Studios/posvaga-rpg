@@ -4,7 +4,7 @@ signal option_chosen(option_id: String)
 
 @export var ink_file: Resource
 @export var speakers_bottom: float = 400
-@export var speakers_speed: float = 1000
+@export var speakers_speed: float = 2000
 
 @onready var ink_player = $InkPlayer
 @onready var replicas_box = $ReplicasBox
