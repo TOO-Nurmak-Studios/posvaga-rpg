@@ -62,6 +62,29 @@ VAR found_command_book_for_sasha = false
 
 === talk_damir ===
 
+# cts: move
+Lida left 2
+# cts: turn
+Lida up
+# cts: wait
+1
+# cts: turn
+Lida down
+# cts: wait
+1
+# cts: move
+Lida right 2
+# cts: wait
+1
+# cts: fade
+in
+# cts: wait
+1
+# cts: fade
+out
+# cts: wait
+1
+
 # sid: damir
 И зачем я вообще пошёл в аспирантуру...
 

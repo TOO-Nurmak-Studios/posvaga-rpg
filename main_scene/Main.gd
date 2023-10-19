@@ -19,6 +19,8 @@ func init(_start_scene_name: String):
 func _ready():
 	EventBus.teleport_request.connect(_teleport)
 	EventBus.battle_request.connect(_battle)
+	EventBus.cutscene_wait_start.connect(wait)
+	EventBus.cutscene_fade_start.connect(fade)
 	
 	if start_scene != null:
 		_change_scene(start_scene, Mode.EXPLORATION)
@@ -85,5 +87,14 @@ func _change_scene(
 			old_scene.queue_free.call_deferred()
 
 
-func _wait(seconds_to_wait: float):
+func wait(seconds_to_wait: float):
 	await get_tree().create_timer(seconds_to_wait, true, true).timeout
+	EventBus.cutscene_wait_finished.emit()
+
+func fade(type: String):
+	match type:
+		"in":
+			await SceneTransition.fade_in()
+		"out":
+			await SceneTransition.fade_out()
+	EventBus.cutscene_fade_finished.emit()

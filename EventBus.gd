@@ -23,6 +23,18 @@ signal player_interact_pressed()
 signal dialog_start(dialog_data: DialogData)
 signal dialog_finished()
 
+#cutscene
+signal cutscene_step_start(step: CutsceneStep)
+signal cutscene_step_finished()
+signal cutscene_move_start(object: String, direction: String, distance: int)
+signal cutscene_move_finished()
+signal cutscene_turn_start(object: String, direction: String)
+signal cutscene_turn_finished()
+signal cutscene_wait_start(seconds: float)
+signal cutscene_wait_finished()
+signal cutscene_fade_start(type: String)
+signal cutscene_fade_finished()
+
 # game state
 # пока один сигнал на всё - мб нужно будет распилить
 # ещё непонятно, как отслеживать, что этот сигнал всегда вызывается
