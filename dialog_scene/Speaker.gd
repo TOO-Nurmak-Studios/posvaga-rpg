@@ -5,7 +5,7 @@ extends Node2D
 signal moving_finished()
 
 const indent_size = 20
-const dim_alpha = 0.3
+const dim_alpha = 0.9
 
 @onready var sprite = $Sprite2D
 
