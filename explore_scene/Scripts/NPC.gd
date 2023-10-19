@@ -4,6 +4,8 @@ signal movement_stoped
 
 const TILE_SIZE = 16
 
+@export var char_name: String = ""
+
 @export var default_speed = 50
 @export var sprint_speed_modifier = 1.5
 @export var starting_direction = Vector2.ZERO
@@ -24,14 +26,48 @@ var is_sprinting = false
 
 var dialog_data: DialogData
 
+var playing_cutscene: bool = false
+
 func _ready():
+	if char_name == "":
+		char_name = name
 	face_direction(starting_direction)
 	if dialog_resource != null:
 		dialog_data = DialogData.new(dialog_resource, dialog_vars, dialog_knot)
+	EventBus.cutscene_move_start.connect(try_move_for_cutscene)
+	EventBus.cutscene_turn_start.connect(try_turn_for_cutscene)
 
 func interact():
 	if dialog_resource != null:
 		EventBus.dialog_start.emit(dialog_data)
+		
+func try_move_for_cutscene(object: String, direction: String, distance: int):
+	if object != char_name:
+		return
+	playing_cutscene = true
+	match direction:
+		"left":
+			move_left(distance)
+		"right":
+			move_right(distance)
+		"up":
+			move_up(distance)
+		"down":
+			move_down(distance)
+
+func try_turn_for_cutscene(object: String, direction: String):
+	if object != char_name:
+		return
+	playing_cutscene = true
+	match direction:
+		"left":
+			turn_left()
+		"right":
+			turn_right()
+		"up":
+			turn_up()
+		"down":
+			turn_down()
 
 func move_left(tiles: int, sprint: bool = false):
 	stop_position = Vector2(position.x - tiles * TILE_SIZE, position.y)
@@ -70,6 +106,9 @@ func _physics_process(delta):
 	if _reached_position():
 		direction = Vector2.ZERO
 		movement_stoped.emit()
+		if playing_cutscene:
+			EventBus.cutscene_move_finished.emit()
+			playing_cutscene = false
 
 func _reached_position():
 	if direction.y > 0:
@@ -140,3 +179,6 @@ func turn_down():
 
 func face_direction(_direction: Vector2):
 	play_animation(_direction, true)
+	if playing_cutscene:
+		EventBus.cutscene_turn_finished.emit()
+		playing_cutscene = false

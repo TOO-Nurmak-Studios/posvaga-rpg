@@ -45,6 +45,9 @@ func new_replica(replica: ReplicaData):
 	is_printing = true
 	print_text()
 
+func clear():
+	text_label.text = ""
+
 func print_text():
 	var prev_char = ''
 	for char in full_text:

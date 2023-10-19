@@ -7,7 +7,9 @@ signal moving_finished()
 const missing_texture = preload("res://sprites/dialog/missing_texture.png")
 
 const indent_size = 20
-const dim_alpha = 0.9
+const color_change_seconds = 0.3
+const dim_color: Color = Color.DIM_GRAY
+const white_color: Color = Color.WHITE
 
 @onready var sprite = $Sprite2D
 
@@ -20,6 +22,7 @@ var disappear_pos_x: float = 0
 var target_pos_x: float = 0
 var current_speed: float = 0
 var location: ReplicaData.SpeakerLocation
+var tween: Tween
 
 
 func init(
@@ -37,7 +40,9 @@ func update(_location: ReplicaData.SpeakerLocation, _texture: Texture2D):
 		_texture = missing_texture
 	
 	sprite.texture = _texture
-	sprite.modulate.a = 1
+	
+	if sprite.modulate != white_color:
+		change_color(white_color)
 
 	var texture_size = _texture.get_size()
 	var texture_size_x = texture_size.x
@@ -60,7 +65,14 @@ func update(_location: ReplicaData.SpeakerLocation, _texture: Texture2D):
 
 
 func dim():
-	sprite.modulate.a = dim_alpha
+	change_color(dim_color)
+
+
+func change_color(color: Color):
+	if tween:
+		tween.kill()
+	tween = create_tween()
+	tween.tween_property(sprite, "modulate", color, color_change_seconds)
 
 
 func set_appeared():

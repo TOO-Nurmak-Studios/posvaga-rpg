@@ -2,13 +2,18 @@ extends CanvasLayer
 
 signal option_chosen(option_id: String)
 
+const back_color_on_start = Color(0, 0, 0, 0)
+const back_color_showed = Color(0, 0, 0, 0.7)
+const back_change_color_seconds = 0.5
+
 @export var ink_file: Resource
-@export var speakers_bottom: float = 400
+@export var speakers_bottom: float = 360
 @export var speakers_speed: float = 2000
 
 @onready var ink_player = $InkPlayer
 @onready var replicas_box = $ReplicasBox
 @onready var choices_box = $ChoicesBox
+@onready var color_rect = $ColorRect
 
 var speaker_scene: PackedScene = load("res://dialog_scene/speaker.tscn")
 
@@ -19,6 +24,7 @@ var dialog_data: DialogData
 var waiting_for_choice: bool
 var may_show_next: bool
 var main_speaker_id: String
+var is_cutscene: bool
 
 
 ## TODO: replace with loading (from where?)
@@ -43,7 +49,7 @@ func create_speakers_data() -> Dictionary:
 
 ## TODO: replace with loading (from where?)
 func get_main_speaker_id():
-	return "student_neutral"
+	return "vera_neutral"
 
 
 func _ready():
@@ -52,8 +58,7 @@ func _ready():
 	hide()
 
 	EventBus.dialog_start.connect(start)
-
-	init_speakers()
+	EventBus.cutscene_step_finished.connect(on_cutscene_step_finished)
 
 	# для отладки самой сцены стартуем сразу,
 	# иначе показываем только при вызове start
@@ -85,6 +90,9 @@ func init_speakers():
 func start(_dialog_data: DialogData):
 	dialog_data = _dialog_data
 	
+	if speakers.is_empty():
+		init_speakers()
+	
 	ink_player.ink_file = dialog_data.ink_file
 	ink_player.create_story()
 	await ink_player.loaded
@@ -101,11 +109,18 @@ func start(_dialog_data: DialogData):
 
 	get_tree().paused = true
 	show()
+	
+	color_rect.modulate = back_color_on_start
+	var tween = create_tween()
+	tween.tween_property(color_rect, "modulate", back_color_showed, back_change_color_seconds)
+	
 	next()
 
 
 func try_next():
-	if replicas_box.is_printing:
+	if is_cutscene:
+		return
+	elif replicas_box.is_printing:
 		replicas_box.show_full_text()
 	elif !waiting_for_choice and may_show_next:
 		next()
@@ -119,9 +134,9 @@ func next():
 		return
 
 	if ink_player.can_continue:
-		var next_replica_text = ink_player.continue_story()
+		var next_text = ink_player.continue_story()
 		var tags = ink_player.current_tags
-		await process_next_replica(next_replica_text, tags)
+		await process_next_unit(next_text, tags)
 
 	if ink_player.has_choices:
 		await replicas_box.printing_finished
@@ -134,13 +149,58 @@ func next():
 	may_show_next = true
 
 
-func process_next_replica(replica_text: String, tags: Array):
+func process_next_unit(text: String, tags: Array):
+	var parsed_tags = parse_tags(tags)
+	
+	if parsed_tags.size() == 0:
+		return
+	
+	var first_tag = parsed_tags[0]
+	
+	if first_tag.type == DialogTag.Type.CUTSCENE_STEP:
+		await process_next_cutscene_step(first_tag.params[0], text)
+	else:
+		await process_next_replica(text, parsed_tags)
+
+	
+func parse_tags(tags: Array) -> Array[DialogTag]:
+	var parsed: Array[DialogTag] = []
+	parsed.resize(tags.size())
+	
+	for i in range(tags.size()):
+		parsed[i] = DialogTag.new(tags[i])
+		
+	return parsed
+
+
+func process_next_cutscene_step(type: String, description: String):
+	if not is_cutscene:
+		## TODO: make it smooth
+		hide()
+		get_tree().paused = false
+		is_cutscene = true
+	
+	var step = CutsceneStep.new(type, description)
+	EventBus.cutscene_step_start.emit(step)
+
+
+func on_cutscene_step_finished():
+	next()
+
+
+func process_next_replica(replica_text: String, tags: Array[DialogTag]):
+	if is_cutscene:
+		## TODO: make it smooth
+		show()
+		get_tree().paused = true
+		is_cutscene = false
+	
 	var replica = parse_next_replica(replica_text, tags)
 	await process_next_speaker(replica.speaker, replica.speaker_location, true)
 	replicas_box.new_replica(replica)
 
 
-func parse_next_replica(replica_text: String, tags: Array) -> ReplicaData:
+func parse_next_replica(replica_text: String, tags: Array[DialogTag]) -> ReplicaData:
 	var speaker_id = null
 	var speaker_data = null
 	var speaker_location = ReplicaData.SpeakerLocation.LEFT
@@ -151,17 +211,13 @@ func parse_next_replica(replica_text: String, tags: Array) -> ReplicaData:
 	replica_text = replica_text.replace("<br>", "\n")
 
 	for tag in tags:
-		var split = tag.split(": ")
-		var tag_name = split[0]
-		var tag_value = split[1]
-
-		match tag_name:
-			"sid":
-				speaker_id = tag_value
-			"loc":
-				speaker_location = ReplicaData.SpeakerLocation.get(tag_value.to_upper())
-			"spd":
-				text_speed = tag_value.to_int()
+		match tag.type:
+			DialogTag.Type.SPEAKER_ID:
+				speaker_id = tag.params[0]
+			DialogTag.Type.SPEAKER_LOCATION:
+				speaker_location = ReplicaData.SpeakerLocation.get(tag.params[0].to_upper())
+			DialogTag.Type.SPEAKER_SPEED:
+				text_speed = tag.params[0].to_int()
 
 	if speaker_id != null:
 		speaker_data = speakers_data.get(speaker_id)
@@ -213,9 +269,12 @@ func finish():
 		var var_val = ink_player.get_variable(var_name)
 		GameState.set_var(var_name, var_val)
 	
-	# пока закомментил, вызывает баги при повторном запуске диалога
-	#for speaker_name in current_speakers_names:
-	#	speakers[speaker_name].queue_free()
+	replicas_box.clear()
+	
+	for speaker_name in current_speakers_names:
+		speakers[speaker_name].queue_free()
+	
+	speakers = {}
 	
 	get_tree().paused = false
 	hide()
