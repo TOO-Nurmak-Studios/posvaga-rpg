@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dl4uacvvm7hiu" path="res://explore_scene/Assets/black_gradient.png" id="1_d1awv"]
 [ext_resource type="PackedScene" path="res://explore_scene/Scenes/Interactible.tscn" id="1_t6mj7"]
 [ext_resource type="TileSet" uid="uid://yjq3qcumf26f" path="res://explore_scene/Assets/Institute.tres" id="4_4d4eo"]
-[ext_resource type="PackedScene" uid="uid://cpyg0dy7ijwm2" path="res://explore_scene/Scenes/player.tscn" id="5_sn24j"]
+[ext_resource type="PackedScene" uid="uid://cpyg0dy7ijwm2" path="res://explore_scene/Scenes/Player.tscn" id="5_sn24j"]
 [ext_resource type="PackedScene" path="res://explore_scene/Scenes/Teleport.tscn" id="9_iibli"]
 
 [node name="Institute_0" type="Node2D"]
