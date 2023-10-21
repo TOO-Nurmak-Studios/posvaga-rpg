@@ -12,18 +12,20 @@ func _init():
 	attack_name = "Cockroach Bite"
 	attack_type = Attack.AttackType.SINGLE
 	attack_tooltip = "Select enemy with arrows, press enter to attack."
+	attack_description = "Common cockroach bite"
 	attack_postmessage = str("%s bites %s for ", damage, " damage.")
 	self.cooldown = atk_cooldown
 	
 func _attack_single(attacker: AbstractCharacter, char: AbstractCharacter, gunpoint: Marker2D):
-	var rand_int = randi_range(0, 3)
-	var animation_name
-	print(rand_int)
-	if rand_int != 0:
-		animation_name = "bite_normal"
+	var animation_name	
+	if attacker.sprite.sprite_frames.has_animation("bite_funny"):
+		var rand_int = randi_range(0, 3)
+		if rand_int != 0:
+			animation_name = "bite_normal"
+		else:
+			animation_name = "bite_funny"
 	else:
-		animation_name = "bite_funny"
-		
+		animation_name = "bite_normal"
 	var start_position = attacker.position
 	var char_array = [char]
 	var position_to_attack = super._get_melee_position(attacker, char)

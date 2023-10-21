@@ -58,6 +58,7 @@ func _on_attack_end(attacker: AbstractCharacter, attacked: Array[AbstractCharact
 	if attacker.get_type() == AbstractCharacter.CharacterType.PLAYER:
 		var enemies_left = select_manager.enemy_amount()
 		if enemies_left == 0:
+			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 			EventBus.emit_battle_scene_end()
 			return
 		select_manager.mark_selected_player_moved()
@@ -70,6 +71,7 @@ func _on_attack_end(attacker: AbstractCharacter, attacked: Array[AbstractCharact
 		attacker.set_enemy_thinking()
 		var players_left = select_manager.players_amount()
 		if players_left == 0:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			EventBus.emit_battle_scene_end()
 			return
 		if select_manager.player_moves_left() <= 0:

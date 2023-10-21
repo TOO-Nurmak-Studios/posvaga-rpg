@@ -5,6 +5,7 @@ enum AttackType {SINGLE, MULTIPLE}
 
 @export var attack_type: AttackType
 @export var attack_name: String
+@export var attack_description: String
 @export var attack_tooltip: String
 @export var attack_postmessage: String
 @export var cooldown: int
