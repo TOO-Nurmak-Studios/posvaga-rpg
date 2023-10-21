@@ -4,6 +4,8 @@ extends Node2D
 
 signal moving_finished()
 
+const missing_texture = preload("res://sprites/dialog/missing_texture.png")
+
 const indent_size = 20
 const dim_alpha = 0.9
 
@@ -31,6 +33,9 @@ func init(
 
 
 func update(_location: ReplicaData.SpeakerLocation, _texture: Texture2D):
+	if _texture == null:
+		_texture = missing_texture
+	
 	sprite.texture = _texture
 	sprite.modulate.a = 1
 

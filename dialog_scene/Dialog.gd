@@ -29,7 +29,9 @@ func create_speakers_data() -> Dictionary:
 		"dean_smiling"    : SpeakerData.new("dean_smiling", "Декан"),
 
 		"student_neutral" : SpeakerData.new("student_neutral", "Студент"),
-		"student_welcome" : SpeakerData.new("student_welcome", "Студент")
+		"student_welcome" : SpeakerData.new("student_welcome", "Студент"),
+		
+		"dean_aaa" : SpeakerData.new("dean_aaa", "Декан бляд")
 	}
 
 
@@ -50,7 +52,7 @@ func _ready():
 	# для отладки самой сцены стартуем сразу,
 	# иначе показываем только при вызове start
 	if get_tree().current_scene == self:
-		var test_dialog = DialogData.new(ink_file, false, [])
+		var test_dialog = DialogData.new(ink_file, [])
 		start(test_dialog)
 
 
@@ -80,6 +82,10 @@ func start(_dialog_data: DialogData):
 	ink_player.ink_file = dialog_data.ink_file
 	ink_player.create_story()
 	await ink_player.loaded
+	
+	# стартуем с заданного узла
+	if dialog_data.starting_knot != null && dialog_data.starting_knot != "":
+		ink_player.choose_path(dialog_data.starting_knot)
 	
 	# загружаем игровые переменные в инк
 	for var_name in dialog_data.var_names:
@@ -152,25 +158,26 @@ func parse_next_replica(replica_text: String, tags: Array) -> ReplicaData:
 				text_speed = tag_value.to_int()
 
 	if speaker_id != null:
-		speaker_data = speakers_data[speaker_id]
+		speaker_data = speakers_data.get(speaker_id)
+	
+	if speakers_data == null:
+		print("Unknown speaker id: " + speaker_id)
 
 	return ReplicaData.new(speaker_data, replica_text, speaker_location as ReplicaData.SpeakerLocation, text_speed)
 
 
 func process_next_speaker(speaker_data: SpeakerData, location: ReplicaData.SpeakerLocation, replace: bool):
+	
+	# пустой либо неизвестный игре спикер
+	if speaker_data == null:
+		hide_current_speakers(replace)
+		return
+	
 	var speaker_name = speaker_data.name
 	var speaker = speakers[speaker_name]
 	var is_new_speaker = !current_speakers_names.has(speaker_name)
 	
-	if not current_speakers_names.is_empty():
-		for current_speaker_name in current_speakers_names:
-			if current_speaker_name != speaker_name:
-				if replace:
-					current_speakers_names.erase(current_speaker_name)
-					await speakers[current_speaker_name].disappear()
-				else:
-					speakers[current_speaker_name].dim()
-	
+	hide_current_speakers(replace, speaker_name)
 	speaker.update(location, speaker_data.texture)
 	
 	if is_new_speaker:
@@ -180,6 +187,18 @@ func process_next_speaker(speaker_data: SpeakerData, location: ReplicaData.Speak
 		current_speakers_names.append(speaker_name)
 	else:
 		speaker.set_appeared()
+
+
+# пустой speaker_name - костыль, ожидается, что такого id никогда не будет в мапе
+func hide_current_speakers(replace: bool, speaker_name: String = ""):
+	if not current_speakers_names.is_empty():
+		for current_speaker_name in current_speakers_names:
+			if current_speaker_name != speaker_name:
+				if replace:
+					current_speakers_names.erase(current_speaker_name)
+					await speakers[current_speaker_name].disappear()
+				else:
+					speakers[current_speaker_name].dim()
 
 
 func finish():

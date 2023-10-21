@@ -8,8 +8,9 @@ extends CharacterBody2D
 @onready var animated_sprite_node = $AnimatedSprite2D
 
 var test_dialog = DialogData.new(
-	preload("res://dialog_scene/ink/test.ink.json"), false, 
-	["test_dialog_visited"])
+	preload("res://dialog_scene/ink/institute_start.ink.json"),
+	["test_dialog_visited"],
+	"zavlab_entrance")
 
 var test_battle_scene = preload("res://battle_scene/battle_field.tscn")
 
