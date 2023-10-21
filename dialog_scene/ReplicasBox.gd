@@ -9,6 +9,7 @@ signal printing_finished()
 @export var max_pitch: float = 0.8
 
 @onready var speaker_name_label = $SpeakerNameLabel
+@onready var speaker_name_rect = $SpeakerNameRect
 @onready var text_label = $TextLabel
 @onready var audio_source = $AudioStreamPlayer
 
@@ -29,7 +30,15 @@ func set_print_sound_path(_print_sound_path: String):
 		print_sound_path = _print_sound_path
 
 func new_replica(replica: ReplicaData):
-	speaker_name_label.text = replica.speaker.name
+	
+	if replica.speaker != null:
+		speaker_name_rect.show()
+		speaker_name_label.text = replica.speaker.name
+	else:
+		# прячем плашку с именем персонажа, если спикер отсутствует
+		speaker_name_rect.hide()
+		speaker_name_label.text = ""
+		
 	text_label.text = ""
 	full_text = replica.text
 	seconds_before_next_symbol = 1 / replica.text_speed

@@ -1,0 +1,15 @@
+[remap]
+
+importer="inkgd.ink.json"
+type="Resource"
+uid="uid://cv6etewqsabw"
+path="res://.godot/imported/institute_start.ink.json-cec192285be9c8c4cb103aef417dbf72.res"
+
+[deps]
+
+source_file="res://dialog_scene/ink/institute_start.ink.json"
+dest_files=["res://.godot/imported/institute_start.ink.json-cec192285be9c8c4cb103aef417dbf72.res"]
+
+[params]
+
+compress=true
