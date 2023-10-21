@@ -14,9 +14,6 @@ var select_state: SelectState
 signal player_selected(player: Player)
 
 func _ready():
-	EventBus.select_next_button_pressed.connect(_select_next)
-	EventBus.select_prev_button_pressed.connect(_select_prev)
-	
 	_init_chars()
 	
 	set_select_state(SelectState.DISABLED)
@@ -34,14 +31,14 @@ func _init_chars():
 		ch.death.connect(remove_player)
 	
 	select_state = SelectState.PLAYER
-	_select_next()
+	select_next()
 	select_state = SelectState.ENEMY
-	_select_next()
+	select_next()
 	
-func _select_next():
+func select_next():
 	select(Select.NEXT)
 	
-func _select_prev():
+func select_prev():
 	select(Select.PREV)
 					
 

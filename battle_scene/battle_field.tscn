@@ -1,15 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://obv5cxfs5qx2"]
+[gd_scene load_steps=8 format=3 uid="uid://obv5cxfs5qx2"]
 
 [ext_resource type="Texture2D" uid="uid://bdfouowg0yewp" path="res://sprites/battle_back.png" id="1_svqol"]
 [ext_resource type="PackedScene" uid="uid://bl2en8v232bj7" path="res://battle_scene/Entity/Player.tscn" id="2_eg6e8"]
 [ext_resource type="Script" path="res://battle_scene/SelectManager.gd" id="3_3i5y2"]
 [ext_resource type="PackedScene" uid="uid://bgybbtokpmwlg" path="res://battle_scene/Entity/Enemies/Cockroach/Cockroach.tscn" id="3_hvf53"]
 [ext_resource type="Script" path="res://battle_scene/BattleManager.gd" id="3_xgenn"]
+[ext_resource type="PackedScene" uid="uid://cuycdtt3185d3" path="res://battle_scene/Entity/Enemies/Cockroach/SmallCockroach.tscn" id="4_id1ag"]
 [ext_resource type="Script" path="res://battle_scene/HUDManager.gd" id="4_pi84k"]
-[ext_resource type="Texture2D" uid="uid://d3ubdiqrf10lk" path="res://sprites/test_button.png" id="7_iv8ia"]
-[ext_resource type="Script" path="res://battle_scene/ButtonTest.gd" id="7_lqobk"]
-[ext_resource type="Script" path="res://battle_scene/VBoxContainerTest.gd" id="7_x87fw"]
-[ext_resource type="Texture2D" uid="uid://cgpt7o1yiruk" path="res://sprites/container.png" id="10_iysgi"]
 
 [node name="BattleField" type="CanvasLayer"]
 
@@ -33,13 +30,17 @@ scale = Vector2(0.5, 0.5)
 char_name = "Player2"
 
 [node name="Cockroach" parent="." instance=ExtResource("3_hvf53")]
-position = Vector2(593, 278)
+position = Vector2(559, 279)
 
 [node name="Cockroach2" parent="." instance=ExtResource("3_hvf53")]
 position = Vector2(545, 387)
 
 [node name="Cockroach3" parent="." instance=ExtResource("3_hvf53")]
 position = Vector2(391, 420)
+
+[node name="SmallCockroach" parent="." instance=ExtResource("4_id1ag")]
+position = Vector2(427, 313)
+scale = Vector2(0.55, 0.55)
 
 [node name="SelectManager" type="Node" parent="."]
 script = ExtResource("3_3i5y2")
@@ -49,42 +50,3 @@ script = ExtResource("3_xgenn")
 
 [node name="HUDManager" type="Node" parent="."]
 script = ExtResource("4_pi84k")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-offset_left = 192.0
-offset_top = 197.0
-offset_right = 232.0
-offset_bottom = 229.0
-script = ExtResource("7_x87fw")
-
-[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer"]
-position = Vector2(19.5, 16.5)
-scale = Vector2(1.225, 1.025)
-texture = ExtResource("10_iysgi")
-
-[node name="Button" type="Button" parent="VBoxContainer" groups=["button"]]
-layout_mode = 2
-script = ExtResource("7_lqobk")
-
-[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Button"]
-position = Vector2(19.5, 4.5)
-scale = Vector2(1.28125, 0.5625)
-texture = ExtResource("7_iv8ia")
-
-[node name="Button4" type="Button" parent="VBoxContainer" groups=["button"]]
-layout_mode = 2
-script = ExtResource("7_lqobk")
-
-[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Button4"]
-position = Vector2(19.5, 4.5)
-scale = Vector2(1.28125, 0.5625)
-texture = ExtResource("7_iv8ia")
-
-[node name="Button5" type="Button" parent="VBoxContainer" groups=["button"]]
-layout_mode = 2
-script = ExtResource("7_lqobk")
-
-[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Button5"]
-position = Vector2(19.5, 4.5)
-scale = Vector2(1.28125, 0.5625)
-texture = ExtResource("7_iv8ia")

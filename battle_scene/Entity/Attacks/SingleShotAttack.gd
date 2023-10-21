@@ -12,6 +12,7 @@ func _init():
 	attack_type = Attack.AttackType.SINGLE
 	attack_tooltip = "Select enemy with arrows, press enter to shoot."
 	attack_postmessage = str("%s shoots %s for ", bullet_damage, " damage.")
+	attack_description = "Just one shot."
 	self.cooldown = atk_cooldown
 	
 func _attack_single(attacker: AbstractCharacter, char: AbstractCharacter, gunpoint: Marker2D):

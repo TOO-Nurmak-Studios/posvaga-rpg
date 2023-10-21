@@ -4,6 +4,8 @@ extends Node
 signal action_button_pressed()
 signal select_next_button_pressed()
 signal select_prev_button_pressed()
+signal select_left_button_pressed()
+signal select_right_button_pressed()
 
 #battle scene
 signal attack_ended(attacker: AbstractCharacter, attacked: Array[AbstractCharacter], attack: Attack)
@@ -26,11 +28,14 @@ signal teleport_request(scene: Resource, player_position: Vector2, player_direct
 signal battle_request(scene: Resource)
 
 func _process(delta):
-
 	if Input.is_action_just_pressed("select_next"):
 		select_next_button_pressed.emit()
 	if Input.is_action_just_pressed("select_prev"):
 		select_prev_button_pressed.emit()
+	if Input.is_action_just_pressed("select_left"):
+		select_left_button_pressed.emit()
+	if Input.is_action_just_pressed("select_right"):
+		select_right_button_pressed.emit()
 	if Input.is_action_just_pressed("debug_action_1"):
 		action_button_pressed.emit()
 

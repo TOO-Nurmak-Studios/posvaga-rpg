@@ -49,6 +49,7 @@ func mark_dead():
 	is_dead = true
 
 func take_damage(damage: int, source_nullable: AbstractCharacter = null, recoil_modifier: int = 1):
+	_on_damage_taken(damage, source_nullable)
 	if source_nullable != null:
 		# all constants here are absolutely random and were chosen
 		# using method "I think this it looks fine with this one"
@@ -62,6 +63,9 @@ func take_damage(damage: int, source_nullable: AbstractCharacter = null, recoil_
 		tween.tween_property(self, "position", self_pos, 0.1 * recoil_modifier)
 		await tween.finished
 	health.remove_health(damage)
+	
+func _on_damage_taken(damage: int, source_nullable: AbstractCharacter = null):
+	pass
 	
 func die():
 	death.emit(self)
