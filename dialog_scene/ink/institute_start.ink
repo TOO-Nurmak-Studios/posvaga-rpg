@@ -66,6 +66,7 @@ VAR found_command_book_for_sasha = false
 И зачем я вообще пошёл в аспирантуру...
 
 # sid: vera_neutral
+# loc: right
 А в лабу зачем пошёл?
 
 # sid: damir
@@ -77,15 +78,17 @@ VAR found_command_book_for_sasha = false
 === talk_lida ===
 
 # sid: lida
-Я ввела координаты всех дорог у пруда, как терминал завис...
+Я ввела координаты всех дорог у пруда, и-и тут терминал завис...
 
 # sid: lida
-Владимир Николаевич меня убьёт!..
+Владимир Николаевич меня убьёт!!.
 
 # sid: vera_neutral
+# loc: right
 Не бойся, мы с ним как-нибудь справимся.
 
 # sid: vera_neutral
+# loc: right
 Но сначала нужно всё починить...
 
 ->END
@@ -93,6 +96,13 @@ VAR found_command_book_for_sasha = false
 
 === talk_sasha ===
 
+{ not found_command_book_for_sasha:
+    -> talk_sasha_book_not_found
+- else:
+    -> talk_sasha_got_book
+}
+
+=== talk_sasha_book_not_found ===
 # sid: sasha
 Я могу перейти в режим отладки, но мои дальнейшие попытки тщетны. 
 
@@ -100,12 +110,14 @@ VAR found_command_book_for_sasha = false
 Ты не нашла книгу?
 
 # sid: vera_neutral
+# loc: right
 Продолжаю поиски.
 
 # sid: sasha
 Точно помню, что оставил её на столе рядом с тобой. Уверенность абсолютная.
 
-# sid: sasha
+# sid: vera_doubting
+# loc: right
 Ха, а я бы не была так уверена.
 
 ->END
@@ -137,12 +149,14 @@ VAR found_command_book_for_sasha = false
 
 === correct_book ===
 ~ found_command_book_for_sasha = true
-<придумать текст>
+Та самая книга!
 ->END
 
-=== got_book ===
+
+=== talk_sasha_got_book ===
 
 # sid: vera_neutral
+# loc: right
 Держи.
 
 # sid: sasha

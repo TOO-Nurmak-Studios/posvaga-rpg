@@ -1,18 +1,67 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfd2dfgygnli5"]
+[gd_scene load_steps=11 format=3 uid="uid://dfd2dfgygnli5"]
 
 [ext_resource type="Texture2D" uid="uid://dl4uacvvm7hiu" path="res://explore_scene/Assets/black_gradient.png" id="1_d1awv"]
-[ext_resource type="PackedScene" path="res://explore_scene/Scenes/Interactible.tscn" id="1_t6mj7"]
+[ext_resource type="PackedScene" uid="uid://clr6m243e5eig" path="res://explore_scene/Scenes/NPC.tscn" id="1_r54cb"]
+[ext_resource type="PackedScene" uid="uid://csl0t86w6bvox" path="res://explore_scene/Scenes/SimpleInteractible.tscn" id="1_t6mj7"]
+[ext_resource type="Resource" uid="uid://cv6etewqsabw" path="res://dialog_scene/ink/institute_start.ink.json" id="2_fr4g5"]
 [ext_resource type="TileSet" uid="uid://yjq3qcumf26f" path="res://explore_scene/Assets/Institute.tres" id="4_4d4eo"]
+[ext_resource type="Texture2D" uid="uid://bm6j0ph1h14uj" path="res://explore_scene/Assets/Institute_2.png" id="4_k6xi8"]
 [ext_resource type="PackedScene" uid="uid://cpyg0dy7ijwm2" path="res://explore_scene/Scenes/Player.tscn" id="5_sn24j"]
 [ext_resource type="PackedScene" path="res://explore_scene/Scenes/Teleport.tscn" id="9_iibli"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_egchs"]
+atlas = ExtResource("4_k6xi8")
+region = Rect2(448, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jx4iy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_egchs")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Institute_0" type="Node2D"]
 y_sort_enabled = true
 position = Vector2(567, 254)
 
-[node name="Interactible" parent="." groups=["Interactible"] instance=ExtResource("1_t6mj7")]
+[node name="Sasha" parent="." groups=["Interactible", "NPC"] instance=ExtResource("1_r54cb")]
+z_index = 1
+position = Vector2(-537, -246)
+starting_direction = Vector2(0, -1)
+dialog_resource = ExtResource("2_fr4g5")
+dialog_vars = Array[String](["found_command_book_for_sasha"])
+dialog_knot = "talk_sasha"
+
+[node name="Lida" parent="." groups=["Interactible", "NPC"] instance=ExtResource("1_r54cb")]
+z_index = 1
+position = Vector2(-489, -246)
+starting_direction = Vector2(0, -1)
+dialog_resource = ExtResource("2_fr4g5")
+dialog_knot = "talk_lida"
+
+[node name="Damir" parent="." groups=["Interactible", "NPC"] instance=ExtResource("1_r54cb")]
+z_index = 1
+position = Vector2(-536, -193)
+starting_direction = Vector2(0, 1)
+dialog_resource = ExtResource("2_fr4g5")
+dialog_knot = "talk_damir"
+
+[node name="CorrectBook" parent="." groups=["Interactible"] instance=ExtResource("1_t6mj7")]
 z_index = 1
 position = Vector2(-591, -172)
+dialog_resource = ExtResource("2_fr4g5")
+dialog_vars = Array[String](["found_command_book_for_sasha"])
+dialog_knot = "correct_book"
+visibility_flag = "found_command_book_for_sasha"
+
+[node name="AnimatedSprite2D" parent="CorrectBook" index="1"]
+position = Vector2(5, 1)
+sprite_frames = SubResource("SpriteFrames_jx4iy")
+animation = &"default"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 10
@@ -46,15 +95,17 @@ layer_2/modulate = Color(1, 1, 1, 1)
 layer_2/y_sort_enabled = true
 layer_2/y_sort_origin = 0
 layer_2/z_index = 1
-layer_2/tile_data = PackedInt32Array(-1376295, 655363, 1, -1310759, 655363, 2, -1245223, 655363, 3, -1376294, 720899, 1, -1310758, 720899, 2, -1376290, 917508, 4, -1376292, 786436, 4, -1245222, 720899, 3, -1376288, 1048580, 4, -1245220, 786436, 2, -1310747, 1179652, 2, -1310749, 917508, 0, -1245224, 2097156, 0, -1245215, 524292, 4, -720924, 1703940, 0, -720927, 1703940, 0, -720930, 1703940, 0, -786460, 1966084, 0, -786463, 1966084, 0, -786466, 1966084, 0, -1310760, 983044, 10, -655387, 1048580, 2, -655388, 1048580, 2, -1048610, 1835012, 2, -1048607, 1835012, 2, -1048604, 1835012, 2, -655400, 655364, 2, -983074, 2228228, 0, -983071, 2228228, 0, -983068, 2228228, 0, -852007, 1572868, 0, -852008, 2097156, 0, -1310752, 1179652, 10)
+layer_2/tile_data = PackedInt32Array(-1376295, 655363, 1, -1310759, 655363, 2, -1245223, 655363, 3, -1376294, 720899, 1, -1310758, 720899, 2, -1376292, 786436, 4, -1245222, 720899, 3, -1376288, 1048580, 4, -1245220, 786436, 2, -1310747, 1179652, 2, -1310749, 917508, 0, -1245224, 2097156, 0, -1245215, 524292, 4, -720924, 1703940, 0, -720927, 1703940, 0, -720930, 1703940, 0, -786460, 1966084, 0, -786463, 1966084, 0, -786466, 1966084, 0, -1310760, 983044, 10, -655387, 1048580, 2, -655388, 1048580, 2, -1048610, 1835012, 2, -1048607, 1835012, 2, -1048604, 1835012, 2, -655400, 655364, 2, -983074, 2228228, 0, -983071, 2228228, 0, -983068, 2228228, 0, -852007, 1572868, 0, -852008, 2097156, 0, -1310752, 1179652, 10, -1376290, 5, 0)
 layer_3/name = "interior2"
 layer_3/enabled = true
 layer_3/modulate = Color(1, 1, 1, 1)
 layer_3/y_sort_enabled = true
 layer_3/y_sort_origin = 16
 layer_3/z_index = 1
-layer_3/tile_data = PackedInt32Array(-983070, 1310724, 4, -720927, 2228228, 2, -720930, 2228228, 2, -720924, 2097156, 4, -1048610, 2097156, 2, -1048607, 2097156, 2, -1048604, 2097156, 2, -852007, 1835012, 4)
+layer_3/tile_data = PackedInt32Array(-983070, 1310724, 4, -720927, 2228228, 2, -720930, 2228228, 2, -720924, 2097156, 4, -852007, 1835012, 4, -1048607, 2097156, 2, -1048604, 2097156, 2, -1048610, 2097156, 2)
 
 [node name="Player" parent="." groups=["Player"] instance=ExtResource("5_sn24j")]
 z_index = 1
-position = Vector2(-520, -200)
+position = Vector2(-487, -188)
+
+[editable path="CorrectBook"]

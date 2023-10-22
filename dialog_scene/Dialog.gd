@@ -31,7 +31,13 @@ func create_speakers_data() -> Dictionary:
 		"student_neutral" : SpeakerData.new("student_neutral", "Студент"),
 		"student_welcome" : SpeakerData.new("student_welcome", "Студент"),
 		
-		"dean_aaa" : SpeakerData.new("dean_aaa", "Декан бляд")
+		"vera_neutral" : SpeakerData.new("vera_neutral", "Вера"),
+		"vera_angry" : SpeakerData.new("vera_angry", "Вера"),
+		"vera_doubting" : SpeakerData.new("vera_doubting", "Вера"),
+		"damir" : SpeakerData.new("damir", "Дамир"),
+		"sasha" : SpeakerData.new("sasha", "Саша"),
+		"lida" : SpeakerData.new("lida", "Лида"),
+		"zavlab" : SpeakerData.new("zavlab", "Владимир Николаевич")
 	}
 
 
@@ -205,10 +211,11 @@ func finish():
 	# выгружаем игровые переменные в глобальный стейт
 	for var_name in dialog_data.var_names:
 		var var_val = ink_player.get_variable(var_name)
-		GameState.vars[var_name] = var_val
+		GameState.set_var(var_name, var_val)
 	
-	for speaker_name in current_speakers_names:
-		speakers[speaker_name].queue_free()
+	# пока закомментил, вызывает баги при повторном запуске диалога
+	#for speaker_name in current_speakers_names:
+	#	speakers[speaker_name].queue_free()
 	
 	get_tree().paused = false
 	hide()
