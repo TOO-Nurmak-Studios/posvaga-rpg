@@ -21,6 +21,11 @@ signal player_interact_pressed()
 signal dialog_start(dialog_data: DialogData)
 signal dialog_finished()
 
+# game state
+# пока один сигнал на всё - мб нужно будет распилить
+# ещё непонятно, как отслеживать, что этот сигнал всегда вызывается
+signal game_state_changed()
+
 #scene transitions
 signal teleport_request(scene: Resource, player_position: Vector2, player_direction: Vector2)
 signal battle_request(scene: Resource)

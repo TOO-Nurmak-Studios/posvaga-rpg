@@ -90,5 +90,18 @@ func _get_direction_name(direction : Vector2):
 	return default
 
 
+# для удобства вызовов из CutsceneManager
+func turn_left():
+	face_direction(NormalizedDirection.LEFT)
+
+func turn_right():
+	face_direction(NormalizedDirection.RIGHT)
+
+func turn_up():
+	face_direction(NormalizedDirection.UP)
+
+func turn_down():
+	face_direction(NormalizedDirection.DOWN)
+
 func face_direction(direction: Vector2):
 	play_animation(direction, true)

@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://byxh3m01kssxk"]
+[gd_scene load_steps=6 format=3 uid="uid://csl0t86w6bvox"]
 
-[ext_resource type="Script" path="res://explore_scene/Scripts/Interactible.gd" id="1_11oeg"]
+[ext_resource type="Script" path="res://explore_scene/Scripts/SimpleInteractible.gd" id="1_ua830"]
 [ext_resource type="Texture2D" uid="uid://d2j6cf5ctielj" path="res://explore_scene/Assets/Player/Player Back Sheet.png" id="2_0ipux"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c5k2m"]
@@ -29,7 +29,7 @@ animations = [{
 
 [node name="Interactible" type="CharacterBody2D" groups=["NPC"]]
 y_sort_enabled = true
-script = ExtResource("1_11oeg")
+script = ExtResource("1_ua830")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -2)
