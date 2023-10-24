@@ -1,16 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://dfd2dfgygnli5"]
+[gd_scene load_steps=12 format=3 uid="uid://dfd2dfgygnli5"]
 
-[ext_resource type="Texture2D" uid="uid://dl4uacvvm7hiu" path="res://explore_scene/Assets/black_gradient.png" id="1_d1awv"]
-[ext_resource type="PackedScene" uid="uid://clr6m243e5eig" path="res://explore_scene/Scenes/NPC.tscn" id="1_r54cb"]
-[ext_resource type="PackedScene" uid="uid://csl0t86w6bvox" path="res://explore_scene/Scenes/SimpleInteractible.tscn" id="1_t6mj7"]
-[ext_resource type="Resource" uid="uid://cv6etewqsabw" path="res://dialog_scene/ink/institute_start.ink.json" id="2_fr4g5"]
-[ext_resource type="TileSet" uid="uid://yjq3qcumf26f" path="res://explore_scene/Assets/Institute.tres" id="4_4d4eo"]
-[ext_resource type="Texture2D" uid="uid://bm6j0ph1h14uj" path="res://explore_scene/Assets/Institute_2.png" id="4_k6xi8"]
-[ext_resource type="PackedScene" uid="uid://cpyg0dy7ijwm2" path="res://explore_scene/Scenes/Player.tscn" id="5_sn24j"]
-[ext_resource type="PackedScene" path="res://explore_scene/Scenes/Teleport.tscn" id="9_iibli"]
+[ext_resource type="Script" path="res://explore_scene/Scripts/LocationManager.gd" id="1_ewxwj"]
+[ext_resource type="PackedScene" uid="uid://clr6m243e5eig" path="res://explore_scene/Scenes/NPC.tscn" id="2_0o8m8"]
+[ext_resource type="Resource" uid="uid://cv6etewqsabw" path="res://dialog_scene/ink/institute_start.ink.json" id="3_b4q4c"]
+[ext_resource type="PackedScene" uid="uid://csl0t86w6bvox" path="res://explore_scene/Scenes/SimpleInteractible.tscn" id="4_m3rro"]
+[ext_resource type="Texture2D" uid="uid://bm6j0ph1h14uj" path="res://explore_scene/Assets/Institute_2.png" id="5_g2w1u"]
+[ext_resource type="Texture2D" uid="uid://dl4uacvvm7hiu" path="res://explore_scene/Assets/black_gradient.png" id="6_vegsi"]
+[ext_resource type="PackedScene" path="res://explore_scene/Scenes/Teleport.tscn" id="7_bw7qj"]
+[ext_resource type="TileSet" uid="uid://yjq3qcumf26f" path="res://explore_scene/Assets/Institute.tres" id="8_ruqwb"]
+[ext_resource type="PackedScene" uid="uid://cpyg0dy7ijwm2" path="res://explore_scene/Scenes/Player.tscn" id="9_eimii"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_egchs"]
-atlas = ExtResource("4_k6xi8")
+atlas = ExtResource("5_g2w1u")
 region = Rect2(448, 64, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jx4iy"]
@@ -27,33 +28,34 @@ animations = [{
 [node name="Institute_0" type="Node2D"]
 y_sort_enabled = true
 position = Vector2(567, 254)
+script = ExtResource("1_ewxwj")
 
-[node name="Sasha" parent="." groups=["Interactible", "NPC"] instance=ExtResource("1_r54cb")]
+[node name="Sasha" parent="." groups=["Interactible", "NPC"] instance=ExtResource("2_0o8m8")]
 z_index = 1
 position = Vector2(-537, -246)
 starting_direction = Vector2(0, -1)
-dialog_resource = ExtResource("2_fr4g5")
+dialog_resource = ExtResource("3_b4q4c")
 dialog_vars = Array[String](["found_command_book_for_sasha"])
 dialog_knot = "talk_sasha"
 
-[node name="Lida" parent="." groups=["Interactible", "NPC"] instance=ExtResource("1_r54cb")]
+[node name="Lida" parent="." groups=["Interactible", "NPC"] instance=ExtResource("2_0o8m8")]
 z_index = 1
 position = Vector2(-489, -246)
 starting_direction = Vector2(0, -1)
-dialog_resource = ExtResource("2_fr4g5")
+dialog_resource = ExtResource("3_b4q4c")
 dialog_knot = "talk_lida"
 
-[node name="Damir" parent="." groups=["Interactible", "NPC"] instance=ExtResource("1_r54cb")]
+[node name="Damir" parent="." groups=["Interactible", "NPC"] instance=ExtResource("2_0o8m8")]
 z_index = 1
 position = Vector2(-536, -193)
 starting_direction = Vector2(0, 1)
-dialog_resource = ExtResource("2_fr4g5")
+dialog_resource = ExtResource("3_b4q4c")
 dialog_knot = "talk_damir"
 
-[node name="CorrectBook" parent="." groups=["Interactible"] instance=ExtResource("1_t6mj7")]
+[node name="CorrectBook" parent="." groups=["Interactible"] instance=ExtResource("4_m3rro")]
 z_index = 1
 position = Vector2(-591, -172)
-dialog_resource = ExtResource("2_fr4g5")
+dialog_resource = ExtResource("3_b4q4c")
 dialog_vars = Array[String](["found_command_book_for_sasha"])
 dialog_knot = "correct_book"
 visibility_flag = "found_command_book_for_sasha"
@@ -67,18 +69,18 @@ animation = &"default"
 z_index = 10
 position = Vector2(-608, -378.5)
 scale = Vector2(0.3125, 0.0507813)
-texture = ExtResource("1_d1awv")
+texture = ExtResource("6_vegsi")
 
-[node name="Teleport" parent="." groups=["Teleport"] instance=ExtResource("9_iibli")]
+[node name="Teleport" parent="." groups=["Teleport"] instance=ExtResource("7_bw7qj")]
 position = Vector2(-608, -298)
 scale = Vector2(2, 0.5)
-scene_name = "res://explore_scene/Scenes/Institute_1.tscn"
+scene_name = "res://explore_scene/Scenes/Institute_Floor2_Part1.tscn"
 player_position = Vector2(-608, -265)
 player_direction = Vector2(0, -1)
 
 [node name="Map" type="TileMap" parent="."]
 y_sort_enabled = true
-tile_set = ExtResource("4_4d4eo")
+tile_set = ExtResource("8_ruqwb")
 format = 2
 layer_0/name = "floor and walls"
 layer_0/tile_data = PackedInt32Array(-589850, 524291, 6, -655386, 524291, 6, -720922, 589827, 7, -786458, 589827, 6, -851994, 589827, 7, -917530, 589827, 6, -983066, 589827, 7, -1048602, 589827, 6, -1114138, 589827, 7, -1179674, 589827, 6, -589851, 458755, 6, -655387, 458755, 6, -720923, 393219, 7, -786459, 393219, 6, -851995, 393219, 8, -917531, 393219, 7, -983067, 393219, 6, -1048603, 393219, 8, -1114139, 393219, 7, -1179675, 393219, 6, -589852, 524291, 6, -655388, 327683, 8, -720924, 327683, 7, -786460, 327683, 6, -851996, 327683, 8, -917532, 327683, 7, -983068, 327683, 6, -1048604, 327683, 8, -1114140, 327683, 7, -1179676, 327683, 6, -589853, 458755, 6, -655389, 262147, 8, -720925, 262147, 7, -786461, 262147, 6, -851997, 262147, 8, -917533, 262147, 7, -983069, 262147, 6, -1048605, 262147, 8, -1114141, 262147, 7, -1179677, 262147, 6, -589854, 524291, 6, -655390, 393219, 8, -720926, 393219, 7, -786462, 393219, 6, -851998, 393219, 8, -917534, 393219, 7, -983070, 393219, 6, -1048606, 393219, 8, -1114142, 393219, 7, -1179678, 393219, 6, -589855, 458755, 6, -655391, 327683, 8, -720927, 327683, 7, -786463, 327683, 6, -851999, 327683, 8, -917535, 327683, 7, -983071, 327683, 6, -1048607, 327683, 8, -1114143, 327683, 7, -1179679, 327683, 6, -589856, 524291, 6, -655392, 262147, 8, -720928, 262147, 7, -786464, 262147, 6, -852000, 262147, 8, -917536, 262147, 7, -983072, 262147, 6, -1048608, 262147, 8, -1114144, 262147, 7, -1179680, 262147, 6, -589857, 458755, 6, -655393, 393219, 8, -720929, 393219, 7, -786465, 393219, 6, -852001, 393219, 8, -917537, 393219, 7, -983073, 393219, 6, -1048609, 393219, 8, -1114145, 393219, 7, -1179681, 393219, 6, -589858, 524291, 6, -655394, 327683, 8, -720930, 327683, 7, -786466, 327683, 6, -852002, 327683, 8, -917538, 327683, 7, -983074, 327683, 6, -1048610, 327683, 8, -1114146, 327683, 7, -1179682, 327683, 6, -589859, 458755, 6, -655395, 262147, 8, -720931, 262147, 7, -786467, 262147, 6, -852003, 262147, 8, -917539, 262147, 7, -983075, 262147, 6, -1048611, 262147, 8, -1114147, 262147, 7, -1179683, 262147, 6, -589860, 524291, 6, -655396, 393219, 8, -720932, 393219, 7, -786468, 393219, 6, -852004, 393219, 8, -917540, 393219, 7, -983076, 393219, 6, -1048612, 393219, 8, -1114148, 393219, 7, -1179684, 393219, 6, -589861, 458755, 6, -655397, 327683, 8, -720933, 327683, 7, -786469, 327683, 6, -852005, 327683, 8, -917541, 327683, 7, -983077, 327683, 6, -1048613, 327683, 8, -1114149, 327683, 7, -1179685, 327683, 6, -589862, 524291, 6, -655398, 262147, 8, -720934, 262147, 7, -786470, 262147, 6, -852006, 262147, 8, -917542, 262147, 7, -983078, 262147, 6, -1048614, 262147, 8, -1114150, 262147, 7, -1179686, 262147, 6, -589863, 458755, 6, -655399, 393219, 8, -720935, 393219, 7, -786471, 393219, 6, -852007, 393219, 8, -917543, 393219, 7, -983079, 393219, 6, -1048615, 393219, 6, -1114151, 393219, 7, -1179687, 393219, 6, -589864, 524291, 6, -655400, 327683, 8, -720936, 327683, 7, -786472, 327683, 6, -852008, 327683, 8, -917544, 327683, 7, -983080, 327683, 6, -1048616, 327683, 6, -1114152, 327683, 7, -1179688, 327683, 6, -589865, 458755, 6, -655401, 262147, 8, -720937, 262147, 7, -786473, 262147, 6, -852009, 262147, 8, -917545, 262147, 7, -983081, 262147, 6, -1048617, 262147, 6, -1114153, 262147, 7, -1179689, 262147, 6, -1441832, 196612, 6, -1376296, 196612, 7, -1310760, 196612, 8, -1245224, 196612, 9, -1507367, 1507331, 10, -1441831, 1507331, 11, -1376295, 2228227, 7, -1310759, 2228227, 8, -1245223, 2228227, 9, -1507366, 1572867, 10, -1441830, 1572867, 11, -1376294, 2293763, 7, -1310758, 2293763, 8, -1245222, 2293763, 9, -1441829, 131076, 6, -1376293, 131076, 7, -1310757, 131076, 8, -1245221, 327684, 19, -1441828, 196612, 6, -1376292, 196612, 7, -1310756, 196612, 8, -1245220, 196612, 9, -1441827, 131076, 6, -1376291, 131076, 7, -1310755, 131076, 8, -1245219, 131076, 9, -1441820, 196612, 6, -1376284, 196612, 7, -1310748, 196612, 8, -1245212, 196612, 9, -1441819, 131076, 6, -1376283, 131076, 7, -1310747, 65540, 18, -1245211, 131076, 9, -1441818, 196612, 6, -1376282, 196612, 7, -1310746, 196612, 8, -1245210, 262148, 19, -1441823, 131076, 6, -1376287, 131076, 7, -1310751, 131076, 8, -1245215, 131076, 9, -1441822, 196612, 6, -1376286, 196612, 7, -1310750, 196612, 8, -1245214, 196612, 9, -1441821, 131076, 6, -1376285, 131076, 7, -1310749, 131076, 8, -1245213, 131076, 9, -1441826, 196612, 6, -1376290, 196612, 7, -1310754, 196612, 8, -1245218, 196612, 9, -1441825, 131076, 6, -1376289, 131076, 7, -1310753, 131076, 8, -1245217, 131076, 9, -1441824, 196612, 6, -1376288, 196612, 7, -1310752, 196612, 8, -1245216, 196612, 9, -1179690, 458756, 2, -1114154, 458756, 2, -1048618, 458756, 2, -983082, 458756, 2, -917546, 458756, 2, -852010, 458756, 2, -720938, 458756, 2, -786474, 458756, 2, -655402, 458756, 2, -589866, 458756, 2, -1245226, 458756, 2, -1310762, 458756, 2, -1376298, 458756, 2, -1441834, 458756, 2, -1441833, 131076, 6, -1376297, 131076, 7, -1310761, 131076, 8, -1245225, 131076, 9, -1507370, 458756, 1, -1507369, 524292, 1, -1507368, 327684, 3, -1507365, 262148, 3, -1507364, 524292, 1, -1507363, 524292, 1, -1507362, 524292, 1, -1507361, 524292, 1, -1507360, 524292, 1, -1507359, 524292, 1, -1507358, 524292, 1, -1507357, 524292, 1, -1507356, 524292, 1, -1507355, 524292, 1, -1507354, 524292, 1, -1507353, 589828, 1, -524330, 458756, 3, -524329, 524292, 3, -524328, 524292, 3, -524327, 524292, 3, -524326, 524292, 3, -524325, 524292, 3, -524324, 524292, 3, -524323, 524292, 3, -524322, 524292, 3, -524321, 524292, 3, -524320, 524292, 3, -524319, 524292, 3, -524318, 524292, 3, -524317, 524292, 3, -524316, 524292, 3, -524315, 524292, 3, -524314, 524292, 3, -524313, 589828, 3, -589849, 589828, 2, -655385, 589828, 2, -720921, 589828, 2, -786457, 589828, 2, -851993, 589828, 2, -917529, 589828, 2, -983065, 589828, 2, -1048601, 589828, 2, -1114137, 589828, 2, -1179673, 589828, 2, -1245209, 589828, 2, -1310745, 589828, 2, -1376281, 589828, 2, -1441817, 589828, 2)
@@ -104,7 +106,7 @@ layer_3/y_sort_origin = 16
 layer_3/z_index = 1
 layer_3/tile_data = PackedInt32Array(-983070, 1310724, 4, -720927, 2228228, 2, -720930, 2228228, 2, -720924, 2097156, 4, -852007, 1835012, 4, -1048607, 2097156, 2, -1048604, 2097156, 2, -1048610, 2097156, 2)
 
-[node name="Player" parent="." groups=["Player"] instance=ExtResource("5_sn24j")]
+[node name="Player" parent="." groups=["Player"] instance=ExtResource("9_eimii")]
 z_index = 1
 position = Vector2(-487, -188)
 

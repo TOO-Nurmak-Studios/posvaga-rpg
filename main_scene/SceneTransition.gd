@@ -3,6 +3,9 @@ extends CanvasLayer
 @onready var fade_rect = $FadeRect
 @onready var fade_animation = $AnimationPlayer
 
+func _process(delta):
+	print("govno")
+
 func fade_in(custom_speed = 1.0):
 	fade_animation.play("Fade", -1, custom_speed)
 	await fade_animation.animation_finished
