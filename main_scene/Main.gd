@@ -9,16 +9,26 @@ var player: ExplorePlayer
 
 var current_battle_scene: Node
 
+const default_start_scene = preload("res://explore_scene/Scenes/Institute_LabRoom.tscn")
+var start_scene: Resource
+
+func init(_start_scene_name: String):
+	if _start_scene_name != null:
+		start_scene = load(_start_scene_name)
+
 func _ready():
 	EventBus.teleport_request.connect(_teleport)
 	EventBus.battle_request.connect(_battle)
 	
-	_game_start()
+	if start_scene != null:
+		_change_scene(start_scene, Mode.EXPLORATION)
+	else:
+		_change_scene(default_start_scene, Mode.EXPLORATION)
 
 # С этой функции будет начинаться вся игра
 # для дебага лучше менять логику в _ready()
 func _game_start():
-	_change_scene(load("res://explore_scene/Scenes/Institute_0.tscn"), Mode.EXPLORATION)
+	_change_scene(default_start_scene, Mode.EXPLORATION)
 	#SceneTransition.fade_out(0.02)
 
 func _teleport(scene: Resource, player_pos: Vector2, player_dir: Vector2):

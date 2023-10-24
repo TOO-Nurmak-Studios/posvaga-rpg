@@ -19,7 +19,7 @@ shape = SubResource("CapsuleShape2D_kphcj")
 y_sort_enabled = true
 position = Vector2(0, 5)
 sprite_frames = ExtResource("2_yyej8")
-animation = &"idle_down"
+animation = &"walk_down"
 offset = Vector2(0, -15)
 
 [node name="Camera2D" type="Camera2D" parent="."]
