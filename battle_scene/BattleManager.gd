@@ -32,6 +32,72 @@ func _ready():
 func _on_battle_scene_ready():
 	get_tree().create_timer(1).timeout.connect(start_next_round)
 
+func _on_attack_end(attacker: AbstractCharacter, attacked: Array[AbstractCharacter], attack: Attack):
+	await _clean_dead()
+	if attacker.get_type() == AbstractCharacter.CharacterType.PLAYER:
+		var enemies_left = select_manager.enemy_amount()
+		if enemies_left == 0:
+			_finish_battle()
+			return
+			
+		select_manager.mark_selected_player_moved()
+		if select_manager.player_moves_left() <= 0:
+			select_manager.reset_player_moves()
+		else:
+			select_manager.select(SelectManager.Select.NEXT, true)
+		start_next_round()
+		
+	else: if attacker.get_type() == AbstractCharacter.CharacterType.ENEMY:
+		attacker.set_enemy_thinking()
+		var new_enemies = _check_for_new_enemies()
+		if !new_enemies.is_empty():
+			for enemy in new_enemies:
+				_add_enemy(enemy)
+				select_manager.add_enemy(enemy)
+				hud_manager.add_enemy(enemy)
+		
+		var players_left = select_manager.players_amount()
+		if players_left == 0:
+			_finish_battle()
+			return
+			
+		if select_manager.player_moves_left() <= 0:
+			select_manager.reset_player_moves()	
+		next_move()
+
+func _add_enemy(enemy: Enemy):
+	enemies.append(enemy)
+	all_characters.append(enemy)
+	enemy.death.connect(func(x):
+		all_characters.erase(x)
+		enemies.erase(x)
+	)
+
+func _clean_dead():
+	for char in all_characters:
+		if char.is_dead:
+			await char.die()
+
+func _check_for_new_enemies():
+	var _enemies = get_tree().get_nodes_in_group("enemy")
+	var new_enemies = []
+	for enemy in _enemies:
+		if !(enemy in enemies):
+			new_enemies.append(enemy)
+	return new_enemies
+
+func _finish_battle():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	EventBus.emit_battle_scene_end()
+
+func next_move():
+	for enemy in enemies:
+		if !enemy.has_moved && enemy.moves_left() == 0:
+			enemy.has_moved = true
+			enemy.do_move(allies, enemies)
+			return
+	hud_manager.enable_player_movement()
+
 func start_next_round():
 	for enemy in enemies:
 		enemy.has_moved = false
@@ -40,45 +106,4 @@ func start_next_round():
 			continue
 		enemy.decrement_time()
 	next_move()
-
-func next_move():
-	for enemy in enemies:
-		if !enemy.has_moved && enemy.moves_left() == 0:
-			enemy.has_moved = true
-			enemy.do_move(allies, enemies)
-			return
-
-	hud_manager.enable_player_movement()
-
-func _on_attack_pressed():
-	select_manager.mark_selected_player_moved()
-
-func _on_attack_end(attacker: AbstractCharacter, attacked: Array[AbstractCharacter], attack: Attack):
-	await _clean_dead()
-	if attacker.get_type() == AbstractCharacter.CharacterType.PLAYER:
-		var enemies_left = select_manager.enemy_amount()
-		if enemies_left == 0:
-			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-			EventBus.emit_battle_scene_end()
-			return
-		select_manager.mark_selected_player_moved()
-		if select_manager.player_moves_left() <= 0:
-			select_manager.reset_player_moves()
-		else:
-			select_manager.select(SelectManager.Select.NEXT, true)
-		start_next_round()
-	else: if attacker.get_type() == AbstractCharacter.CharacterType.ENEMY:
-		attacker.set_enemy_thinking()
-		var players_left = select_manager.players_amount()
-		if players_left == 0:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			EventBus.emit_battle_scene_end()
-			return
-		if select_manager.player_moves_left() <= 0:
-			select_manager.reset_player_moves()	
-		next_move()
-
-func _clean_dead():
-	for char in all_characters:
-		if char.is_dead:
-			await char.die()
+	

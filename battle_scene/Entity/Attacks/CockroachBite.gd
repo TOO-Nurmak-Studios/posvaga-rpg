@@ -3,7 +3,7 @@ extends Attack
 
 @export var run_time_length: float = 1
 @export var damage: float = 3
-@export var atk_cooldown: int = 100
+@export var atk_cooldown: int = 2
 var current_callable_on_finish: Callable
 
 @onready var rand = RandomNumberGenerator.new()

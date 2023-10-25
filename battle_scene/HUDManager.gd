@@ -64,6 +64,9 @@ func _select_left():
 func _select_right():
 	if current_state == State.SELECT_PLAYER:
 		change_state(State.SELECT_ATTACK)
+		
+func _attack_ended(attacker: AbstractCharacter, attacked: Array[AbstractCharacter], attack: Attack):
+	_draw_attack_line(attacker, attacked, attack)
 
 func _draw_attack_line(attacker: AbstractCharacter, attacked: Array[AbstractCharacter], attack: Attack):
 	if attack != null:
@@ -71,6 +74,9 @@ func _draw_attack_line(attacker: AbstractCharacter, attacked: Array[AbstractChar
 		attack_label.text = attack.attack_postmessage % [attacker.char_name, attacked_str]
 		attack_label.show()
 
+func add_enemy(enemy: Enemy):
+	_create_health_bar(enemy.health)
+	_create_move_timer(enemy)
 
 func _on_battle_scene_end():
 	change_state(State.NOTHING)
@@ -150,20 +156,22 @@ func _create_move_timer(enemy: Enemy):
 func _create_health_bars():
 	var health_nodes: Array[Node] = get_tree().get_nodes_in_group("health_node")
 	for health_node in health_nodes:
-		health_node = health_node as HealthNode
+		_create_health_bar(health_node)
 		
-		var hp_bar: HealthBar = health_bar_scene.instantiate()
-		hp_bar.update_value(0, health_node.health)
-		health_node.health_changed.connect(hp_bar.update_value)
-		health_node.tree_exiting.connect(hp_bar.queue_free)
+func _create_health_bar(health_node: HealthNode):
+	var hp_bar: HealthBar = health_bar_scene.instantiate()
+	hp_bar.update_value(0, health_node.health)
+	health_node.health_changed.connect(hp_bar.update_value)
+	health_node.tree_exiting.connect(hp_bar.queue_free)
 		
-		var node = Node2D.new()
-		var parent_position: Vector2 = health_node.global_position
-		node.position = parent_position
+	var node = Node2D.new()
+	var parent_position: Vector2 = health_node.global_position
+	node.position = parent_position
 		
-		node.add_child.call_deferred(hp_bar)
-		main_scene.add_child.call_deferred(node)
-		hp_bar.tree_entered.connect(_attach_sibling_remote_transform.bind(node, health_node))
+	node.add_child.call_deferred(hp_bar)
+	main_scene.add_child.call_deferred(node)
+	hp_bar.tree_entered.connect(_attach_sibling_remote_transform.bind(node, health_node))
+		
 	
 func _attach_sibling_remote_transform(transformed_node: Node, sibling_node: Node2D):
 	var rt: RemoteTransform2D = RemoteTransform2D.new()

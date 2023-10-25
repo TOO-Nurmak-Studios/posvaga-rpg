@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://obv5cxfs5qx2"]
+[gd_scene load_steps=7 format=3 uid="uid://obv5cxfs5qx2"]
 
 [ext_resource type="Texture2D" uid="uid://bdfouowg0yewp" path="res://sprites/battle_back.png" id="1_svqol"]
 [ext_resource type="PackedScene" uid="uid://bl2en8v232bj7" path="res://battle_scene/Entity/Player.tscn" id="2_eg6e8"]
 [ext_resource type="Script" path="res://battle_scene/SelectManager.gd" id="3_3i5y2"]
 [ext_resource type="PackedScene" uid="uid://bgybbtokpmwlg" path="res://battle_scene/Entity/Enemies/Cockroach/Cockroach.tscn" id="3_hvf53"]
 [ext_resource type="Script" path="res://battle_scene/BattleManager.gd" id="3_xgenn"]
-[ext_resource type="PackedScene" uid="uid://cuycdtt3185d3" path="res://battle_scene/Entity/Enemies/Cockroach/SmallCockroach.tscn" id="4_id1ag"]
 [ext_resource type="Script" path="res://battle_scene/HUDManager.gd" id="4_pi84k"]
 
 [node name="BattleField" type="CanvasLayer"]
@@ -31,16 +30,6 @@ char_name = "Player2"
 
 [node name="Cockroach" parent="." instance=ExtResource("3_hvf53")]
 position = Vector2(559, 279)
-
-[node name="Cockroach2" parent="." instance=ExtResource("3_hvf53")]
-position = Vector2(545, 387)
-
-[node name="Cockroach3" parent="." instance=ExtResource("3_hvf53")]
-position = Vector2(391, 420)
-
-[node name="SmallCockroach" parent="." instance=ExtResource("4_id1ag")]
-position = Vector2(427, 313)
-scale = Vector2(0.55, 0.55)
 
 [node name="SelectManager" type="Node" parent="."]
 script = ExtResource("3_3i5y2")

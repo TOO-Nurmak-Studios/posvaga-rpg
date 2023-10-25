@@ -1,14 +1,14 @@
-class_name Cockroach
+class_name SmallCockroach
 extends Enemy
 
 @onready var blood_emitter: GPUParticles2D = $BloodEmitter as GPUParticles2D
 
 func _init():
-	attacks = [CockroachChant.new(), CockroachBite.new()]
+	attacks = [CockroachBite.new()]
 
 func _ready():
 	super._ready()
-	char_name = "Cock Roach"
+	char_name = "Small Cock Roach"
 
 func _on_damage_taken(damage: int, source_nullable: AbstractCharacter = null):
 	var source_pos = source_nullable.position

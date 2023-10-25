@@ -89,6 +89,10 @@ func select(select_type: Select, force: bool = false, force_type: SelectState = 
 	if char_type == CharType.PLAYER:
 		player_selected.emit(selected_player())
 
+func add_enemy(enemy: Enemy):
+	enemies().push_back(enemy)
+	enemy.death.connect(remove_enemy)
+
 func remove_enemy(enemy: Enemy):
 	if enemy == selected_enemy():
 		select(Select.NEXT, true, SelectState.ENEMY)

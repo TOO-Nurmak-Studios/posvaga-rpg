@@ -1,0 +1,17 @@
+[gd_scene load_steps=6 format=3 uid="uid://b1cgvbg8uf0m5"]
+
+[ext_resource type="Texture2D" uid="uid://3ejdkl7ljd0m" path="res://sprites/test_button_1.png" id="1_5ri77"]
+[ext_resource type="Script" path="res://battle_scene/HUD/KeyboardButton.gd" id="1_io22c"]
+[ext_resource type="Texture2D" uid="uid://byxrsqhyy6x17" path="res://sprites/test_button_selected.png" id="2_5mq42"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o2cpy"]
+texture = ExtResource("2_5mq42")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3jfk1"]
+texture = ExtResource("1_5ri77")
+
+[node name="KeyboardButton" type="Button"]
+mouse_filter = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_o2cpy")
+theme_override_styles/focus = SubResource("StyleBoxTexture_3jfk1")
+script = ExtResource("1_io22c")
