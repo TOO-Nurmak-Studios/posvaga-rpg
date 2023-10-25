@@ -1,0 +1,172 @@
+[gd_scene load_steps=29 format=3 uid="uid://cuycdtt3185d3"]
+
+[ext_resource type="Script" path="res://battle_scene/Entity/Enemies/Cockroach/SmallCockroach.gd" id="1_lhnyy"]
+[ext_resource type="PackedScene" uid="uid://qy81h3pjkt1f" path="res://battle_scene/EntityPrototype/HealthNode.tscn" id="2_1sy2k"]
+[ext_resource type="Texture2D" uid="uid://dwuqpsot5bgvu" path="res://sprites/Enemies/small_cockroach/small cock2.png" id="3_bmn8n"]
+[ext_resource type="Texture2D" uid="uid://ciitpk20pr4n4" path="res://sprites/Enemies/small_cockroach/small cock3.png" id="4_bymiy"]
+[ext_resource type="Texture2D" uid="uid://dew6fejidkvj1" path="res://sprites/Enemies/small_cockroach/small cock4.png" id="5_0nib0"]
+[ext_resource type="Texture2D" uid="uid://d2swk5l0abj5g" path="res://sprites/Enemies/small_cockroach/small cock5.png" id="6_k36xl"]
+[ext_resource type="Texture2D" uid="uid://dxqruv31280sm" path="res://sprites/Enemies/small_cockroach/small cock6.png" id="7_7o2w3"]
+[ext_resource type="Texture2D" uid="uid://d2l2ilrj6ap5f" path="res://sprites/Enemies/small_cockroach/small cock7.png" id="8_je1m5"]
+[ext_resource type="Texture2D" uid="uid://k3w0fujkfnp8" path="res://sprites/Enemies/small_cockroach/1.png" id="9_dymnn"]
+[ext_resource type="Texture2D" uid="uid://cyhrraxl6yvpn" path="res://sprites/Enemies/small_cockroach/2.png" id="10_j7j6e"]
+[ext_resource type="Texture2D" uid="uid://cxln1jhef5m48" path="res://sprites/Enemies/small_cockroach/3.png" id="11_8u6sq"]
+[ext_resource type="Texture2D" uid="uid://c327g30klvtnw" path="res://sprites/Enemies/small_cockroach/4.png" id="12_a78ia"]
+[ext_resource type="Texture2D" uid="uid://duum0ga8ftymx" path="res://sprites/Enemies/small_cockroach/5.png" id="13_isfci"]
+[ext_resource type="Texture2D" uid="uid://7vxfgthpqhv2" path="res://sprites/Enemies/small_cockroach/6.png" id="14_5xu6i"]
+[ext_resource type="Texture2D" uid="uid://45a0m6nvjs4i" path="res://sprites/Enemies/small_cockroach/7.png" id="15_p52re"]
+[ext_resource type="Texture2D" uid="uid://cetglyvksdtde" path="res://sprites/Enemies/small_cockroach/8.png" id="16_ytr3i"]
+[ext_resource type="Texture2D" uid="uid://dh6d5ndy6vlt0" path="res://sprites/Enemies/small_cockroach/9.png" id="17_kpsn8"]
+[ext_resource type="Texture2D" uid="uid://d3j601fquji2o" path="res://sprites/Enemies/small_cockroach/10.png" id="18_kdvvh"]
+[ext_resource type="Texture2D" uid="uid://c3wm8nlebxt6y" path="res://sprites/Enemies/small_cockroach/11.png" id="19_uprwv"]
+[ext_resource type="Texture2D" uid="uid://di0uc3bxo234t" path="res://sprites/Enemies/small_cockroach/12.png" id="20_a5bt0"]
+[ext_resource type="Texture2D" uid="uid://dl7kntoqq6bm" path="res://sprites/Enemies/small_cockroach/13.png" id="21_mr8p2"]
+[ext_resource type="Texture2D" uid="uid://b3sv08ydrh30" path="res://sprites/Enemies/small_cockroach/14.png" id="22_wqs16"]
+[ext_resource type="Texture2D" uid="uid://byx6rsctf1vy0" path="res://sprites/Enemies/small_cockroach/Sprite-0003.png" id="23_jktyq"]
+[ext_resource type="Texture2D" uid="uid://cnk1mi3p1e26v" path="res://sprites/Enemies/small_cockroach/Sprite-0004.png" id="24_cn44v"]
+[ext_resource type="Texture2D" uid="uid://70y35q1md7fs" path="res://sprites/Enemies/small_cockroach/small cock1.png" id="25_f7tjs"]
+[ext_resource type="Texture2D" uid="uid://0xe5q6skx4uf" path="res://sprites/Enemies/small_cockroach/Sprite-0003-selected.png" id="25_mdus7"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wb641"]
+emission_shape = 2
+emission_sphere_radius = 10.0
+particle_flag_disable_z = true
+direction = Vector3(1, -0.5, 0)
+spread = 15.0
+flatness = 0.5
+gravity = Vector3(0, 98, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 1000.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 1.5
+scale_max = 1.5
+color = Color(0.494118, 0.101961, 0.145098, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_86saj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_bmn8n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_bymiy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_0nib0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_k36xl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_7o2w3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_je1m5")
+}],
+"loop": false,
+"name": &"bite_normal",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_dymnn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_j7j6e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_8u6sq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_a78ia")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_isfci")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_5xu6i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_p52re")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_ytr3i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_kpsn8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_kdvvh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_uprwv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_a5bt0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_mr8p2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_wqs16")
+}],
+"loop": false,
+"name": &"death",
+"speed": 28.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_jktyq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_cn44v")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("25_mdus7")
+}],
+"loop": true,
+"name": &"idle_selected",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("25_f7tjs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_bmn8n")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}]
+
+[node name="SmallCockroach" type="Node2D" groups=["enemy"]]
+script = ExtResource("1_lhnyy")
+
+[node name="HealthNode" parent="." instance=ExtResource("2_1sy2k")]
+position = Vector2(-64, 0)
+
+[node name="BloodEmitter" type="GPUParticles2D" parent="."]
+position = Vector2(8, 34)
+emitting = false
+amount = 1000
+process_material = SubResource("ParticleProcessMaterial_wb641")
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+trail_lifetime = 0.03
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_86saj")
+animation = &"idle"
+frame_progress = 0.857555
+
+[node name="Crosshair" type="Marker2D" parent="."]
+position = Vector2(28, -4)

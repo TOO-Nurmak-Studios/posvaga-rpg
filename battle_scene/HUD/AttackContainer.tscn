@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://u3y4kgdgm6yn"]
+
+[ext_resource type="Script" path="res://battle_scene/HUD/AttackContainer.gd" id="1_j6bqw"]
+[ext_resource type="Texture2D" uid="uid://bvh0kj7fvwpny" path="res://sprites/container_texture.png" id="2_jblg0"]
+[ext_resource type="FontFile" uid="uid://dsg3v8pxmy0f8" path="res://fonts/monogram-extended.ttf" id="3_w3ait"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h8ayk"]
+texture = ExtResource("2_jblg0")
+expand_margin_left = 11.0
+expand_margin_top = 15.0
+expand_margin_right = 11.0
+expand_margin_bottom = 15.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8hged"]
+texture = ExtResource("2_jblg0")
+
+[node name="KeyboardVBoxContainer" type="HBoxContainer"]
+z_index = 5
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_vertical = 4
+theme_override_constants/separation = 15
+script = ExtResource("1_j6bqw")
+
+[node name="ButtonPanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_h8ayk")
+
+[node name="ButtonContainer" type="VBoxContainer" parent="ButtonPanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextPanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_8hged")
+
+[node name="MarginContainer" type="MarginContainer" parent="TextPanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 20
+
+[node name="ReferenceRect" type="ReferenceRect" parent="TextPanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(120, 50)
+layout_mode = 2
+border_width = 2.5
+
+[node name="Text" type="Label" parent="TextPanelContainer/MarginContainer/ReferenceRect"]
+layout_mode = 2
+offset_left = -20.0
+offset_top = -5.0
+offset_right = 140.0
+offset_bottom = 55.0
+theme_override_fonts/font = ExtResource("3_w3ait")
+theme_override_font_sizes/font_size = 16
+text = "Select an attack."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
