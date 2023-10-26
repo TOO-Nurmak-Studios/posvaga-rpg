@@ -19,6 +19,7 @@ func init(_start_scene_name: String):
 func _ready():
 	EventBus.teleport_request.connect(_teleport)
 	EventBus.battle_request.connect(_battle)
+	EventBus.battle_scene_end.connect(_battle_finished)
 	EventBus.cutscene_wait_start.connect(wait)
 	EventBus.cutscene_fade_start.connect(fade)
 	
@@ -41,6 +42,20 @@ func _teleport(scene: Resource, player_pos: Vector2, player_dir: Vector2):
 func _battle(scene: Resource):
 	await SceneTransition.fade_in()
 	_change_scene(scene, Mode.BATTLE)
+	SceneTransition.fade_out()
+
+func _battle_finished():
+	#await SceneTransition.fade_in()
+	
+	current_exploration_scene.show()
+	current_exploration_scene.set_process(true)
+	current_exploration_scene.set_physics_process(true)
+	current_exploration_scene.set_process_input(true)
+	EventBus.player_input_enabled = true
+	
+	current_battle_scene.hide()
+	current_battle_scene.queue_free.call_deferred()
+	
 	SceneTransition.fade_out()
 
 func _change_scene(

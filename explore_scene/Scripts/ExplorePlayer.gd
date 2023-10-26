@@ -1,7 +1,7 @@
 class_name ExplorePlayer
 extends CharacterBody2D
 
-@export var default_speed = 50
+@export var default_speed = 55
 @export var sprint_speed_modifier = 1.5
 @export var raycast_length = 15
 

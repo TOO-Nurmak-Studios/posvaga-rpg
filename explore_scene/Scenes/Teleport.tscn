@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dqg8vok8l0lvo"]
+[gd_scene load_steps=3 format=3 uid="uid://dgipy14v4a35t"]
 
 [ext_resource type="Script" path="res://explore_scene/Scripts/Teleport.gd" id="1_ifue2"]
 
