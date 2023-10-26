@@ -1,33 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://csl0t86w6bvox"]
+[gd_scene load_steps=4 format=3 uid="uid://csl0t86w6bvox"]
 
 [ext_resource type="Script" path="res://explore_scene/Scripts/SimpleInteractible.gd" id="1_ua830"]
-[ext_resource type="Texture2D" uid="uid://d2j6cf5ctielj" path="res://explore_scene/Assets/Player/Player Back Sheet.png" id="2_0ipux"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c5k2m"]
 radius = 8.0
 height = 16.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ixyyd"]
-atlas = ExtResource("2_0ipux")
-region = Rect2(0, 132, 48, 44)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_em4vg"]
-animations = [{
-"frames": [],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ixyyd")
-}],
-"loop": true,
-"name": &"new_animation",
-"speed": 5.0
-}]
 
-[node name="Interactible" type="CharacterBody2D" groups=["NPC"]]
+[node name="Interactible" type="CharacterBody2D" groups=["Interactible"]]
 y_sort_enabled = true
 script = ExtResource("1_ua830")
 
@@ -38,4 +19,3 @@ shape = SubResource("CapsuleShape2D_c5k2m")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, -6)
 sprite_frames = SubResource("SpriteFrames_em4vg")
-animation = &"new_animation"

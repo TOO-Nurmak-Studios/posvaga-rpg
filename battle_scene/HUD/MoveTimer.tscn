@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://e4y1baujsyhi"]
+[gd_scene load_steps=3 format=3 uid="uid://0fs47vtgm2ms"]
 
 [ext_resource type="Script" path="res://battle_scene/HUD/MoveTimer.gd" id="1_72i5m"]
 [ext_resource type="Texture2D" uid="uid://b4un3b1s1macb" path="res://sprites/timer.png" id="1_of4sf"]

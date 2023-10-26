@@ -3,8 +3,8 @@ extends CanvasLayer
 signal option_chosen(option_id: String)
 
 const back_color_on_start = Color(0, 0, 0, 0)
-const back_color_showed = Color(0, 0, 0, 0.7)
-const back_change_color_seconds = 0.5
+const back_color_showed = Color(0, 0, 0, 0.5)
+const back_change_color_seconds = 0.3
 
 @export var ink_file: Resource
 @export var speakers_bottom: float = 360
@@ -40,6 +40,11 @@ func create_speakers_data() -> Dictionary:
 		"vera_neutral" : SpeakerData.new("vera_neutral", "Вера"),
 		"vera_angry" : SpeakerData.new("vera_angry", "Вера"),
 		"vera_doubting" : SpeakerData.new("vera_doubting", "Вера"),
+		"vera_bored" : SpeakerData.new("vera_bored", "Вера"),
+		"vera_questioning" : SpeakerData.new("vera_questioning", "Вера"),
+		"vera_sad" : SpeakerData.new("vera_sad", "Вера"),
+		"vera_scared" : SpeakerData.new("vera_scared", "Вера"),
+		
 		"damir" : SpeakerData.new("damir", "Дамир"),
 		"sasha" : SpeakerData.new("sasha", "Саша"),
 		"lida" : SpeakerData.new("lida", "Лида"),
@@ -56,6 +61,7 @@ func _ready():
 	ink_player.loads_in_background = false
 
 	hide()
+	init_speakers()
 
 	EventBus.dialog_start.connect(start)
 	EventBus.cutscene_step_finished.connect(on_cutscene_step_finished)
@@ -90,9 +96,6 @@ func init_speakers():
 func start(_dialog_data: DialogData):
 	dialog_data = _dialog_data
 	
-	if speakers.is_empty():
-		init_speakers()
-	
 	ink_player.ink_file = dialog_data.ink_file
 	ink_player.create_story()
 	await ink_player.loaded
@@ -107,7 +110,7 @@ func start(_dialog_data: DialogData):
 		if var_val != null:
 			ink_player.set_variable(var_name, var_val)
 
-	get_tree().paused = true
+	_lock_player()
 	show()
 	
 	color_rect.modulate = back_color_on_start
@@ -152,17 +155,12 @@ func next():
 func process_next_unit(text: String, tags: Array):
 	var parsed_tags = parse_tags(tags)
 	
-	if parsed_tags.size() == 0:
-		return
-	
-	var first_tag = parsed_tags[0]
-	
-	if first_tag.type == DialogTag.Type.CUTSCENE_STEP:
-		await process_next_cutscene_step(first_tag.params[0], text)
-	else:
+	if parsed_tags.size() == 0 || parsed_tags[0].type != DialogTag.Type.CUTSCENE_STEP:
 		await process_next_replica(text, parsed_tags)
+	else:
+		await process_next_cutscene_step(parsed_tags[0].params[0], text)
 
-	
+
 func parse_tags(tags: Array) -> Array[DialogTag]:
 	var parsed: Array[DialogTag] = []
 	parsed.resize(tags.size())
@@ -177,7 +175,6 @@ func process_next_cutscene_step(type: String, description: String):
 	if not is_cutscene:
 		## TODO: make it smooth
 		hide()
-		get_tree().paused = false
 		is_cutscene = true
 	
 	var step = CutsceneStep.new(type, description)
@@ -192,7 +189,6 @@ func process_next_replica(replica_text: String, tags: Array[DialogTag]):
 	if is_cutscene:
 		## TODO: make it smooth
 		show()
-		get_tree().paused = true
 		is_cutscene = false
 	
 	var replica = parse_next_replica(replica_text, tags)
@@ -252,7 +248,7 @@ func process_next_speaker(speaker_data: SpeakerData, location: ReplicaData.Speak
 
 
 # пустой speaker_name - костыль, ожидается, что такого id никогда не будет в мапе
-func hide_current_speakers(replace: bool, speaker_name: String = ""):
+func hide_current_speakers(replace: bool = true, speaker_name: String = ""):
 	if not current_speakers_names.is_empty():
 		for current_speaker_name in current_speakers_names:
 			if current_speaker_name != speaker_name:
@@ -264,6 +260,8 @@ func hide_current_speakers(replace: bool, speaker_name: String = ""):
 
 
 func finish():
+	hide_current_speakers()
+	
 	# выгружаем игровые переменные в глобальный стейт
 	for var_name in dialog_data.var_names:
 		var var_val = ink_player.get_variable(var_name)
@@ -271,12 +269,7 @@ func finish():
 	
 	replicas_box.clear()
 	
-	for speaker_name in current_speakers_names:
-		speakers[speaker_name].queue_free()
-	
-	speakers = {}
-	
-	get_tree().paused = false
+	_unlock_player()
 	hide()
 	EventBus.dialog_finished.emit()
 	print("dialog finished")
@@ -287,6 +280,14 @@ func _on_choices_box_option_chosen(option_id: int):
 	option_chosen.emit(option_id)
 	waiting_for_choice = false
 	next()
+
+func _lock_player():
+	EventBus.player_input_enabled = false
+	get_tree().get_first_node_in_group("Player").process_mode = PROCESS_MODE_DISABLED
+
+func _unlock_player():
+	EventBus.player_input_enabled = true
+	get_tree().get_first_node_in_group("Player").process_mode = PROCESS_MODE_INHERIT
 
 
 ## TODO: for tests, remove

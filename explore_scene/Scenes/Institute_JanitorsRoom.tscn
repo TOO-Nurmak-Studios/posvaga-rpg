@@ -1,0 +1,113 @@
+[gd_scene load_steps=13 format=3 uid="uid://2apbx1x1ic53"]
+
+[ext_resource type="Script" path="res://explore_scene/Scripts/LocationManager.gd" id="1_ian7v"]
+[ext_resource type="Texture2D" uid="uid://dl4uacvvm7hiu" path="res://explore_scene/Assets/black_gradient.png" id="2_04nca"]
+[ext_resource type="PackedScene" uid="uid://csl0t86w6bvox" path="res://explore_scene/Scenes/SimpleInteractible.tscn" id="2_cj7va"]
+[ext_resource type="PackedScene" uid="uid://l353l3owxbsk" path="res://explore_scene/Scenes/StepOnInteractible.tscn" id="2_pqh8a"]
+[ext_resource type="Texture2D" uid="uid://brtvk3tgml4jw" path="res://sprites/map/cockroach1.png" id="3_2wi3f"]
+[ext_resource type="Resource" uid="uid://cuti6wqk8m383" path="res://dialog_scene/ink/institute.ink.json" id="3_hrtm2"]
+[ext_resource type="PackedScene" uid="uid://dgipy14v4a35t" path="res://explore_scene/Scenes/Teleport.tscn" id="3_tdb87"]
+[ext_resource type="TileSet" uid="uid://yjq3qcumf26f" path="res://explore_scene/Assets/Institute.tres" id="4_3cunm"]
+[ext_resource type="Texture2D" uid="uid://bh6wh1w4ochux" path="res://sprites/map/cockroach2.png" id="4_ku60p"]
+[ext_resource type="PackedScene" uid="uid://cpyg0dy7ijwm2" path="res://explore_scene/Scenes/player.tscn" id="5_ryfu6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7h037"]
+atlas = ExtResource("3_2wi3f")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gqcvd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7h037")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ku60p")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="Institute_JanitorsRoom" type="Node2D"]
+y_sort_enabled = true
+position = Vector2(567, 254)
+script = ExtResource("1_ian7v")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 11
+offset_left = -712.0
+offset_top = -409.0
+offset_right = -501.0
+offset_bottom = -198.0
+color = Color(0, 0, 0, 0.509804)
+
+[node name="Interactible" parent="." groups=["Interactible"] instance=ExtResource("2_cj7va")]
+z_index = 2
+position = Vector2(-603, -308)
+dialog_resource = ExtResource("3_hrtm2")
+dialog_knot = "janitors_room_box"
+
+[node name="StartCockroachFight" parent="." instance=ExtResource("2_pqh8a")]
+z_index = 1
+position = Vector2(-609, -283)
+dialog_resource = ExtResource("3_hrtm2")
+dialog_vars = Array[String](["had_first_cockroach_fight"])
+dialog_knot = "janitors_room_cockroach"
+visibility_flag = "had_first_cockroach_fight"
+invert_visibility_flag = true
+battle_scene_name = "res://battle_scene/battle_field.tscn"
+after_battle_dialog_knot = "janitors_room_cockroach_after_battle"
+
+[node name="CollisionShape2D" parent="StartCockroachFight" index="0"]
+position = Vector2(8, -5)
+
+[node name="AnimatedSprite2D" parent="StartCockroachFight" index="1"]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(8, -34)
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_gqcvd")
+animation = &"default"
+frame_progress = 0.304482
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 10
+position = Vector2(-607.978, -230.121)
+rotation = 3.14159
+scale = Vector2(0.31285, 0.0511413)
+texture = ExtResource("2_04nca")
+
+[node name="Teleport" parent="." groups=["Teleport"] instance=ExtResource("3_tdb87")]
+position = Vector2(-608, -230)
+scale = Vector2(2, 0.5)
+scene_name = "res://explore_scene/Scenes/Institute_Floor2_Part1.tscn"
+player_position = Vector2(-143, -290)
+player_direction = Vector2(0, 1)
+
+[node name="Map" type="TileMap" parent="."]
+y_sort_enabled = true
+tile_set = ExtResource("4_3cunm")
+format = 2
+layer_0/name = "floor and walls"
+layer_0/tile_data = PackedInt32Array(-1048612, 131076, 10, -1114148, 196612, 11, -1179684, 196612, 10, -1114149, 131076, 11, -1179685, 131076, 10, -1048614, 131076, 10, -1114150, 196612, 11, -1179686, 196612, 10, -1048615, 131076, 10, -1114151, 131076, 11, -1179687, 131076, 10, -1048616, 131076, 10, -1114152, 196612, 11, -1179688, 196612, 10, -1048617, 131076, 10, -1114153, 131076, 11, -1179689, 131076, 10, -1441833, 524292, 6, -1376297, 524292, 7, -1310761, 262148, 6, -1245225, 262148, 7, -1441832, 589828, 6, -1376296, 589828, 7, -1310760, 327684, 6, -1245224, 327684, 7, -1376295, 524292, 7, -1310759, 524292, 6, -1245223, 393220, 7, -1376294, 589828, 7, -1310758, 589828, 6, -1245222, 458756, 7, -1441829, 524292, 6, -1376293, 524292, 7, -1310757, 393220, 6, -1245221, 393220, 7, -1441828, 589828, 6, -1376292, 589828, 7, -1310756, 458756, 6, -1245220, 458756, 7, -1441831, 524292, 6, -1441830, 589828, 6, -1048618, 458756, 2, -1114154, 458756, 2, -1179690, 458756, 2, -1245226, 458756, 2, -1310762, 458756, 2, -1376298, 458756, 2, -1441834, 458756, 2, -1507370, 458756, 1, -1507369, 524292, 1, -1507368, 524292, 1, -1507367, 524292, 1, -1507366, 524292, 1, -1507365, 524292, 1, -1507364, 524292, 1, -983079, 131076, 10, -983078, 131076, 10, -983081, 131076, 10, -983080, 131076, 10, -983082, 458756, 2, -983077, 131076, 10, -983076, 131076, 10, -1048613, 131076, 10, -1048611, 589828, 2, -1114147, 589828, 2, -1179683, 589828, 2, -1245219, 589828, 2, -1310755, 589828, 2, -1376291, 589828, 2, -1441827, 589828, 2, -1507363, 589828, 1, -983075, 589828, 2, -917543, 131076, 10, -917542, 131076, 10, -917545, 524292, 3, -917544, 327684, 2, -917541, 262148, 2, -917546, 458756, 3, -917540, 524292, 3, -917539, 589828, 3)
+layer_1/name = "interior"
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = true
+layer_1/y_sort_origin = 0
+layer_1/z_index = 1
+layer_1/tile_data = PackedInt32Array(-1310757, 1048580, 12, -1310760, 1179652, 2, -1376295, 655364, 10, -1310759, 655364, 11, -1376294, 720900, 10, -1310758, 720900, 11, -1245220, 1310724, 12, -1179685, 1310724, 10, -1441832, 1048580, 15, -983076, 720901, 2)
+layer_2/name = "interior2"
+layer_2/enabled = true
+layer_2/modulate = Color(1, 1, 1, 1)
+layer_2/y_sort_enabled = true
+layer_2/y_sort_origin = 0
+layer_2/z_index = 2
+layer_2/tile_data = PackedInt32Array()
+
+[node name="Player" parent="." groups=["Player"] instance=ExtResource("5_ryfu6")]
+z_index = 1
+position = Vector2(-603, -246)
+
+[editable path="StartCockroachFight"]

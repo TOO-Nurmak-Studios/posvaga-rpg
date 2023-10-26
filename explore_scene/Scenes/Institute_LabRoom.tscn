@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dfd2dfgygnli5"]
+[gd_scene load_steps=12 format=3 uid="uid://co1by3cqnkfqv"]
 
 [ext_resource type="Script" path="res://explore_scene/Scripts/LocationManager.gd" id="1_ewxwj"]
 [ext_resource type="PackedScene" uid="uid://clr6m243e5eig" path="res://explore_scene/Scenes/NPC.tscn" id="2_0o8m8"]
@@ -6,9 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://csl0t86w6bvox" path="res://explore_scene/Scenes/SimpleInteractible.tscn" id="4_m3rro"]
 [ext_resource type="Texture2D" uid="uid://bm6j0ph1h14uj" path="res://explore_scene/Assets/Institute_2.png" id="5_g2w1u"]
 [ext_resource type="Texture2D" uid="uid://dl4uacvvm7hiu" path="res://explore_scene/Assets/black_gradient.png" id="6_vegsi"]
-[ext_resource type="PackedScene" path="res://explore_scene/Scenes/Teleport.tscn" id="7_bw7qj"]
+[ext_resource type="PackedScene" uid="uid://dgipy14v4a35t" path="res://explore_scene/Scenes/Teleport.tscn" id="7_bw7qj"]
 [ext_resource type="TileSet" uid="uid://yjq3qcumf26f" path="res://explore_scene/Assets/Institute.tres" id="8_ruqwb"]
-[ext_resource type="PackedScene" uid="uid://cpyg0dy7ijwm2" path="res://explore_scene/Scenes/Player.tscn" id="9_eimii"]
+[ext_resource type="PackedScene" uid="uid://cpyg0dy7ijwm2" path="res://explore_scene/Scenes/player.tscn" id="9_eimii"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_egchs"]
 atlas = ExtResource("5_g2w1u")
@@ -52,18 +52,18 @@ starting_direction = Vector2(0, 1)
 dialog_resource = ExtResource("3_b4q4c")
 dialog_knot = "talk_damir"
 
-[node name="CorrectBook" parent="." groups=["Interactible"] instance=ExtResource("4_m3rro")]
+[node name="CorrectBook" parent="." instance=ExtResource("4_m3rro")]
 z_index = 1
 position = Vector2(-591, -172)
 dialog_resource = ExtResource("3_b4q4c")
 dialog_vars = Array[String](["found_command_book_for_sasha"])
 dialog_knot = "correct_book"
 visibility_flag = "found_command_book_for_sasha"
+invert_visibility_flag = true
 
 [node name="AnimatedSprite2D" parent="CorrectBook" index="1"]
 position = Vector2(5, 1)
 sprite_frames = SubResource("SpriteFrames_jx4iy")
-animation = &"default"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 10
