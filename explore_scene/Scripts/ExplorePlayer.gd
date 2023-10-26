@@ -1,12 +1,15 @@
 class_name ExplorePlayer
 extends CharacterBody2D
 
+var directions = [NormalizedDirection.LEFT, NormalizedDirection.RIGHT, NormalizedDirection.UP, NormalizedDirection.DOWN]
+
 @export var default_speed = 55
 @export var sprint_speed_modifier = 1.5
 @export var raycast_length = 15
 
 @onready var animation_node = $AnimatedSprite2D
-@onready var ray_cast = $RayCast2D
+@onready var interact_area = $Area2D
+@onready var interact_icon = $InteractIcon
 
 var speed = default_speed
 var speed_modifier = 1
@@ -14,14 +17,24 @@ var direction_name = "down"
 var animation_name
 
 var is_sprinting = false
+var is_interacting = false
 
 func _ready():
 	EventBus.player_move_pressed.connect(_process_movement)
 	EventBus.player_sprint_pressed.connect(_process_sprint_pressed)
 	EventBus.player_sprint_released.connect(_process_sprint_released)
 	EventBus.player_interact_pressed.connect(_process_interaction)
+	EventBus.player_interaction_ended.connect(_process_interaction_ended)
 	
 	_process_movement(0, Vector2.ZERO)
+
+
+func _process(_delta):
+	var target = _getInteractibleTarget()
+	if target != null && !is_interacting:
+		interact_icon.show()
+	else:
+		interact_icon.hide()
 
 
 func _process_sprint_pressed():
@@ -30,27 +43,56 @@ func _process_sprint_pressed():
 		speed = default_speed * sprint_speed_modifier
 		animation_node.speed_scale *= sprint_speed_modifier
 
-
 func _process_sprint_released():
 	is_sprinting = false
 	speed = default_speed
 	animation_node.speed_scale = 1
 
-
 func _process_movement(delta, new_velocity):
 	velocity = new_velocity.normalized() * speed * delta;
 	move_and_collide(velocity)
 	play_animation(velocity)
-	if new_velocity != Vector2.ZERO:
-		ray_cast.target_position = new_velocity.normalized() * raycast_length
+
+
+func _getInteractibleTarget():
+	
+	# достаем только интерактивные предметы
+	var filter_func = func(x): return x.is_in_group("Interactible")
+	# сортируем по возврастанию удаленности от игрока, чтобы выбрать ближайший
+	var sort_func = func(x, y): return x.position.distance_to(self.position) < y.position.distance_to(self.position)
+	
+	var interactibles = interact_area.get_overlapping_bodies().filter(filter_func)
+	interactibles.sort_custom(sort_func)
+	
+	if interactibles.size() == 0:
+		return null
+	
+	return interactibles[0]
 
 
 func _process_interaction():
-	var target = ray_cast.get_collider()
-	if target != null:
-		if target.is_in_group("Interactible"):
-			target.interact()
+	var target = _getInteractibleTarget()
+	if target != null && !is_interacting:
+		is_interacting = true
+		interact_icon.hide()
+		_turn_to_face_target(target)
+		target.interact()
 
+func _process_interaction_ended():
+	is_interacting = false
+
+func _turn_to_face_target(target: Node2D):
+	var dir = self.position.direction_to(target.position)
+	var sort_func = func(x, y): return x.distance_to(dir) < y.distance_to(dir)
+	directions.sort_custom(sort_func)
+	
+	var ld = NormalizedDirection.LEFT.distance_to(dir)
+	var rd = NormalizedDirection.RIGHT.distance_to(dir)
+	var ud = NormalizedDirection.UP.distance_to(dir)
+	var dd = NormalizedDirection.DOWN.distance_to(dir)
+	
+	face_direction(directions[0])
+	
 
 func play_animation(new_direction : Vector2, idle: bool = false):
 	var new_animation_name

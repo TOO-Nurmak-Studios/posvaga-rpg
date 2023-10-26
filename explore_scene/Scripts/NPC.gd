@@ -37,10 +37,14 @@ func _ready():
 	EventBus.cutscene_move_start.connect(try_move_for_cutscene)
 	EventBus.cutscene_turn_start.connect(try_turn_for_cutscene)
 
+
 func interact():
 	if dialog_resource != null:
 		EventBus.dialog_start.emit(dialog_data)
-		
+		await EventBus.dialog_finished
+	EventBus.player_interaction_ended.emit()
+
+
 func try_move_for_cutscene(object: String, direction: String, distance: int):
 	if object != char_name:
 		return

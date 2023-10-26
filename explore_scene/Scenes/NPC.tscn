@@ -231,7 +231,7 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="NPC" type="CharacterBody2D"]
+[node name="NPC" type="CharacterBody2D" groups=["Interactible", "NPC"]]
 y_sort_enabled = true
 script = ExtResource("1_f2psi")
 

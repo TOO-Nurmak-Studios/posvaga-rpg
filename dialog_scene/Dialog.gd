@@ -45,7 +45,13 @@ func create_speakers_data() -> Dictionary:
 		"vera_sad" : SpeakerData.new("vera_sad", "Вера"),
 		"vera_scared" : SpeakerData.new("vera_scared", "Вера"),
 		
-		"damir" : SpeakerData.new("damir", "Дамир"),
+		"damir_neutral" : SpeakerData.new("damir_neutral", "Дамир", true),
+		"damir_angry" : SpeakerData.new("damir_angry", "Дамир", true),
+		"damir_bored" : SpeakerData.new("damir_bored", "Дамир", true),
+		"damir_happy" : SpeakerData.new("damir_happy", "Дамир", true),
+		"damir_relaxed" : SpeakerData.new("damir_relaxed", "Дамир", true),
+		"damir_sad" : SpeakerData.new("damir_sad", "Дамир", true),
+		
 		"sasha" : SpeakerData.new("sasha", "Саша"),
 		"lida" : SpeakerData.new("lida", "Лида"),
 		"zavlab" : SpeakerData.new("zavlab", "Владимир Николаевич")
@@ -218,8 +224,8 @@ func parse_next_replica(replica_text: String, tags: Array[DialogTag]) -> Replica
 	if speaker_id != null:
 		speaker_data = speakers_data.get(speaker_id)
 	
-	if speakers_data == null:
-		print("Unknown speaker id: " + speaker_id)
+	if speaker_data == null:
+		print("Unknown speaker id: " + str(speaker_id))
 
 	return ReplicaData.new(speaker_data, replica_text, speaker_location as ReplicaData.SpeakerLocation, text_speed)
 
@@ -236,7 +242,7 @@ func process_next_speaker(speaker_data: SpeakerData, location: ReplicaData.Speak
 	var is_new_speaker = !current_speakers_names.has(speaker_name)
 	
 	hide_current_speakers(replace, speaker_name)
-	speaker.update(location, speaker_data.texture)
+	speaker.update(location, speaker_data)
 	
 	if is_new_speaker:
 		speaker.set_disappeared()
@@ -283,11 +289,15 @@ func _on_choices_box_option_chosen(option_id: int):
 
 func _lock_player():
 	EventBus.player_input_enabled = false
-	get_tree().get_first_node_in_group("Player").process_mode = PROCESS_MODE_DISABLED
+	var player = get_tree().get_first_node_in_group("Player")
+	if player != null:
+		player.process_mode = PROCESS_MODE_DISABLED
 
 func _unlock_player():
 	EventBus.player_input_enabled = true
-	get_tree().get_first_node_in_group("Player").process_mode = PROCESS_MODE_INHERIT
+	var player = get_tree().get_first_node_in_group("Player")
+	if player != null:
+		player.process_mode = PROCESS_MODE_INHERIT
 
 
 ## TODO: for tests, remove

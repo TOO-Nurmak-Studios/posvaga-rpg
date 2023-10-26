@@ -116,11 +116,11 @@ VAR had_first_cockroach_fight = false
 === other_floor_part_stop ===
 # sid: vera_neutral
 # loc: right
-Я хочу спустится к выходу. Может, ребята курят на улице.
+Я хочу спуститься к выходу. Может, ребята курят на улице.
 
 # sid: vera_neutral
 # loc: right
-Нужно спустится по лестнице позади меня.
+Нужно пройти по лестнице позади меня.
 
 ->END
 
