@@ -1,7 +1,7 @@
 [gd_scene load_steps=44 format=3 uid="uid://co1by3cqnkfqv"]
 
 [ext_resource type="Script" path="res://explore_scene/Scripts/LocationManager.gd" id="1_ewxwj"]
-[ext_resource type="PackedScene" uid="uid://clr6m243e5eig" path="res://explore_scene/Scenes/NPC.tscn" id="2_0o8m8"]
+[ext_resource type="PackedScene" path="res://explore_scene/Scenes/NPC.tscn" id="2_0o8m8"]
 [ext_resource type="Resource" uid="uid://cv6etewqsabw" path="res://dialog_scene/ink/institute_start.ink.json" id="3_b4q4c"]
 [ext_resource type="Texture2D" uid="uid://bsnh5ye6gdkjc" path="res://sprites/map/damir_front.png" id="4_153p8"]
 [ext_resource type="PackedScene" uid="uid://csl0t86w6bvox" path="res://explore_scene/Scenes/SimpleInteractible.tscn" id="4_m3rro"]
@@ -255,6 +255,7 @@ animations = [{
 y_sort_enabled = true
 position = Vector2(567, 254)
 script = ExtResource("1_ewxwj")
+music_file_name = "a_star_called_sun_v2.mp3"
 
 [node name="Sasha" parent="." instance=ExtResource("2_0o8m8")]
 z_index = 1

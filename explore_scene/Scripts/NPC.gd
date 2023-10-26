@@ -15,6 +15,7 @@ const TILE_SIZE = 16
 @export var dialog_knot: String
 
 @onready var animation_node = $AnimatedSprite2D
+@onready var footsteps_player = $footsteps_player
 
 var direction = Vector2.ZERO
 var stop_position: Vector2
@@ -36,6 +37,7 @@ func _ready():
 		dialog_data = DialogData.new(dialog_resource, dialog_vars, dialog_knot)
 	EventBus.cutscene_move_start.connect(try_move_for_cutscene)
 	EventBus.cutscene_turn_start.connect(try_turn_for_cutscene)
+	footsteps_player.set_sprint_speed_modifier(sprint_speed_modifier)
 
 
 func interact():
@@ -99,13 +101,16 @@ func _sprint(on: bool):
 		if on:
 			speed = default_speed * sprint_speed_modifier
 			animation_node.speed_scale *= sprint_speed_modifier
+			footsteps_player.set_sprint()
 		else:
 			speed = default_speed
 			animation_node.speed_scale = 1
+			footsteps_player.set_no_sprint()
 
 func _physics_process(delta):
 	velocity = speed * direction * delta
 	play_animation(velocity)
+	footsteps_player.process_for(velocity)
 	var collision = move_and_collide(velocity)
 	if _reached_position():
 		direction = Vector2.ZERO

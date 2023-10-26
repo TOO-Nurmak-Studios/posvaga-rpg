@@ -1,7 +1,7 @@
 class_name DialogTag
 
 
-enum Type { SPEAKER_ID, SPEAKER_LOCATION, SPEAKER_SPEED, CUTSCENE_STEP }
+enum Type { SPEAKER_ID, SPEAKER_LOCATION, SPEAKER_SPEED, CUTSCENE_STEP, SOUND, MUSIC }
 
 
 var type: Type
@@ -24,3 +24,7 @@ func _init(source: String):
 			type = Type.SPEAKER_SPEED
 		"cts":
 			type = Type.CUTSCENE_STEP
+		"snd":
+			type = Type.SOUND
+		"mus":
+			type = Type.MUSIC

@@ -9,9 +9,9 @@ signal printing_finished()
 @export var max_pitch: float = 0.8
 
 @onready var speaker_name_label = $SpeakerNameLabel
-@onready var speaker_name_rect = $SpeakerNameRect
+@onready var speaker_name_frame = $SpeakerNameFrame
 @onready var text_label = $TextLabel
-@onready var audio_source = $AudioStreamPlayer
+@onready var sound_player = $PrintSoundPlayer
 
 var full_text: String
 var seconds_before_next_symbol: float
@@ -26,17 +26,17 @@ func _process(delta):
 
 func set_print_sound_path(_print_sound_path: String):
 	if (print_sound_path != _print_sound_path):
-		audio_source.stream = load(_print_sound_path)
+		sound_player.stream = load(_print_sound_path)
 		print_sound_path = _print_sound_path
 
 func new_replica(replica: ReplicaData):
 	
 	if replica.speaker != null:
-		speaker_name_rect.show()
+		speaker_name_frame.show()
 		speaker_name_label.text = replica.speaker.name
 	else:
 		# прячем плашку с именем персонажа, если спикер отсутствует
-		speaker_name_rect.hide()
+		speaker_name_frame.hide()
 		speaker_name_label.text = ""
 		
 	text_label.text = ""
@@ -67,9 +67,9 @@ func show_full_text():
 	printing_finished.emit()
 
 func play_print_sound():
-	audio_source.stop()
-	audio_source.pitch_scale = randf_range(min_pitch, max_pitch)
-	audio_source.play()
+	sound_player.stop()
+	sound_player.pitch_scale = randf_range(min_pitch, max_pitch)
+	sound_player.play()
 
 func is_space(char):
 	return " \n\t".contains(char)
