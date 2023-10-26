@@ -10,16 +10,16 @@ VAR found_command_book_for_sasha = false
 
 # cts: s 1 fade off
 # cts: s 2 wait 2
-# sid: damir
+# sid: damir_neutral
 Как же меня всё это достало!
 
 # sid: vera_doubting
 ...
 
-# sid: damir
+# sid: damir_neutral
 Мы работали целый день, а толку никакого! Даже половину координат не загнали.
 
-# sid: damir
+# sid: damir_neutral
 И зачем я вообще пошёл в аспирантуру...
 
 # sid: sasha
@@ -29,10 +29,10 @@ VAR found_command_book_for_sasha = false
 Я-я не хочу оставаться тут на всю ночь...
 
 # cts: s 1 wait 1
-# sid: damir
+# sid: damir_neutral
 Да что б его, опять всё зависло!
 
-# sid: damir
+# sid: damir_neutral
 Это же не у меня одного так? Или я схожу с ума?
 
 # sid: lida
@@ -62,6 +62,46 @@ VAR found_command_book_for_sasha = false
 
 === talk_damir ===
 
+# sid: damir_bored
+И зачем я вообще пошёл в аспирантуру...
+
+# sid: vera_neutral
+# loc: right
+А в лабу зачем пошёл?
+
+# sid: damir_relaxed
+Слишком много вопросов стоит перед советскими учеными!
+
+# sid: damir_sad
+Слишком много вопросов стоит перед советскими учеными!
+
+# sid: damir_happy
+Слишком много вопросов стоит перед советскими учеными!
+
+# sid: damir_angry
+Слишком много вопросов стоит перед советскими учеными!
+
+# sid: damir_neutral
+Слишком много вопросов стоит перед советскими учеными!
+
+* [Да]
+
+    # sid: damir_happy
+    # loc: left
+    Ага
+    ->END
+
+* [Нет]
+
+    # sid: damir_angry
+    # loc: left
+    РРРРР я жолбарыс
+
+->END
+
+
+=== talk_lida ===
+
 # cts: move
 Lida left 2
 # cts: turn
@@ -84,21 +124,6 @@ in
 out
 # cts: wait
 1
-
-# sid: damir
-И зачем я вообще пошёл в аспирантуру...
-
-# sid: vera_neutral
-# loc: right
-А в лабу зачем пошёл?
-
-# sid: damir
-Слишком много вопросов стоит перед советскими учеными!
-
-->END
-
-
-=== talk_lida ===
 
 # sid: lida
 Я ввела координаты всех дорог у пруда, и-и тут терминал завис...
@@ -189,7 +214,7 @@ out
 Ага, значит так, и вот так.....
 
 # cts: s 1 wait 1
-# sid: damir
+# sid: damir_neutral
 Ну, чего там? Заработало?
 
 # sid: sasha
@@ -201,7 +226,7 @@ out
 # sid: sasha
 Больше похоже на какой-то сбой. Надо спросить у Владимира Николаевича.
 
-# sid: damir
+# sid: damir_neutral
 Только старого хрыча нам не хватало... 
 -> zavlab_entrance
 
@@ -213,14 +238,14 @@ out
 # cts: s 3 turn sasha left
 # cts: s 4 turn lida left
 # cts: s 5 turn vera left
-# cts: s 6 turn damir left
+# cts: s 6 turn damir_neutral left
 # sid: zavlab
 Ну что, товарищи аспиранты? Как продвигается работа?
 
 # sid: lida
 В-Владимир Николаевич...
 
-# sid: damir
+# sid: damir_neutral
 Почти готово, ха-ха! Работаем в поте лица, даже перекурить некода, ха...
 
 # sid: zavlab
@@ -258,25 +283,25 @@ out
 # cts: s 3 turn sasha down
 # cts: s 4 turn lida down
 # cts: s 5 turn vera up
-# cts: s 6 turn damir up
+# cts: s 6 turn damir_neutral up
 # cts: s 7 wait 1
-# sid: damir
+# sid: damir_neutral
 Ну что за фигняяяяя...
 
 # sid: sasha
 ...
 
-# sid: damir
+# sid: damir_neutral
 Чёрт с ним, я покурить. Кто-нибудь со мной?
 
-# cts: s 1 turn damir right
-# cts: s 2 turn damir up
+# cts: s 1 turn damir_neutral right
+# cts: s 2 turn damir_neutral up
 # cts: s 3 wait 1
-# sid: damir
+# sid: damir_neutral
 Чёрт с вами тоже, я пошёл.
 
-# cts: s 1 walk damir left 4
-# cts: s 2 walk damir up 12
+# cts: s 1 walk damir_neutral left 4
+# cts: s 2 walk damir_neutral up 12
 # sid: sasha
 Ладно, надо сфокусироваться. Что мы можем сделать в этой ситуации...
 

@@ -35,18 +35,23 @@ func init(
 	move_speed = _move_speed
 
 
-func update(_location: ReplicaData.SpeakerLocation, _texture: Texture2D):
-	if _texture == null:
-		_texture = missing_texture
-	
-	sprite.texture = _texture
+func update(_location: ReplicaData.SpeakerLocation, speaker_data: SpeakerData):
+	if speaker_data.texture != null:
+		sprite.texture = speaker_data.texture
+	else:
+		sprite.texture = missing_texture
 	
 	if sprite.modulate != white_color:
 		change_color(white_color)
 
-	var texture_size = _texture.get_size()
+	var texture_size = sprite.texture.get_size()
 	var texture_size_x = texture_size.x
 	var texture_size_y = texture_size.y
+	
+	if speaker_data.invert_on_left && _location == ReplicaData.SpeakerLocation.LEFT:
+		sprite.scale.x = -1
+	else:
+		sprite.scale.x = 1
 
 	position.y = bottom - texture_size_y / 2
 

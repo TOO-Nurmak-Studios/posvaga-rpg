@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w7dk6"]
 size = Vector2(25, 7.5)
 
-[node name="Interactible" type="Area2D" groups=["NPC"]]
+[node name="Interactible" type="Area2D" groups=["Interactible"]]
 y_sort_enabled = true
 script = ExtResource("1_rilu5")
 

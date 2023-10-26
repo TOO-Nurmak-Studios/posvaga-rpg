@@ -18,6 +18,7 @@ signal player_move_pressed(delta: float, vector: Vector2)
 signal player_sprint_pressed()
 signal player_sprint_released()
 signal player_interact_pressed()
+signal player_interaction_ended()
 
 #dialog
 signal dialog_start(dialog_data: DialogData)
@@ -56,14 +57,19 @@ func _process(delta):
 	if Input.is_action_just_pressed("debug_action_1"):
 		action_button_pressed.emit()
 
-	if player_input_enabled:
-		process_player_input(delta)
+	process_player_input(delta)
 
 func process_player_input(delta):
 	if Input.is_action_pressed("ui_sprint"):
 		player_sprint_pressed.emit()
 	elif Input.is_action_just_released("ui_sprint"):
 		player_sprint_released.emit()
+	
+	# оставляем только сигналы на спринт, иначе может получится так,
+	# что игро забегает в диалог, игра не ловит отпущенный шифт,
+	# и после выхода из диалога персонажа в вечном спринте
+	if !player_input_enabled:
+		return
 	
 	if Input.is_action_just_pressed("ui_interact"):
 		player_interact_pressed.emit()

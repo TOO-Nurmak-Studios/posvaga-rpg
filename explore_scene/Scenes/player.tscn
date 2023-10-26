@@ -1,15 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://cpyg0dy7ijwm2"]
+[gd_scene load_steps=6 format=3 uid="uid://cpyg0dy7ijwm2"]
 
 [ext_resource type="Script" path="res://explore_scene/Scripts/ExplorePlayer.gd" id="1_kwvig"]
+[ext_resource type="Texture2D" uid="uid://c4qrvxa0b5bf8" path="res://sprites/interact_icon.png" id="2_2ti2k"]
 [ext_resource type="SpriteFrames" uid="uid://crcv7qopl806y" path="res://sprites/map/Vera.tres" id="2_yyej8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kphcj"]
 radius = 6.0
 height = 14.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_x0mls"]
+radius = 15.0
+
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
 script = ExtResource("1_kwvig")
+
+[node name="InteractIcon" type="Sprite2D" parent="."]
+visible = false
+z_index = 4
+y_sort_enabled = true
+position = Vector2(5, -34)
+texture = ExtResource("2_2ti2k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, -1)
@@ -24,5 +35,8 @@ offset = Vector2(0, -15)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
-target_position = Vector2(0, 20)
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1, 0)
+shape = SubResource("CircleShape2D_x0mls")

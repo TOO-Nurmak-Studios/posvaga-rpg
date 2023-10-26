@@ -53,6 +53,8 @@ func _on_body_entered(body):
 		await EventBus.dialog_finished
 	if battle_scene != null:
 		EventBus.battle_request.emit(battle_scene)
+		await EventBus.battle_scene_end
 		if after_battle_dialog_data != null:
-			await EventBus.battle_scene_end
 			EventBus.dialog_start.emit(after_battle_dialog_data)
+			await EventBus.dialog_finished
+	EventBus.player_interaction_ended.emit()
