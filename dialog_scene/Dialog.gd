@@ -161,6 +161,17 @@ func next():
 func process_next_unit(text: String, tags: Array):
 	var parsed_tags = parse_tags(tags)
 	
+	var sound_tag = find_sound_tag(parsed_tags)
+	var music_tag = find_music_tag(parsed_tags)
+	
+	if sound_tag != null:
+		process_next_sound(sound_tag.params[0])
+		parsed_tags.erase(sound_tag)
+		
+	if music_tag != null:
+		process_next_music(music_tag.params[0])
+		parsed_tags.erase(music_tag)
+	
 	if parsed_tags.size() == 0 || parsed_tags[0].type != DialogTag.Type.CUTSCENE_STEP:
 		await process_next_replica(text, parsed_tags)
 	else:
@@ -177,6 +188,18 @@ func parse_tags(tags: Array) -> Array[DialogTag]:
 	return parsed
 
 
+func find_sound_tag(tags: Array[DialogTag]):
+	for tag in tags:
+		if tag.type == DialogTag.Type.SOUND:
+			return tag
+	return null
+
+func find_music_tag(tags: Array[DialogTag]):
+	for tag in tags:
+		if tag.type == DialogTag.Type.MUSIC:
+			return tag
+	return null
+
 func process_next_cutscene_step(type: String, description: String):
 	if not is_cutscene:
 		## TODO: make it smooth
@@ -185,6 +208,14 @@ func process_next_cutscene_step(type: String, description: String):
 	
 	var step = CutsceneStep.new(type, description)
 	EventBus.cutscene_step_start.emit(step)
+
+
+func process_next_sound(file: String):
+	EventBus.sound_play.emit(file)
+
+
+func process_next_music(file: String):
+	EventBus.music_play_new.emit(file)
 
 
 func on_cutscene_step_finished():

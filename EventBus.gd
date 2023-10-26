@@ -36,6 +36,13 @@ signal cutscene_wait_finished()
 signal cutscene_fade_start(type: String)
 signal cutscene_fade_finished()
 
+# audio
+signal music_play_new(file: String)
+signal music_play()
+signal music_pause()
+signal music_stop()
+signal sound_play(file: String)
+
 # game state
 # пока один сигнал на всё - мб нужно будет распилить
 # ещё непонятно, как отслеживать, что этот сигнал всегда вызывается

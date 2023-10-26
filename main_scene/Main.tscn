@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b8hn70mcr38uw"]
+[gd_scene load_steps=5 format=3 uid="uid://b8hn70mcr38uw"]
 
 [ext_resource type="Script" path="res://main_scene/Main.gd" id="1_pvdqy"]
 [ext_resource type="PackedScene" uid="uid://clah0tnwu35b8" path="res://dialog_scene/dialog.tscn" id="2_c1bjn"]
-[ext_resource type="PackedScene" path="res://dialog_scene/cutscene_manager.tscn" id="3_tyco7"]
+[ext_resource type="PackedScene" uid="uid://i4ni7ofuasr" path="res://dialog_scene/cutscene_manager.tscn" id="3_tyco7"]
+[ext_resource type="PackedScene" uid="uid://dyko4lfujsxkc" path="res://main_scene/audio_player.tscn" id="4_4sudp"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_pvdqy")
@@ -10,3 +11,5 @@ script = ExtResource("1_pvdqy")
 [node name="Dialog" parent="." instance=ExtResource("2_c1bjn")]
 
 [node name="CutsceneManager" parent="." instance=ExtResource("3_tyco7")]
+
+[node name="audio_player" parent="." instance=ExtResource("4_4sudp")]

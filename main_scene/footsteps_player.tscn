@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlogc4w6w08bp"]
+
+[ext_resource type="Script" path="res://main_scene/FootstepsPlayer.gd" id="1_jxcw8"]
+[ext_resource type="AudioStream" uid="uid://cat321o87v6tx" path="res://sfx/footsteps.wav" id="2_r2spa"]
+
+[node name="footsteps_player" type="Node"]
+script = ExtResource("1_jxcw8")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_r2spa")

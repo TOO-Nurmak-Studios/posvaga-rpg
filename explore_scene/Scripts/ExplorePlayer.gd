@@ -10,6 +10,7 @@ var directions = [NormalizedDirection.LEFT, NormalizedDirection.RIGHT, Normalize
 @onready var animation_node = $AnimatedSprite2D
 @onready var interact_area = $Area2D
 @onready var interact_icon = $InteractIcon
+@onready var footsteps_player = $footsteps_player
 
 var speed = default_speed
 var speed_modifier = 1
@@ -25,6 +26,8 @@ func _ready():
 	EventBus.player_sprint_released.connect(_process_sprint_released)
 	EventBus.player_interact_pressed.connect(_process_interaction)
 	EventBus.player_interaction_ended.connect(_process_interaction_ended)
+	
+	footsteps_player.set_sprint_speed_modifier(sprint_speed_modifier)
 	
 	_process_movement(0, Vector2.ZERO)
 
@@ -42,16 +45,19 @@ func _process_sprint_pressed():
 		is_sprinting = true
 		speed = default_speed * sprint_speed_modifier
 		animation_node.speed_scale *= sprint_speed_modifier
+		footsteps_player.set_sprint()
 
 func _process_sprint_released():
 	is_sprinting = false
 	speed = default_speed
 	animation_node.speed_scale = 1
+	footsteps_player.set_no_sprint()
 
 func _process_movement(delta, new_velocity):
 	velocity = new_velocity.normalized() * speed * delta;
 	move_and_collide(velocity)
 	play_animation(velocity)
+	footsteps_player.process_for(velocity)
 
 
 func _getInteractibleTarget():
