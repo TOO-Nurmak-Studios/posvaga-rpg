@@ -22,7 +22,7 @@ config/icon="res://icon.svg"
 
 EventBus="*res://EventBus.gd"
 __InkRuntime="*res://addons/inkgd/runtime/static/ink_runtime.gd"
-GameState="*res://GameState.gd"
+GameState="*res://state/GameState.gd"
 SceneTransition="*res://main_scene/SceneTransition.tscn"
 
 [debug]

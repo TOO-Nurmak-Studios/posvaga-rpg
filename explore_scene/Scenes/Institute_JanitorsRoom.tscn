@@ -36,13 +36,13 @@ script = ExtResource("1_ian7v")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = 11
-offset_left = -712.0
-offset_top = -409.0
-offset_right = -501.0
-offset_bottom = -198.0
+offset_left = -922.0
+offset_top = -485.0
+offset_right = -282.0
+offset_bottom = -5.0
 color = Color(0, 0, 0, 0.509804)
 
-[node name="Interactible" parent="." groups=["Interactible"] instance=ExtResource("2_cj7va")]
+[node name="Interactible" parent="." instance=ExtResource("2_cj7va")]
 z_index = 2
 position = Vector2(-603, -308)
 dialog_resource = ExtResource("3_hrtm2")

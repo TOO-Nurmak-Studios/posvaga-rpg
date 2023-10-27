@@ -23,6 +23,8 @@ func _ready():
 	EventBus.cutscene_wait_start.connect(wait)
 	EventBus.cutscene_fade_start.connect(fade)
 	
+	_init_state()
+	
 	if start_scene != null:
 		_change_scene(start_scene, Mode.EXPLORATION)
 	else:
@@ -33,6 +35,12 @@ func _ready():
 func _game_start():
 	_change_scene(default_start_scene, Mode.EXPLORATION)
 	#SceneTransition.fade_out(0.02)
+
+func _init_state():
+	var vera = CharacterState.new(100, 100, [], null, null, null)
+	var chapter_one_party = PartyState.new(vera, null, null, null)
+	GameState.irlParty = chapter_one_party
+	GameState.curParty = chapter_one_party
 
 func _teleport(scene: Resource, player_pos: Vector2, player_dir: Vector2):
 	await SceneTransition.fade_in()
