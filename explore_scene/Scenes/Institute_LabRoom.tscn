@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://co1by3cqnkfqv"]
+[gd_scene load_steps=44 format=3 uid="uid://crfyehwu32xwx"]
 
 [ext_resource type="Script" path="res://explore_scene/Scripts/LocationManager.gd" id="1_ewxwj"]
 [ext_resource type="PackedScene" path="res://explore_scene/Scenes/NPC.tscn" id="2_0o8m8"]

@@ -1,0 +1,323 @@
+[gd_scene load_steps=15 format=3 uid="uid://j28ay1lfl87u"]
+
+[ext_resource type="Texture2D" uid="uid://c3inolkkmts5q" path="res://sprites/map/rain/light0.png" id="1_ss6cb"]
+[ext_resource type="Texture2D" uid="uid://ddgas6lll8oj1" path="res://sprites/map/rain/light01.png" id="2_jkop2"]
+[ext_resource type="Texture2D" uid="uid://daixakjqhck4t" path="res://sprites/map/rain/light02.png" id="3_1uhti"]
+[ext_resource type="Texture2D" uid="uid://bo488j7cqb0bu" path="res://sprites/map/rain/light03.png" id="4_8s2gy"]
+[ext_resource type="Texture2D" uid="uid://b8tv4kjr2l8ic" path="res://sprites/map/rain/light04.png" id="5_a0f5h"]
+[ext_resource type="Texture2D" uid="uid://dwcu5antmx8ny" path="res://sprites/map/rain/light05.png" id="6_hhi23"]
+[ext_resource type="Texture2D" uid="uid://qxbm2cfxtqv8" path="res://sprites/map/rain/light06.png" id="7_4vulq"]
+[ext_resource type="Texture2D" uid="uid://drjbr03k5e483" path="res://sprites/map/rain/light07.png" id="8_8r8h6"]
+[ext_resource type="Texture2D" uid="uid://ct74ftw6l4exb" path="res://sprites/map/rain/light08.png" id="9_wgbj2"]
+[ext_resource type="Texture2D" uid="uid://bi6ndox1r8vvd" path="res://sprites/map/rain/light09.png" id="10_3k6um"]
+[ext_resource type="Texture2D" uid="uid://dhjq4riqavdew" path="res://sprites/map/rain/light10.png" id="11_3cj7u"]
+[ext_resource type="TileSet" uid="uid://yjq3qcumf26f" path="res://explore_scene/Assets/Institute.tres" id="12_mot7a"]
+
+[sub_resource type="Animation" id="Animation_rt2mx"]
+resource_name = "rain"
+length = 11.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rain00:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Rain01:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Rain02:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, true, false, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Rain03:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, true, false, false, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Rain04:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Rain05:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Rain06:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Rain07:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Rain08:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, false, true, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Rain09:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, true, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Rain10:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Rain08:energy")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.35]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Rain10:energy")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.35]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Rain01:energy")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 10, 10.5, 11),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.35, 0.35, 1.0, 0.35]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Rain03:energy")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0, 9, 9.5, 10, 11),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.35, 0.35, 1.0, 0.35, 0.35]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6o0b4"]
+_data = {
+"rain": SubResource("Animation_rt2mx")
+}
+
+[node name="RainyWindow" type="Node2D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "rain"
+speed_scale = 2.0
+libraries = {
+"": SubResource("AnimationLibrary_6o0b4")
+}
+
+[node name="Rain00" type="PointLight2D" parent="."]
+visible = false
+scale = Vector2(0.355469, 0.204102)
+energy = 0.35
+shadow_enabled = true
+shadow_filter = 1
+texture = ExtResource("1_ss6cb")
+
+[node name="Rain01" type="PointLight2D" parent="."]
+visible = false
+scale = Vector2(0.355469, 0.204102)
+energy = 0.35
+shadow_enabled = true
+shadow_filter = 1
+texture = ExtResource("2_jkop2")
+
+[node name="Rain02" type="PointLight2D" parent="."]
+visible = false
+scale = Vector2(0.355469, 0.204102)
+energy = 0.35
+shadow_enabled = true
+shadow_filter = 1
+texture = ExtResource("3_1uhti")
+
+[node name="Rain03" type="PointLight2D" parent="."]
+visible = false
+scale = Vector2(0.355469, 0.204102)
+energy = 0.35
+shadow_enabled = true
+shadow_filter = 1
+texture = ExtResource("4_8s2gy")
+
+[node name="Rain04" type="PointLight2D" parent="."]
+visible = false
+scale = Vector2(0.355469, 0.204102)
+energy = 0.35
+shadow_enabled = true
+shadow_filter = 1
+texture = ExtResource("5_a0f5h")
+
+[node name="Rain05" type="PointLight2D" parent="."]
+visible = false
+scale = Vector2(0.355469, 0.204102)
+energy = 0.35
+shadow_enabled = true
+shadow_filter = 1
+texture = ExtResource("6_hhi23")
+
+[node name="Rain06" type="PointLight2D" parent="."]
+visible = false
+scale = Vector2(0.355469, 0.204102)
+energy = 0.35
+shadow_enabled = true
+shadow_filter = 1
+texture = ExtResource("7_4vulq")
+
+[node name="Rain07" type="PointLight2D" parent="."]
+visible = false
+scale = Vector2(0.355469, 0.204102)
+energy = 0.35
+shadow_enabled = true
+shadow_filter = 1
+texture = ExtResource("8_8r8h6")
+
+[node name="Rain08" type="PointLight2D" parent="."]
+visible = false
+scale = Vector2(0.355469, 0.204102)
+energy = 0.35
+shadow_enabled = true
+shadow_filter = 1
+texture = ExtResource("9_wgbj2")
+
+[node name="Rain09" type="PointLight2D" parent="."]
+visible = false
+scale = Vector2(0.355469, 0.204102)
+energy = 0.35
+shadow_enabled = true
+shadow_filter = 1
+texture = ExtResource("10_3k6um")
+
+[node name="Rain10" type="PointLight2D" parent="."]
+scale = Vector2(0.355469, 0.204102)
+energy = 0.35
+shadow_enabled = true
+shadow_filter = 1
+texture = ExtResource("11_3cj7u")
+
+[node name="Map" type="TileMap" parent="."]
+visible = false
+y_sort_enabled = true
+position = Vector2(-300, 53)
+tile_set = ExtResource("12_mot7a")
+format = 2
+layer_0/name = "floor and walls"
+layer_0/tile_data = PackedInt32Array(-1048567, 262147, 12, -983031, 262147, 13, -1048566, 327683, 12, -983030, 327683, 13, -1048564, 327683, 12, -983028, 327683, 13, -1048565, 262147, 12, -983029, 262147, 13, -917496, 262147, 12, -851960, 262147, 13, -917495, 327683, 12, -851959, 327683, 13, -917494, 393219, 12, -851958, 393219, 13, -917493, 458755, 12, -851957, 458755, 13, -917492, 524291, 12, -851956, 524291, 13, -917491, 589827, 12, -851955, 589827, 13, -786424, 262147, 12, -720888, 262147, 13, -786423, 327683, 12, -720887, 327683, 13, -786422, 393219, 12, -720886, 393219, 13, -786421, 458755, 12, -720885, 458755, 13, -786420, 524291, 12, -720884, 524291, 13, -786419, 589827, 12, -720883, 589827, 13, -655352, 262147, 12, -589816, 262147, 13, -655351, 327683, 12, -589815, 327683, 13, -655350, 393219, 12, -589814, 393219, 13, -655349, 458755, 12, -589813, 458755, 13, -655348, 524291, 12, -589812, 524291, 13, -655347, 589827, 12, -589811, 589827, 13, -524280, 262147, 12, -458744, 262147, 13, -524279, 327683, 12, -458743, 327683, 13, -524278, 393219, 12, -458742, 393219, 13, -524277, 458755, 12, -458741, 458755, 13, -524276, 524291, 12, -458740, 524291, 13, -524275, 589827, 12, -458739, 589827, 13, -393208, 262147, 12, -327672, 262147, 13, -393207, 327683, 12, -327671, 327683, 13, -393206, 393219, 12, -327670, 393219, 13, -393205, 458755, 12, -327669, 458755, 13, -393204, 524291, 12, -327668, 524291, 13, -393203, 589827, 12, -327667, 589827, 13, -262136, 262147, 12, -196600, 262147, 13, -262135, 327683, 12, -196599, 327683, 13, -262134, 393219, 12, -196598, 393219, 13, -262133, 458755, 12, -196597, 458755, 13, -262132, 524291, 12, -196596, 524291, 13, -262131, 589827, 12, -196595, 589827, 13, -131064, 262147, 12, -65528, 262147, 13, -131063, 327683, 12, -65527, 327683, 13, -131062, 393219, 12, -65526, 393219, 13, -131061, 458755, 12, -65525, 458755, 13, -131060, 524291, 12, -65524, 524291, 13, -131059, 589827, 12, -65523, 589827, 13, 8, 262147, 12, 65544, 262147, 13, 9, 327683, 12, 65545, 327683, 13, 10, 393219, 12, 65546, 393219, 13, 11, 458755, 12, 65547, 458755, 13, 12, 524291, 12, 65548, 524291, 13, 13, 589827, 12, 65549, 589827, 13, 131080, 262147, 12, 196616, 262147, 13, 131081, 327683, 12, 196617, 327683, 13, 131082, 393219, 12, 196618, 393219, 13, 131083, 458755, 12, 196619, 458755, 13, 131084, 524291, 12, 196620, 524291, 13, 131085, 589827, 12, 196621, 589827, 13, 262152, 262147, 12, 327688, 262147, 13, 262153, 327683, 12, 327689, 327683, 13, 262154, 393219, 12, 327690, 393219, 13, 262155, 458755, 12, 327691, 458755, 13, 262156, 524291, 12, 327692, 524291, 13, 262157, 589827, 12, 327693, 589827, 13, -983032, 262147, 12, -983027, 262147, 12, -1048568, 262147, 6, -1048563, 262147, 6, -1048569, 458756, 2, -983033, 458756, 2, -917497, 458756, 2, -851961, 458756, 2, -786425, 458756, 2, -720889, 458756, 2, -655353, 458756, 2, -589817, 458756, 2, -524281, 458756, 2, -458745, 458756, 2, -393209, 458756, 2, -327673, 458756, 2, -262137, 458756, 2, -196601, 458756, 2, -131065, 458756, 2, -65529, 458756, 2, 7, 458756, 2, 65543, 458756, 2, 131079, 458756, 2, 196615, 458756, 2, 262151, 458756, 2, 327687, 458756, 2, 327694, 589828, 2, 262158, 589828, 2, 196622, 589828, 2, 131086, 589828, 2, 65550, 589828, 2, 14, 589828, 2, -65522, 589828, 2, -131058, 589828, 2, -196594, 131076, 4, -262130, 131076, 4, -327666, 131076, 4, -393202, 131076, 4, -458738, 131076, 4, -524274, 131076, 4, -589810, 589828, 2, -655346, 589828, 2, -720882, 589828, 2, -786418, 589828, 2, -851954, 589828, 2, -917490, 589828, 2, -983026, 589828, 2, -1048562, 589828, 2)
+layer_1/name = "interior"
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = true
+layer_1/y_sort_origin = 0
+layer_1/z_index = 1
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "interior2"
+layer_2/enabled = true
+layer_2/modulate = Color(1, 1, 1, 1)
+layer_2/y_sort_enabled = true
+layer_2/y_sort_origin = 0
+layer_2/z_index = 2
+layer_2/tile_data = PackedInt32Array()
