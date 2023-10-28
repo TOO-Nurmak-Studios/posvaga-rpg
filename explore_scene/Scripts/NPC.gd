@@ -48,7 +48,8 @@ func interact():
 
 
 func try_move_for_cutscene(object: String, direction: String, distance: int):
-	if object != char_name:
+	# matchn() instead of == for case-insensitive comparison
+	if !char_name.matchn(object):
 		return
 	playing_cutscene = true
 	match direction:
@@ -62,7 +63,8 @@ func try_move_for_cutscene(object: String, direction: String, distance: int):
 			move_down(distance)
 
 func try_turn_for_cutscene(object: String, direction: String):
-	if object != char_name:
+	# matchn() instead of == for case-insensitive comparison
+	if !char_name.matchn(object):
 		return
 	playing_cutscene = true
 	match direction:
@@ -112,7 +114,7 @@ func _physics_process(delta):
 	play_animation(velocity)
 	footsteps_player.process_for(velocity)
 	var collision = move_and_collide(velocity)
-	if _reached_position():
+	if _reached_position() || collision != null:
 		direction = Vector2.ZERO
 		movement_stoped.emit()
 		if playing_cutscene:
