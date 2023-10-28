@@ -49,6 +49,7 @@ scale = Vector2(0.563408, 0.109365)
 texture = ExtResource("1_e0xl0")
 
 [node name="Teleport_LabRoom" parent="." groups=["Teleport"] instance=ExtResource("2_nwupr")]
+z_index = 1
 position = Vector2(-607.941, -252)
 scale = Vector2(2, 0.5)
 scene_name = "res://explore_scene/Scenes/Institute_LabRoom.tscn"
@@ -62,6 +63,14 @@ scene_name = "res://explore_scene/Scenes/Institute_JanitorsRoom.tscn"
 player_position = Vector2(-608, -242)
 player_direction = Vector2(0, -1)
 visibility_flag = "tried_stairs_doors"
+
+[node name="Teleport_OtherFloorpart" parent="." groups=["Teleport"] instance=ExtResource("2_nwupr")]
+z_index = 1
+position = Vector2(176, -237)
+scale = Vector2(4, 1)
+scene_name = "res://explore_scene/Scenes/Institute_Floor2_Part2.tscn"
+player_position = Vector2(176, -214)
+player_direction = Vector2(0, 1)
 
 [node name="Map" type="TileMap" parent="."]
 y_sort_enabled = true
