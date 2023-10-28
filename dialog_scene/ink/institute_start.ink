@@ -8,12 +8,16 @@ VAR found_command_book_for_sasha = false
 
 Ноябрь, 19XX год. Город N. Институт прикладной геоинформатики.
 
-# cts: s 1 fade off
-# cts: s 2 wait 2
+# cts: fade 
+off
+# cts: wait 
+2
+
 # sid: damir_neutral
 Как же меня всё это достало!
 
 # sid: vera_doubting
+# loc: right
 ...
 
 # sid: damir_neutral
@@ -28,7 +32,8 @@ VAR found_command_book_for_sasha = false
 # sid: lida
 Я-я не хочу оставаться тут на всю ночь...
 
-# cts: s 1 wait 1
+# cts: wait 
+1
 # sid: damir_neutral
 Да что б его, опять всё зависло!
 
@@ -39,6 +44,7 @@ VAR found_command_book_for_sasha = false
 У меня тоже ничего не работает...
 
 # sid: vera_neutral
+# loc: right
 Ха, вот вам и суперЭВМ.
 
 # sid: sasha
@@ -47,14 +53,17 @@ VAR found_command_book_for_sasha = false
 # sid: sasha
 Так...
 
-# cts: s 1 wait 1
+# cts: wait 
+1
 # sid: sasha
 Вера, можешь мне подать пособие с командами? Книга была где-то около твоего стола.
 
 # sid: vera_angry
+# loc: right
 ...
 
 # sid: vera_doubting
+# loc: right
 ...ладно, сейчас.
 
 ->END
@@ -103,17 +112,17 @@ VAR found_command_book_for_sasha = false
 === talk_lida ===
 
 # cts: move
-Lida left 2
+damir left 2
 # cts: turn
-Lida up
+damir up
 # cts: wait
 1
 # cts: turn
-Lida down
+damir down
 # cts: wait
 1
 # cts: move
-Lida right 2
+damir right 2
 # cts: wait
 1
 # cts: fade
@@ -233,79 +242,106 @@ out
 
 === zavlab_entrance ===
 
-# cts: s 1 walk zavlab down 5
-# cts: s 2 walk zavlab right 1
-# cts: s 3 turn sasha left
-# cts: s 4 turn lida left
-# cts: s 5 turn vera left
-# cts: s 6 turn damir_neutral left
-# sid: zavlab
+# cts: turn 
+sasha left
+# cts: turn 
+lida left
+# cts: turn 
+vera left
+# cts: turn 
+damir left
+#cts: wait
+1
+
+# sid: zavlab_neutral
 Ну что, товарищи аспиранты? Как продвигается работа?
 
 # sid: lida
 В-Владимир Николаевич...
 
-# sid: damir_neutral
+# sid: damir_bored
 Почти готово, ха-ха! Работаем в поте лица, даже перекурить некода, ха...
 
-# sid: zavlab
+# sid: zavlab_little_smile
 Так я и думал.
 
-# sid: zavlab
+# sid: zavlab_shouting
 Напоминаю вам, что завтра очень важный день! Медлить нельзя, все геоданные должны быть внесены в систему.
 
-# sid: zavlab
+# sid: zavlab_angry
 Думаю, не надо напоминать, что ваша работа в лаборатории прямо влияет на оценку за практику.
 
-# sid: vera_neutral
+# sid: vera_bored
+# loc: right
 (если не надо, то зачем напомнил?)
 
-# sid: zavlab
+# sid: zavlab_smiling
 Верочка, умница, у тебя ко мне какой-то вопрос?
 
-# sid: vera_neutral
+# sid: vera_scared
+# loc: right
 Э-э-э, нет, Владимир Николаевич, никаких вопросов...
 
 # sid: lida
 ...
 
-# sid: zavlab
+# sid: zavlab_smiling
 Ну вот и славно! У матросов нет вопросов, да?
 
 # sid: sasha
 Владимир Николаевич, у нас тут...
 
-# sid: zavlab
+# sid: zavlab_little_smile
 Всё, всё, мне надо бежать, завтра мне всё покажете. И чтобы ни строчки не пропустили, запомните!
 
-# cts: s 1 walk zavlab left 1
-# cts: s 2 walk zavlab up 8
-# cts: s 3 turn sasha down
-# cts: s 4 turn lida down
-# cts: s 5 turn vera up
-# cts: s 6 turn damir_neutral up
-# cts: s 7 wait 1
-# sid: damir_neutral
+# cts: walk 
+zavlab left 1
+# cts: walk 
+zavlab up 8
+# cts: turn 
+sasha down
+# cts: turn 
+lida down
+# cts: turn 
+vera up
+# cts: turn 
+damir up
+# cts: wait 
+1
+
+# sid: damir_bored
 Ну что за фигняяяяя...
 
 # sid: sasha
 ...
 
-# sid: damir_neutral
+# sid: damir_relaxed
 Чёрт с ним, я покурить. Кто-нибудь со мной?
 
-# cts: s 1 turn damir_neutral right
-# cts: s 2 turn damir_neutral up
-# cts: s 3 wait 1
+# cts: turn 
+damir right
+# cts: wait 
+1
+# cts: turn 
+damir up
+# cts: wait 
+1
+# cts: turn 
+damir down
+
 # sid: damir_neutral
 Чёрт с вами тоже, я пошёл.
 
-# cts: s 1 walk damir_neutral left 4
-# cts: s 2 walk damir_neutral up 12
+# cts: walk 
+damir left 4
+# cts: walk 
+damir up 12
+
 # sid: sasha
 Ладно, надо сфокусироваться. Что мы можем сделать в этой ситуации...
 
-# sid: vera
+# sid: vera_neutral
+# loc: right
 (как же мне хочется спать...)
 
 # sid: lida
@@ -314,7 +350,8 @@ out
 # sid: sasha
 Да, но терминал ведёт себя очень странно в любом случае. Может...
 
-# sid: vera
+# sid: vera_neutral
+# loc: right
 (......)
 
 -> END

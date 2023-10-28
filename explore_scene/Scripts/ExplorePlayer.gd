@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 var directions = [NormalizedDirection.LEFT, NormalizedDirection.RIGHT, NormalizedDirection.UP, NormalizedDirection.DOWN]
 
+@export var char_name: String = ""
 @export var default_speed = 55
 @export var sprint_speed_modifier = 1.5
 @export var raycast_length = 15
@@ -26,6 +27,8 @@ func _ready():
 	EventBus.player_sprint_released.connect(_process_sprint_released)
 	EventBus.player_interact_pressed.connect(_process_interaction)
 	EventBus.player_interaction_ended.connect(_process_interaction_ended)
+	EventBus.cutscene_move_start.connect(try_move_for_cutscene)
+	EventBus.cutscene_turn_start.connect(try_turn_for_cutscene)
 	
 	footsteps_player.set_sprint_speed_modifier(sprint_speed_modifier)
 	
@@ -153,3 +156,22 @@ func turn_down():
 
 func face_direction(direction: Vector2):
 	play_animation(direction, true)
+
+
+func try_move_for_cutscene(object: String, direction: String, distance: int):
+	pass # todo
+
+func try_turn_for_cutscene(object: String, direction: String):
+	# matchn() instead of == for case-insensitive comparison
+	if !char_name.matchn(object):
+		return
+	match direction:
+		"left":
+			turn_left()
+		"right":
+			turn_right()
+		"up":
+			turn_up()
+		"down":
+			turn_down()
+	EventBus.cutscene_turn_finished.emit()
