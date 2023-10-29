@@ -9,6 +9,7 @@ func _ready():
 	EventBus.cutscene_turn_finished.connect(on_step_finished)
 	EventBus.cutscene_wait_finished.connect(on_step_finished)
 	EventBus.cutscene_fade_finished.connect(on_step_finished)
+	EventBus.cutscene_animation_finished.connect(on_step_finished)
 
 
 func _process(delta):
@@ -25,6 +26,8 @@ func process_cutscene_step(step: CutsceneStep):
 			process_move(step.params)
 		CutsceneStep.Type.TURN:
 			process_turn(step.params)
+		CutsceneStep.Type.ANIM:
+			process_animation(step.params)
 
 
 func on_step_finished():
@@ -45,10 +48,19 @@ func process_move(params: PackedStringArray):
 	var object = params[0] as String
 	var direction = params[1] as String
 	var distance = params[2].to_int()
-	EventBus.cutscene_move_start.emit(object, direction, distance)
+	var sprint = false
+	if params.size() == 4:
+		sprint = params[3] == "sprint"
+	EventBus.cutscene_move_start.emit(object, direction, distance, sprint)
 
 
 func process_turn(params: PackedStringArray):
 	var object = params[0] as String
 	var direction = params[1].replace("\n", "") as String
 	EventBus.cutscene_turn_start.emit(object, direction)
+
+
+func process_animation(params: PackedStringArray):
+	var object = params[0] as String
+	var animation_name = params[1] as String
+	EventBus.cutscene_animation_start.emit(object, animation_name)

@@ -47,20 +47,20 @@ func interact():
 	EventBus.player_interaction_ended.emit()
 
 
-func try_move_for_cutscene(object: String, direction: String, distance: int):
+func try_move_for_cutscene(object: String, direction: String, distance: int, sprint: bool):
 	# matchn() instead of == for case-insensitive comparison
 	if !char_name.matchn(object):
 		return
 	playing_cutscene = true
 	match direction:
 		"left":
-			move_left(distance)
+			move_left(distance, sprint)
 		"right":
-			move_right(distance)
+			move_right(distance, sprint)
 		"up":
-			move_up(distance)
+			move_up(distance, sprint)
 		"down":
-			move_down(distance)
+			move_down(distance, sprint)
 
 func try_turn_for_cutscene(object: String, direction: String):
 	# matchn() instead of == for case-insensitive comparison
@@ -110,6 +110,8 @@ func _sprint(on: bool):
 			footsteps_player.set_no_sprint()
 
 func _physics_process(delta):
+	if direction == Vector2.ZERO:
+		return
 	velocity = speed * direction * delta
 	play_animation(velocity)
 	footsteps_player.process_for(velocity)

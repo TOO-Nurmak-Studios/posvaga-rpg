@@ -23,6 +23,7 @@ func _ready():
 		EventBus.game_state_changed.connect(_update_visible)
 	if animation_node != null:
 		animation_node.play("default")
+		EventBus.cutscene_animation_start.connect(try_animation_for_cutscene)
 
 func _update_visible():
 	var flag_value = GameState.vars.get(visibility_flag, false)
@@ -33,6 +34,12 @@ func _update_visible():
 	else:
 		hide()
 		collision_node.disabled = true
+
+func try_animation_for_cutscene(object_name: String, animation_name: String):
+	if !name.matchn(object_name):
+		return
+	animation_node.play(animation_name)
+	EventBus.cutscene_animation_finished.emit()
 
 func interact():
 	if dialog_data != null:
