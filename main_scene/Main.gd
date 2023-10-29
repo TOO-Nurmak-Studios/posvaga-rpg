@@ -13,7 +13,7 @@ const default_start_scene = preload("res://explore_scene/Scenes/Institute_LabRoo
 var start_scene: Resource
 
 func init(_start_scene_name: String):
-	if _start_scene_name != null:
+	if _start_scene_name != null && _start_scene_name != "":
 		start_scene = load(_start_scene_name)
 
 func _ready():

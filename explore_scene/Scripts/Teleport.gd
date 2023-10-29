@@ -25,5 +25,7 @@ func _update_visible():
 	print("Updating visibility for " + self.name + ", flag: " + str(visibility_flag) + " = " + str(flag_value) + ", inverted = " + str(invert_visibility_flag))
 	if flag_value != invert_visibility_flag:
 		show()
+		monitoring = true
 	else:
 		hide()
+		monitoring = false

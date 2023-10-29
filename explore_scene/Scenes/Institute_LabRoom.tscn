@@ -1,17 +1,467 @@
-[gd_scene load_steps=43 format=3 uid="uid://crfyehwu32xwx"]
+[gd_scene load_steps=109 format=3 uid="uid://c31kjk1b47iot"]
 
 [ext_resource type="Script" path="res://explore_scene/Scripts/LocationManager.gd" id="1_ewxwj"]
-[ext_resource type="PackedScene" path="res://explore_scene/Scenes/NPC.tscn" id="2_0o8m8"]
+[ext_resource type="PackedScene" uid="uid://clr6m243e5eig" path="res://explore_scene/Scenes/NPC.tscn" id="2_0o8m8"]
 [ext_resource type="Resource" uid="uid://cv6etewqsabw" path="res://dialog_scene/ink/institute_start.ink.json" id="3_b4q4c"]
 [ext_resource type="Texture2D" uid="uid://bsnh5ye6gdkjc" path="res://sprites/map/damir_front.png" id="4_153p8"]
 [ext_resource type="PackedScene" uid="uid://csl0t86w6bvox" path="res://explore_scene/Scenes/SimpleInteractible.tscn" id="4_m3rro"]
-[ext_resource type="Texture2D" uid="uid://bm6j0ph1h14uj" path="res://explore_scene/Assets/Institute_2.png" id="5_g2w1u"]
+[ext_resource type="Texture2D" uid="uid://c762huwmff7i" path="res://sprites/map/sasha_front.png" id="4_taekv"]
 [ext_resource type="Texture2D" uid="uid://v88gfegg2nv5" path="res://sprites/map/damir_side.png" id="5_iw833"]
+[ext_resource type="Texture2D" uid="uid://8tkr3i4galm6" path="res://sprites/map/sasha_side.png" id="5_s5x7y"]
 [ext_resource type="Texture2D" uid="uid://bpg01r28dk50i" path="res://sprites/map/damir_back.png" id="6_2tsv3"]
+[ext_resource type="Texture2D" uid="uid://dhecxy3tb3yqr" path="res://sprites/map/sasha_back.png" id="6_jfdja"]
 [ext_resource type="Texture2D" uid="uid://dl4uacvvm7hiu" path="res://explore_scene/Assets/black_gradient.png" id="6_vegsi"]
+[ext_resource type="Texture2D" uid="uid://bl1jbr1hbb4y7" path="res://sprites/map/zavlab_front.png" id="7_3w664"]
 [ext_resource type="PackedScene" uid="uid://dgipy14v4a35t" path="res://explore_scene/Scenes/Teleport.tscn" id="7_bw7qj"]
+[ext_resource type="Texture2D" uid="uid://bloessegf8p4p" path="res://explore_scene/Assets/Institute_3.png" id="8_7hhce"]
 [ext_resource type="TileSet" uid="uid://yjq3qcumf26f" path="res://explore_scene/Assets/Institute.tres" id="8_ruqwb"]
+[ext_resource type="Texture2D" uid="uid://c6rseeykk62l7" path="res://sprites/map/zavlab_side.png" id="8_wlj7y"]
+[ext_resource type="Texture2D" uid="uid://bollefhvprtf4" path="res://sprites/map/zavlab_back.png" id="9_ebise"]
 [ext_resource type="PackedScene" uid="uid://cpyg0dy7ijwm2" path="res://explore_scene/Scenes/player.tscn" id="9_eimii"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jn6cc"]
+atlas = ExtResource("4_taekv")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ygr5r"]
+atlas = ExtResource("5_s5x7y")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oc1at"]
+atlas = ExtResource("6_jfdja")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_skhka"]
+atlas = ExtResource("4_taekv")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_afnvi"]
+atlas = ExtResource("4_taekv")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o0dc4"]
+atlas = ExtResource("4_taekv")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nw32b"]
+atlas = ExtResource("4_taekv")
+region = Rect2(144, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u0jyu"]
+atlas = ExtResource("4_taekv")
+region = Rect2(192, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvc5a"]
+atlas = ExtResource("4_taekv")
+region = Rect2(240, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q42v2"]
+atlas = ExtResource("4_taekv")
+region = Rect2(288, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ej0uk"]
+atlas = ExtResource("4_taekv")
+region = Rect2(336, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbht6"]
+atlas = ExtResource("5_s5x7y")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_grfmh"]
+atlas = ExtResource("5_s5x7y")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h5cly"]
+atlas = ExtResource("5_s5x7y")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uggfa"]
+atlas = ExtResource("5_s5x7y")
+region = Rect2(144, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w7bj6"]
+atlas = ExtResource("5_s5x7y")
+region = Rect2(192, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_buj4i"]
+atlas = ExtResource("5_s5x7y")
+region = Rect2(240, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4v3ig"]
+atlas = ExtResource("5_s5x7y")
+region = Rect2(288, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3x8jx"]
+atlas = ExtResource("5_s5x7y")
+region = Rect2(336, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w3s73"]
+atlas = ExtResource("6_jfdja")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exqdo"]
+atlas = ExtResource("6_jfdja")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xlih4"]
+atlas = ExtResource("6_jfdja")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x5s1p"]
+atlas = ExtResource("6_jfdja")
+region = Rect2(144, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kr606"]
+atlas = ExtResource("6_jfdja")
+region = Rect2(192, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gu10c"]
+atlas = ExtResource("6_jfdja")
+region = Rect2(240, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i44b0"]
+atlas = ExtResource("6_jfdja")
+region = Rect2(288, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_381t5"]
+atlas = ExtResource("6_jfdja")
+region = Rect2(336, 48, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yyxhf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jn6cc")
+}],
+"loop": true,
+"name": &"idle_down",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ygr5r")
+}],
+"loop": true,
+"name": &"idle_side",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oc1at")
+}],
+"loop": true,
+"name": &"idle_up",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_skhka")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_afnvi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o0dc4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nw32b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u0jyu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rvc5a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q42v2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ej0uk")
+}],
+"loop": true,
+"name": &"walk_down",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rbht6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_grfmh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h5cly")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uggfa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w7bj6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_buj4i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4v3ig")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3x8jx")
+}],
+"loop": true,
+"name": &"walk_side",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w3s73")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_exqdo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xlih4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x5s1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kr606")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gu10c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i44b0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_381t5")
+}],
+"loop": true,
+"name": &"walk_up",
+"speed": 8.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k44q6"]
+atlas = ExtResource("7_3w664")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wk5ku"]
+atlas = ExtResource("8_wlj7y")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yg7q2"]
+atlas = ExtResource("9_ebise")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b2q38"]
+atlas = ExtResource("7_3w664")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xj6v0"]
+atlas = ExtResource("7_3w664")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nhfu3"]
+atlas = ExtResource("7_3w664")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4y3t"]
+atlas = ExtResource("7_3w664")
+region = Rect2(144, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nepmc"]
+atlas = ExtResource("7_3w664")
+region = Rect2(192, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_av5pe"]
+atlas = ExtResource("7_3w664")
+region = Rect2(240, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_82awu"]
+atlas = ExtResource("7_3w664")
+region = Rect2(288, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sl0bo"]
+atlas = ExtResource("7_3w664")
+region = Rect2(336, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6l35"]
+atlas = ExtResource("8_wlj7y")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3debf"]
+atlas = ExtResource("8_wlj7y")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1g4xf"]
+atlas = ExtResource("8_wlj7y")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ov6ni"]
+atlas = ExtResource("8_wlj7y")
+region = Rect2(144, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pjmm5"]
+atlas = ExtResource("8_wlj7y")
+region = Rect2(192, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_52124"]
+atlas = ExtResource("8_wlj7y")
+region = Rect2(240, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oai6i"]
+atlas = ExtResource("8_wlj7y")
+region = Rect2(288, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0riqj"]
+atlas = ExtResource("8_wlj7y")
+region = Rect2(336, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sjce1"]
+atlas = ExtResource("9_ebise")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sj8k8"]
+atlas = ExtResource("9_ebise")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ibec"]
+atlas = ExtResource("9_ebise")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2jece"]
+atlas = ExtResource("9_ebise")
+region = Rect2(144, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v2r4b"]
+atlas = ExtResource("9_ebise")
+region = Rect2(192, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_df7yj"]
+atlas = ExtResource("9_ebise")
+region = Rect2(240, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fdycu"]
+atlas = ExtResource("9_ebise")
+region = Rect2(288, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mijsm"]
+atlas = ExtResource("9_ebise")
+region = Rect2(336, 48, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_agft5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k44q6")
+}],
+"loop": true,
+"name": &"idle_down",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wk5ku")
+}],
+"loop": true,
+"name": &"idle_side",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yg7q2")
+}],
+"loop": true,
+"name": &"idle_up",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b2q38")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xj6v0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nhfu3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y4y3t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nepmc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_av5pe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_82awu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sl0bo")
+}],
+"loop": true,
+"name": &"walk_down",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b6l35")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3debf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1g4xf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ov6ni")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pjmm5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_52124")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oai6i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0riqj")
+}],
+"loop": true,
+"name": &"walk_side",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sjce1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sj8k8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ibec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2jece")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v2r4b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_df7yj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fdycu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mijsm")
+}],
+"loop": true,
+"name": &"walk_up",
+"speed": 8.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r7qf0"]
 atlas = ExtResource("4_153p8")
@@ -235,18 +685,62 @@ animations = [{
 "speed": 8.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_egchs"]
-atlas = ExtResource("5_g2w1u")
+[sub_resource type="CircleShape2D" id="CircleShape2D_c1oij"]
+radius = 6.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dg044"]
+atlas = ExtResource("8_7hhce")
 region = Rect2(448, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_20thn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dg044")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h3cns"]
+atlas = ExtResource("8_7hhce")
+region = Rect2(224, 96, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g82cs"]
+atlas = ExtResource("8_7hhce")
+region = Rect2(256, 96, 32, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jx4iy"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_egchs")
+"texture": SubResource("AtlasTexture_h3cns")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g82cs")
+}],
+"loop": false,
+"name": &"close",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g82cs")
 }],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g82cs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h3cns")
+}],
+"loop": false,
+"name": &"open",
 "speed": 5.0
 }]
 
@@ -264,10 +758,16 @@ dialog_resource = ExtResource("3_b4q4c")
 dialog_vars = Array[String](["found_command_book_for_sasha"])
 dialog_knot = "talk_sasha"
 
+[node name="AnimatedSprite2D" parent="Sasha" index="1"]
+sprite_frames = SubResource("SpriteFrames_yyxhf")
+
 [node name="Zavlab" parent="." instance=ExtResource("2_0o8m8")]
 z_index = 1
-position = Vector2(-607, -358)
+position = Vector2(-603, -328)
 starting_direction = Vector2(0, 1)
+
+[node name="AnimatedSprite2D" parent="Zavlab" index="1"]
+sprite_frames = SubResource("SpriteFrames_agft5")
 
 [node name="Lida" parent="." instance=ExtResource("2_0o8m8")]
 z_index = 1
@@ -288,16 +788,36 @@ sprite_frames = SubResource("SpriteFrames_0b684")
 
 [node name="CorrectBook" parent="." instance=ExtResource("4_m3rro")]
 z_index = 1
-position = Vector2(-591, -172)
+position = Vector2(-605, -160)
 dialog_resource = ExtResource("3_b4q4c")
 dialog_vars = Array[String](["found_command_book_for_sasha"])
 dialog_knot = "correct_book"
 visibility_flag = "found_command_book_for_sasha"
 invert_visibility_flag = true
 
+[node name="CollisionShape2D" parent="CorrectBook" index="0"]
+position = Vector2(-1.44749, 1.017)
+shape = SubResource("CircleShape2D_c1oij")
+
 [node name="AnimatedSprite2D" parent="CorrectBook" index="1"]
-position = Vector2(5, 1)
+position = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_20thn")
+
+[node name="Door" parent="." instance=ExtResource("4_m3rro")]
+z_index = 1
+position = Vector2(-612, -340)
+
+[node name="CollisionShape2D" parent="Door" index="0"]
+disabled = true
+
+[node name="AnimatedSprite2D" parent="Door" index="1"]
+y_sort_enabled = true
+position = Vector2(4, 34)
 sprite_frames = SubResource("SpriteFrames_jx4iy")
+animation = &"open"
+frame = 1
+frame_progress = 1.0
+offset = Vector2(0, -30)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 10
@@ -311,13 +831,14 @@ scale = Vector2(2, 0.5)
 scene_name = "res://explore_scene/Scenes/Institute_Floor2_Part1.tscn"
 player_position = Vector2(-608, -265)
 player_direction = Vector2(0, -1)
+visibility_flag = "aaaaa"
 
 [node name="Map" type="TileMap" parent="."]
 y_sort_enabled = true
 tile_set = ExtResource("8_ruqwb")
 format = 2
 layer_0/name = "floor and walls"
-layer_0/tile_data = PackedInt32Array(-589850, 524291, 6, -655386, 524291, 6, -720922, 589827, 7, -786458, 589827, 6, -851994, 589827, 7, -917530, 589827, 6, -983066, 589827, 7, -1048602, 589827, 6, -1114138, 589827, 7, -1179674, 589827, 6, -589851, 458755, 6, -655387, 458755, 6, -720923, 393219, 7, -786459, 393219, 6, -851995, 393219, 8, -917531, 393219, 7, -983067, 393219, 6, -1048603, 393219, 8, -1114139, 393219, 7, -1179675, 393219, 6, -589852, 524291, 6, -655388, 327683, 8, -720924, 327683, 7, -786460, 327683, 6, -851996, 327683, 8, -917532, 327683, 7, -983068, 327683, 6, -1048604, 327683, 8, -1114140, 327683, 7, -1179676, 327683, 6, -589853, 458755, 6, -655389, 262147, 8, -720925, 262147, 7, -786461, 262147, 6, -851997, 262147, 8, -917533, 262147, 7, -983069, 262147, 6, -1048605, 262147, 8, -1114141, 262147, 7, -1179677, 262147, 6, -589854, 524291, 6, -655390, 393219, 8, -720926, 393219, 7, -786462, 393219, 6, -851998, 393219, 8, -917534, 393219, 7, -983070, 393219, 6, -1048606, 393219, 8, -1114142, 393219, 7, -1179678, 393219, 6, -589855, 458755, 6, -655391, 327683, 8, -720927, 327683, 7, -786463, 327683, 6, -851999, 327683, 8, -917535, 327683, 7, -983071, 327683, 6, -1048607, 327683, 8, -1114143, 327683, 7, -1179679, 327683, 6, -589856, 524291, 6, -655392, 262147, 8, -720928, 262147, 7, -786464, 262147, 6, -852000, 262147, 8, -917536, 262147, 7, -983072, 262147, 6, -1048608, 262147, 8, -1114144, 262147, 7, -1179680, 262147, 6, -589857, 458755, 6, -655393, 393219, 8, -720929, 393219, 7, -786465, 393219, 6, -852001, 393219, 8, -917537, 393219, 7, -983073, 393219, 6, -1048609, 393219, 8, -1114145, 393219, 7, -1179681, 393219, 6, -589858, 524291, 6, -655394, 327683, 8, -720930, 327683, 7, -786466, 327683, 6, -852002, 327683, 8, -917538, 327683, 7, -983074, 327683, 6, -1048610, 327683, 8, -1114146, 327683, 7, -1179682, 327683, 6, -589859, 458755, 6, -655395, 262147, 8, -720931, 262147, 7, -786467, 262147, 6, -852003, 262147, 8, -917539, 262147, 7, -983075, 262147, 6, -1048611, 262147, 8, -1114147, 262147, 7, -1179683, 262147, 6, -589860, 524291, 6, -655396, 393219, 8, -720932, 393219, 7, -786468, 393219, 6, -852004, 393219, 8, -917540, 393219, 7, -983076, 393219, 6, -1048612, 393219, 8, -1114148, 393219, 7, -1179684, 393219, 6, -589861, 458755, 6, -655397, 327683, 8, -720933, 327683, 7, -786469, 327683, 6, -852005, 327683, 8, -917541, 327683, 7, -983077, 327683, 6, -1048613, 327683, 8, -1114149, 327683, 7, -1179685, 327683, 6, -589862, 524291, 6, -655398, 262147, 8, -720934, 262147, 7, -786470, 262147, 6, -852006, 262147, 8, -917542, 262147, 7, -983078, 262147, 6, -1048614, 262147, 8, -1114150, 262147, 7, -1179686, 262147, 6, -589863, 458755, 6, -655399, 393219, 8, -720935, 393219, 7, -786471, 393219, 6, -852007, 393219, 8, -917543, 393219, 7, -983079, 393219, 6, -1048615, 393219, 6, -1114151, 393219, 7, -1179687, 393219, 6, -589864, 524291, 6, -655400, 327683, 8, -720936, 327683, 7, -786472, 327683, 6, -852008, 327683, 8, -917544, 327683, 7, -983080, 327683, 6, -1048616, 327683, 6, -1114152, 327683, 7, -1179688, 327683, 6, -589865, 458755, 6, -655401, 262147, 8, -720937, 262147, 7, -786473, 262147, 6, -852009, 262147, 8, -917545, 262147, 7, -983081, 262147, 6, -1048617, 262147, 6, -1114153, 262147, 7, -1179689, 262147, 6, -1441832, 196612, 6, -1376296, 196612, 7, -1310760, 196612, 8, -1245224, 196612, 9, -1507367, 1507331, 10, -1441831, 1507331, 11, -1376295, 2228227, 7, -1310759, 2228227, 8, -1245223, 2228227, 9, -1507366, 1572867, 10, -1441830, 1572867, 11, -1376294, 2293763, 7, -1310758, 2293763, 8, -1245222, 2293763, 9, -1441829, 131076, 6, -1376293, 131076, 7, -1310757, 131076, 8, -1245221, 327684, 19, -1441828, 196612, 6, -1376292, 196612, 7, -1310756, 196612, 8, -1245220, 196612, 9, -1441827, 131076, 6, -1376291, 131076, 7, -1310755, 131076, 8, -1245219, 131076, 9, -1441820, 196612, 6, -1376284, 196612, 7, -1310748, 196612, 8, -1245212, 196612, 9, -1441819, 131076, 6, -1376283, 131076, 7, -1310747, 65540, 18, -1245211, 131076, 9, -1441818, 196612, 6, -1376282, 196612, 7, -1310746, 196612, 8, -1245210, 262148, 19, -1441823, 131076, 6, -1376287, 131076, 7, -1310751, 131076, 8, -1245215, 131076, 9, -1441822, 196612, 6, -1376286, 196612, 7, -1310750, 196612, 8, -1245214, 196612, 9, -1441821, 131076, 6, -1376285, 131076, 7, -1310749, 131076, 8, -1245213, 131076, 9, -1441826, 196612, 6, -1376290, 196612, 7, -1310754, 196612, 8, -1245218, 196612, 9, -1441825, 131076, 6, -1376289, 131076, 7, -1310753, 131076, 8, -1245217, 131076, 9, -1441824, 196612, 6, -1376288, 196612, 7, -1310752, 196612, 8, -1245216, 196612, 9, -1179690, 458756, 2, -1114154, 458756, 2, -1048618, 458756, 2, -983082, 458756, 2, -917546, 458756, 2, -852010, 458756, 2, -720938, 458756, 2, -786474, 458756, 2, -655402, 458756, 2, -589866, 458756, 2, -1245226, 458756, 2, -1310762, 458756, 2, -1376298, 458756, 2, -1441834, 458756, 2, -1441833, 131076, 6, -1376297, 131076, 7, -1310761, 131076, 8, -1245225, 131076, 9, -1507370, 458756, 1, -1507369, 524292, 1, -1507368, 327684, 3, -1507365, 262148, 3, -1507364, 524292, 1, -1507363, 524292, 1, -1507362, 524292, 1, -1507361, 524292, 1, -1507360, 524292, 1, -1507359, 524292, 1, -1507358, 524292, 1, -1507357, 524292, 1, -1507356, 524292, 1, -1507355, 524292, 1, -1507354, 524292, 1, -1507353, 589828, 1, -524330, 458756, 3, -524329, 524292, 3, -524328, 524292, 3, -524327, 524292, 3, -524326, 524292, 3, -524325, 524292, 3, -524324, 524292, 3, -524323, 524292, 3, -524322, 524292, 3, -524321, 524292, 3, -524320, 524292, 3, -524319, 524292, 3, -524318, 524292, 3, -524317, 524292, 3, -524316, 524292, 3, -524315, 524292, 3, -524314, 524292, 3, -524313, 589828, 3, -589849, 589828, 2, -655385, 589828, 2, -720921, 589828, 2, -786457, 589828, 2, -851993, 589828, 2, -917529, 589828, 2, -983065, 589828, 2, -1048601, 589828, 2, -1114137, 589828, 2, -1179673, 589828, 2, -1245209, 589828, 2, -1310745, 589828, 2, -1376281, 589828, 2, -1441817, 589828, 2)
+layer_0/tile_data = PackedInt32Array(-589850, 524291, 6, -655386, 524291, 6, -720922, 589827, 7, -786458, 589827, 6, -851994, 589827, 7, -917530, 589827, 6, -983066, 589827, 7, -1048602, 589827, 6, -1114138, 589827, 7, -1179674, 589827, 6, -589851, 458755, 6, -655387, 458755, 6, -720923, 393219, 7, -786459, 393219, 6, -851995, 393219, 8, -917531, 393219, 7, -983067, 393219, 6, -1048603, 393219, 8, -1114139, 393219, 7, -1179675, 393219, 6, -589852, 524291, 6, -655388, 327683, 8, -720924, 327683, 7, -786460, 327683, 6, -851996, 327683, 8, -917532, 327683, 7, -983068, 327683, 6, -1048604, 327683, 8, -1114140, 327683, 7, -1179676, 327683, 6, -589853, 458755, 6, -655389, 262147, 8, -720925, 262147, 7, -786461, 262147, 6, -851997, 262147, 8, -917533, 262147, 7, -983069, 262147, 6, -1048605, 262147, 8, -1114141, 262147, 7, -1179677, 262147, 6, -589854, 524291, 6, -655390, 393219, 8, -720926, 393219, 7, -786462, 393219, 6, -851998, 393219, 8, -917534, 393219, 7, -983070, 393219, 6, -1048606, 393219, 8, -1114142, 393219, 7, -1179678, 393219, 6, -589855, 458755, 6, -655391, 327683, 8, -720927, 327683, 7, -786463, 327683, 6, -851999, 327683, 8, -917535, 327683, 7, -983071, 327683, 6, -1048607, 327683, 8, -1114143, 327683, 7, -1179679, 327683, 6, -589856, 524291, 6, -655392, 262147, 8, -720928, 262147, 7, -786464, 262147, 6, -852000, 262147, 8, -917536, 262147, 7, -983072, 262147, 6, -1048608, 262147, 8, -1114144, 262147, 7, -1179680, 262147, 6, -589857, 458755, 6, -655393, 393219, 8, -720929, 393219, 7, -786465, 393219, 6, -852001, 393219, 8, -917537, 393219, 7, -983073, 393219, 6, -1048609, 393219, 8, -1114145, 393219, 7, -1179681, 393219, 6, -589858, 524291, 6, -655394, 327683, 8, -720930, 327683, 7, -786466, 327683, 6, -852002, 327683, 8, -917538, 327683, 7, -983074, 327683, 6, -1048610, 327683, 8, -1114146, 327683, 7, -1179682, 327683, 6, -589859, 458755, 6, -655395, 262147, 8, -720931, 262147, 7, -786467, 262147, 6, -852003, 262147, 8, -917539, 262147, 7, -983075, 262147, 6, -1048611, 262147, 8, -1114147, 262147, 7, -1179683, 262147, 6, -589860, 524291, 6, -655396, 393219, 8, -720932, 393219, 7, -786468, 393219, 6, -852004, 393219, 8, -917540, 393219, 7, -983076, 393219, 6, -1048612, 393219, 8, -1114148, 393219, 7, -1179684, 393219, 6, -589861, 458755, 6, -655397, 327683, 8, -720933, 327683, 7, -786469, 327683, 6, -852005, 327683, 8, -917541, 327683, 7, -983077, 327683, 6, -1048613, 327683, 8, -1114149, 327683, 7, -1179685, 327683, 6, -589862, 524291, 6, -655398, 262147, 8, -720934, 262147, 7, -786470, 262147, 6, -852006, 262147, 8, -917542, 262147, 7, -983078, 262147, 6, -1048614, 262147, 8, -1114150, 262147, 7, -1179686, 262147, 6, -589863, 458755, 6, -655399, 393219, 8, -720935, 393219, 7, -786471, 393219, 6, -852007, 393219, 8, -917543, 393219, 7, -983079, 393219, 6, -1048615, 393219, 6, -1114151, 393219, 7, -1179687, 393219, 6, -589864, 524291, 6, -655400, 327683, 8, -720936, 327683, 7, -786472, 327683, 6, -852008, 327683, 8, -917544, 327683, 7, -983080, 327683, 6, -1048616, 327683, 6, -1114152, 327683, 7, -1179688, 327683, 6, -589865, 458755, 6, -655401, 262147, 8, -720937, 262147, 7, -786473, 262147, 6, -852009, 262147, 8, -917545, 262147, 7, -983081, 262147, 6, -1048617, 262147, 6, -1114153, 262147, 7, -1179689, 262147, 6, -1441832, 196612, 6, -1376296, 196612, 7, -1310760, 196612, 8, -1245224, 196612, 9, -1441829, 131076, 6, -1376293, 131076, 7, -1310757, 131076, 8, -1245221, 327684, 19, -1441828, 196612, 6, -1376292, 196612, 7, -1310756, 196612, 8, -1245220, 196612, 9, -1441827, 131076, 6, -1376291, 131076, 7, -1310755, 131076, 8, -1245219, 131076, 9, -1441820, 196612, 6, -1376284, 196612, 7, -1310748, 196612, 8, -1245212, 196612, 9, -1441819, 131076, 6, -1376283, 131076, 7, -1310747, 65540, 18, -1245211, 131076, 9, -1441818, 196612, 6, -1376282, 196612, 7, -1310746, 196612, 8, -1245210, 262148, 19, -1441823, 131076, 6, -1376287, 131076, 7, -1310751, 131076, 8, -1245215, 131076, 9, -1441822, 196612, 6, -1376286, 196612, 7, -1310750, 196612, 8, -1245214, 196612, 9, -1441821, 131076, 6, -1376285, 131076, 7, -1310749, 131076, 8, -1245213, 131076, 9, -1441826, 196612, 6, -1376290, 196612, 7, -1310754, 196612, 8, -1245218, 196612, 9, -1441825, 131076, 6, -1376289, 131076, 7, -1310753, 131076, 8, -1245217, 131076, 9, -1441824, 196612, 6, -1376288, 196612, 7, -1310752, 196612, 8, -1245216, 196612, 9, -1179690, 458756, 2, -1114154, 458756, 2, -1048618, 458756, 2, -983082, 458756, 2, -917546, 458756, 2, -852010, 458756, 2, -720938, 458756, 2, -786474, 458756, 2, -655402, 458756, 2, -589866, 458756, 2, -1245226, 458756, 2, -1310762, 458756, 2, -1376298, 458756, 2, -1441834, 458756, 2, -1441833, 131076, 6, -1376297, 131076, 7, -1310761, 131076, 8, -1245225, 131076, 9, -1507370, 458756, 1, -1507369, 524292, 1, -1507368, 327684, 3, -1507365, 262148, 3, -1507364, 524292, 1, -1507363, 524292, 1, -1507362, 524292, 1, -1507361, 524292, 1, -1507360, 524292, 1, -1507359, 524292, 1, -1507358, 524292, 1, -1507357, 524292, 1, -1507356, 524292, 1, -1507355, 524292, 1, -1507354, 524292, 1, -1507353, 589828, 1, -524330, 458756, 3, -524329, 524292, 3, -524328, 524292, 3, -524327, 524292, 3, -524326, 524292, 3, -524325, 524292, 3, -524324, 524292, 3, -524323, 524292, 3, -524322, 524292, 3, -524321, 524292, 3, -524320, 524292, 3, -524319, 524292, 3, -524318, 524292, 3, -524317, 524292, 3, -524316, 524292, 3, -524315, 524292, 3, -524314, 524292, 3, -524313, 589828, 3, -589849, 589828, 2, -655385, 589828, 2, -720921, 589828, 2, -786457, 589828, 2, -851993, 589828, 2, -917529, 589828, 2, -983065, 589828, 2, -1048601, 589828, 2, -1114137, 589828, 2, -1179673, 589828, 2, -1245209, 589828, 2, -1310745, 589828, 2, -1376281, 589828, 2, -1441817, 589828, 2, -1441831, 1507331, 11, -1376295, 327683, 8, -1310759, 458755, 8, -1245223, 524291, 7, -1245222, 589827, 7, -1310758, 524291, 8, -1376294, 393219, 8, -1441830, 1572867, 11, -1507366, 1572867, 10, -1507367, 1507331, 10)
 layer_1/name = "interior on the floor"
 layer_1/enabled = true
 layer_1/modulate = Color(1, 1, 1, 1)
@@ -331,7 +852,7 @@ layer_2/modulate = Color(1, 1, 1, 1)
 layer_2/y_sort_enabled = true
 layer_2/y_sort_origin = 0
 layer_2/z_index = 1
-layer_2/tile_data = PackedInt32Array(-1376295, 655363, 1, -1310759, 655363, 2, -1245223, 655363, 3, -1376294, 720899, 1, -1310758, 720899, 2, -1376292, 786436, 4, -1245222, 720899, 3, -1376288, 1048580, 4, -1245220, 786436, 2, -1310747, 1179652, 2, -1310749, 917508, 0, -1245224, 2097156, 0, -1245215, 524292, 4, -720924, 1703940, 0, -720927, 1703940, 0, -720930, 1703940, 0, -786460, 1966084, 0, -786463, 1966084, 0, -786466, 1966084, 0, -1310760, 983044, 10, -655387, 1048580, 2, -655388, 1048580, 2, -1048610, 1835012, 2, -1048607, 1835012, 2, -1048604, 1835012, 2, -655400, 655364, 2, -983074, 2228228, 0, -983071, 2228228, 0, -983068, 2228228, 0, -852007, 1572868, 0, -852008, 2097156, 0, -1310752, 1179652, 10, -1376290, 5, 0)
+layer_2/tile_data = PackedInt32Array(-1376292, 786436, 4, -1376288, 1048580, 4, -1245220, 786436, 2, -1310747, 1179652, 2, -1310749, 917508, 0, -1245224, 2097156, 0, -1245215, 524292, 4, -720924, 1703940, 0, -720927, 1703940, 0, -720930, 1703940, 0, -786460, 1966084, 0, -786463, 1966084, 0, -786466, 1966084, 0, -1310760, 983044, 10, -655387, 1048580, 2, -655388, 1048580, 2, -1048610, 1835012, 2, -1048607, 1835012, 2, -1048604, 1835012, 2, -655400, 655364, 2, -983074, 2228228, 0, -983071, 2228228, 0, -983068, 2228228, 0, -852007, 1572868, 0, -852008, 2097156, 0, -1310752, 1179652, 10, -1376290, 5, 0)
 layer_3/name = "interior2"
 layer_3/enabled = true
 layer_3/modulate = Color(1, 1, 1, 1)
@@ -345,5 +866,16 @@ z_index = 1
 position = Vector2(-487, -188)
 char_name = "Vera"
 
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 2
+offset_left = -645.0
+offset_top = -464.0
+offset_right = -572.0
+offset_bottom = -384.0
+color = Color(0, 0, 0, 1)
+
+[editable path="Sasha"]
+[editable path="Zavlab"]
 [editable path="Damir"]
 [editable path="CorrectBook"]
+[editable path="Door"]

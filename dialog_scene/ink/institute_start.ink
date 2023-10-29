@@ -111,12 +111,16 @@ off
 
 === talk_lida ===
 
+# cts: anim
+door open
 # cts: move
 damir left 2
 # cts: turn
 damir up
 # cts: wait
 1
+# cts: anim
+door close
 # cts: turn
 damir down
 # cts: wait
@@ -242,14 +246,26 @@ out
 
 === zavlab_entrance ===
 
+# cts: anim
+door open
+# cts: wait
+1
 # cts: turn 
 sasha left
 # cts: turn 
 lida left
 # cts: turn 
 vera left
+# cts: wait
+0.5
 # cts: turn 
 damir left
+# cts: wait
+0.5
+# cts: move
+zavlab down 6
+# cts: turn 
+zavlab right
 #cts: wait
 1
 
@@ -260,7 +276,7 @@ damir left
 В-Владимир Николаевич...
 
 # sid: damir_bored
-Почти готово, ха-ха! Работаем в поте лица, даже перекурить некода, ха...
+Почти готово, ха-ха! Работаем в поте лица, даже перекурить некогда, ха...
 
 # sid: zavlab_little_smile
 Так я и думал.
@@ -294,10 +310,15 @@ damir left
 # sid: zavlab_little_smile
 Всё, всё, мне надо бежать, завтра мне всё покажете. И чтобы ни строчки не пропустили, запомните!
 
-# cts: walk 
-zavlab left 1
-# cts: walk 
-zavlab up 8
+
+# cts: turn 
+zavlab up
+# cts: wait
+0.5
+# cts: move
+zavlab up 20 sprint
+# cts: anim
+door close
 # cts: turn 
 sasha down
 # cts: turn 
@@ -306,7 +327,7 @@ lida down
 vera up
 # cts: turn 
 damir up
-# cts: wait 
+#cts: wait
 1
 
 # sid: damir_bored

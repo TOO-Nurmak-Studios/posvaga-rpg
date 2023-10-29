@@ -24,6 +24,7 @@ EventBus="*res://EventBus.gd"
 __InkRuntime="*res://addons/inkgd/runtime/static/ink_runtime.gd"
 GameState="*res://state/GameState.gd"
 SceneTransition="*res://main_scene/SceneTransition.tscn"
+DialogStaticInitializer="*res://dialog_scene/DialogStaticInitializer.gd"
 
 [debug]
 
