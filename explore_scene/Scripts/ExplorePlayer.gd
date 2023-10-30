@@ -37,7 +37,7 @@ func _ready():
 
 func _process(_delta):
 	var target = _getInteractibleTarget()
-	if target != null && !is_interacting:
+	if target != null && target.interaction_enabled && !is_interacting:
 		interact_icon.show()
 	else:
 		interact_icon.hide()
@@ -81,7 +81,7 @@ func _getInteractibleTarget():
 
 func _process_interaction():
 	var target = _getInteractibleTarget()
-	if target != null && !is_interacting:
+	if target != null && target.interaction_enabled && !is_interacting:
 		is_interacting = true
 		interact_icon.hide()
 		_turn_to_face_target(target)

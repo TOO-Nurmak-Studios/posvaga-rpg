@@ -13,6 +13,7 @@ const TILE_SIZE = 16
 @export var dialog_resource: Resource
 @export var dialog_vars: Array[String]
 @export var dialog_knot: String
+@export var interaction_enabled: bool = true
 
 @onready var animation_node = $AnimatedSprite2D
 @onready var footsteps_player = $footsteps_player
@@ -41,6 +42,8 @@ func _ready():
 
 
 func interact():
+	if !interaction_enabled:
+		return
 	if dialog_resource != null:
 		EventBus.dialog_start.emit(dialog_data)
 		await EventBus.dialog_finished

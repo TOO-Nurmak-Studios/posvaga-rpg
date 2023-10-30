@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://8tkr3i4galm6" path="res://sprites/map/sasha_side.png" id="5_s5x7y"]
 [ext_resource type="Texture2D" uid="uid://bpg01r28dk50i" path="res://sprites/map/damir_back.png" id="6_2tsv3"]
 [ext_resource type="Texture2D" uid="uid://dhecxy3tb3yqr" path="res://sprites/map/sasha_back.png" id="6_jfdja"]
-[ext_resource type="Texture2D" uid="uid://dl4uacvvm7hiu" path="res://explore_scene/Assets/black_gradient.png" id="6_vegsi"]
 [ext_resource type="Texture2D" uid="uid://bl1jbr1hbb4y7" path="res://sprites/map/zavlab_front.png" id="7_3w664"]
 [ext_resource type="PackedScene" uid="uid://dgipy14v4a35t" path="res://explore_scene/Scenes/Teleport.tscn" id="7_bw7qj"]
 [ext_resource type="Texture2D" uid="uid://bloessegf8p4p" path="res://explore_scene/Assets/Institute_3.png" id="8_7hhce"]
@@ -703,6 +702,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nrf6t"]
+size = Vector2(30, 12)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_h3cns"]
 atlas = ExtResource("8_7hhce")
 region = Rect2(224, 96, 32, 64)
@@ -806,9 +808,11 @@ sprite_frames = SubResource("SpriteFrames_20thn")
 [node name="Door" parent="." instance=ExtResource("4_m3rro")]
 z_index = 1
 position = Vector2(-612, -340)
+interaction_enabled = false
 
 [node name="CollisionShape2D" parent="Door" index="0"]
-disabled = true
+position = Vector2(5, 30)
+shape = SubResource("RectangleShape2D_nrf6t")
 
 [node name="AnimatedSprite2D" parent="Door" index="1"]
 y_sort_enabled = true
@@ -819,12 +823,6 @@ frame = 1
 frame_progress = 1.0
 offset = Vector2(0, -30)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = 10
-position = Vector2(-608, -378.5)
-scale = Vector2(0.3125, 0.0507813)
-texture = ExtResource("6_vegsi")
-
 [node name="Teleport" parent="." groups=["Teleport"] instance=ExtResource("7_bw7qj")]
 position = Vector2(-608, -298)
 scale = Vector2(2, 0.5)
@@ -832,6 +830,11 @@ scene_name = "res://explore_scene/Scenes/Institute_Floor2_Part1.tscn"
 player_position = Vector2(-608, -265)
 player_direction = Vector2(0, -1)
 visibility_flag = "aaaaa"
+
+[node name="Sprite2D" parent="Teleport" index="0"]
+position = Vector2(0.00300598, -161.987)
+rotation = 0.0
+scale = Vector2(0.156203, 0.0936448)
 
 [node name="Map" type="TileMap" parent="."]
 y_sort_enabled = true
@@ -879,3 +882,4 @@ color = Color(0, 0, 0, 1)
 [editable path="Damir"]
 [editable path="CorrectBook"]
 [editable path="Door"]
+[editable path="Teleport"]
