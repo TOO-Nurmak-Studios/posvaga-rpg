@@ -26,7 +26,7 @@ off
 # sid: damir_neutral
 И зачем я вообще пошёл в аспирантуру...
 
-# sid: sasha
+# sid: sasha_neutral
 Сейчас только 8 вечера. Мы ещё успеваем. 
 
 # sid: lida
@@ -47,15 +47,15 @@ off
 # loc: right
 Ха, вот вам и суперЭВМ.
 
-# sid: sasha
+# sid: sasha_neutral
 Сейчас разберёмся. Кажется, опять институская сеть перегружена.
 
-# sid: sasha
+# sid: sasha_neutral
 Так...
 
 # cts: wait 
 1
-# sid: sasha
+# sid: sasha_neutral
 Вера, можешь мне подать пособие с командами? Книга была где-то около твоего стола.
 
 # sid: vera_angry
@@ -164,17 +164,17 @@ out
 }
 
 === talk_sasha_book_not_found ===
-# sid: sasha
+# sid: sasha_neutral
 Я могу перейти в режим отладки, но мои дальнейшие попытки тщетны. 
 
-# sid: sasha
+# sid: sasha_neutral
 Ты не нашла книгу?
 
 # sid: vera_neutral
 # loc: right
 Продолжаю поиски.
 
-# sid: sasha
+# sid: sasha_smiling
 Точно помню, что оставил её на столе рядом с тобой. Уверенность абсолютная.
 
 # sid: vera_doubting
@@ -220,23 +220,23 @@ out
 # loc: right
 Держи.
 
-# sid: sasha
+# sid: sasha_smiling
 То что надо, спасибо. Так, мне нужна глава про отладку...
 
-# sid: sasha
+# sid: sasha_neutral
 Ага, значит так, и вот так.....
 
 # cts: s 1 wait 1
 # sid: damir_neutral
 Ну, чего там? Заработало?
 
-# sid: sasha
+# sid: sasha_surprised
 Очень странно. Сеть действительно перегружена, но я не понимаю, что происходит. Кто-то отправляет команды управления на все ЭВМ в институте...
 
 # sid: lida
 ! ! !
 
-# sid: sasha
+# sid: sasha_neutral
 Больше похоже на какой-то сбой. Надо спросить у Владимира Николаевича.
 
 # sid: damir_neutral
@@ -304,7 +304,7 @@ zavlab right
 # sid: zavlab_smiling
 Ну вот и славно! У матросов нет вопросов, да?
 
-# sid: sasha
+# sid: sasha_surprised
 Владимир Николаевич, у нас тут...
 
 # sid: zavlab_little_smile
@@ -316,7 +316,7 @@ zavlab up
 # cts: wait
 0.5
 # cts: move
-zavlab up 20 sprint
+zavlab up 12 sprint
 # cts: anim
 door close
 # cts: turn 
@@ -333,7 +333,7 @@ damir up
 # sid: damir_bored
 Ну что за фигняяяяя...
 
-# sid: sasha
+# sid: sasha_scared
 ...
 
 # sid: damir_relaxed
@@ -358,7 +358,7 @@ damir left 4
 # cts: walk 
 damir up 12
 
-# sid: sasha
+# sid: sasha_angry
 Ладно, надо сфокусироваться. Что мы можем сделать в этой ситуации...
 
 # sid: vera_neutral
@@ -368,7 +368,7 @@ damir up 12
 # sid: lida
 Отключим удаленный доступ, и продолжим работу локально? Что-то ведь должно было сохраниться...
 
-# sid: sasha
+# sid: sasha_neutral
 Да, но терминал ведёт себя очень странно в любом случае. Может...
 
 # sid: vera_neutral
