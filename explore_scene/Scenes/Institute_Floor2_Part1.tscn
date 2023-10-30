@@ -22,30 +22,10 @@ y_sort_enabled = true
 position = Vector2(567, 254)
 script = ExtResource("1_6u1w0")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = 10
-position = Vector2(-607.978, -246.121)
-rotation = 3.14159
-scale = Vector2(0.31285, 0.0511413)
-texture = ExtResource("1_e0xl0")
-
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-z_index = 10
-position = Vector2(-144, -379)
-scale = Vector2(0.31285, 0.0511413)
-texture = ExtResource("1_e0xl0")
-
 [node name="Sprite2D3" type="Sprite2D" parent="."]
 z_index = 10
 position = Vector2(175.989, -386.227)
 scale = Vector2(0.562675, 0.115414)
-texture = ExtResource("1_e0xl0")
-
-[node name="Sprite2D4" type="Sprite2D" parent="."]
-z_index = 10
-position = Vector2(175.948, -237.888)
-rotation = 3.14159
-scale = Vector2(0.563408, 0.109365)
 texture = ExtResource("1_e0xl0")
 
 [node name="Teleport_LabRoom" parent="." groups=["Teleport"] instance=ExtResource("2_nwupr")]
@@ -56,6 +36,10 @@ scene_name = "res://explore_scene/Scenes/Institute_LabRoom.tscn"
 player_position = Vector2(-608, -280)
 player_direction = Vector2(0, 1)
 
+[node name="Sprite2D" parent="Teleport_LabRoom" index="0"]
+position = Vector2(-0.0193238, 12.1272)
+scale = Vector2(0.156682, 0.0932201)
+
 [node name="Teleport_JanitorsRoom" parent="." groups=["Teleport"] instance=ExtResource("2_nwupr")]
 position = Vector2(-143, -310)
 scale = Vector2(2, 0.5)
@@ -64,6 +48,11 @@ player_position = Vector2(-608, -242)
 player_direction = Vector2(0, -1)
 visibility_flag = "tried_stairs_doors"
 
+[node name="Sprite2D" parent="Teleport_JanitorsRoom" index="0"]
+position = Vector2(-0.500001, -136.003)
+rotation = 0.0
+scale = Vector2(0.15625, 0.0937236)
+
 [node name="Teleport_OtherFloorpart" parent="." groups=["Teleport"] instance=ExtResource("2_nwupr")]
 z_index = 1
 position = Vector2(176, -237)
@@ -71,6 +60,10 @@ scale = Vector2(4, 1)
 scene_name = "res://explore_scene/Scenes/Institute_Floor2_Part2.tscn"
 player_position = Vector2(176, -214)
 player_direction = Vector2(0, 1)
+
+[node name="Sprite2D" parent="Teleport_OtherFloorpart" index="0"]
+position = Vector2(0.00165776, 2.62903)
+scale = Vector2(0.140654, 0.0828292)
 
 [node name="Map" type="TileMap" parent="."]
 y_sort_enabled = true
@@ -196,12 +189,15 @@ shape = SubResource("RectangleShape2D_o1opx")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = 11
-offset_left = -949.0
+offset_left = -955.0
 offset_top = -655.0
-offset_right = 473.0
+offset_right = 467.0
 offset_bottom = 43.0
 color = Color(0, 0, 0, 0.156863)
 
+[editable path="Teleport_LabRoom"]
+[editable path="Teleport_JanitorsRoom"]
+[editable path="Teleport_OtherFloorpart"]
 [editable path="StairsDoor"]
 [editable path="OtherFloorPartStop"]
 [editable path="JanitorsDoor"]

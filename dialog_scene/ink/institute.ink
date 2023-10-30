@@ -1,6 +1,8 @@
 VAR tried_stairs_doors = false
 VAR called_for_friends = false
 VAR had_first_cockroach_fight = false
+VAR heard_voices = false
+VAR eavesdroped_conversation = false
 
 -> janitors_room_cockroach
 
@@ -179,7 +181,35 @@ VAR had_first_cockroach_fight = false
 
 
 === janitors_room_box ===
-
 Шкафчик пуст.
+-> END
+
+
+=== hallway_cabinet_document ===
+ИНСТИТУТ ПРИКЛАДНОЙ ГЕОИНФОРМАТИКИ ПРИГЛАШАЕТ ДОБРОВОЛЬЦЕВ ДЛЯ УЧАСТИЯ В НАУЧНЫХ ЭКСПЕРИМЕНТАХ
+
+Любой может приложить руку к науке! Страна зовёт!
+-> END
+
+
+=== voices ===
+~ heard_voices = true
+
+# sid: vera_doubting
+# loc: right
+Кажется, я что-то слышу... Голоса!
+
+# sid: vera_scared
+# loc: right
+Рядом точно кто-то есть. Но на ребят не похоже...
 
 -> END
+
+
+=== downstairs_stop ===
+# sid: vera_questioning
+# loc: right
+Я всё ещё слышу чей-то разговор дальше по коридору. Нужно проверить.
+-> END
+
+

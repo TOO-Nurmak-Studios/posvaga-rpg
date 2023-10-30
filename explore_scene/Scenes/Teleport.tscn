@@ -1,12 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://dgipy14v4a35t"]
+[gd_scene load_steps=4 format=3 uid="uid://dgipy14v4a35t"]
 
 [ext_resource type="Script" path="res://explore_scene/Scripts/Teleport.gd" id="1_ifue2"]
+[ext_resource type="Texture2D" uid="uid://dl4uacvvm7hiu" path="res://explore_scene/Assets/black_gradient.png" id="2_l7f7b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1nlvv"]
 size = Vector2(16, 16)
 
 [node name="Teleport" type="Area2D"]
 script = ExtResource("1_ifue2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 10
+position = Vector2(0.00870621, 0.089189)
+rotation = 3.14159
+scale = Vector2(0.125042, 0.0629867)
+texture = ExtResource("2_l7f7b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_1nlvv")

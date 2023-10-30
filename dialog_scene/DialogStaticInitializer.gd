@@ -28,6 +28,7 @@ var speakers_data = {
 		
 		"sasha_neutral"    : SpeakerData.new("sasha_neutral", "Саша"),
 		"sasha_angry"      : SpeakerData.new("sasha_angry", "Саша"),
+		"sasha_confused"   : SpeakerData.new("sasha_confused", "Саша"),
 		"sasha_scared"     : SpeakerData.new("sasha_scared", "Саша"),
 		"sasha_smiling"    : SpeakerData.new("sasha_smiling", "Саша"),
 		"sasha_surprised"  : SpeakerData.new("sasha_surprised", "Саша"),

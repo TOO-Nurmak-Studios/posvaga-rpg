@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ceiilwt8mftg8"
-path="res://.godot/imported/3.png-aa916c5dbc95ddfa8d00383d2762f111.ctex"
+uid="uid://dk3whfcheovcg"
+path="res://.godot/imported/sasha_confused.png-b03b9486d6bb9cd41243ee6132edb2cf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/dialog/3.png"
-dest_files=["res://.godot/imported/3.png-aa916c5dbc95ddfa8d00383d2762f111.ctex"]
+source_file="res://sprites/dialog/sasha_confused.png"
+dest_files=["res://.godot/imported/sasha_confused.png-b03b9486d6bb9cd41243ee6132edb2cf.ctex"]
 
 [params]
 

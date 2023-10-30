@@ -246,6 +246,8 @@ out
 
 === zavlab_entrance ===
 
+# cts: wait
+1
 # cts: anim
 door open
 # cts: wait

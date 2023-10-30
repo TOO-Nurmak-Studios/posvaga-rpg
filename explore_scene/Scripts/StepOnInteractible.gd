@@ -8,6 +8,7 @@ extends Area2D
 @export var invert_visibility_flag: bool
 @export var battle_scene_name: String
 @export var after_battle_dialog_knot: String
+@export var interaction_enabled: bool = true
 
 @onready var collision_node: CollisionShape2D = $CollisionShape2D as CollisionShape2D
 @onready var animation_node:  = $AnimatedSprite2D as AnimatedSprite2D
@@ -55,7 +56,7 @@ func _update_visible():
 		collision_node.disabled = true
 
 func _on_body_entered(body):
-	if body == null || !body.is_in_group("Player"):
+	if !interaction_enabled || body == null || !body.is_in_group("Player"):
 		return
 	
 	if dialog_data != null:

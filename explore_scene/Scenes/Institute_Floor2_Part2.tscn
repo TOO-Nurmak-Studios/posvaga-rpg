@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cg33t80mr44ia"]
+[gd_scene load_steps=11 format=3 uid="uid://cg33t80mr44ia"]
 
 [ext_resource type="Script" path="res://explore_scene/Scripts/LocationManager.gd" id="1_8vph8"]
-[ext_resource type="Texture2D" uid="uid://dl4uacvvm7hiu" path="res://explore_scene/Assets/black_gradient.png" id="2_q8ngg"]
 [ext_resource type="TileSet" uid="uid://yjq3qcumf26f" path="res://explore_scene/Assets/Institute.tres" id="4_pr0ww"]
 [ext_resource type="PackedScene" uid="uid://cpyg0dy7ijwm2" path="res://explore_scene/Scenes/player.tscn" id="5_jrv02"]
 [ext_resource type="PackedScene" uid="uid://dgipy14v4a35t" path="res://explore_scene/Scenes/Teleport.tscn" id="6_bw3lx"]
+[ext_resource type="PackedScene" uid="uid://csl0t86w6bvox" path="res://explore_scene/Scenes/SimpleInteractible.tscn" id="6_pn8rq"]
+[ext_resource type="Resource" uid="uid://cuti6wqk8m383" path="res://dialog_scene/ink/institute.ink.json" id="7_5n87p"]
 [ext_resource type="PackedScene" uid="uid://j28ay1lfl87u" path="res://explore_scene/Scenes/RainyWindow.tscn" id="8_axchb"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bw5xm"]
@@ -13,16 +14,13 @@ polygon = PackedVector2Array(-12, -500, 4, -500, 4, 80, -12, 80)
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ibwxf"]
 polygon = PackedVector2Array(-12, -500, 4, -500, 4, 12, -12, 12)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_mmb51"]
+radius = 3.0
+
 [node name="Institute_Floor2_Part2" type="Node2D"]
 y_sort_enabled = true
 position = Vector2(567, 254)
 script = ExtResource("1_8vph8")
-
-[node name="Sprite2D4" type="Sprite2D" parent="."]
-z_index = 10
-position = Vector2(176, -242.888)
-scale = Vector2(0.8125, 0.109365)
-texture = ExtResource("2_q8ngg")
 
 [node name="Map" type="TileMap" parent="."]
 y_sort_enabled = true
@@ -36,7 +34,7 @@ layer_1/modulate = Color(1, 1, 1, 1)
 layer_1/y_sort_enabled = true
 layer_1/y_sort_origin = 0
 layer_1/z_index = 1
-layer_1/tile_data = PackedInt32Array(131085, 1310724, 0, 65549, 524292, 4)
+layer_1/tile_data = PackedInt32Array(786445, 1441796, 0, 720909, 655364, 2, 13, 524292, 4, 65549, 1310724, 0, 131085, 524292, 4)
 layer_2/name = "interior2"
 layer_2/enabled = true
 layer_2/modulate = Color(1, 1, 1, 1)
@@ -46,8 +44,8 @@ layer_2/z_index = 2
 layer_2/tile_data = PackedInt32Array()
 
 [node name="Player" parent="." groups=["Player"] instance=ExtResource("5_jrv02")]
-z_index = 2
-position = Vector2(176, -199)
+z_index = 1
+position = Vector2(155, 249)
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = 11
@@ -55,7 +53,7 @@ offset_left = -949.0
 offset_top = -655.0
 offset_right = 412.0
 offset_bottom = 584.0
-color = Color(0, 0, 0, 0.27451)
+color = Color(0, 0, 0, 0.352941)
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 position = Vector2(227, -148)
@@ -89,10 +87,32 @@ scene_name = "res://explore_scene/Scenes/Institute_Floor2_Part1.tscn"
 player_position = Vector2(176, -252)
 player_direction = Vector2(0, 1)
 
-[node name="Teleport_Back2" parent="." groups=["Teleport"] instance=ExtResource("6_bw3lx")]
+[node name="Sprite2D" parent="Teleport_Back" index="0"]
+position = Vector2(0.00309867, -16.9108)
+rotation = 0.0
+scale = Vector2(0.135368, 0.0629867)
+
+[node name="Teleport_Forward" parent="." groups=["Teleport"] instance=ExtResource("6_bw3lx")]
 z_index = 1
 position = Vector2(176, 312)
 scale = Vector2(6, 1)
-scene_name = "res://explore_scene/Scenes/Institute_Floor2_Part1.tscn"
-player_position = Vector2(176, -252)
+scene_name = "res://explore_scene/Scenes/Institute_Floor2_Part3.tscn"
+player_position = Vector2(176, 344)
 player_direction = Vector2(0, 1)
+
+[node name="Sprite2D" parent="Teleport_Forward" index="0"]
+position = Vector2(-0.00475448, 0.0888655)
+scale = Vector2(0.13525, 0.0629867)
+
+[node name="Interactible" parent="." instance=ExtResource("6_pn8rq")]
+position = Vector2(217, 211)
+dialog_resource = ExtResource("7_5n87p")
+dialog_knot = "hallway_cabinet_document"
+
+[node name="CollisionShape2D" parent="Interactible" index="0"]
+position = Vector2(0, 0)
+shape = SubResource("CircleShape2D_mmb51")
+
+[editable path="Teleport_Back"]
+[editable path="Teleport_Forward"]
+[editable path="Interactible"]

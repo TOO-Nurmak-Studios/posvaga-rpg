@@ -5,11 +5,12 @@ extends CharacterBody2D
 @export var dialog_knot: String
 @export var visibility_flag: String
 @export var invert_visibility_flag: bool
+@export var interaction_enabled: bool = true
 
 @export var is_battle_scene_enabled: bool = false
 @export var battle_scene_type: BattleScene.BattleSceneType
-@export var battle_scene_players: Array[BattleScene.SceneCharacterType] 
-@export var battle_scene_enemies: Array[BattleScene.SceneCharacterType] 
+@export var battle_scene_players: Array[BattleScene.SceneCharacterType]
+@export var battle_scene_enemies: Array[BattleScene.SceneCharacterType]
 var _battle_scene: Dictionary # <Main.SceneDataType, ?>
 
 @onready var collision_node: CollisionShape2D = $CollisionShape2D as CollisionShape2D
@@ -46,10 +47,19 @@ func _update_visible():
 func try_animation_for_cutscene(object_name: String, animation_name: String):
 	if !name.matchn(object_name):
 		return
+
+	# костыль, чтобы двери открывались и через них можно было пройти
+	if animation_name == "open":
+		collision_node.disabled = true
+	else:
+		collision_node.disabled = false
+
 	animation_node.play(animation_name)
 	EventBus.cutscene_animation_finished.emit()
 
 func interact():
+	if !interaction_enabled:
+		return
 	if dialog_data != null:
 		EventBus.dialog_start.emit(dialog_data)
 		await EventBus.dialog_finished
