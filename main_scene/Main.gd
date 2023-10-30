@@ -26,14 +26,14 @@ func _ready():
 	_init_state()
 	
 	if start_scene != null:
-		_change_scene(start_scene, Mode.EXPLORATION)
+		_change_scene({SceneTransition.SceneDataType.PACKED_SCENE: start_scene}, Mode.EXPLORATION)
 	else:
-		_change_scene(default_start_scene, Mode.EXPLORATION)
+		_change_scene({SceneTransition.SceneDataType.PACKED_SCENE: default_start_scene}, Mode.EXPLORATION)
 
 # С этой функции будет начинаться вся игра
 # для дебага лучше менять логику в _ready()
 func _game_start():
-	_change_scene(default_start_scene, Mode.EXPLORATION)
+	_change_scene({SceneTransition.SceneDataType.PACKED_SCENE: default_start_scene}, Mode.EXPLORATION)
 	#SceneTransition.fade_out(0.02)
 
 func _init_state():
@@ -44,17 +44,13 @@ func _init_state():
 
 func _teleport(scene: Resource, player_pos: Vector2, player_dir: Vector2):
 	await SceneTransition.fade_in()
-	_change_scene(scene, Mode.EXPLORATION, player_pos, player_dir)
+	_change_scene({SceneTransition.SceneDataType.PACKED_SCENE: scene}, Mode.EXPLORATION, player_pos, player_dir)
 	SceneTransition.fade_out()
 
-func _battle(scene: Resource):
-	await SceneTransition.fade_in()
-	_change_scene(scene, Mode.BATTLE)
-	SceneTransition.fade_out()
+func _battle(scene_data: Dictionary):
+	_change_scene(scene_data, Mode.BATTLE)
 
 func _battle_finished():
-	#await SceneTransition.fade_in()
-	
 	current_exploration_scene.show()
 	current_exploration_scene.set_process(true)
 	current_exploration_scene.set_physics_process(true)
@@ -67,7 +63,7 @@ func _battle_finished():
 	SceneTransition.fade_out()
 
 func _change_scene(
-				scene: Resource, 
+				new_scene_data: Dictionary,
 				mode: Mode, 
 				player_pos: Vector2 = Vector2.ZERO,
 				player_dir: Vector2 = Vector2.ZERO):
@@ -76,7 +72,7 @@ func _change_scene(
 	
 	if mode == Mode.EXPLORATION:
 		old_scene = current_exploration_scene
-		
+		var scene = new_scene_data[SceneTransition.SceneDataType.PACKED_SCENE]
 		current_exploration_scene = scene.instantiate()
 		add_child(current_exploration_scene)
 		
@@ -93,7 +89,11 @@ func _change_scene(
 	elif mode == Mode.BATTLE:
 		old_scene = current_battle_scene
 		
-		current_battle_scene = scene.instantiate()
+		current_battle_scene = BattleScene.instantiate_battle_scene(
+			new_scene_data[SceneTransition.SceneDataType.BATTLE_BACK_TYPE],
+			new_scene_data[SceneTransition.SceneDataType.BATTLE_PLAYER_DICT],
+			new_scene_data[SceneTransition.SceneDataType.BATTLE_ENEMY_DICT]
+		)
 		add_child(current_battle_scene)
 		
 		current_mode = Mode.BATTLE

@@ -1,0 +1,209 @@
+[gd_scene load_steps=38 format=3 uid="uid://daury0h1nbxnw"]
+
+[ext_resource type="Script" path="res://battle_scene/Entity/Players/Laborantka/Player.gd" id="1_t3ib5"]
+[ext_resource type="PackedScene" uid="uid://qy81h3pjkt1f" path="res://battle_scene/EntityPrototype/HealthNode.tscn" id="2_83v14"]
+[ext_resource type="Texture2D" uid="uid://bdb6je3i2clwb" path="res://sprites/Players/Laborantka/idle/1.png" id="3_idg7l"]
+[ext_resource type="Shader" path="res://battle_scene/HUD/Shaders/outline_shader.gdshader" id="3_o651o"]
+[ext_resource type="Texture2D" uid="uid://dkpmjg32yiute" path="res://sprites/Players/Laborantka/idle/2.png" id="4_4jvuq"]
+[ext_resource type="Texture2D" uid="uid://c02ydfbrnc3fx" path="res://sprites/Players/Laborantka/idle/12.png" id="5_82f6m"]
+[ext_resource type="Texture2D" uid="uid://hhowpykjo65g" path="res://sprites/Players/Laborantka/kick/1.png" id="7_3ix2s"]
+[ext_resource type="Texture2D" uid="uid://d320jygqbnnky" path="res://sprites/Players/Laborantka/walk/1.png" id="7_326bl"]
+[ext_resource type="Texture2D" uid="uid://d3nbsuvpux0rf" path="res://sprites/Players/Laborantka/walk/2.png" id="8_bgl8g"]
+[ext_resource type="Texture2D" uid="uid://cy8o5vcjn2w5b" path="res://sprites/Players/Laborantka/kick/2.png" id="8_rcdck"]
+[ext_resource type="Texture2D" uid="uid://es40eer6jcmb" path="res://sprites/Players/Laborantka/kick/3.png" id="9_ng6sv"]
+[ext_resource type="Texture2D" uid="uid://ddfwdbq6x6hko" path="res://sprites/Players/Laborantka/walk/3.png" id="9_u2y7k"]
+[ext_resource type="Texture2D" uid="uid://by6upeouglw3f" path="res://sprites/Players/Laborantka/walk/4.png" id="10_kgge8"]
+[ext_resource type="Texture2D" uid="uid://bjc784lmxthdr" path="res://sprites/Players/Laborantka/kick/4.png" id="10_kt3ec"]
+[ext_resource type="Texture2D" uid="uid://cxia5fwvqwgdm" path="res://sprites/Players/Laborantka/kick/5.png" id="11_bsj33"]
+[ext_resource type="Texture2D" uid="uid://dst03a3571lt4" path="res://sprites/Players/Laborantka/walk/5.png" id="11_fr4km"]
+[ext_resource type="Texture2D" uid="uid://culbo45bcq232" path="res://sprites/Players/Laborantka/kick/6.png" id="12_5fybc"]
+[ext_resource type="Texture2D" uid="uid://by7bygdylqg5u" path="res://sprites/Players/Laborantka/walk/6.png" id="12_68oue"]
+[ext_resource type="Texture2D" uid="uid://c64qfo2bcocs4" path="res://sprites/Players/Laborantka/shield/1.png" id="13_8se3w"]
+[ext_resource type="Texture2D" uid="uid://ckvh54e5l8beh" path="res://sprites/Players/Laborantka/shield/2.png" id="14_yeg6j"]
+[ext_resource type="Texture2D" uid="uid://c7ydip2gbuf3r" path="res://sprites/Players/Laborantka/shield/3.png" id="15_0frl0"]
+[ext_resource type="Texture2D" uid="uid://s16k4raim3d" path="res://sprites/Players/Laborantka/shield/4.png" id="16_m51i6"]
+[ext_resource type="Texture2D" uid="uid://delf6funtkc3y" path="res://sprites/Players/Laborantka/shield/5.png" id="17_3td4y"]
+[ext_resource type="Texture2D" uid="uid://b1etf4xuej45l" path="res://sprites/Players/Laborantka/shield/6.png" id="18_r0tpl"]
+[ext_resource type="Texture2D" uid="uid://bqat5bb40prq6" path="res://sprites/Players/Laborantka/shield/7.png" id="19_j3tj2"]
+[ext_resource type="Texture2D" uid="uid://bftmd6djwolh1" path="res://sprites/Players/Laborantka/shield/8.png" id="20_6nybn"]
+[ext_resource type="Texture2D" uid="uid://c07nkg20r4g3m" path="res://sprites/Players/Laborantka/shield/9.png" id="21_rffcc"]
+[ext_resource type="Texture2D" uid="uid://d0jqf1qor7d0q" path="res://sprites/Players/Laborantka/shield/10.png" id="22_malnn"]
+[ext_resource type="Texture2D" uid="uid://dboxbm50kt7j1" path="res://sprites/Players/Laborantka/throw/1.png" id="23_iep3v"]
+[ext_resource type="Texture2D" uid="uid://buwhxj4wthao2" path="res://sprites/Players/Laborantka/throw/2.png" id="24_7myvj"]
+[ext_resource type="Texture2D" uid="uid://s41vfro0xh15" path="res://sprites/Players/Laborantka/throw/3.png" id="25_2udme"]
+[ext_resource type="Texture2D" uid="uid://cmlf55y7n2daw" path="res://sprites/Players/Laborantka/throw/4.png" id="26_kjiy5"]
+[ext_resource type="Texture2D" uid="uid://bviygcty8lpis" path="res://sprites/Players/Laborantka/throw/5.png" id="27_ffb0q"]
+[ext_resource type="Texture2D" uid="uid://bldoacfpsfhrf" path="res://sprites/Players/Laborantka/throw/6.png" id="28_kjuca"]
+[ext_resource type="Texture2D" uid="uid://dsr3nrjwmmr5y" path="res://sprites/Players/Laborantka/throw/7.png" id="29_ptrny"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v4jvb"]
+resource_local_to_scene = true
+shader = ExtResource("3_o651o")
+shader_parameter/color = Vector4(0, 255, 0, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/number_of_images = Vector2(1, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g04c6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_idg7l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_4jvuq")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_82f6m")
+}],
+"loop": false,
+"name": &"idle_selected",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_3ix2s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_rcdck")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ng6sv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_kt3ec")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_bsj33")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_5fybc")
+}],
+"loop": false,
+"name": &"kick",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_8se3w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_yeg6j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_0frl0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_m51i6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_3td4y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_r0tpl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_j3tj2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_6nybn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_rffcc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_malnn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_3td4y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_m51i6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_0frl0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_yeg6j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_8se3w")
+}],
+"loop": false,
+"name": &"shield",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_iep3v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_7myvj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_2udme")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_kjiy5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_ffb0q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_kjuca")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_ptrny")
+}],
+"loop": false,
+"name": &"throw",
+"speed": 16.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_326bl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_bgl8g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_u2y7k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_kgge8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_fr4km")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_68oue")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 12.0
+}]
+
+[node name="Player" type="Node2D" groups=["player"]]
+script = ExtResource("1_t3ib5")
+char_name = "Лаборантка"
+
+[node name="HealthNode" parent="." instance=ExtResource("2_83v14")]
+position = Vector2(-52, -50)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_v4jvb")
+sprite_frames = SubResource("SpriteFrames_g04c6")
+animation = &"throw"
+
+[node name="Crosshair" type="Marker2D" parent="."]
+position = Vector2(41, -39)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+max_polyphony = 3

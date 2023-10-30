@@ -1,4 +1,5 @@
 extends Node
+class_name BattleManager
 
 var all_characters: Array[AbstractCharacter]
 @onready var select_manager: SelectManager = $"../SelectManager" as SelectManager
@@ -9,7 +10,7 @@ var allies: Array[Node]
 var current_move: int = -1
 
 # initiative-based turn system
-func _ready():
+func start():
 	enemies = get_tree().get_nodes_in_group("enemy")
 	allies = get_tree().get_nodes_in_group("player")
 	
@@ -26,15 +27,12 @@ func _ready():
 		)
 
 	EventBus.attack_ended.connect(_on_attack_end)
-	$"..".ready.connect(_on_battle_scene_ready)
 	pass 
-
-func _on_battle_scene_ready():
-	get_tree().create_timer(1).timeout.connect(start_next_round)
 
 func _on_attack_end(attacker: AbstractCharacter, attacked: Array[AbstractCharacter], attack: Attack):
 	await _clean_dead()
 	if attacker.get_type() == AbstractCharacter.CharacterType.PLAYER:
+		attack.start_cooldown()
 		var enemies_left = select_manager.enemy_amount()
 		if enemies_left == 0:
 			_finish_battle()
@@ -87,8 +85,7 @@ func _check_for_new_enemies():
 	return new_enemies
 
 func _finish_battle():
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	EventBus.emit_battle_scene_end()
+	EventBus.emit_battle_scene_fade_away()
 
 func next_move():
 	for enemy in enemies:
@@ -105,5 +102,7 @@ func start_next_round():
 			enemy.prepare_random_attack()
 			continue
 		enemy.decrement_time()
+	for player in allies:
+		player.decrement_attack_cooldown()
 	next_move()
 	

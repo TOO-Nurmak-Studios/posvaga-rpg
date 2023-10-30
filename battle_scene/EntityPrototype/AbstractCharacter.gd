@@ -39,11 +39,12 @@ func get_animation_duration(anim_name: StringName):
 	return frames / duration
 
 func select():
-	sprite.animation = "idle_selected"
+	var sh = self.sprite.material as ShaderMaterial
+	sh.set_shader_parameter("width", 1)
 
 func unselect():
-	if !is_attack_in_flight:
-		sprite.play("idle")
+	var sh = self.sprite.material as ShaderMaterial
+	sh.set_shader_parameter("width", 0)
 
 func mark_dead():
 	is_dead = true
@@ -77,3 +78,7 @@ func die():
 
 func get_type() -> CharacterType:
 	return CharacterType.UNKNOWN 
+
+func decrement_attack_cooldown():
+	for attack in attacks:
+		attack.decrement_cooldown()

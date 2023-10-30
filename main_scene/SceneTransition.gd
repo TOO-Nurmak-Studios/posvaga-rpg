@@ -3,6 +3,13 @@ extends CanvasLayer
 @onready var fade_rect = $FadeRect
 @onready var fade_animation = $AnimationPlayer
 
+enum SceneDataType {
+	PACKED_SCENE, 
+	BATTLE_BACK_TYPE, 
+	BATTLE_ENEMY_DICT, 
+	BATTLE_PLAYER_DICT
+}
+
 func fade_in(custom_speed = 1.0):
 	fade_animation.play("Fade", -1, custom_speed)
 	await fade_animation.animation_finished

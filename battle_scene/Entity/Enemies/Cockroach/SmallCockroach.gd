@@ -8,7 +8,6 @@ func _init():
 
 func _ready():
 	super._ready()
-	char_name = "Small Cock Roach"
 
 func _on_damage_taken(damage: int, source_nullable: AbstractCharacter = null):
 	var source_pos = source_nullable.position

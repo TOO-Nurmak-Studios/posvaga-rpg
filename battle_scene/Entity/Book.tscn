@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cn1rosrfelqc5"]
+
+[ext_resource type="Script" path="res://battle_scene/EntityPrototype/Projectile.gd" id="1_3seq8"]
+[ext_resource type="Texture2D" uid="uid://c1wr1d0nb0qni" path="res://sprites/Players/Laborantka/book/book.png" id="2_vw5h1"]
+
+[node name="Book" type="Node2D"]
+script = ExtResource("1_3seq8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_vw5h1")

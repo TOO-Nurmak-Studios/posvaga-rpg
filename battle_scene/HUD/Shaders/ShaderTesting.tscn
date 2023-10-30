@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://djr6yts6ed42q"]
+
+[ext_resource type="Material" uid="uid://ds6uwg053nwtf" path="res://battle_scene/HUD/Shaders/ShaderTesting.tres" id="1_c5sow"]
+[ext_resource type="Texture2D" uid="uid://cnhdw6suq0b5e" path="res://icon.svg" id="2_05j5u"]
+
+[node name="ShaderTesting" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("1_c5sow")
+texture = ExtResource("2_05j5u")

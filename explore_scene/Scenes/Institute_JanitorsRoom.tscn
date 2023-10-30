@@ -58,6 +58,9 @@ visibility_flag = "had_first_cockroach_fight"
 invert_visibility_flag = true
 battle_scene_name = "res://battle_scene/battle_field.tscn"
 after_battle_dialog_knot = "janitors_room_cockroach_after_battle"
+is_battle_scene_enabled = true
+battle_scene_players = Array[int]([0])
+battle_scene_enemies = Array[int]([2])
 
 [node name="CollisionShape2D" parent="StartCockroachFight" index="0"]
 position = Vector2(8, -5)

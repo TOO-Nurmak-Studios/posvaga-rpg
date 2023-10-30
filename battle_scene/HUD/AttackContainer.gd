@@ -1,4 +1,4 @@
-extends HBoxContainer
+extends VBoxContainer
 class_name AttackContainer
 @onready var button_container = $ButtonPanelContainer/ButtonContainer
 @onready var label = $TextPanelContainer/MarginContainer/ReferenceRect/Text
@@ -27,6 +27,10 @@ func enable():
 		return
 	if _selected_button == -1:
 		_selected_button = 0
+	if buttons[_selected_button].disabled:
+		select_next_button(Select.NEXT)
+		return
+	
 	button_selected.emit(_selected_button)
 	buttons[_selected_button].mouse_entered.emit()
 		
@@ -43,13 +47,19 @@ func select_next_button(select_type: Select):
 	var old_selected_button = _selected_button
 	
 	var modifier: int = 1 if select_type == Select.NEXT else -1
-	
-	_selected_button += modifier
-	if _selected_button >= buttons.size():
-		_selected_button = 0
-	if _selected_button < 0:
-		_selected_button = buttons.size() - 1
-	var button: Button = buttons[_selected_button] as Button
+	var button: Button
+	while true:
+		_selected_button += modifier
+		if _selected_button >= buttons.size():
+			_selected_button = 0
+		if _selected_button < 0:
+			_selected_button = buttons.size() - 1
+		if _selected_button == old_selected_button:
+			return
+		button = buttons[_selected_button] as Button
+		if !button.disabled:
+			break
+			
 	button._on_mouse_enter()
 	button_selected.emit(_selected_button)
 	if old_selected_button != -1:

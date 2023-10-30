@@ -1,19 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://0fs47vtgm2ms"]
+[gd_scene load_steps=4 format=3 uid="uid://e4y1baujsyhi"]
 
 [ext_resource type="Script" path="res://battle_scene/HUD/MoveTimer.gd" id="1_72i5m"]
-[ext_resource type="Texture2D" uid="uid://b4un3b1s1macb" path="res://sprites/timer.png" id="1_of4sf"]
+[ext_resource type="Texture2D" uid="uid://dndsdef8a4e67" path="res://sprites/timer_high_res.png" id="2_2bvmh"]
+[ext_resource type="FontFile" uid="uid://dsg3v8pxmy0f8" path="res://fonts/monogram-extended.ttf" id="3_4xn4s"]
 
 [node name="Timer" type="Node2D"]
 script = ExtResource("1_72i5m")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_of4sf")
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("2_2bvmh")
 
 [node name="Label" type="Label" parent="."]
-offset_left = -2.0
-offset_top = -6.0
-offset_right = 8.0
-offset_bottom = 20.0
+offset_left = -9.0
+offset_top = -13.0
+offset_right = 12.0
+offset_bottom = 11.0
+scale = Vector2(0.942406, 1.04727)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 8
+theme_override_fonts/font = ExtResource("3_4xn4s")
 text = "?"
+horizontal_alignment = 1
+vertical_alignment = 1

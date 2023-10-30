@@ -4,16 +4,16 @@ extends Node
 var chars: Dictionary # <CharType, Array[AbstractCharacter]>
 var selected_char_index: Dictionary # <CharType, int>
 
-var moved_players: Array[Player]
+var moved_players: Array[AbstractCharacter]
 
 enum Select {NEXT, PREV}
 enum SelectState {DISABLED, ENEMY, PLAYER}
 enum CharType {ENEMY, PLAYER}
 var select_state: SelectState
 
-signal player_selected(player: Player)
+signal player_selected(player: AbstractCharacter)
 
-func _ready():
+func start():
 	_init_chars()
 	
 	set_select_state(SelectState.DISABLED)
@@ -103,7 +103,7 @@ func remove_enemy(enemy: Enemy):
 		
 	enemies().erase(enemy)
 
-func remove_player(player: Player):
+func remove_player(player: AbstractCharacter):
 	if player == selected_player():
 		select(Select.NEXT, true, SelectState.PLAYER)
 		
@@ -136,7 +136,7 @@ func set_select_state(new_state: SelectState):
 					select(Select.NEXT)
 				selected_player().select()
 
-func selected_player() -> Player:
+func selected_player() -> AbstractCharacter:
 	#return selected_char[CharType.PLAYER]
 	if selected_char_index[CharType.PLAYER] == -1:
 		return null

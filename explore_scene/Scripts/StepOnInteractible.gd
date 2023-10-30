@@ -1,3 +1,4 @@
+class_name Main
 extends Area2D
 
 @export var dialog_resource: Resource
@@ -13,7 +14,12 @@ extends Area2D
 
 var dialog_data: DialogData
 var after_battle_dialog_data: DialogData
-var battle_scene: Resource
+
+@export var is_battle_scene_enabled: bool = false
+@export var battle_scene_type: BattleScene.BattleSceneType
+@export var battle_scene_players: Array[BattleScene.SceneCharacterType] 
+@export var battle_scene_enemies: Array[BattleScene.SceneCharacterType] 
+var _battle_scene: Dictionary # <Main.SceneDataType, ?>
 
 func _ready():
 	body_entered.connect(_on_body_entered)
@@ -21,8 +27,12 @@ func _ready():
 	if dialog_resource != null:
 		dialog_data = DialogData.new(dialog_resource, dialog_vars, dialog_knot)
 	
-	if battle_scene_name != null:
-		battle_scene = load(battle_scene_name)
+	if is_battle_scene_enabled:
+		_battle_scene = {
+			SceneTransition.SceneDataType.BATTLE_BACK_TYPE: battle_scene_type,
+			SceneTransition.SceneDataType.BATTLE_ENEMY_DICT: battle_scene_enemies,
+			SceneTransition.SceneDataType.BATTLE_PLAYER_DICT: battle_scene_players
+		}
 		# чтобы работало только когда есть и диалог, и баттл сцена
 		if dialog_data != null && after_battle_dialog_knot != null:
 			after_battle_dialog_data = DialogData.new(dialog_resource, dialog_vars, after_battle_dialog_knot)
@@ -51,8 +61,8 @@ func _on_body_entered(body):
 	if dialog_data != null:
 		EventBus.dialog_start.emit(dialog_data)
 		await EventBus.dialog_finished
-	if battle_scene != null:
-		EventBus.battle_request.emit(battle_scene)
+	if is_battle_scene_enabled:
+		EventBus.battle_request.emit(_battle_scene)
 		await EventBus.battle_scene_end
 		if after_battle_dialog_data != null:
 			EventBus.dialog_start.emit(after_battle_dialog_data)
