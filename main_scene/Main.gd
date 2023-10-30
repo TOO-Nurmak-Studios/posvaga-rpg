@@ -16,6 +16,7 @@ func init(_start_scene_name: String):
 	if _start_scene_name != null && _start_scene_name != "":
 		start_scene = load(_start_scene_name)
 
+
 func _ready():
 	EventBus.teleport_request.connect(_teleport)
 	EventBus.battle_request.connect(_battle)
@@ -24,6 +25,8 @@ func _ready():
 	EventBus.cutscene_fade_start.connect(fade)
 	
 	_init_state()
+	InventoryManager.initialize()
+	InventoryTest.new().test()
 	
 	if start_scene != null:
 		_change_scene({SceneTransition.SceneDataType.PACKED_SCENE: start_scene}, Mode.EXPLORATION)
@@ -38,9 +41,10 @@ func _game_start():
 
 func _init_state():
 	var vera = CharacterState.new(100, 100, [], null, null, null)
-	var chapter_one_party = PartyState.new(vera, null, null, null)
+	var chapter_one_party = PartyState.new(vera, null, null, Inventory.new())
 	GameState.irlParty = chapter_one_party
 	GameState.curParty = chapter_one_party
+	GameState.simParty = PartyState.new(null, null, null, Inventory.new())
 
 func _teleport(scene: Resource, player_pos: Vector2, player_dir: Vector2):
 	await SceneTransition.fade_in()

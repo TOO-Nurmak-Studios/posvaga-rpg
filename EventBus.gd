@@ -52,6 +52,11 @@ signal sound_play(file: String)
 # ещё непонятно, как отслеживать, что этот сигнал всегда вызывается
 signal game_state_changed()
 
+# inventory
+signal gold_add(to_add: int)
+signal gold_remove(to_remove: int)
+signal item_use(type_id: String)
+
 #scene transitions
 signal teleport_request(scene: Resource, player_position: Vector2, player_direction: Vector2)
 signal battle_request(battle_data: Dictionary)
