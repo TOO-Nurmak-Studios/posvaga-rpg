@@ -1,8 +1,9 @@
-[gd_scene load_steps=29 format=3 uid="uid://cuycdtt3185d3"]
+[gd_scene load_steps=31 format=3 uid="uid://cuycdtt3185d3"]
 
 [ext_resource type="Script" path="res://battle_scene/Entity/Enemies/Cockroach/SmallCockroach.gd" id="1_lhnyy"]
 [ext_resource type="PackedScene" uid="uid://qy81h3pjkt1f" path="res://battle_scene/EntityPrototype/HealthNode.tscn" id="2_1sy2k"]
 [ext_resource type="Texture2D" uid="uid://dwuqpsot5bgvu" path="res://sprites/Enemies/small_cockroach/small cock2.png" id="3_bmn8n"]
+[ext_resource type="Shader" path="res://battle_scene/HUD/Shaders/outline_shader.gdshader" id="3_keh8i"]
 [ext_resource type="Texture2D" uid="uid://ciitpk20pr4n4" path="res://sprites/Enemies/small_cockroach/small cock3.png" id="4_bymiy"]
 [ext_resource type="Texture2D" uid="uid://dew6fejidkvj1" path="res://sprites/Enemies/small_cockroach/small cock4.png" id="5_0nib0"]
 [ext_resource type="Texture2D" uid="uid://d2swk5l0abj5g" path="res://sprites/Enemies/small_cockroach/small cock5.png" id="6_k36xl"]
@@ -42,6 +43,16 @@ orbit_velocity_max = 0.0
 scale_min = 1.5
 scale_max = 1.5
 color = Color(0.494118, 0.101961, 0.145098, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1b20q"]
+resource_local_to_scene = true
+shader = ExtResource("3_keh8i")
+shader_parameter/color = Vector4(255, 0, 0, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/number_of_images = Vector2(1, 1)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_86saj"]
 animations = [{
@@ -148,9 +159,11 @@ animations = [{
 
 [node name="SmallCockroach" type="Node2D" groups=["enemy"]]
 script = ExtResource("1_lhnyy")
+char_name = "Малый кокроч"
 
 [node name="HealthNode" parent="." instance=ExtResource("2_1sy2k")]
 position = Vector2(-64, 0)
+health = 15
 
 [node name="BloodEmitter" type="GPUParticles2D" parent="."]
 position = Vector2(8, 34)
@@ -164,6 +177,7 @@ randomness = 1.0
 trail_lifetime = 0.03
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_1b20q")
 sprite_frames = SubResource("SpriteFrames_86saj")
 animation = &"idle"
 frame_progress = 0.857555

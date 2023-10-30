@@ -34,7 +34,6 @@ func _attack_single(attacker: AbstractCharacter, char: AbstractCharacter, gunpoi
 	tween.tween_property(projectile, "position", projectile.target, bullet_flight_length)
 	tween.tween_callback(
 		func(): 
-		
 			projectile.queue_free()
 			await char.take_damage(bullet_damage, attacker)
 			EventBus.emit_attack_ended(attacker, [char], self)

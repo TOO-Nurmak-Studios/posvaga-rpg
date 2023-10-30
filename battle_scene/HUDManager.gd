@@ -2,6 +2,9 @@ class_name HUDManager
 
 extends Node
 
+#constants
+const attack_container_offset = Vector2(16, -8)
+
 #resources
 var health_bar_scene: Resource = preload("res://battle_scene/HUD/HealthBar.tscn")
 var timer_scene: Resource = preload("res://battle_scene/HUD/MoveTimer.tscn")
@@ -20,11 +23,11 @@ var attack_label: Label
 
 # state machine
 enum State {SELECT_PLAYER, SELECT_ATTACK, SELECT_ENEMY, NOTHING}
-var current_state: State = State.SELECT_PLAYER
+var current_state: State = State.NOTHING
 var selected_attack: int = -1
 
-# must be called after battle manager! 
-func _ready():
+# must be called after battle manager and select manager! 
+func start():
 	main_scene = get_parent()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
@@ -36,6 +39,7 @@ func _ready():
 	_create_move_timers()
 
 	EventBus.action_button_pressed.connect(_action_pressed)
+	EventBus.battle_scene_fade_away.connect(_on_battle_scene_fade_away)
 	EventBus.battle_scene_end.connect(_on_battle_scene_end)
 	EventBus.attack_ended.connect(_draw_attack_line)
 	EventBus.select_next_button_pressed.connect(_select_next)
@@ -78,10 +82,13 @@ func add_enemy(enemy: Enemy):
 	_create_health_bar(enemy.health)
 	_create_move_timer(enemy)
 
-func _on_battle_scene_end():
+func _on_battle_scene_fade_away():
 	change_state(State.NOTHING)
 	tooltip_label.text = "Battle finished!"
-	tooltip_label.show()	
+	tooltip_label.show()
+
+func _on_battle_scene_end():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _action_pressed():
 	if current_state == State.SELECT_ENEMY:
@@ -94,6 +101,7 @@ func _action_pressed():
 func _attack_pressed(i: int):
 	change_state(State.SELECT_ENEMY)
 	selected_attack = i
+	tooltip_label.text = select_manager.selected_player().attacks[i].attack_tooltip
 
 func enable_player_movement():
 	change_state(State.SELECT_PLAYER)
@@ -161,8 +169,10 @@ func _create_health_bars():
 func _create_health_bar(health_node: HealthNode):
 	var hp_bar: HealthBar = health_bar_scene.instantiate()
 	hp_bar.update_value(0, health_node.health)
+	hp_bar.max_value = health_node.health
 	health_node.health_changed.connect(hp_bar.update_value)
 	health_node.tree_exiting.connect(hp_bar.queue_free)
+	health_node.health_bar = hp_bar
 		
 	var node = Node2D.new()
 	var parent_position: Vector2 = health_node.global_position
@@ -191,6 +201,7 @@ func _attach_child_remote_transform(transformed_node: Node, parent_node: Node2D)
 
 func _create_tooltip_label():
 	tooltip_label = Label.new()
+	tooltip_label.z_index = 4
 	tooltip_label.add_theme_font_size_override("font_size", 16)
 	tooltip_label.add_theme_font_override("font", font)
 	tooltip_label.text = "Use arrows to select enemy, Enter to attack."
@@ -200,6 +211,7 @@ func _create_tooltip_label():
 	
 func _create_attack_label():
 	attack_label = Label.new()
+	attack_label.z_index = 4
 	attack_label.add_theme_font_size_override("font_size", 16)
 	attack_label.add_theme_font_override("font", font)
 	attack_label.text = ""
@@ -207,7 +219,7 @@ func _create_attack_label():
 	attack_label.hide()
 	add_sibling.call_deferred(attack_label)
 
-func _create_attack_menu(character: Player):
+func _create_attack_menu(character: AbstractCharacter):
 	if select_manager.select_state == SelectManager.SelectState.DISABLED:
 		return
 	if current_attack_container != null:
@@ -219,13 +231,11 @@ func _create_attack_menu(character: Player):
 	
 	var sprite = character.get_node("Sprite") as AnimatedSprite2D
 	var global_pos = sprite.global_position
-	var rect2size = sprite.sprite_frames.get_frame_texture("shoot", 0).get_size() * sprite.scale * character.scale
-	var attack_menu_position = global_pos + Vector2(rect2size.x / 2, 0) + Vector2(4, -8)
+	var rect2size = sprite.sprite_frames.get_frame_texture("idle", 0).get_size() * sprite.scale * character.scale
+	var attack_menu_position = global_pos + Vector2(rect2size.x / 2, 0) + attack_container_offset
 	
 	current_attack_container = container_scene.instantiate() as AttackContainer
 	current_attack_container.position = attack_menu_position
-	#current_attack_container.add_theme_constant_override("separation", 12)
-	current_attack_container.size = Vector2(60, 60)
 	current_attack_container.button_selected.connect(func(i): 
 		attack_in_container_selected(current_attack_container, character.attacks[i])
 		)
@@ -235,8 +245,10 @@ func _create_attack_menu(character: Player):
 		var attack = character.attacks[i]
 		var button: KeyboardButton = button_scene.instantiate() as KeyboardButton
 		button.init_vars(attack.attack_name, 16)
-		button.scale = Vector2(2, 2) 
+		button.scale = Vector2(1, 2) 
 		button.pressed.connect(_attack_pressed.bind(i))
+		attack.cooldown_update.connect(button.disable_button)
+		attack.cooldown_end.connect(button.enable_button)
 		button.add_theme_font_override("font", font)
 		button.add_to_group("button")
 		button_children.append(button)

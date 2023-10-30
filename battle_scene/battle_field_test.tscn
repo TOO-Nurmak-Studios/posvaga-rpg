@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://dsga2re843xau"]
+
+[ext_resource type="Texture2D" uid="uid://bdfouowg0yewp" path="res://sprites/battle_back.png" id="1_7nuqj"]
+[ext_resource type="PackedScene" uid="uid://bl2en8v232bj7" path="res://battle_scene/Entity/Players/TestPlayer123/Player.tscn" id="2_ytvvn"]
+[ext_resource type="PackedScene" uid="uid://bgybbtokpmwlg" path="res://battle_scene/Entity/Enemies/Cockroach/Cockroach.tscn" id="3_5bm3l"]
+[ext_resource type="Script" path="res://battle_scene/SelectManager.gd" id="4_7e3ks"]
+[ext_resource type="Script" path="res://battle_scene/BattleManager.gd" id="5_pn3jx"]
+[ext_resource type="Script" path="res://battle_scene/HUDManager.gd" id="6_2ogb3"]
+
+[node name="BattleField" type="CanvasLayer"]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(320, 240)
+texture = ExtResource("1_7nuqj")
+
+[node name="Player3" parent="." instance=ExtResource("2_ytvvn")]
+position = Vector2(165, 325)
+scale = Vector2(0.5, 0.5)
+char_name = "Player3"
+
+[node name="Player" parent="." instance=ExtResource("2_ytvvn")]
+position = Vector2(107, 368)
+scale = Vector2(0.5, 0.5)
+char_name = "Player1"
+
+[node name="Player2" parent="." instance=ExtResource("2_ytvvn")]
+position = Vector2(58, 425)
+scale = Vector2(0.5, 0.5)
+char_name = "Player2"
+
+[node name="Cockroach" parent="." instance=ExtResource("3_5bm3l")]
+position = Vector2(559, 279)
+
+[node name="SelectManager" type="Node" parent="."]
+script = ExtResource("4_7e3ks")
+
+[node name="BattleManager" type="Node" parent="."]
+script = ExtResource("5_pn3jx")
+
+[node name="HUDManager" type="Node" parent="."]
+script = ExtResource("6_2ogb3")

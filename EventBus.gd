@@ -9,6 +9,7 @@ signal select_right_button_pressed()
 
 #battle scene
 signal attack_ended(attacker: AbstractCharacter, attacked: Array[AbstractCharacter], attack: Attack)
+signal battle_scene_fade_away()
 signal battle_scene_end()
 
 #explore scene, player controls
@@ -52,7 +53,7 @@ signal game_state_changed()
 
 #scene transitions
 signal teleport_request(scene: Resource, player_position: Vector2, player_direction: Vector2)
-signal battle_request(scene: Resource)
+signal battle_request(battle_data: Dictionary)
 
 func _process(delta):
 	if Input.is_action_just_pressed("select_next"):
@@ -89,5 +90,8 @@ func process_player_input(delta):
 func emit_attack_ended(attacker: AbstractCharacter, attacked: Array[AbstractCharacter], attack: Attack):
 	attack_ended.emit(attacker, attacked, attack)
 
+func emit_battle_scene_fade_away():
+	battle_scene_fade_away.emit()
+	
 func emit_battle_scene_end():
 	battle_scene_end.emit()

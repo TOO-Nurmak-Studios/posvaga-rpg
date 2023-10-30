@@ -2,8 +2,8 @@ class_name CockroachBite
 extends Attack
 
 @export var run_time_length: float = 1
-@export var damage: float = 3
-@export var atk_cooldown: int = 2
+@export var damage: float = 150
+@export var atk_cooldown: int = 1
 var current_callable_on_finish: Callable
 
 @onready var rand = RandomNumberGenerator.new()
@@ -13,7 +13,7 @@ func _init():
 	attack_type = Attack.AttackType.SINGLE
 	attack_tooltip = "Select enemy with arrows, press enter to attack."
 	attack_description = "Common cockroach bite"
-	attack_postmessage = str("%s bites %s for ", damage, " damage.")
+	attack_postmessage = str("%s кусает %s на ", damage, " урона.")
 	self.cooldown = atk_cooldown
 	
 func _attack_single(attacker: AbstractCharacter, char: AbstractCharacter, gunpoint: Marker2D):

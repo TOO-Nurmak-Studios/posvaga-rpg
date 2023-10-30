@@ -1,41 +1,30 @@
-[gd_scene load_steps=7 format=3 uid="uid://obv5cxfs5qx2"]
+[gd_scene load_steps=6 format=3 uid="uid://obv5cxfs5qx2"]
 
-[ext_resource type="Texture2D" uid="uid://bdfouowg0yewp" path="res://sprites/battle_back.png" id="1_svqol"]
-[ext_resource type="PackedScene" uid="uid://bl2en8v232bj7" path="res://battle_scene/Entity/Player.tscn" id="2_eg6e8"]
+[ext_resource type="Script" path="res://battle_scene/battle_field.gd" id="1_8qh5k"]
 [ext_resource type="Script" path="res://battle_scene/SelectManager.gd" id="3_3i5y2"]
-[ext_resource type="PackedScene" uid="uid://bgybbtokpmwlg" path="res://battle_scene/Entity/Enemies/Cockroach/Cockroach.tscn" id="3_hvf53"]
 [ext_resource type="Script" path="res://battle_scene/BattleManager.gd" id="3_xgenn"]
 [ext_resource type="Script" path="res://battle_scene/HUDManager.gd" id="4_pi84k"]
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_7u3ua"]
+viewport_path = NodePath("SubViewport")
+
 [node name="BattleField" type="CanvasLayer"]
+script = ExtResource("1_8qh5k")
 
-[node name="Background" type="Sprite2D" parent="."]
+[node name="ViewportSprite" type="Sprite2D" parent="."]
+z_index = -100
 position = Vector2(320, 240)
-texture = ExtResource("1_svqol")
+texture = SubResource("ViewportTexture_7u3ua")
 
-[node name="Player3" parent="." groups=["player"] instance=ExtResource("2_eg6e8")]
-position = Vector2(165, 325)
-scale = Vector2(0.5, 0.5)
-char_name = "Player3"
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(640, 480)
+render_target_update_mode = 4
 
-[node name="Player" parent="." groups=["player"] instance=ExtResource("2_eg6e8")]
-position = Vector2(107, 368)
-scale = Vector2(0.5, 0.5)
-char_name = "Player1"
-
-[node name="Player2" parent="." groups=["player"] instance=ExtResource("2_eg6e8")]
-position = Vector2(58, 425)
-scale = Vector2(0.5, 0.5)
-char_name = "Player2"
-
-[node name="Cockroach" parent="." instance=ExtResource("3_hvf53")]
-position = Vector2(559, 279)
-
-[node name="SelectManager" type="Node" parent="."]
-script = ExtResource("3_3i5y2")
-
-[node name="BattleManager" type="Node" parent="."]
+[node name="BattleManager" type="Node" parent="SubViewport"]
 script = ExtResource("3_xgenn")
 
-[node name="HUDManager" type="Node" parent="."]
+[node name="SelectManager" type="Node" parent="SubViewport"]
+script = ExtResource("3_3i5y2")
+
+[node name="HUDManager" type="Node" parent="SubViewport"]
 script = ExtResource("4_pi84k")

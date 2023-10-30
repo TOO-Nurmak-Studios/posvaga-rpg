@@ -19,3 +19,11 @@ func _on_mouse_enter():
 
 func _on_mouse_exit():
 	self.release_focus()
+
+func disable_button(cooldown: int):
+	self.disabled = true
+	self.text = str(_text, " (", cooldown, ")")
+	
+func enable_button():
+	self.disabled = false
+	self.text = _text

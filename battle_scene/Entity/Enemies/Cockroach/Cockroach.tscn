@@ -1,8 +1,9 @@
-[gd_scene load_steps=29 format=3 uid="uid://bgybbtokpmwlg"]
+[gd_scene load_steps=31 format=3 uid="uid://bgybbtokpmwlg"]
 
 [ext_resource type="Script" path="res://battle_scene/Entity/Enemies/Cockroach/Cockroach.gd" id="1_8o6um"]
 [ext_resource type="PackedScene" uid="uid://qy81h3pjkt1f" path="res://battle_scene/EntityPrototype/HealthNode.tscn" id="2_jicok"]
 [ext_resource type="Texture2D" uid="uid://cttptwn5m7bch" path="res://sprites/Enemies/big_cockroach/death1.png" id="3_l4044"]
+[ext_resource type="Shader" path="res://battle_scene/HUD/Shaders/outline_shader.gdshader" id="3_r122x"]
 [ext_resource type="Texture2D" uid="uid://djhcvuq6cctaq" path="res://sprites/Enemies/big_cockroach/bite1_1 (1).png" id="3_wa7gi"]
 [ext_resource type="Texture2D" uid="uid://d2gtd3nliih07" path="res://sprites/Enemies/big_cockroach/bite2.png" id="4_m70lu"]
 [ext_resource type="Texture2D" uid="uid://d25dm2g0y2ca5" path="res://sprites/Enemies/big_cockroach/death2.png" id="4_u0ucp"]
@@ -42,6 +43,16 @@ orbit_velocity_max = 0.0
 scale_min = 1.5
 scale_max = 1.5
 color = Color(0.494118, 0.101961, 0.145098, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n28oh"]
+resource_local_to_scene = true
+shader = ExtResource("3_r122x")
+shader_parameter/color = Vector4(255, 0, 0, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/number_of_images = Vector2(1, 1)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p1p8m"]
 animations = [{
@@ -167,6 +178,7 @@ animations = [{
 
 [node name="Cockroach" type="Node2D" groups=["enemy"]]
 script = ExtResource("1_8o6um")
+char_name = "Большой кокроч"
 
 [node name="HealthNode" parent="." instance=ExtResource("2_jicok")]
 position = Vector2(-64, -64)
@@ -183,8 +195,9 @@ randomness = 1.0
 trail_lifetime = 0.03
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_n28oh")
 sprite_frames = SubResource("SpriteFrames_p1p8m")
-animation = &"walk"
+animation = &"idle"
 
 [node name="Crosshair" type="Marker2D" parent="."]
 position = Vector2(28, -4)

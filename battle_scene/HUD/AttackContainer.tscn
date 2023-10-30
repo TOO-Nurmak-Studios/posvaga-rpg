@@ -7,19 +7,23 @@
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h8ayk"]
 texture = ExtResource("2_jblg0")
 expand_margin_left = 11.0
-expand_margin_top = 15.0
+expand_margin_top = 11.0
 expand_margin_right = 11.0
-expand_margin_bottom = 15.0
+expand_margin_bottom = 11.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8hged"]
 texture = ExtResource("2_jblg0")
+expand_margin_left = 40.0
+expand_margin_top = 20.0
+expand_margin_right = 40.0
+expand_margin_bottom = 20.0
 
-[node name="KeyboardVBoxContainer" type="HBoxContainer"]
+[node name="KeyboardVBoxContainer" type="VBoxContainer"]
 z_index = 5
 offset_right = 40.0
 offset_bottom = 40.0
 size_flags_vertical = 4
-theme_override_constants/separation = 15
+theme_override_constants/separation = 35
 script = ExtResource("1_j6bqw")
 
 [node name="ButtonPanelContainer" type="PanelContainer" parent="."]
@@ -28,6 +32,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_h8ayk")
 
 [node name="ButtonContainer" type="VBoxContainer" parent="ButtonPanelContainer"]
 layout_mode = 2
+size_flags_stretch_ratio = 0.5
 alignment = 1
 
 [node name="TextPanelContainer" type="PanelContainer" parent="."]
@@ -38,25 +43,21 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_8hged")
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 40
-theme_override_constants/margin_bottom = 20
 
 [node name="ReferenceRect" type="ReferenceRect" parent="TextPanelContainer/MarginContainer"]
-custom_minimum_size = Vector2(120, 50)
+custom_minimum_size = Vector2(80, 50)
 layout_mode = 2
 border_width = 2.5
 
 [node name="Text" type="Label" parent="TextPanelContainer/MarginContainer/ReferenceRect"]
 layout_mode = 2
-offset_left = -20.0
-offset_top = -5.0
-offset_right = 140.0
-offset_bottom = 55.0
+offset_left = -25.0
+offset_top = -11.0
+offset_right = 106.0
+offset_bottom = 63.0
 theme_override_fonts/font = ExtResource("3_w3ait")
 theme_override_font_sizes/font_size = 16
-text = "Select an attack."
+text = "Выберите атаку."
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
