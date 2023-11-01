@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://clah0tnwu35b8"]
+[gd_scene load_steps=7 format=3 uid="uid://clah0tnwu35b8"]
 
 [ext_resource type="Script" path="res://dialog_scene/Dialog.gd" id="1_42uhe"]
 [ext_resource type="PackedScene" uid="uid://bbruyt65lcvvv" path="res://dialog_scene/replicas_box.tscn" id="1_n5grt"]
 [ext_resource type="Resource" uid="uid://u8w7njkp8npl" path="res://dialog_scene/ink/test.ink.json" id="2_lkfr1"]
 [ext_resource type="PackedScene" uid="uid://rqc1ucjcp3qg" path="res://dialog_scene/choices_box.tscn" id="3_ifti7"]
 [ext_resource type="Script" path="res://addons/inkgd/ink_player.gd" id="4_pyt6a"]
+[ext_resource type="Texture2D" uid="uid://mqqlrubsdftq" path="res://sprites/dialog/dialog_gradient_background.png" id="6_avjyf"]
 
 [node name="Dialog" type="CanvasLayer"]
 process_mode = 3
@@ -38,10 +39,15 @@ grow_vertical = 0
 
 [node name="ChoicesBox" parent="." instance=ExtResource("3_ifti7")]
 process_mode = 3
-offset_left = 20.0
-offset_top = -57.0
-offset_right = 420.0
-offset_bottom = -22.0
+offset_left = 30.0
+offset_top = -52.0
+offset_right = 430.0
+offset_bottom = -17.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(320, 240)
+texture = ExtResource("6_avjyf")
 
 [connection signal="option_chosen" from="." to="." method="_on_option_chosen"]
 [connection signal="option_chosen" from="ChoicesBox" to="." method="_on_choices_box_option_chosen"]

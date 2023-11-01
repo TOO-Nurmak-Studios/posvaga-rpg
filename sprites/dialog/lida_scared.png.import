@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2kvlcvndtk8q"
-path="res://.godot/imported/dean_neutral.png-1977a554c251d57e1a1b2eaafed6b607.ctex"
+uid="uid://lki16wemgdb1"
+path="res://.godot/imported/lida_scared.png-11296191a314f5c6c8d9b1875cc98e59.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/dialog/dean_neutral.png"
-dest_files=["res://.godot/imported/dean_neutral.png-1977a554c251d57e1a1b2eaafed6b607.ctex"]
+source_file="res://sprites/dialog/lida_scared.png"
+dest_files=["res://.godot/imported/lida_scared.png-11296191a314f5c6c8d9b1875cc98e59.ctex"]
 
 [params]
 

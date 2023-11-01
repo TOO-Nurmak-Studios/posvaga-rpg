@@ -28,7 +28,7 @@ VAR eavesdroped_conversation = false
 === room_201 ===
 # sid: vera_neutral
 # loc: right
-Кабинет 201, там часто работает Владимир Николаевич.
+Кабинет 201. Там часто работает Владимир Николаевич.
 
 # sid: vera_neutral
 # loc: right
@@ -39,7 +39,7 @@ VAR eavesdroped_conversation = false
 === room_202 ===
 # sid: vera_neutral
 # loc: right
-Кабинет 202, лаборатория геофизического анализа.
+Кабинет 202. Лаборатория геофизического анализа.
 
 # sid: vera_neutral
 # loc: right
@@ -52,7 +52,7 @@ VAR eavesdroped_conversation = false
 
 
 === news ===
-Стенгазета "ЗНАНИЯ - ЭТО СИЛА! НАШ РОДНОЙ ИНСТИТУТ."
+Стенгазета "ЗНАНИЕ - СИЛА! ВЕСТИ ИНСТИТУТА."
 
 "СУПЕРЭВМ НОВЕЙШЕЙ МОДЕЛИ ИРТЫШ-ОУ-2 УСТАНОВЛЕН В ИНСТИТУТЕ ГЕОИНФОРМАТИКИ"
 

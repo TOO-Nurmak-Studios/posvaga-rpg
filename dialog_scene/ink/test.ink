@@ -10,59 +10,59 @@ VAR test_dialog_visited = false
 
 ~ test_dialog_visited = true
 
-# sid: dean_neutral
+# sid: zavlab_neutral
 # loc: left
 Добрый день.
 
-# sid: student_welcome
+# sid: vera_neutral
 # loc: right
 Здравствуйте.
 
-# sid: dean_smiling
+# sid: director_determined
 # loc: left
-Доброго утра, славяне! Аааааабубэбубэбубээээээээ!.. эээээээ эъ ъъъъ ъъъъъ длиннннооооеее е ъ<br>И с переносом ещё по приколу
+Доброго утра, славяне! Ааабубэбубэбубээээээээ!.. эъ длиннннооооеее е ъ<br>И с переносом ещё по приколу
 
-# sid: dean_neutral
+# sid: director_angry
 # loc: left
 Вы знаете, зачем мы здесь собрались?
 
 * [Да]
 
-    # sid: dean_neutral
+    # sid: director_neutral
     # loc: left
     Что ж, тогда не будем медлить. Вас отчислили.
     -> END
 
 * [Нет]
 
-    # sid: dean_neutral
+    # sid: director_concerned
     # loc: left
     Ваши успехи в учёбе оставляют желать лучшего. Нам нужно решить этот вопрос.
 
-    # sid: student_neutral
+    # sid: vera_questioning
     # loc: right
     ...
 
-    # sid: dean_neutral
+    # sid: zavlab_shouting
     # loc: left
     Что вы можете сказать в своё оправдание?
 
     ** [Не надо]
 
-        # sid: dean_angry
+        # sid: zavlab_angry
         # loc: left
         <Взрыв>
         -> END
 
     ** [Щас тебя порешаю]
 
-        # sid: dean_angry
+        # sid: zavlab_angry
         # loc: left
         Чё тявкнул, Бобик?
         -> END
 
 === test_dialog_alternative ===
-# sid: dean_neutral
+# sid: zavlab_neutral
 # loc: left
 Нам больше не о чем говорить.
 -> END
