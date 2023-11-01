@@ -8,8 +8,11 @@ signal printing_finished()
 @export var min_pitch: float = 0.7
 @export var max_pitch: float = 0.8
 
+@export var max_short_name_length: int = 14
+
 @onready var speaker_name_label = $SpeakerNameLabel
 @onready var speaker_name_frame = $SpeakerNameFrame
+@onready var speaker_name_long_frame = $SpeakerNameLongFrame
 @onready var text_label = $TextLabel
 @onready var sound_player = $PrintSoundPlayer
 
@@ -32,10 +35,17 @@ func set_print_sound_path(_print_sound_path: String):
 func new_replica(replica: ReplicaData):
 	
 	if replica.speaker != null:
-		speaker_name_frame.show()
 		speaker_name_label.text = replica.speaker.name
+		if replica.speaker.name.length() > max_short_name_length:
+			speaker_name_frame.hide()
+			speaker_name_long_frame.show()
+		else:
+			speaker_name_frame.show()
+			speaker_name_long_frame.hide()
+		
 	else:
 		# прячем плашку с именем персонажа, если спикер отсутствует
+		speaker_name_long_frame.hide()
 		speaker_name_frame.hide()
 		speaker_name_label.text = ""
 		

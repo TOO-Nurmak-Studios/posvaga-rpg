@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdcgfmgeulxxi"
-path="res://.godot/imported/dean_smiling.png-9c2cc055f482efb61171b182f428294c.ctex"
+uid="uid://chxl7ycwegpku"
+path="res://.godot/imported/director_scared.png-47c41e1baa7ce7c650c2ebe6c8f4eb20.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/dialog/dean_smiling.png"
-dest_files=["res://.godot/imported/dean_smiling.png-9c2cc055f482efb61171b182f428294c.ctex"]
+source_file="res://sprites/dialog/director_scared.png"
+dest_files=["res://.godot/imported/director_scared.png-47c41e1baa7ce7c650c2ebe6c8f4eb20.ctex"]
 
 [params]
 

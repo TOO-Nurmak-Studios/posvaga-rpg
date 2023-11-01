@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpkl0n56udb3q"
-path="res://.godot/imported/student_welcome.png-d812f499ad174cad7699bf004b9a9c79.ctex"
+uid="uid://dfw2ts4ochx6m"
+path="res://.godot/imported/director_concerned.png-1551764f8ba39b75fab86a503e06d9ec.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/dialog/student_welcome.png"
-dest_files=["res://.godot/imported/student_welcome.png-d812f499ad174cad7699bf004b9a9c79.ctex"]
+source_file="res://sprites/dialog/director_concerned.png"
+dest_files=["res://.godot/imported/director_concerned.png-1551764f8ba39b75fab86a503e06d9ec.ctex"]
 
 [params]
 

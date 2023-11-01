@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfksiaq5mtoqu"
-path="res://.godot/imported/student_neutral.png-c1825c5d5c616589112be8d9e0039f1e.ctex"
+uid="uid://1ll7vbga4l85"
+path="res://.godot/imported/lida_angry.png-e1acc806e134f6e05762aacc2f22c722.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/dialog/student_neutral.png"
-dest_files=["res://.godot/imported/student_neutral.png-c1825c5d5c616589112be8d9e0039f1e.ctex"]
+source_file="res://sprites/dialog/lida_angry.png"
+dest_files=["res://.godot/imported/lida_angry.png-e1acc806e134f6e05762aacc2f22c722.ctex"]
 
 [params]
 

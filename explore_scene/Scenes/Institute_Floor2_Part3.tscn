@@ -138,7 +138,7 @@ visibility_flag = "heard_voices"
 invert_visibility_flag = true
 
 [node name="CollisionShape2D" parent="HeardVoices" index="0"]
-position = Vector2(19, -3.5)
+position = Vector2(-0.5, -3.5)
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = 11

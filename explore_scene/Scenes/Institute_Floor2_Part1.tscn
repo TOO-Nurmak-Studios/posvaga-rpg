@@ -176,7 +176,7 @@ visibility_flag = "called_for_friends"
 invert_visibility_flag = true
 
 [node name="CollisionShape2D" parent="LookingForFriends" index="0"]
-position = Vector2(-0.5, -3.5)
+position = Vector2(-0.5, -2.5)
 
 [node name="Portrait" parent="." instance=ExtResource("6_a1olp")]
 z_index = 1
@@ -188,6 +188,7 @@ dialog_knot = "portrait"
 shape = SubResource("RectangleShape2D_o1opx")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 z_index = 11
 offset_left = -955.0
 offset_top = -655.0
