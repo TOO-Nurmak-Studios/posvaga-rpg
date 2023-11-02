@@ -1,38 +1,17 @@
 class_name ExplorePlayer
-extends CharacterBody2D
+extends MovableCharacter
 
-var directions = [NormalizedDirection.LEFT, NormalizedDirection.RIGHT, NormalizedDirection.UP, NormalizedDirection.DOWN]
-
-@export var char_name: String = ""
-@export var default_speed = 55
-@export var sprint_speed_modifier = 1.5
-@export var raycast_length = 15
-
-@onready var animation_node = $AnimatedSprite2D
 @onready var interact_area = $Area2D
 @onready var interact_icon = $InteractIcon
-@onready var footsteps_player = $footsteps_player
-
-var speed = default_speed
-var speed_modifier = 1
-var direction_name = "down"
-var animation_name
-
-var is_sprinting = false
-var is_interacting = false
 
 func _ready():
+	super()
+
 	EventBus.player_move_pressed.connect(_process_movement)
 	EventBus.player_sprint_pressed.connect(_process_sprint_pressed)
 	EventBus.player_sprint_released.connect(_process_sprint_released)
 	EventBus.player_interact_pressed.connect(_process_interaction)
 	EventBus.player_interaction_ended.connect(_process_interaction_ended)
-	EventBus.cutscene_move_start.connect(try_move_for_cutscene)
-	EventBus.cutscene_turn_start.connect(try_turn_for_cutscene)
-	
-	footsteps_player.set_sprint_speed_modifier(sprint_speed_modifier)
-	
-	_process_movement(0, Vector2.ZERO)
 
 
 func _process(_delta):
@@ -101,77 +80,3 @@ func _turn_to_face_target(target: Node2D):
 	var dd = NormalizedDirection.DOWN.distance_to(dir)
 	
 	face_direction(directions[0])
-	
-
-func play_animation(new_direction : Vector2, idle: bool = false):
-	var new_animation_name
-	
-	# меняем направление если вектор ненулевой
-	if new_direction != Vector2.ZERO:
-		direction_name = _get_direction_name(new_direction)
-		if direction_name == "left":
-			animation_node.flip_h = true
-			direction_name = "side"
-		elif direction_name == "right":
-			animation_node.flip_h = false
-			direction_name = "side"
-	
-	if new_direction != Vector2.ZERO && !idle:
-		new_animation_name = "walk_" + direction_name
-	else:
-		new_animation_name = "idle_" + direction_name
-	
-	if (animation_name != new_animation_name):
-		animation_name = new_animation_name
-		animation_node.play(animation_name)
-
-
-func _get_direction_name(direction : Vector2):
-	const default = "down"
-	
-	if direction.y > 0:
-		return "down"
-	elif direction.y < 0:
-		return "up"
-	elif direction.x > 0:
-		return "right"
-	elif direction.x < 0:
-		return "left"
-		
-	return default
-
-
-# для удобства вызовов из CutsceneManager
-func turn_left():
-	face_direction(NormalizedDirection.LEFT)
-
-func turn_right():
-	face_direction(NormalizedDirection.RIGHT)
-
-func turn_up():
-	face_direction(NormalizedDirection.UP)
-
-func turn_down():
-	face_direction(NormalizedDirection.DOWN)
-
-func face_direction(direction: Vector2):
-	play_animation(direction, true)
-
-
-func try_move_for_cutscene(object: String, direction: String, distance: int):
-	pass # todo
-
-func try_turn_for_cutscene(object: String, direction: String):
-	# matchn() instead of == for case-insensitive comparison
-	if !char_name.matchn(object):
-		return
-	match direction:
-		"left":
-			turn_left()
-		"right":
-			turn_right()
-		"up":
-			turn_up()
-		"down":
-			turn_down()
-	EventBus.cutscene_turn_finished.emit()

@@ -18,8 +18,8 @@ var after_battle_dialog_data: DialogData
 
 @export var is_battle_scene_enabled: bool = false
 @export var battle_scene_type: BattleScene.BattleSceneType
-@export var battle_scene_players: Array[BattleScene.SceneCharacterType] 
-@export var battle_scene_enemies: Array[BattleScene.SceneCharacterType] 
+@export var battle_scene_players: Array[BattleScene.SceneCharacterType]
+@export var battle_scene_enemies: Array[BattleScene.SceneCharacterType]
 var _battle_scene: Dictionary # <Main.SceneDataType, ?>
 
 func _ready():
@@ -42,7 +42,7 @@ func _ready():
 		_update_visible()
 		EventBus.game_state_changed.connect(_update_visible)
 	
-	if animation_node != null:
+	if animation_node != null && animation_node.sprite_frames != null && animation_node.sprite_frames.has_animation("default"):
 		animation_node.play("default")
 
 func _update_visible():
