@@ -161,6 +161,30 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_fqbyu")
+}],
+"loop": true,
+"name": &"still_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b52ks")
+}],
+"loop": true,
+"name": &"still_side",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mmwp7")
+}],
+"loop": true,
+"name": &"still_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_r341q")
 }, {
 "duration": 1.0,

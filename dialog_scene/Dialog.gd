@@ -139,6 +139,7 @@ func process_next_unit(text: String, tags: Array):
 	if parsed_tags.size() == 0 || parsed_tags[0].type != DialogTag.Type.CUTSCENE_STEP:
 		await process_next_replica(text, parsed_tags)
 	else:
+		hide_current_speakers(true)
 		await process_next_cutscene_step(parsed_tags[0].params[0], text)
 
 
@@ -193,8 +194,8 @@ func process_next_replica(replica_text: String, tags: Array[DialogTag]):
 		is_cutscene = false
 	
 	var replica = parse_next_replica(replica_text, tags)
-	await process_next_speaker(replica.speaker, replica.speaker_location, true)
 	replicas_box.new_replica(replica)
+	await process_next_speaker(replica.speaker, replica.speaker_location, true)
 
 
 func parse_next_replica(replica_text: String, tags: Array[DialogTag]) -> ReplicaData:
@@ -284,15 +285,15 @@ func _on_choices_box_option_chosen(option_id: int):
 
 func _lock_player():
 	EventBus.player_input_enabled = false
-	var player = get_tree().get_first_node_in_group("Player")
-	if player != null:
-		player.process_mode = PROCESS_MODE_DISABLED
+	#var player = get_tree().get_first_node_in_group("Player")
+	#if player != null:
+	#	player.process_mode = PROCESS_MODE_DISABLED
 
 func _unlock_player():
 	EventBus.player_input_enabled = true
-	var player = get_tree().get_first_node_in_group("Player")
-	if player != null:
-		player.process_mode = PROCESS_MODE_INHERIT
+	#var player = get_tree().get_first_node_in_group("Player")
+	#if player != null:
+	#	player.process_mode = PROCESS_MODE_INHERIT
 
 
 ## TODO: for tests, remove

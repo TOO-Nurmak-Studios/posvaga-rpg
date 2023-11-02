@@ -1,10 +1,11 @@
 extends CharacterBody2D
 
-@export var dialog_resource: Resource
+@export var dialog_resource: InkResource
 @export var dialog_vars: Array[String]
 @export var dialog_knot: String
 @export var visibility_flag: String
 @export var invert_visibility_flag: bool
+@export var after_battle_dialog_knot: String
 @export var interaction_enabled: bool = true
 
 @export var is_battle_scene_enabled: bool = false
@@ -17,16 +18,19 @@ var _battle_scene: Dictionary # <Main.SceneDataType, ?>
 @onready var animation_node:  = $AnimatedSprite2D as AnimatedSprite2D
 
 var dialog_data: DialogData
+var after_battle_dialog_data: DialogData
 
 func _ready():
 	if dialog_resource != null:
 		dialog_data = DialogData.new(dialog_resource, dialog_vars, dialog_knot)
 	if is_battle_scene_enabled:
-		_battle_scene = {
-			SceneTransition.SceneDataType.BATTLE_BACK_TYPE: battle_scene_type,
-			SceneTransition.SceneDataType.BATTLE_ENEMY_DICT: battle_scene_enemies,
-			SceneTransition.SceneDataType.BATTLE_PLAYER_DICT: battle_scene_players
-		}
+    		_battle_scene = {
+    			SceneTransition.SceneDataType.BATTLE_BACK_TYPE: battle_scene_type,
+    			SceneTransition.SceneDataType.BATTLE_ENEMY_DICT: battle_scene_enemies,
+    			SceneTransition.SceneDataType.BATTLE_PLAYER_DICT: battle_scene_players
+    		}
+    		if dialog_data != null && after_battle_dialog_knot != null:
+				after_battle_dialog_data = DialogData.new(dialog_resource, dialog_vars, after_battle_dialog_knot)
 	if visibility_flag != null && visibility_flag != "":
 		_update_visible()
 		EventBus.game_state_changed.connect(_update_visible)
@@ -66,4 +70,7 @@ func interact():
 	if is_battle_scene_enabled:
 		EventBus.battle_request.emit(_battle_scene)
 		await EventBus.battle_scene_end
+		if after_battle_dialog_data != null:
+			EventBus.dialog_start.emit(after_battle_dialog_data)
+			await EventBus.dialog_finished
 	EventBus.player_interaction_ended.emit()

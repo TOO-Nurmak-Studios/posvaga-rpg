@@ -28,6 +28,8 @@ func process_cutscene_step(step: CutsceneStep):
 			process_turn(step.params)
 		CutsceneStep.Type.ANIM:
 			process_animation(step.params)
+		CutsceneStep.Type.REMV:
+			process_remove(step.params)
 
 
 func on_step_finished():
@@ -64,3 +66,8 @@ func process_animation(params: PackedStringArray):
 	var object = params[0] as String
 	var animation_name = params[1] as String
 	EventBus.cutscene_animation_start.emit(object, animation_name)
+
+
+func process_remove(params: PackedStringArray):
+	var object = params[0] as String
+	EventBus.cutscene_remove_object.emit(object)
