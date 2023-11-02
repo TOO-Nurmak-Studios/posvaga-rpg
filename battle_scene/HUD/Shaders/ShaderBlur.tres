@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cs75q6l2hbea6"]
+
+[ext_resource type="Shader" path="res://battle_scene/HUD/Shaders/glitch_shader.gdshader" id="1_spkhl"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_spkhl")
+shader_parameter/dir = Vector2(-0.25, -0.25)
+shader_parameter/quality = 5

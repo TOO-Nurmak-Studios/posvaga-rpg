@@ -5,7 +5,7 @@ var battle_background: BattleBackground
 var _players
 var _enemies
 
-var shader = preload("res://battle_scene/HUD/Shaders/ShaderTesting.tres")
+var shader = preload("res://battle_scene/HUD/Shaders/ShaderBlur.tres")
 
 # battle start constants
 const start_time = 1

@@ -1,7 +1,7 @@
 class_name Attack
 extends Node
 
-enum AttackType {SINGLE, MULTIPLE}
+enum AttackType {SINGLE, MULTIPLE, ON_SELF, ON_ALLY}
 
 @export var attack_type: AttackType
 @export var attack_name: String
@@ -20,14 +20,20 @@ func attack(attacker: AbstractCharacter, attacked, gunpoint: Marker2D = null):
 		AttackType.SINGLE:
 			await _attack_single(attacker, attacked, gunpoint)
 			return
+		AttackType.ON_SELF:
+			await _attack_single(attacker, attacked, gunpoint)
+			return
+		AttackType.ON_ALLY:
+			await _attack_single(attacker, attacked, gunpoint)
+			return
 		AttackType.MULTIPLE:
 			await _attack_multiple(attacker, attacked, gunpoint)
 			return
 
-func _attack_single(attacker: AbstractCharacter, char: AbstractCharacter, gunpoint: Marker2D):
+func _attack_single(_attacker: AbstractCharacter, _char: AbstractCharacter, _gunpoint: Marker2D):
 	pass
 	
-func _attack_multiple(attacker: AbstractCharacter, chars: Array[AbstractCharacter], gunpoint: Marker2D):
+func _attack_multiple(_attacker: AbstractCharacter, _chars: Array[AbstractCharacter], _gunpoint: Marker2D):
 	pass
 
 func _get_melee_position(attacker: AbstractCharacter, char: AbstractCharacter, how_close: float = 0.9):
@@ -46,3 +52,6 @@ func decrement_cooldown():
 func start_cooldown():
 	_cooldown = cooldown
 	cooldown_update.emit(cooldown)
+
+func wait(sec: float):
+	await get_tree().create_timer(sec).timeout

@@ -2,8 +2,7 @@ class_name LabKick
 extends Attack
 
 @export var run_time_length: float = 1
-@export var damage: float = 1
-var current_callable_on_finish: Callable
+@export var damage: float = 5
 
 func _init():
 	attack_name = "Пинок"
@@ -18,7 +17,7 @@ func _attack_single(attacker: AbstractCharacter, char: AbstractCharacter, gunpoi
 	var start_position = attacker.position
 	var char_array = [char]
 	var position_to_attack = super._get_melee_position(attacker, char, 0.8)
-	attacker.sprite.play("walk")
+	attacker.walk()
 	var tween: Tween = attacker.create_tween()
 	
 	# move to position
@@ -27,7 +26,7 @@ func _attack_single(attacker: AbstractCharacter, char: AbstractCharacter, gunpoi
 	
 	# attack
 	tween.tween_callback(_play_kick_animation.bind(attacker, char, animation_name))
-	tween.tween_interval(attacker.get_animation_duration(animation_name))
+	tween.tween_interval(attacker.get_animation_duration(animation_name) + 0.25)
 	
 	#move back
 	tween.tween_property(attacker, "position", start_position, run_time_length)
@@ -36,15 +35,13 @@ func _attack_single(attacker: AbstractCharacter, char: AbstractCharacter, gunpoi
 	tween.tween_callback(_on_after_attack.bind(attacker, char))
 
 func _play_kick_animation(attacker: AbstractCharacter, char: AbstractCharacter, animation_name: String):
-	current_callable_on_finish = _on_after_kick.bind(attacker, char)
-	attacker.sprite.play(animation_name)
-	attacker.sprite.animation_finished.connect(current_callable_on_finish)
-	
-func _on_after_kick(attacker: AbstractCharacter, char: AbstractCharacter):
-	attacker.sprite.play("walk")
-	await char.take_damage(damage, attacker)
-	attacker.sprite.animation_finished.disconnect(current_callable_on_finish)
+	attacker.stop_walk()
+	await attacker.kick()
+	char.take_damage(damage, attacker)
+	await wait(0.25)
+	attacker.walk()
 
 func _on_after_attack(attacker: AbstractCharacter, char: AbstractCharacter):
 	attacker.sprite.play("idle")
+	attacker.stop_walk()
 	EventBus.emit_attack_ended(attacker, [char] as Array[AbstractCharacter], self)

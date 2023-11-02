@@ -1,10 +1,53 @@
-[gd_scene load_steps=3 format=3 uid="uid://djr6yts6ed42q"]
+[gd_scene load_steps=6 format=3 uid="uid://djr6yts6ed42q"]
 
 [ext_resource type="Material" uid="uid://ds6uwg053nwtf" path="res://battle_scene/HUD/Shaders/ShaderTesting.tres" id="1_c5sow"]
 [ext_resource type="Texture2D" uid="uid://cnhdw6suq0b5e" path="res://icon.svg" id="2_05j5u"]
 
+[sub_resource type="Animation" id="Animation_h13x8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_vy12k"]
+resource_name = "new_animation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4lmkx"]
+_data = {
+"RESET": SubResource("Animation_h13x8"),
+"new_animation": SubResource("Animation_vy12k")
+}
+
 [node name="ShaderTesting" type="Node2D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_4lmkx")
+}
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = ExtResource("1_c5sow")
+position = Vector2(1, 0)
 texture = ExtResource("2_05j5u")

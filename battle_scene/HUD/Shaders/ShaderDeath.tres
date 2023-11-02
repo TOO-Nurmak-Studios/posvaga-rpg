@@ -1,6 +1,6 @@
-[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://ds6uwg053nwtf"]
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://cxqhm622nuh7w"]
 
-[ext_resource type="Shader" path="res://battle_scene/HUD/Shaders/death_shader.gdshader" id="1_n1mx4"]
+[ext_resource type="Shader" path="res://battle_scene/HUD/Shaders/death_shader.gdshader" id="1_hnwkq"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_g7ifc"]
 noise_type = 0
@@ -29,7 +29,7 @@ noise = SubResource("FastNoiseLite_dbf53")
 
 [resource]
 resource_local_to_scene = true
-shader = ExtResource("1_n1mx4")
+shader = ExtResource("1_hnwkq")
 shader_parameter/progress = 0.0
 shader_parameter/strength = 1.0
 shader_parameter/noise_tex_normal = SubResource("NoiseTexture2D_k34si")

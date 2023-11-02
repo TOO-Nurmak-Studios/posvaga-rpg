@@ -4,7 +4,7 @@ extends Attack
 var small_cockroach_scene: PackedScene = preload("res://battle_scene/Entity/Enemies/Cockroach/SmallCockroach.tscn")
 
 @export var chant_length: float = 1
-@export var atk_cooldown: int = 10
+@export var atk_cooldown: int = 2
 @export var spawn_distance: int = 4
 
 @onready var rand = RandomNumberGenerator.new()
@@ -20,7 +20,8 @@ func _init():
 func _attack_single(attacker: AbstractCharacter, _char: AbstractCharacter, gunpoint: Marker2D):
 	var animation_name	= "chant"
 	var start_position = attacker.position
-	attacker.sprite.play("chant")
+	
+	attacker.play_spawn_effect()
 	
 	var new_cockroach = small_cockroach_scene.instantiate() as SmallCockroach
 	new_cockroach.scale = Vector2(0.5, 0.5)
@@ -28,7 +29,7 @@ func _attack_single(attacker: AbstractCharacter, _char: AbstractCharacter, gunpo
 	
 	new_cockroach.ready.connect(_calculate_position.bind(attacker, new_cockroach))
 	add_sibling(new_cockroach)
-	await get_tree().create_timer(chant_length).timeout
+	await wait(chant_length)
 	#end of attack
 	attacker.sprite.play("idle")
 	EventBus.emit_attack_ended(attacker, [_char] as Array[AbstractCharacter], self)
