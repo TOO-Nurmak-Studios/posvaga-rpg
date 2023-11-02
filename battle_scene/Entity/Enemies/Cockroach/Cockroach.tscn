@@ -1,8 +1,10 @@
-[gd_scene load_steps=31 format=3 uid="uid://bgybbtokpmwlg"]
+[gd_scene load_steps=34 format=3 uid="uid://bgybbtokpmwlg"]
 
 [ext_resource type="Script" path="res://battle_scene/Entity/Enemies/Cockroach/Cockroach.gd" id="1_8o6um"]
 [ext_resource type="PackedScene" uid="uid://qy81h3pjkt1f" path="res://battle_scene/EntityPrototype/HealthNode.tscn" id="2_jicok"]
+[ext_resource type="AudioStream" uid="uid://ba5whwvxpmb4x" path="res://sfx/battle_scene/big_cockroach_bite.wav" id="2_qetuw"]
 [ext_resource type="Texture2D" uid="uid://cttptwn5m7bch" path="res://sprites/Enemies/big_cockroach/death1.png" id="3_l4044"]
+[ext_resource type="AudioStream" uid="uid://c0rru4u0va64y" path="res://sfx/battle_scene/big_cockroach_spawn.wav" id="3_njckr"]
 [ext_resource type="Shader" path="res://battle_scene/HUD/Shaders/outline_shader.gdshader" id="3_r122x"]
 [ext_resource type="Texture2D" uid="uid://djhcvuq6cctaq" path="res://sprites/Enemies/big_cockroach/bite1_1 (1).png" id="3_wa7gi"]
 [ext_resource type="Texture2D" uid="uid://d2gtd3nliih07" path="res://sprites/Enemies/big_cockroach/bite2.png" id="4_m70lu"]
@@ -27,6 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://c3xtfmlonkkur" path="res://sprites/Enemies/big_cockroach/Sprite-0002.png" id="24_620t0"]
 [ext_resource type="Texture2D" uid="uid://12oa3deuy8gf" path="res://sprites/Enemies/big_cockroach/Sprite-0003.png" id="25_6j63w"]
 [ext_resource type="Texture2D" uid="uid://bp25df6vlghhk" path="res://sprites/Enemies/big_cockroach/Sprite-0004.png" id="26_hh67c"]
+[ext_resource type="AudioStream" uid="uid://cve0fo301h1a1" path="res://sfx/battle_scene/small_cockroach_footsteps.wav" id="29_rd12v"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wb641"]
 emission_shape = 2
@@ -178,10 +181,13 @@ animations = [{
 
 [node name="Cockroach" type="Node2D" groups=["enemy"]]
 script = ExtResource("1_8o6um")
+attack_stream = ExtResource("2_qetuw")
+spawn_stream = ExtResource("3_njckr")
 char_name = "Большой кокроч"
 
 [node name="HealthNode" parent="." instance=ExtResource("2_jicok")]
 position = Vector2(-64, -64)
+health = 80
 
 [node name="BloodEmitter" type="GPUParticles2D" parent="."]
 position = Vector2(-4, 7)
@@ -201,3 +207,11 @@ animation = &"idle"
 
 [node name="Crosshair" type="Marker2D" parent="."]
 position = Vector2(28, -4)
+
+[node name="AttackAudio" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("29_rd12v")
+volume_db = 5.0
+pitch_scale = 1.15
+max_polyphony = 3

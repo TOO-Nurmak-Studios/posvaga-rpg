@@ -1,7 +1,9 @@
-[gd_scene load_steps=31 format=3 uid="uid://cuycdtt3185d3"]
+[gd_scene load_steps=34 format=3 uid="uid://cuycdtt3185d3"]
 
 [ext_resource type="Script" path="res://battle_scene/Entity/Enemies/Cockroach/SmallCockroach.gd" id="1_lhnyy"]
+[ext_resource type="AudioStream" uid="uid://drk1smc6lyynd" path="res://sfx/battle_scene/small_cockroach_bite.wav" id="2_0itto"]
 [ext_resource type="PackedScene" uid="uid://qy81h3pjkt1f" path="res://battle_scene/EntityPrototype/HealthNode.tscn" id="2_1sy2k"]
+[ext_resource type="AudioStream" uid="uid://bfjmuof0augqo" path="res://sfx/battle_scene/small_cockroach_death.wav" id="3_68nin"]
 [ext_resource type="Texture2D" uid="uid://dwuqpsot5bgvu" path="res://sprites/Enemies/small_cockroach/small cock2.png" id="3_bmn8n"]
 [ext_resource type="Shader" path="res://battle_scene/HUD/Shaders/outline_shader.gdshader" id="3_keh8i"]
 [ext_resource type="Texture2D" uid="uid://ciitpk20pr4n4" path="res://sprites/Enemies/small_cockroach/small cock3.png" id="4_bymiy"]
@@ -27,6 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://cnk1mi3p1e26v" path="res://sprites/Enemies/small_cockroach/Sprite-0004.png" id="24_cn44v"]
 [ext_resource type="Texture2D" uid="uid://70y35q1md7fs" path="res://sprites/Enemies/small_cockroach/small cock1.png" id="25_f7tjs"]
 [ext_resource type="Texture2D" uid="uid://0xe5q6skx4uf" path="res://sprites/Enemies/small_cockroach/Sprite-0003-selected.png" id="25_mdus7"]
+[ext_resource type="AudioStream" uid="uid://cve0fo301h1a1" path="res://sfx/battle_scene/small_cockroach_footsteps.wav" id="28_0s5de"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wb641"]
 emission_shape = 2
@@ -159,11 +162,13 @@ animations = [{
 
 [node name="SmallCockroach" type="Node2D" groups=["enemy"]]
 script = ExtResource("1_lhnyy")
+attack_stream = ExtResource("2_0itto")
 char_name = "Малый кокроч"
+death_sound = ExtResource("3_68nin")
 
 [node name="HealthNode" parent="." instance=ExtResource("2_1sy2k")]
 position = Vector2(-64, 0)
-health = 15
+health = 10
 
 [node name="BloodEmitter" type="GPUParticles2D" parent="."]
 position = Vector2(8, 34)
@@ -184,3 +189,11 @@ frame_progress = 0.857555
 
 [node name="Crosshair" type="Marker2D" parent="."]
 position = Vector2(28, -4)
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("28_0s5de")
+volume_db = 5.0
+pitch_scale = 1.15
+max_polyphony = 3
+
+[node name="AttackAudio" type="AudioStreamPlayer2D" parent="."]

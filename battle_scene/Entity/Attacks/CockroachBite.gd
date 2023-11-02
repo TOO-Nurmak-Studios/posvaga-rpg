@@ -1,10 +1,11 @@
 class_name CockroachBite
 extends Attack
 
+const post_attack_wait = 0.5
+
 @export var run_time_length: float = 1
-@export var damage: float = 150
+@export var damage: float = 10
 @export var atk_cooldown: int = 1
-var current_callable_on_finish: Callable
 
 @onready var rand = RandomNumberGenerator.new()
 
@@ -28,8 +29,8 @@ func _attack_single(attacker: AbstractCharacter, char: AbstractCharacter, gunpoi
 		animation_name = "bite_normal"
 	var start_position = attacker.position
 	var char_array = [char]
-	var position_to_attack = super._get_melee_position(attacker, char)
-	attacker.sprite.play("walk")
+	var position_to_attack = super._get_melee_position(attacker, char, 0.8)
+	attacker.walk()
 	var tween: Tween = attacker.create_tween()
 	
 	# move to position
@@ -38,7 +39,7 @@ func _attack_single(attacker: AbstractCharacter, char: AbstractCharacter, gunpoi
 	
 	# attack
 	tween.tween_callback(_play_bite_animation.bind(attacker, char, animation_name))
-	tween.tween_interval(attacker.get_animation_duration(animation_name))
+	tween.tween_interval(attacker.get_animation_duration(animation_name) + post_attack_wait)
 	
 	#move back
 	tween.tween_property(attacker, "position", start_position, run_time_length)
@@ -47,15 +48,13 @@ func _attack_single(attacker: AbstractCharacter, char: AbstractCharacter, gunpoi
 	tween.tween_callback(_on_after_attack.bind(attacker, char))
 
 func _play_bite_animation(attacker: AbstractCharacter, char: AbstractCharacter, animation_name: String):
-	current_callable_on_finish = _on_after_bite.bind(attacker, char)
-	attacker.sprite.play(animation_name)
-	attacker.sprite.animation_finished.connect(current_callable_on_finish)
-	
-func _on_after_bite(attacker: AbstractCharacter, char: AbstractCharacter):
-	attacker.sprite.play("walk")
-	await char.take_damage(damage, attacker)
-	attacker.sprite.animation_finished.disconnect(current_callable_on_finish)
+	attacker.stop_walk()
+	await attacker.bite(animation_name)
+	char.take_damage(damage, attacker)
+	await wait(post_attack_wait)
+	attacker.walk()
 
 func _on_after_attack(attacker: AbstractCharacter, char: AbstractCharacter):
 	attacker.sprite.play("idle")
+	attacker.stop_walk()
 	EventBus.emit_attack_ended(attacker, [char] as Array[AbstractCharacter], self)

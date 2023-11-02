@@ -22,7 +22,7 @@ var attack_label: Label
 @onready var select_manager: SelectManager = $"../SelectManager" as SelectManager
 
 # state machine
-enum State {SELECT_PLAYER, SELECT_ATTACK, SELECT_ENEMY, NOTHING}
+enum State {SELECT_PLAYER, SELECT_ATTACK, SELECT_ENEMY, SELECT_ALLY, NOTHING}
 var current_state: State = State.NOTHING
 var selected_attack: int = -1
 
@@ -99,9 +99,17 @@ func _action_pressed():
 	return	
 
 func _attack_pressed(i: int):
-	change_state(State.SELECT_ENEMY)
+	var attack = select_manager.selected_player().attacks[i]
 	selected_attack = i
-	tooltip_label.text = select_manager.selected_player().attacks[i].attack_tooltip
+	if attack.attack_type == Attack.AttackType.SINGLE:
+		change_state(State.SELECT_ENEMY)
+		tooltip_label.text = select_manager.selected_player().attacks[i].attack_tooltip
+		return
+	if attack.attack_type == Attack.AttackType.ON_SELF:
+		select_manager.on_shoot_pressed(selected_attack)
+		change_state(State.NOTHING)
+		return
+		
 
 func enable_player_movement():
 	change_state(State.SELECT_PLAYER)

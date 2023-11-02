@@ -17,6 +17,8 @@ position = Vector2(320, 240)
 texture = SubResource("ViewportTexture_7u3ua")
 
 [node name="SubViewport" type="SubViewport" parent="."]
+audio_listener_enable_2d = true
+audio_listener_enable_3d = true
 size = Vector2i(640, 480)
 render_target_update_mode = 4
 

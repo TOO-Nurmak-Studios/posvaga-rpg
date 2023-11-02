@@ -9,7 +9,6 @@ var allies: Array[Node]
 
 var current_move: int = -1
 
-# initiative-based turn system
 func start():
 	enemies = get_tree().get_nodes_in_group("enemy")
 	allies = get_tree().get_nodes_in_group("player")
@@ -31,6 +30,7 @@ func start():
 
 func _on_attack_end(attacker: AbstractCharacter, attacked: Array[AbstractCharacter], attack: Attack):
 	await _clean_dead()
+	await get_tree().create_timer(0.25).timeout
 	if attacker.get_type() == AbstractCharacter.CharacterType.PLAYER:
 		attack.start_cooldown()
 		var enemies_left = select_manager.enemy_amount()

@@ -1,8 +1,8 @@
-class_name ThrowBookAttack
+class_name LabThrowBook
 extends Attack
 
 @export var book_flight_length: float = 1
-@export var book_damage: float = 1
+@export var book_damage: float = 20
 var book_scene: Resource = preload("res://battle_scene/Entity/Book.tscn")
 var current_callable_on_finish: Callable
 
@@ -10,14 +10,12 @@ func _init():
 	attack_name = "Бросок книги"
 	attack_type = Attack.AttackType.SINGLE
 	attack_tooltip = "Выбор врага: стрелки, удар: Enter."
-	attack_postmessage = str("%s бросает книгу в %s, нанося", book_damage, " урона.")
+	attack_postmessage = str("%s бросает книгу в %s, нанося ", book_damage, " урона.")
 	attack_description = "Кинуть вашу любимую часть Зорича в лицо врагу."
 	cooldown = 3
 	
 func _attack_single(attacker: AbstractCharacter, char: AbstractCharacter, gunpoint: Marker2D):
-	attacker.sprite.play("throw")
-	await attacker.sprite.animation_finished
-	attacker.sprite.play("idle")
+	await attacker.throw_book()
 	
 	if gunpoint == null:
 		printerr("Trying to shoot without a gunpoint")
@@ -40,6 +38,7 @@ func _attack_single(attacker: AbstractCharacter, char: AbstractCharacter, gunpoi
 
 func _on_attack_land(projectile, attacker: AbstractCharacter, char: AbstractCharacter):
 	projectile.queue_free()
+	attacker.book_impact_sound()
 	await char.take_damage(book_damage, attacker)
 	EventBus.emit_attack_ended(attacker, [char], self)
 
