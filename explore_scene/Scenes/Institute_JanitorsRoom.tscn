@@ -53,7 +53,6 @@ dialog_vars = Array[String](["had_first_cockroach_fight"])
 dialog_knot = "janitors_room_cockroach"
 visibility_flag = "had_first_cockroach_fight"
 invert_visibility_flag = true
-battle_scene_name = "res://battle_scene/battle_field.tscn"
 after_battle_dialog_knot = "janitors_room_cockroach_after_battle"
 is_battle_scene_enabled = true
 battle_scene_players = Array[int]([0])

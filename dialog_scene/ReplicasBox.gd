@@ -7,6 +7,7 @@ signal printing_finished()
 @export var delay_multiplier: float = 4
 @export var min_pitch: float = 0.7
 @export var max_pitch: float = 0.8
+@export var missing_speaker_pitch_offset = -0.1
 
 @export var max_short_name_length: int = 14
 
@@ -51,6 +52,8 @@ func new_replica(replica: ReplicaData):
 		speaker_name_long_frame.hide()
 		speaker_name_frame.hide()
 		speaker_name_label.text = ""
+		
+		pitch_offset = missing_speaker_pitch_offset
 		
 	text_label.text = ""
 	full_text = replica.text

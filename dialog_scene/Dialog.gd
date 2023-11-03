@@ -285,15 +285,9 @@ func _on_choices_box_option_chosen(option_id: int):
 
 func _lock_player():
 	EventBus.player_input_enabled = false
-	#var player = get_tree().get_first_node_in_group("Player")
-	#if player != null:
-	#	player.process_mode = PROCESS_MODE_DISABLED
 
 func _unlock_player():
 	EventBus.player_input_enabled = true
-	#var player = get_tree().get_first_node_in_group("Player")
-	#if player != null:
-	#	player.process_mode = PROCESS_MODE_INHERIT
 
 
 ## TODO: for tests, remove

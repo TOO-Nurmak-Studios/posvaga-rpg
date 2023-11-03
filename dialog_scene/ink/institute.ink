@@ -27,33 +27,34 @@ VAR had_second_cockroach_fight = false
 
 
 === room_201 ===
-# sid: vera_neutral
-# loc: right
-Кабинет 201. Там часто работает Владимир Николаевич.
 
-# sid: vera_neutral
-# loc: right
+Кабинет 201. Личный кабинет Владимира Николаевича.
+
 Дверь закрыта.
 -> END
 
 
 === room_202 ===
-# sid: vera_neutral
-# loc: right
-Кабинет 202. Лаборатория геофизического анализа.
+
+Кабинет 202. Лаборатория геофизического анализа. Кабинет закрыт.
 
 # sid: vera_neutral
 # loc: right
 Они недолюбливают нас с тех пор, как Владимир Николаевич получил доступ к "Иртышу". Все их просьбы директор отклонил.
 
-# sid: vera_neutral
-# loc: right
-Кабинет закрыт. Никого внутри.
+-> END
+
+
+=== room_209 ===
+
+Кабинет 209. Канцелярия.
+
+Дверь закрыта.
 -> END
 
 
 === news ===
-Стенгазета "ЗНАНИЕ - СИЛА! ВЕСТИ ИНСТИТУТА."
+Стенгазета "ЗНАНИЕ - СИЛА! ИНСТИТУТСКИЕ ВЕСТИ."
 
 "СУПЕРЭВМ НОВЕЙШЕЙ МОДЕЛИ ИРТЫШ-ОУ-2 УСТАНОВЛЕН В ИНСТИТУТЕ ГЕОИНФОРМАТИКИ"
 
@@ -65,7 +66,7 @@ VAR had_second_cockroach_fight = false
 
 # sid: vera_neutral
 # loc: right
-А вот и важные объявления...
+А вот и более важные объявления...
 
 -> END
 
@@ -237,7 +238,7 @@ VAR had_second_cockroach_fight = false
 # loc: right
 (Владимир Николаевич? Я думала, он давно ушёл домой...)
 
-# mus: accumulator_v2.mp3
+# mus: accumulator.mp3
 # sid: zavlab_shouting
 Иосиф Юлианыч, послушайте. На кону нечто большее, чем успех проекта...
 
@@ -370,5 +371,68 @@ zavlab
 # sid: vera_neutral
 # loc: right
 Отлично, теперь в институте на одного таракана меньше.
+
+-> END
+
+
+=== first_floor_stairs_door ===
+Закрыто.
+-> END
+
+
+=== first_floor_main_exit ===
+
+# sid: vera_doubting
+# loc: right
+Главный вход... тоже закрыт?
+
+# sid: vera_scared
+# loc: right
+Чёрт-чёрт-чёрт. Чтоб тебя...
+
+# sid: vera_scared
+# loc: right
+Ребята, где же вы...
+
+-> END
+
+
+=== first_floor_secret_door ===
+
+# spd: 10
+п-п...
+
+# spd: 10
+по...
+
+# spd: 10
+п-помогиитее.......
+
+# sid: vera_doubting
+# loc: right
+Что за?
+
+# spd: 5
+# sid: vera_doubting
+# loc: right
+.....
+
+# snd: door_open.wav
+# cts: fade
+in 0.25
+
+# cts: wait
+1
+
+# spd: 5
+# sid: vera_doubting
+# loc: right
+.....
+
+# mus: .
+# snd: scream.wav
+# sid: vera_scared
+# loc: right
+!!!!!!!!
 
 -> END

@@ -1,11 +1,15 @@
 class_name ExplorePlayer
 extends MovableCharacter
 
+const player_speed = 60
+
 @onready var interact_area = $Area2D
 @onready var interact_icon = $InteractIcon
 
 func _ready():
 	super()
+	speed = player_speed
+	default_speed = player_speed
 
 	EventBus.player_move_pressed.connect(_process_movement)
 	EventBus.player_sprint_pressed.connect(_process_sprint_pressed)

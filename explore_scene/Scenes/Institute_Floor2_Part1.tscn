@@ -177,8 +177,9 @@ visibility_flag = "called_for_friends"
 invert_visibility_flag = true
 
 [node name="CollisionShape2D" parent="LookingForFriends" index="0"]
-position = Vector2(1, -3)
+position = Vector2(1.125, -1.5)
 rotation = 1.5708
+scale = Vector2(2, 1)
 
 [node name="Portrait" parent="." instance=ExtResource("6_a1olp")]
 z_index = 1
@@ -191,11 +192,11 @@ shape = SubResource("RectangleShape2D_o1opx")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = 11
-offset_left = -955.0
-offset_top = -655.0
-offset_right = 467.0
-offset_bottom = 43.0
-color = Color(0, 0, 0, 0.156863)
+offset_left = -945.0
+offset_top = -657.0
+offset_right = 477.0
+offset_bottom = 41.0
+color = Color(0, 0, 0, 0.196078)
 
 [editable path="Teleport_LabRoom"]
 [editable path="Teleport_JanitorsRoom"]

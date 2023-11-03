@@ -58,7 +58,7 @@ _data = {
 }
 
 [node name="SceneTransition" type="CanvasLayer"]
-layer = 15
+layer = 2
 script = ExtResource("1_tg1m2")
 
 [node name="FadeRect" type="ColorRect" parent="."]
