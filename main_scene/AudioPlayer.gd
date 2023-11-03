@@ -1,5 +1,3 @@
-class_name AudioPlayer
-
 extends Node
 
 const music_path_prefix = "res://music/"
