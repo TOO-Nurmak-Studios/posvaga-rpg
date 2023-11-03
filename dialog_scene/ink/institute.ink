@@ -3,6 +3,7 @@ VAR called_for_friends = false
 VAR had_first_cockroach_fight = false
 VAR heard_voices = false
 VAR eavesdroped_conversation = false
+VAR had_second_cockroach_fight = false
 
 -> janitors_room_cockroach
 
@@ -70,7 +71,7 @@ VAR eavesdroped_conversation = false
 
 
 === portrait ===
-Иосиф Юлианович, профессор, академик, герой социалистического труда. Директор института прикладной геоинформатики.
+Иосиф Юлианович Кузнецов. Профессор, академик, герой социалистического труда. Директор института прикладной геоинформатики.
 -> END
 
 === toilet ===
@@ -199,6 +200,7 @@ VAR eavesdroped_conversation = false
 # loc: right
 Кажется, я что-то слышу... Голоса!
 
+# mus: horror_mystery.ogg
 # sid: vera_scared
 # loc: right
 Рядом точно кто-то есть. Но на ребят не похоже...
@@ -213,3 +215,160 @@ VAR eavesdroped_conversation = false
 -> END
 
 
+=== director_office ===
+{ not eavesdroped_conversation:
+    -> director_zavlab_conversation
+- else:
+    -> director_office_alternative
+}
+
+=== director_office_alternative ===
+# sid: vera_scared
+# loc: right
+Кабинет директора института. Я бы держалась отсюда подальше...
+-> END
+
+=== director_zavlab_conversation ===
+~ eavesdroped_conversation = true
+
+...вынужден повторить: это черезвычайное происшествие, медлить нельзя...
+
+# sid: vera_doubting
+# loc: right
+(Владимир Николаевич? Я думала, он давно ушёл домой...)
+
+# mus: accumulator_v2.mp3
+# sid: zavlab_shouting
+Иосиф Юлианыч, послушайте. На кону нечто большее, чем успех проекта...
+
+# sid: director_neutral
+Я всё понимаю. Но стоит избегать поспешных решений.
+
+# sid: vera_scared
+# loc: right
+(Это же директор нашего института!)
+
+# sid: vera_scared
+# loc: right
+(Должно быть, произошло что-то серьезное...)
+
+# sid: zavlab_scared
+Он захватил нашу сеть. Теперь в этом здании он может контролировать всё!
+
+# sid: zavlab_scared
+И он может попытаться подключить кого-то, что ещё хуже...
+
+# sid: director_concerned
+Но ведь вы приняли сдерживающие меры первого уровня?
+
+# sid: zavlab_scared
+Да, но я мог недооценить, на что способна обученная на таких данных модель.
+
+# sid: zavlab_scared
+Сейчас я предлагаю немедленное уничтожение...
+
+# sid: director_concerned
+Исключено. Мы не можем себе этого позволить - особенно за день до встречи с партийным руководством.
+
+# sid: zavlab_scared
+Но...
+
+# sid: director_determined
+Никаких но! Нужно найти другой выход.
+
+# sid: director_concerned
+Изолируйте программу, не допустив потери данных и оборудования. Обученную модель нужно сохранить для прототипа.
+
+# sid: director_angry
+И... о произошедшем не должен знать никто.
+
+# sid: director_angry
+Есть ли кто-то в здании кто-то кроме нас?
+
+# sid: vera_scared
+# loc: right
+!!!
+
+# sid: zavlab_scared
+Э... нет, никого не должно быть. И-и выходы все заблокированы в рамках мер первого уровня.
+
+# sid: director_concerned
+Отлично. Значит, обойдется без жертв.
+
+# sid: director_concerned
+Тогда немедленно отправляйтесь в вычислительный отсек. Я присоединюсь к вам позже.
+
+# sid: vera_scared
+# loc: right
+!!!!!!
+
+# cts: turn
+vera left
+# cts: wait
+0.4
+# cts: turn
+vera right
+# cts: wait
+0.4
+# cts: turn
+vera left
+# cts: wait
+0.4
+# cts: turn
+vera right
+# cts: wait
+0.5
+# cts: move
+vera left 4 sprint
+# cts: turn
+vera down
+# cts: wait
+1
+# snd: door_open.wav
+# cts: anim
+door open
+# cts: move
+zavlab down 7 sprint
+# snd: door_close.mp3
+# cts: anim
+door close
+# cts: move
+zavlab right 16 sprint
+# cts: remv
+zavlab
+# cts: wait
+2
+
+# sid: vera_scared
+# loc: right
+...
+# mus: .
+# sid: vera_scared
+# loc: right
+Фууух...
+
+# sid: vera_scared
+# loc: right
+Что-то не так. Надеюсь, с ребятами всё хорошо...
+
+-> END
+
+
+=== hallway_cockroaches ===
+
+~ had_second_cockroach_fight = true
+
+# sid: vera_neutral
+# loc: right
+ДРАКА С ТАРАКАНАМИ! ДААААА
+
+-> END
+
+
+=== hallway_cockroaches_after_battle ===
+
+# sid: vera_neutral
+# loc: right
+Отлично, теперь в институте на одного таракана меньше.
+
+-> END

@@ -8,7 +8,7 @@ var sprint_speed_modifier: float
 var is_playing: bool = false
 
 func set_sprint_speed_modifier(modifier: float):
-	sprint_speed_modifier = modifier
+	sprint_speed_modifier = modifier - 0.3
 
 func set_sprint():
 	audio_player.pitch_scale = sprint_speed_modifier
