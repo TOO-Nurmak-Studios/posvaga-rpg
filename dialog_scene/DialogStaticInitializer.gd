@@ -5,13 +5,13 @@ var main_speaker_id = "vera_neutral"
 
 var speakers_data = {
 	
-		"vera_neutral"        : SpeakerData.new("vera_neutral", "Вера", false, 0.05),
-		"vera_angry"          : SpeakerData.new("vera_angry", "Вера", false, 0.05),
-		"vera_doubting"       : SpeakerData.new("vera_doubting", "Вера", false, 0.05),
-		"vera_bored"          : SpeakerData.new("vera_bored", "Вера", false, 0.05),
-		"vera_questioning"    : SpeakerData.new("vera_questioning", "Вера", false, 0.05),
-		"vera_sad"            : SpeakerData.new("vera_sad", "Вера", false, 0.05),
-		"vera_scared"         : SpeakerData.new("vera_scared", "Вера", false, 0.05),
+		"vera_neutral"        : SpeakerData.new("vera_neutral", "Вера", true, 0.05),
+		"vera_angry"          : SpeakerData.new("vera_angry", "Вера", true, 0.05),
+		"vera_doubting"       : SpeakerData.new("vera_doubting", "Вера", true, 0.05),
+		"vera_bored"          : SpeakerData.new("vera_bored", "Вера", true, 0.05),
+		"vera_questioning"    : SpeakerData.new("vera_questioning", "Вера", true, 0.05),
+		"vera_sad"            : SpeakerData.new("vera_sad", "Вера", true, 0.05),
+		"vera_scared"         : SpeakerData.new("vera_scared", "Вера", true, 0.05),
 		
 		"damir_neutral"       : SpeakerData.new("damir_neutral", "Дамир", true, -0.05),
 		"damir_angry"         : SpeakerData.new("damir_angry", "Дамир", true, -0.05),
@@ -20,12 +20,12 @@ var speakers_data = {
 		"damir_relaxed"       : SpeakerData.new("damir_relaxed", "Дамир", true, -0.05),
 		"damir_sad"           : SpeakerData.new("damir_sad", "Дамир", true, -0.05),
 		
-		"sasha_neutral"       : SpeakerData.new("sasha_neutral", "Саша"),
-		"sasha_angry"         : SpeakerData.new("sasha_angry", "Саша"),
-		"sasha_confused"      : SpeakerData.new("sasha_confused", "Саша"),
-		"sasha_scared"        : SpeakerData.new("sasha_scared", "Саша"),
-		"sasha_smiling"       : SpeakerData.new("sasha_smiling", "Саша"),
-		"sasha_surprised"     : SpeakerData.new("sasha_surprised", "Саша"),
+		"sasha_neutral"       : SpeakerData.new("sasha_neutral", "Саша", false, 0.0),
+		"sasha_angry"         : SpeakerData.new("sasha_angry", "Саша", false, 0.0),
+		"sasha_confused"      : SpeakerData.new("sasha_confused", "Саша", false, 0.0),
+		"sasha_scared"        : SpeakerData.new("sasha_scared", "Саша", false, 0.0),
+		"sasha_smiling"       : SpeakerData.new("sasha_smiling", "Саша", false, 0.0),
+		"sasha_surprised"     : SpeakerData.new("sasha_surprised", "Саша", false, 0.0),
 		
 		"lida_neutral"        : SpeakerData.new("lida_neutral", "Лида", true, 0.1),
 		"lida_angry"          : SpeakerData.new("lida_angry", "Лида", true, 0.1),

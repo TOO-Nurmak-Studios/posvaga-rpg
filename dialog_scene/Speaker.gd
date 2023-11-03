@@ -48,7 +48,10 @@ func update(_location: ReplicaData.SpeakerLocation, speaker_data: SpeakerData):
 	var texture_size_x = texture_size.x
 	var texture_size_y = texture_size.y
 	
-	if speaker_data.invert_on_left && _location == ReplicaData.SpeakerLocation.LEFT:
+	var need_invert_on_left = speaker_data.invert_on_left && _location == ReplicaData.SpeakerLocation.LEFT
+	var need_invert_on_right = !speaker_data.invert_on_left && _location == ReplicaData.SpeakerLocation.RIGHT
+	
+	if need_invert_on_left || need_invert_on_right:
 		sprite.scale.x = -1
 	else:
 		sprite.scale.x = 1

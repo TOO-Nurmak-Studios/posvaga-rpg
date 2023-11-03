@@ -229,22 +229,25 @@ vera left
 # cts: turn 
 damir left
 # cts: wait
-0.5
+1
+# mus: hey_now.mp3
 # cts: move
 zavlab down 6
 # cts: turn 
 zavlab right
 #cts: wait
-1
+1.5
 
 # sid: zavlab_neutral
 Ну что, товарищи аспиранты? Как продвигается работа?
 
 # sid: lida_scared
+# loc: right
 В-Владимир Николаевич...
 
 # sid: damir_bored
-Почти готово, ха-ха! Работаем в поте лица, даже перекурить некогда, ха...
+# loc: right
+Почти готово, ха-ха! Работаем в поте лица, даже перекурить некогда...
 
 # sid: zavlab_little_smile
 Так я и думал.
@@ -267,16 +270,18 @@ zavlab right
 Э-э-э, нет, Владимир Николаевич, никаких вопросов...
 
 # sid: lida_angry
+# loc: right
 ...
 
 # sid: zavlab_smiling
 Ну вот и славно! У матросов нет вопросов, ха-ха?
 
 # sid: sasha_surprised
-Владимир Николаевич, у нас тут...
+# loc: right
+Владимир Николаевич, у нас тут проблема...
 
 # sid: zavlab_little_smile
-Всё, всё, мне надо бежать, завтра мне всё покажете. И чтобы ни строчки не пропустили, запомните!
+Всё, всё, мне надо бежать, завтра мне всё покажете. И чтобы ни строчки не пропустили!
 
 
 # cts: turn 
@@ -285,6 +290,7 @@ zavlab up
 0.5
 # cts: move
 zavlab up 12 sprint
+# mus: .
 # snd: door_close.mp3
 # cts: anim
 door close
@@ -299,8 +305,9 @@ vera up
 # cts: turn 
 damir up
 #cts: wait
-1
+3
 
+# mus: a_star_called_sun.mp3
 # sid: damir_bored
 Ну что за фигняяяяя...
 
@@ -330,6 +337,8 @@ damir down
 
 # cts: move 
 damir left 4.6
+# cts: turn 
+vera left
 # cts: move 
 damir up 12
 # snd: door_open.wav

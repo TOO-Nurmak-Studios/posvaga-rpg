@@ -358,18 +358,6 @@ invert_visibility_flag = true
 position = Vector2(0, 0)
 shape = SubResource("RectangleShape2D_wjtsl")
 
-[node name="JanitorsDoor" parent="." instance=ExtResource("6_s7mi7")]
-z_index = 1
-position = Vector2(-144, 381)
-dialog_resource = ExtResource("7_1dr4r")
-dialog_knot = "janitors_room_stop"
-visibility_flag = "tried_stairs_doors"
-invert_visibility_flag = true
-
-[node name="CollisionShape2D" parent="JanitorsDoor" index="0"]
-position = Vector2(0, -2)
-shape = SubResource("RectangleShape2D_61646")
-
 [node name="ToiletDoor" parent="." instance=ExtResource("6_s7mi7")]
 z_index = 1
 position = Vector2(0, 381)
@@ -384,7 +372,7 @@ shape = SubResource("RectangleShape2D_61646")
 z_index = 1
 position = Vector2(-608, 381)
 dialog_resource = ExtResource("7_1dr4r")
-dialog_knot = "room_202"
+dialog_knot = "room_209"
 
 [node name="CollisionShape2D" parent="Room209" index="0"]
 position = Vector2(0, -2)
@@ -401,6 +389,7 @@ invert_visibility_flag = true
 
 [node name="CollisionShape2D" parent="HeardVoices" index="0"]
 position = Vector2(9.5, -2.1875)
+scale = Vector2(2, 1)
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = 11
@@ -458,7 +447,6 @@ sprite_frames = SubResource("SpriteFrames_mfkee")
 [editable path="Teleport_Hallway"]
 [editable path="Teleport_Downstairs"]
 [editable path="OtherFloorPartStop"]
-[editable path="JanitorsDoor"]
 [editable path="ToiletDoor"]
 [editable path="Room209"]
 [editable path="HeardVoices"]

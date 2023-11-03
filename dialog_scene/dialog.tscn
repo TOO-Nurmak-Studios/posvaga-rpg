@@ -9,6 +9,7 @@
 
 [node name="Dialog" type="CanvasLayer"]
 process_mode = 3
+layer = 3
 script = ExtResource("1_42uhe")
 ink_file = ExtResource("2_lkfr1")
 
