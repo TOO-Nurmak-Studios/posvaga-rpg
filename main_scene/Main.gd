@@ -114,10 +114,10 @@ func wait(seconds_to_wait: float):
 	await get_tree().create_timer(seconds_to_wait, true, true).timeout
 	EventBus.cutscene_wait_finished.emit()
 
-func fade(type: String):
+func fade(type: String, speed: float = 1.0):
 	match type:
 		"in":
-			await SceneTransition.fade_in()
+			await SceneTransition.fade_in(speed)
 		"out":
-			await SceneTransition.fade_out()
+			await SceneTransition.fade_out(speed)
 	EventBus.cutscene_fade_finished.emit()

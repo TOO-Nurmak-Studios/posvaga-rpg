@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://explore_scene/Scripts/LocationManager.gd" id="1_ian7v"]
 [ext_resource type="Texture2D" uid="uid://dl4uacvvm7hiu" path="res://explore_scene/Assets/black_gradient.png" id="2_04nca"]
 [ext_resource type="PackedScene" uid="uid://csl0t86w6bvox" path="res://explore_scene/Scenes/SimpleInteractible.tscn" id="2_cj7va"]
-[ext_resource type="PackedScene" uid="uid://l353l3owxbsk" path="res://explore_scene/Scenes/StepOnInteractible.tscn" id="2_pqh8a"]
 [ext_resource type="Texture2D" uid="uid://brtvk3tgml4jw" path="res://sprites/map/cockroach1.png" id="3_2wi3f"]
 [ext_resource type="Resource" uid="uid://cuti6wqk8m383" path="res://dialog_scene/ink/institute.ink.json" id="3_hrtm2"]
 [ext_resource type="PackedScene" uid="uid://dgipy14v4a35t" path="res://explore_scene/Scenes/Teleport.tscn" id="3_tdb87"]
@@ -11,11 +10,14 @@
 [ext_resource type="Texture2D" uid="uid://bh6wh1w4ochux" path="res://sprites/map/cockroach2.png" id="4_ku60p"]
 [ext_resource type="PackedScene" uid="uid://cpyg0dy7ijwm2" path="res://explore_scene/Scenes/player.tscn" id="5_ryfu6"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ep0py"]
+size = Vector2(35, 33)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_7h037"]
 atlas = ExtResource("3_2wi3f")
 region = Rect2(0, 0, 128, 128)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_gqcvd"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_il6ae"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -33,6 +35,7 @@ animations = [{
 y_sort_enabled = true
 position = Vector2(567, 254)
 script = ExtResource("1_ian7v")
+music_file_name = "horror_ambience.ogg"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = 11
@@ -42,15 +45,9 @@ offset_right = -282.0
 offset_bottom = -5.0
 color = Color(0, 0, 0, 0.509804)
 
-[node name="Interactible" parent="." instance=ExtResource("2_cj7va")]
-z_index = 2
-position = Vector2(-603, -308)
-dialog_resource = ExtResource("3_hrtm2")
-dialog_knot = "janitors_room_box"
-
-[node name="StartCockroachFight" parent="." instance=ExtResource("2_pqh8a")]
+[node name="CockroachInteractible" parent="." instance=ExtResource("2_cj7va")]
 z_index = 1
-position = Vector2(-609, -283)
+position = Vector2(-602, -311)
 dialog_resource = ExtResource("3_hrtm2")
 dialog_vars = Array[String](["had_first_cockroach_fight"])
 dialog_knot = "janitors_room_cockroach"
@@ -62,17 +59,20 @@ is_battle_scene_enabled = true
 battle_scene_players = Array[int]([0])
 battle_scene_enemies = Array[int]([2])
 
-[node name="CollisionShape2D" parent="StartCockroachFight" index="0"]
-position = Vector2(8, -5)
+[node name="CollisionShape2D" parent="CockroachInteractible" index="0"]
+position = Vector2(-1.5, 14.5)
+shape = SubResource("RectangleShape2D_ep0py")
 
-[node name="AnimatedSprite2D" parent="StartCockroachFight" index="1"]
-z_index = 1
-y_sort_enabled = true
-position = Vector2(8, -34)
+[node name="AnimatedSprite2D" parent="CockroachInteractible" index="1"]
 scale = Vector2(0.3, 0.3)
-sprite_frames = SubResource("SpriteFrames_gqcvd")
-animation = &"default"
-frame_progress = 0.304482
+sprite_frames = SubResource("SpriteFrames_il6ae")
+
+[node name="BoxInteractible" parent="." instance=ExtResource("2_cj7va")]
+z_index = 2
+position = Vector2(-603, -308)
+dialog_resource = ExtResource("3_hrtm2")
+dialog_knot = "janitors_room_box"
+visibility_flag = "had_first_cockroach_fight"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 10
@@ -113,4 +113,4 @@ layer_2/tile_data = PackedInt32Array()
 z_index = 1
 position = Vector2(-603, -246)
 
-[editable path="StartCockroachFight"]
+[editable path="CockroachInteractible"]

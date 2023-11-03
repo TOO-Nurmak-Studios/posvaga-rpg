@@ -24,12 +24,12 @@ func _ready():
 	if dialog_resource != null:
 		dialog_data = DialogData.new(dialog_resource, dialog_vars, dialog_knot)
 	if is_battle_scene_enabled:
-    		_battle_scene = {
-    			SceneTransition.SceneDataType.BATTLE_BACK_TYPE: battle_scene_type,
-    			SceneTransition.SceneDataType.BATTLE_ENEMY_DICT: battle_scene_enemies,
-    			SceneTransition.SceneDataType.BATTLE_PLAYER_DICT: battle_scene_players
-    		}
-    		if dialog_data != null && after_battle_dialog_knot != null:
+			_battle_scene = {
+				SceneTransition.SceneDataType.BATTLE_BACK_TYPE: battle_scene_type,
+				SceneTransition.SceneDataType.BATTLE_ENEMY_DICT: battle_scene_enemies,
+				SceneTransition.SceneDataType.BATTLE_PLAYER_DICT: battle_scene_players
+			}
+			if dialog_data != null && after_battle_dialog_knot != null:
 				after_battle_dialog_data = DialogData.new(dialog_resource, dialog_vars, after_battle_dialog_knot)
 	if visibility_flag != null && visibility_flag != "":
 		_update_visible()

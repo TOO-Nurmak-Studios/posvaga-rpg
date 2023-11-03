@@ -81,18 +81,6 @@ off
 # sid: damir_relaxed
 Слишком много вопросов стоит перед советскими учеными!
 
-# sid: damir_sad
-Слишком много вопросов стоит перед советскими учеными!
-
-# sid: damir_happy
-Слишком много вопросов стоит перед советскими учеными!
-
-# sid: damir_angry
-Слишком много вопросов стоит перед советскими учеными!
-
-# sid: damir_neutral
-Слишком много вопросов стоит перед советскими учеными!
-
 * [Да]
 
     # sid: damir_happy
@@ -110,33 +98,6 @@ off
 
 
 === talk_lida ===
-
-# cts: anim
-door open
-# cts: move
-damir left 2
-# cts: turn
-damir up
-# cts: wait
-1
-# cts: anim
-door close
-# cts: turn
-damir down
-# cts: wait
-1
-# cts: move
-damir right 2
-# cts: wait
-1
-# cts: fade
-in
-# cts: wait
-1
-# cts: fade
-out
-# cts: wait
-1
 
 # sid: lida_neutral
 Я вбила почти все координаты на сегодня, и-и тут терминал завис...
@@ -251,6 +212,8 @@ out
 
 # cts: wait
 1
+# mus: .
+# snd: door_open.wav
 # cts: anim
 door open
 # cts: wait
@@ -307,7 +270,7 @@ zavlab right
 ...
 
 # sid: zavlab_smiling
-Ну вот и славно! У матросов нет вопросов, да?
+Ну вот и славно! У матросов нет вопросов, ха-ха?
 
 # sid: sasha_surprised
 Владимир Николаевич, у нас тут...
@@ -322,8 +285,11 @@ zavlab up
 0.5
 # cts: move
 zavlab up 12 sprint
+# snd: door_close.mp3
 # cts: anim
 door close
+# cts: wait
+1
 # cts: turn 
 sasha down
 # cts: turn 
@@ -360,12 +326,34 @@ damir down
 1
 
 # sid: damir_neutral
-Чёрт с вами тоже, я пошёл.
+Да и чёрт с вами, я пошёл.
 
-# cts: walk 
-damir left 4
-# cts: walk 
+# cts: move 
+damir left 4.6
+# cts: move 
 damir up 12
+# snd: door_open.wav
+# cts: anim
+door open
+# cts: move 
+damir up 7
+# snd: door_close.mp3
+# cts: anim
+door close
+# cts: wait 
+1
+# cts: move 
+vera down 3
+# cts: turn 
+sasha up
+# cts: turn 
+lida up
+# cts: move 
+vera right 3
+# cts: turn 
+vera down
+# cts: wait 
+1
 
 # sid: sasha_angry
 Ладно, надо сфокусироваться. Что мы можем сделать в этой ситуации...
@@ -383,5 +371,8 @@ damir up 12
 # sid: vera_neutral
 # loc: right
 (......)
+
+# cts: fade
+in 0.25
 
 -> END

@@ -38,7 +38,10 @@ func on_step_finished():
 
 func process_fade(params: PackedStringArray):
 	var type = params[0].replace("\n", "")
-	EventBus.cutscene_fade_start.emit(type)
+	var speed = 1.0
+	if params.size() > 1:
+		speed = params[1].replace("\n", "").to_float()
+	EventBus.cutscene_fade_start.emit(type, speed)
 
 
 func process_wait(params: PackedStringArray):
@@ -49,7 +52,7 @@ func process_wait(params: PackedStringArray):
 func process_move(params: PackedStringArray):
 	var object = params[0] as String
 	var direction = params[1] as String
-	var distance = params[2].to_int()
+	var distance = params[2].to_float()
 	var sprint = false
 	if params.size() == 4:
 		sprint = params[3] == "sprint"

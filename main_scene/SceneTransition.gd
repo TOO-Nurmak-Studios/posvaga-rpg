@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 @onready var fade_rect = $FadeRect
-@onready var fade_animation = $AnimationPlayer
+@onready var fade_animation: AnimationPlayer = $AnimationPlayer
 
 enum SceneDataType {
 	PACKED_SCENE, 

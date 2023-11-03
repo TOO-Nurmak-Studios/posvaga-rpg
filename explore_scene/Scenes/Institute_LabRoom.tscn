@@ -1,4 +1,4 @@
-[gd_scene load_steps=109 format=3 uid="uid://csl6hp7uuxnv3"]
+[gd_scene load_steps=109 format=3 uid="uid://bi7pp380kq1kj"]
 
 [ext_resource type="Script" path="res://explore_scene/Scripts/LocationManager.gd" id="1_ewxwj"]
 [ext_resource type="PackedScene" uid="uid://clr6m243e5eig" path="res://explore_scene/Scenes/NPC.tscn" id="2_0o8m8"]
@@ -746,7 +746,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Institute_0" type="Node2D"]
+[node name="Institute_LabRoom" type="Node2D"]
 y_sort_enabled = true
 position = Vector2(567, 254)
 script = ExtResource("1_ewxwj")
@@ -755,10 +755,10 @@ music_file_name = "a_star_called_sun_v2.mp3"
 [node name="Sasha" parent="." instance=ExtResource("2_0o8m8")]
 z_index = 1
 position = Vector2(-537, -246)
-starting_direction = Vector2(0, -1)
 dialog_resource = ExtResource("3_b4q4c")
 dialog_vars = Array[String](["found_command_book_for_sasha"])
 dialog_knot = "talk_sasha"
+starting_direction = Vector2(0, -1)
 
 [node name="AnimatedSprite2D" parent="Sasha" index="1"]
 sprite_frames = SubResource("SpriteFrames_yyxhf")
@@ -774,19 +774,20 @@ sprite_frames = SubResource("SpriteFrames_agft5")
 [node name="Lida" parent="." instance=ExtResource("2_0o8m8")]
 z_index = 1
 position = Vector2(-489, -246)
-starting_direction = Vector2(0, -1)
 dialog_resource = ExtResource("3_b4q4c")
 dialog_knot = "talk_lida"
+starting_direction = Vector2(0, -1)
 
 [node name="Damir" parent="." instance=ExtResource("2_0o8m8")]
 z_index = 1
 position = Vector2(-536, -193)
-starting_direction = Vector2(0, 1)
 dialog_resource = ExtResource("3_b4q4c")
 dialog_knot = "talk_damir"
+starting_direction = Vector2(0, 1)
 
 [node name="AnimatedSprite2D" parent="Damir" index="1"]
 sprite_frames = SubResource("SpriteFrames_0b684")
+animation = &"walk_up"
 
 [node name="CorrectBook" parent="." instance=ExtResource("4_m3rro")]
 z_index = 1

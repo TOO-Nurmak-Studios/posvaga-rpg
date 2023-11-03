@@ -26,6 +26,7 @@ GameState="*res://state/GameState.gd"
 SceneTransition="*res://main_scene/SceneTransition.tscn"
 BattleScene="*res://battle_scene/BattleScene.gd"
 DialogStaticInitializer="*res://dialog_scene/DialogStaticInitializer.gd"
+AudioPlayer="*res://main_scene/audio_player.tscn"
 
 [debug]
 

@@ -36,7 +36,7 @@ signal cutscene_animation_start(object: String, animation_name: String)
 signal cutscene_animation_finished()
 signal cutscene_wait_start(seconds: float)
 signal cutscene_wait_finished()
-signal cutscene_fade_start(type: String)
+signal cutscene_fade_start(type: String, speed: float)
 signal cutscene_fade_finished()
 signal cutscene_remove_object()
 
