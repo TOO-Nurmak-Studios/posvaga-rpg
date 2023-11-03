@@ -25,7 +25,6 @@ func _ready():
 	EventBus.cutscene_fade_start.connect(fade)
 	
 	_init_state()
-	InventoryManager.initialize()
 	InventoryTest.new().test()
 	
 	if start_scene != null:

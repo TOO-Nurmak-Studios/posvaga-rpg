@@ -15,8 +15,9 @@ func test():
 
 func test_add_and_remove_gold():
 	print("InventoryTest: test_add_and_remove_gold")
-	EventBus.gold_add.emit(5)
-	EventBus.gold_remove.emit(3)
+	GameState.simParty.inventory.add_gold(5)
+	GameState.simParty.inventory.remove_gold(3)
+	print("InventoryTest: gold: ", GameState.simParty.inventory.gold)
 
 
 func test_get_put_remove():
@@ -32,6 +33,12 @@ func test_get_put_remove():
 	GameState.simParty.inventory.put(item, 3)
 	print("InventoryTest: get_by_type_id after put 3: ", GameState.simParty.inventory.get_by_type_id("test_get_put_remove"))
 	print("InventoryTest: count after put 3: ", GameState.simParty.inventory.count("test_get_put_remove"))
+	GameState.simParty.inventory.remove("test_get_put_remove", 2)
+	print("InventoryTest: get_by_type_id after remove 2: ", GameState.simParty.inventory.get_by_type_id("test_get_put_remove"))
+	print("InventoryTest: count after remove 2: ", GameState.simParty.inventory.count("test_get_put_remove"))
+	GameState.simParty.inventory.remove("test_get_put_remove", 2)
+	print("InventoryTest: get_by_type_id after remove 2: ", GameState.simParty.inventory.get_by_type_id("test_get_put_remove"))
+	print("InventoryTest: count after remove 2: ", GameState.simParty.inventory.count("test_get_put_remove"))
 
 
 func test_buy():
