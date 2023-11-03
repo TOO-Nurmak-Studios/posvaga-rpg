@@ -26,10 +26,13 @@ func put_and_pay(item: Item, count: int, cost: int):
 
 
 func remove(type_id: String, count: int = 1):
-	if items.has(type_id) and items[type_id].has_at_least(count):
-		items[type_id].remove(count)
-		if items[type_id].is_empty():
-			items.erase(type_id)
+	if not items.has(type_id):
+		return
+	
+	items[type_id].remove(count)
+	
+	if items[type_id].is_empty():
+		items.erase(type_id)
 
 
 func clear():

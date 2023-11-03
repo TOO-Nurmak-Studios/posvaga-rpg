@@ -53,8 +53,6 @@ signal sound_play(file: String)
 signal game_state_changed()
 
 # inventory
-signal gold_add(to_add: int)
-signal gold_remove(to_remove: int)
 signal item_use(type_id: String)
 
 #scene transitions

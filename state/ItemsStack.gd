@@ -32,6 +32,10 @@ func remove(to_remove: int):
 		count = 0
 
 
+func remove_all():
+	count = 0
+
+
 func use_item():
 	if count > 0:
 		EventBus.item_use.emit(example_item.type_id)
