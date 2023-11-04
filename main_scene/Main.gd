@@ -9,8 +9,11 @@ var player: ExplorePlayer
 
 var current_battle_scene: Node
 
-const default_start_scene = preload("res://explore_scene/Scenes/Institute_LabRoom.tscn")
+const default_start_scene = preload("res://explore_scene/Scenes/Institute_LabRoom_Start.tscn")
+const default_start_dialog = preload("res://dialog_scene/ink/institute_start.ink.json")
+
 var start_scene: Resource
+var start_dialog = DialogData.new(default_start_dialog, [])
 
 func init(_start_scene_name: String):
 	if _start_scene_name != null && _start_scene_name != "":
@@ -23,6 +26,7 @@ func _ready():
 	EventBus.battle_scene_end.connect(_battle_finished)
 	EventBus.cutscene_wait_start.connect(wait)
 	EventBus.cutscene_fade_start.connect(fade)
+	EventBus.cutscene_change_scene.connect(_cutscene_change_scene)
 	
 	_init_state()
 	InventoryTest.new().test()
@@ -30,12 +34,14 @@ func _ready():
 	if start_scene != null:
 		_change_scene({SceneTransition.SceneDataType.PACKED_SCENE: start_scene}, Mode.EXPLORATION)
 	else:
-		_change_scene({SceneTransition.SceneDataType.PACKED_SCENE: default_start_scene}, Mode.EXPLORATION)
+		_game_start()
 
 # С этой функции будет начинаться вся игра
 # для дебага лучше менять логику в _ready()
 func _game_start():
+	SceneTransition.fade_in(5)
 	_change_scene({SceneTransition.SceneDataType.PACKED_SCENE: default_start_scene}, Mode.EXPLORATION)
+	EventBus.dialog_start.emit(start_dialog)
 	#SceneTransition.fade_out(0.02)
 
 func _init_state():
@@ -45,10 +51,20 @@ func _init_state():
 	GameState.curParty = chapter_one_party
 	GameState.simParty = PartyState.new(null, null, null, Inventory.new())
 
+# игрок наступил на телепорт и переходит в новую сцену через фейд
 func _teleport(scene: Resource, player_pos: Vector2, player_dir: Vector2):
 	await SceneTransition.fade_in()
 	_change_scene({SceneTransition.SceneDataType.PACKED_SCENE: scene}, Mode.EXPLORATION, player_pos, player_dir)
 	SceneTransition.fade_out()
+
+# катсцена требует сменить сцену, меняем без фейда и постановки игрока, отправляем сигнал, блокируем игрока
+func _cutscene_change_scene(scene_path: String):
+	var scene = load(scene_path)
+	_change_scene({SceneTransition.SceneDataType.PACKED_SCENE: scene}, Mode.EXPLORATION)
+	EventBus.player_input_enabled = false
+	# жесточайший костыль чтобы напомнить игроку, что мы в диалоге
+	current_exploration_scene.get_node("Player")._process_dialog_start(null)
+	EventBus.cutscene_step_finished.emit()
 
 func _battle(scene_data: Dictionary):
 	_change_scene(scene_data, Mode.BATTLE)

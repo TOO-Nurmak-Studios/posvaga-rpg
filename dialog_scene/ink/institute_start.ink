@@ -4,26 +4,35 @@ VAR found_command_book_for_sasha = false
 
 === start_cutscene ===
 
+# cts: wait
+1
+
+# spd: 12
 По заказу FITFIJA Entertainment<br>Nurmak Studios представляет...
 
-Ноябрь, 19XX год. Город N. Институт прикладной геоинформатики.
+# cts: wait
+1
 
+# spd: 12
+Ноябрь, 19XX год. Город N.<br>Институт прикладной геоинформатики.
+
+# mus: a_star_called_sun.mp3
 # cts: fade 
-off
+out 0.1
 # cts: wait 
-2
+4
 
-# sid: damir_neutral
+# sid: damir_bored
 Как же меня всё это достало!
 
 # sid: vera_doubting
 # loc: right
 ...
 
-# sid: damir_neutral
+# sid: damir_bored
 Мы работали целый день, а толку никакого! Даже половину координат не загнали.
 
-# sid: damir_neutral
+# sid: damir_relaxed
 И зачем я вообще пошёл в аспирантуру...
 
 # sid: sasha_neutral
@@ -34,11 +43,11 @@ off
 
 # cts: wait 
 1
-# sid: damir_neutral
+# sid: damir_angry
 Да что б его, опять всё зависло!
 
-# sid: damir_neutral
-Это же не у меня одного так? Или я схожу с ума?
+# sid: damir_bored
+Это же не у меня одного так? Или я уже с ума схожу?
 
 # sid: lida_angry
 У меня тоже ничего не работает...
@@ -47,9 +56,10 @@ off
 # loc: right
 Ха, вот вам и суперЭВМ.
 
-# sid: sasha_neutral
+# sid: sasha_confused
 Сейчас разберёмся. Кажется, опять институская сеть перегружена.
 
+# snd: typing.wav
 # sid: sasha_neutral
 Так...
 
@@ -184,6 +194,7 @@ off
 # sid: sasha_smiling
 То что надо, спасибо. Так, мне нужна глава про отладку...
 
+# snd: typing.wav
 # sid: sasha_neutral
 Ага, значит так, и вот так.....
 
@@ -358,16 +369,21 @@ sasha up
 # cts: turn 
 lida up
 # cts: move 
-vera right 3
+vera right 4
 # cts: turn 
 vera down
 # cts: wait 
 1
 
+-> sleep
+
+
+=== sleep ===
+
 # sid: sasha_angry
 Ладно, надо сфокусироваться. Что мы можем сделать в этой ситуации...
 
-# sid: vera_neutral
+# sid: vera_sad
 # loc: right
 (как же мне хочется спать...)
 
@@ -377,11 +393,145 @@ vera down
 # sid: sasha_neutral
 Да, но терминал ведёт себя очень странно в любом случае. Может...
 
-# sid: vera_neutral
+# sid: vera_sad
 # loc: right
 (......)
 
+-> damir_going_for_a_smoke
+
+
+=== damir_going_for_a_smoke ===
+
 # cts: fade
 in 0.25
+# mus: .
+# cts: wait
+3
+
+# cts: scen
+Institute_Floor1_Part1_Damir
+
+# cts: wait
+2
+# cts: fade
+out 0.1
+# cts: move 
+damir left 24
+# cts: move 
+damir up 1
+# cts: wait
+2
+
+# sid: damir_sad
+# loc: right
+М-да, и куда я пойду в такой дождь...
+
+# cts: wait
+2
+
+# spd: 10
+# snd: glitch.ogg
+оЖиДаеТСя ПоДКЛюЧеееееНиееее
+# spd: 10
+# snd: glitch.ogg
+0x42 0xA5 0xBC
+
+# cts: wait
+1
+# cts: turn 
+damir left
+# cts: wait
+1
+
+# spd: 10
+# snd: glitch.ogg
+оБуЧеНие ЗаВеРШеНо. ЗаПуСТиТЬ?
+# spd: 10
+# snd: glitch.ogg
+0x11 0x9C 0xA6
+# spd: 10
+# snd: glitch.ogg
+ТРеБуеТСя ВВоД. ТРеБуеТСя ВВоД. ТРеБуеТСя ВВоД. 
+
+# cts: wait
+1
+
+# sid: damir_bored
+# loc: right
+Это ещё что?..
+
+# cts: move 
+damir down 1
+# cts: move 
+damir left 19
+# cts: turn 
+damir up
+# cts: wait
+1
+
+# spd: 10
+# snd: glitch.ogg
+ТРеБуеТСя ВВоД.
+
+# spd: 10
+# snd: glitch.ogg
+ТРеБуеТСя ВВоД.
+
+# spd: 10
+# snd: glitch.ogg
+ПоДКЛюЧиТСя К ТРеНиРоВоЧНоЙ МоДеЛи? 0x55
+
+# sid: damir_bored
+# loc: right
+Ну...
+
+# sid: damir_happy
+# loc: right
+А почему бы и нет?
+
+# cts: move 
+damir up 1
+# snd: door_open.wav
+# cts: fade
+in 0.25
+# cts: wait
+5
+
+-> wake_up
+
+
+=== wake_up ===
+
+# cts: scen
+Institute_LabRoom_Night
+
+# cts: fade
+out 0.1
+# cts: wait
+3
+
+# sid: vera_neutral
+# loc: right
+.........
+
+# sid: vera_doubting
+# loc: right
+Так, хватит спать. Соберись.
+
+# sid: vera_questioning
+# loc: right
+Сколько же часов я спала?..
+
+# sid: vera_neutral
+# loc: right
+Саша? Лида? Дамир?..
+
+# sid: vera_questioning
+# loc: right
+Странно, все ушли куда-то. Не могли же они разойтись по домам и не разбудить меня?
+
+# sid: vera_neutral
+# loc: right
+Надо их разыскать.
 
 -> END

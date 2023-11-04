@@ -39,6 +39,7 @@ signal cutscene_wait_finished()
 signal cutscene_fade_start(type: String, speed: float)
 signal cutscene_fade_finished()
 signal cutscene_remove_object()
+signal cutscene_change_scene(path: String)
 
 # audio
 signal music_play_new(file: String)

@@ -4,6 +4,7 @@ VAR had_first_cockroach_fight = false
 VAR heard_voices = false
 VAR eavesdroped_conversation = false
 VAR had_second_cockroach_fight = false
+VAR had_optional_cockroach_fight = false
 
 -> janitors_room_cockroach
 
@@ -52,6 +53,19 @@ VAR had_second_cockroach_fight = false
 Дверь закрыта.
 -> END
 
+=== room_109 ===
+
+Кабинет 109. Архив.
+
+Дверь закрыта.
+-> END
+
+=== room_108 ===
+
+Кабинет 108. Библиотека института.
+
+Дверь закрыта.
+-> END
 
 === news ===
 Стенгазета "ЗНАНИЕ - СИЛА! ИНСТИТУТСКИЕ ВЕСТИ."
@@ -351,6 +365,29 @@ zavlab
 # sid: vera_scared
 # loc: right
 Что-то не так. Надеюсь, с ребятами всё хорошо...
+
+-> END
+
+=== optional_cockroach_fight ===
+
+~ had_optional_cockroach_fight = true
+
+# sid: vera_neutral
+# loc: right
+ОПЦИОНАЛЬНАЯ ЛИ ЭТО БИТВА? ДА КТО Б ЕГО ЗНАЛ
+
+* [Напасть]
+
+    # sid: vera_neutral
+    # loc: right
+    АРРРРРР
+    ->END
+
+* [Уйти]
+
+    # sid: vera_neutral
+    # loc: right
+    Ну ладно ладно... ХОТЯЯЯЯ
 
 -> END
 

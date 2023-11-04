@@ -17,6 +17,7 @@ func _ready():
 	EventBus.player_interact_pressed.connect(_process_interaction)
 	EventBus.player_interaction_ended.connect(_process_interaction_ended)
 	EventBus.dialog_start.connect(_process_dialog_start)
+	EventBus.dialog_finished.connect(_process_interaction_ended)
 
 
 func _process(_delta):

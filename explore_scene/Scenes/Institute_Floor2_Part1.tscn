@@ -21,7 +21,7 @@ size = Vector2(32, 20)
 y_sort_enabled = true
 position = Vector2(567, 254)
 script = ExtResource("1_6u1w0")
-music_file_name = "horror_ambience.ogg"
+music_file_name = "sorcerers_puppet.mp3"
 
 [node name="Sprite2D3" type="Sprite2D" parent="."]
 z_index = 10
@@ -33,7 +33,7 @@ texture = ExtResource("1_e0xl0")
 z_index = 1
 position = Vector2(-607.941, -252)
 scale = Vector2(2, 0.5)
-scene_name = "res://explore_scene/Scenes/Institute_LabRoom.tscn"
+scene_name = "res://explore_scene/Scenes/Institute_LabRoom_Night.tscn"
 player_position = Vector2(-608, -280)
 player_direction = Vector2(0, 1)
 

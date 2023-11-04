@@ -29,7 +29,7 @@ func _ready():
 				SceneTransition.SceneDataType.BATTLE_ENEMY_DICT: battle_scene_enemies,
 				SceneTransition.SceneDataType.BATTLE_PLAYER_DICT: battle_scene_players
 			}
-			if dialog_data != null && after_battle_dialog_knot != null:
+			if dialog_data != null && after_battle_dialog_knot != "":
 				after_battle_dialog_data = DialogData.new(dialog_resource, dialog_vars, after_battle_dialog_knot)
 	if visibility_flag != null && visibility_flag != "":
 		_update_visible()
