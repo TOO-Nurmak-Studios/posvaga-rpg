@@ -194,18 +194,18 @@ func process_next_sound(file: String):
 
 
 func process_next_music(params: PackedStringArray):
-	var file: String = params[0]
-	var down_seconds = params[1]
-	var up_seconds = params[2]
-	var volume = params[3]
+	var file: String = params[0] if !params.is_empty() else "."
+	var down_seconds = params[1] if params.size() > 1 else "."
+	var up_seconds = params[2] if params.size() > 2 else "."
+	var volume = params[3] if params.size() > 3 else "."
 	EventBus.music_play_new.emit(file, down_seconds, up_seconds, volume)
 
 
 func process_next_env(params: PackedStringArray):
-	var file: String = params[0]
-	var down_seconds = params[1]
-	var up_seconds = params[2]
-	var volume = params[3]
+	var file: String = params[0] if !params.is_empty() else "."
+	var down_seconds = params[1] if params.size() > 1 else "."
+	var up_seconds = params[2] if params.size() > 2 else "."
+	var volume = params[3] if params.size() > 3 else "."
 	EventBus.env_play_new.emit(file, down_seconds, up_seconds, volume)
 
 
