@@ -133,7 +133,7 @@ func process_next_unit(text: String, tags: Array):
 		parsed_tags.erase(sound_tag)
 		
 	if music_tag != null:
-		process_next_music(music_tag.params[0])
+		process_next_music(music_tag.params)
 		parsed_tags.erase(music_tag)
 	
 	if parsed_tags.size() == 0 || parsed_tags[0].type != DialogTag.Type.CUTSCENE_STEP:
@@ -179,8 +179,12 @@ func process_next_sound(file: String):
 	EventBus.sound_play.emit(file)
 
 
-func process_next_music(file: String):
-	EventBus.music_play_new.emit(file)
+func process_next_music(params: PackedStringArray):
+	var file: String = params[0]
+	var down_seconds = params[1]
+	var up_seconds = params[2]
+	var volume = params[3]
+	EventBus.music_play_new.emit(file, down_seconds, up_seconds, volume)
 
 
 func on_cutscene_step_finished():
