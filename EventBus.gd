@@ -47,6 +47,10 @@ signal music_play()
 signal music_pause()
 signal music_stop(down_seconds: String)
 signal sound_play(file: String)
+signal env_play_new(file: String, down_seconds: String, up_sedonds: String, volume: String)
+signal env_play()
+signal env_pause()
+signal env_stop(down_seconds: String)
 
 # game state
 # пока один сигнал на всё - мб нужно будет распилить

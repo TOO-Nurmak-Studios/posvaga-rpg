@@ -9,3 +9,5 @@ script = ExtResource("1_qnklq")
 volume_db = -7.0
 
 [node name="SoundPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="EnvPlayer" type="AudioStreamPlayer" parent="."]
