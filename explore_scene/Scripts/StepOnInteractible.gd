@@ -35,7 +35,7 @@ func _ready():
 			SceneTransition.SceneDataType.BATTLE_PLAYER_DICT: battle_scene_players
 		}
 		# чтобы работало только когда есть и диалог, и баттл сцена
-		if dialog_data != null && after_battle_dialog_knot != null:
+		if dialog_data != null && after_battle_dialog_knot != "":
 			after_battle_dialog_data = DialogData.new(dialog_resource, dialog_vars, after_battle_dialog_knot)
 		
 	if visibility_flag != null && visibility_flag != "":

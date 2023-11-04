@@ -35,7 +35,7 @@ animations = [{
 y_sort_enabled = true
 position = Vector2(567, 254)
 script = ExtResource("1_ian7v")
-music_file_name = "horror_ambience.ogg"
+music_file_name = "sorcerers_puppet.mp3"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = 11

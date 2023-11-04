@@ -11,6 +11,5 @@ func _ready():
 		var parent = get_parent()
 		get_parent().add_child.call_deferred(main)
 		self.queue_free.call_deferred()
- 
 	
 	EventBus.music_play_new.emit(music_file_name)
