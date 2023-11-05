@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bb8dg2qrkshyo"]
+[gd_scene load_steps=14 format=3 uid="uid://bb8dg2qrkshyo"]
 
 [ext_resource type="Script" path="res://explore_scene/Scripts/LocationManager.gd" id="1_awj2c"]
 [ext_resource type="TileSet" uid="uid://yjq3qcumf26f" path="res://explore_scene/Assets/Institute.tres" id="2_k7age"]
@@ -31,6 +31,9 @@ animations = [{
 "speed": 2.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kv8ej"]
+size = Vector2(25, 7.5)
+
 [node name="Institute_Floor1_Part2" type="Node2D"]
 y_sort_enabled = true
 position = Vector2(567, 254)
@@ -59,9 +62,10 @@ layer_2/tile_data = PackedInt32Array()
 
 [node name="Player" parent="." groups=["Player"] instance=ExtResource("3_0lawu")]
 z_index = 1
-position = Vector2(155, 249)
+position = Vector2(180, 103)
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 z_index = 11
 offset_left = -949.0
 offset_top = -655.0
@@ -124,9 +128,10 @@ position = Vector2(-2, 0.5)
 shape = SubResource("RectangleShape2D_2lf3e")
 
 [node name="AnimatedSprite2D" parent="CockroachInteractible2" index="1"]
-position = Vector2(0, -28)
+position = Vector2(0, -17)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_gmedy")
+offset = Vector2(0, -25)
 
 [node name="CockroachInteractible3" parent="." instance=ExtResource("6_rim64")]
 z_index = 1
@@ -162,7 +167,8 @@ battle_scene_enemies = Array[int]([2])
 
 [node name="CollisionShape2D" parent="CockroachesFight" index="0"]
 position = Vector2(19, -1.125)
-scale = Vector2(2, 1)
+scale = Vector2(5, 1)
+shape = SubResource("RectangleShape2D_kv8ej")
 
 [editable path="Teleport_Up"]
 [editable path="Teleport_Down"]

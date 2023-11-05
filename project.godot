@@ -14,7 +14,7 @@ config/name="project-irtysh"
 config/name_localized={
 "ru_RU": "Проект \"ИРТЫШ\""
 }
-run/main_scene="res://main_scene/Main.tscn"
+run/main_scene="res://battle_scene/TestMainScene.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="res://sprites/splash.png"
