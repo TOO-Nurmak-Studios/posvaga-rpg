@@ -1,4 +1,9 @@
 VAR found_command_book_for_sasha = false
+VAR got_wrong_book_1 = false
+VAR got_wrong_book_2 = false
+VAR got_wrong_book_3 = false
+VAR got_wrong_book_4 = false
+VAR got_wrong_book_5 = false
 
 -> start_cutscene 
 
@@ -128,10 +133,13 @@ out 0.1
 
 === talk_sasha ===
 
-{ not found_command_book_for_sasha:
-    -> talk_sasha_book_not_found
-- else:
+{ 
+- found_command_book_for_sasha:
     -> talk_sasha_got_book
+- got_wrong_book_1 || got_wrong_book_2 || got_wrong_book_3 || got_wrong_book_4 || got_wrong_book_5:
+    -> talk_sasha_wrong_book
+- else:
+    -> talk_sasha_book_not_found
 }
 
 === talk_sasha_book_not_found ===
@@ -146,7 +154,7 @@ out 0.1
 Продолжаю поиски.
 
 # sid: sasha_smiling
-Точно помню, что оставил её на столе рядом с тобой. Уверенность абсолютная.
+Точно помню, что оставил её где-то у твоего стола. Уверенность абсолютная.
 
 # sid: vera_doubting
 # loc: right
@@ -155,34 +163,218 @@ out 0.1
 ->END
 
 
-=== wrong_book_floor_1 ===
-<придумать текст>
+=== talk_sasha_wrong_book ===
+# sid: vera_sad
+# loc: right
+Это не та книга?
+
+# sid: sasha_angry
+Нет, совсем не та.
+
+# sid: sasha_smiling
+Точно помню, что оставил её где-то у твоего стола. Уверенность абсолютная.
+
+# sid: vera_doubting
+# loc: right
+Ха, а я бы не была так уверена.
+
 ->END
 
-=== wrong_book_floor_2 ===
-<придумать текст>
+
+=== wrong_book_1 ===
+
+Новгородцев Ю.Е. Развитие архитектуры ЭВМ от БЭСМ-6 до суперкомпьютеров. / Институт системного анализа РАН. - 230 c.
+
+Взять книгу?
+
+* [Взять]
+    
+    ~ got_wrong_book_1 = true
+    
+    # sid: vera_neutral
+    # loc: right
+    Может, подойдет.
+    ->END
+
+* [Уйти]
+
+    # sid: vera_neutral
+    # loc: right
+    Надо поискать ещё.
+    ->END
+
+
+=== wrong_book_2 ===
+
+Мулко, К.Т. Информационная безопасность в контексте актуальных уязвимостей компьютерных систем / БГУИР, – 264 с. : ил.
+
+Взять книгу?
+
+* [Взять]
+    
+    ~ got_wrong_book_2 = true
+    
+    # sid: vera_neutral
+    # loc: right
+    Может, подойдет.
+    ->END
+
+* [Уйти]
+
+    # sid: vera_neutral
+    # loc: right
+    Надо поискать ещё.
+    ->END
+
+
+=== wrong_book_3 ===
+
+Грук С.И. Машина для интегрирования дифференциальных уравнений / Изд-во АН СССР, 1941, - 441 с.
+
+Взять книгу?
+
+* [Взять]
+    
+    ~ got_wrong_book_3 = true
+    
+    # sid: vera_neutral
+    # loc: right
+    Может, подойдет.
+    ->END
+
+* [Уйти]
+
+    # sid: vera_neutral
+    # loc: right
+    Надо поискать ещё.
+    ->END
+
+
+=== wrong_book_4 ===
+
+Нурмаков В.И., Старцева Г.А. Геоинформатика: учебное пособие / Изд-во АмГПГУ - 262 с.
+
+Взять книгу?
+
+* [Взять]
+    
+    ~ got_wrong_book_4 = true
+    
+    # sid: vera_neutral
+    # loc: right
+    Может, подойдет.
+    ->END
+
+* [Уйти]
+
+    # sid: vera_neutral
+    # loc: right
+    Надо поискать ещё.
+    ->END
+
+
+=== wrong_book_5 ===
+
+Демидович Б. П. Сборник задач и упражнений по математическому анализу: Учеб. пособие для вузов / 558, [2] с.: ил.
+
+Взять книгу?
+
+* [Взять]
+    
+    ~ got_wrong_book_5 = true
+    
+    # sid: vera_scared
+    # loc: right
+    Может, не надо...
+    ->END
+
+* [Уйти]
+
+    # sid: vera_neutral
+    # loc: right
+    Надо поискать ещё.
+    ->END
+
+
+=== zavlab_book ===
+# sid: vera_neutral
+# loc: right
+Это папка Владимира Николаевича с геоданными нашей области.
+
+# sid: vera_sad
+# loc: right
+Всё это нам нужно вбить в систему до завтра...
+
+# sid: vera_bored
+# loc: right
+Какая же это скучная работа...
 ->END
 
-=== wrong_book_desk ===
-<придумать текст>
-->END
 
-=== wrong_book_shelf_1 ===
-<придумать текст>
-->END
+=== vera_notes ===
+# sid: vera_neutral
+# loc: right
+Мои заметки, какие-то расчеты. Надо выбросить.
+-> END
 
-=== wrong_book_shelf_2 ===
-<придумать текст>
-->END
 
-=== wrong_book_pile ===
-<придумать текст>
-->END
+=== book_pile ===
+{ 
+- not got_wrong_book_5:
+
+    Одна книга наверху стопки привлекает внимание своей потрёпанной обложкой.
+
+    -> wrong_book_5
+- else:
+    -> book_pile_empty
+}
+
+
+=== book_pile_empty ===
+Ни одна книга в этой куче не привлекает внимания.
+-> END
+
+
+=== book_shelf_1 ===
+Ни одна книга на полке не привлекает внимания.
+-> END
+
+
+=== book_shelf_2 ===
+{ 
+- not found_command_book_for_sasha:
+    -> correct_book
+- else:
+    -> book_shelf_2_empty
+}
+
+=== book_shelf_2_empty ===
+Ни одна книга в этом шкафу не привлекает внимания.
+-> END
 
 === correct_book ===
-~ found_command_book_for_sasha = true
-Та самая книга!
-->END
+
+Неровно стоящая книга привлекает внимание. Кажется, её поставили на полку совсем недавно.
+
+Иванопольский И.А., Швац Е.В., Архитектура и список машинных команд кластерных систем супер-ЭВМ серии "ИРТЫШ" / М.: Наука. - 352 c.
+
+Взять книгу?
+
+* [Взять]
+    
+    ~ found_command_book_for_sasha = true
+    
+    # sid: vera_neutral
+    # loc: right
+    То, что надо.
+    ->END
+
+* [Уйти]
+
+    # sid: vera_neutral
+    # loc: right
+    Надо поискать ещё.
+    ->END
 
 
 === talk_sasha_got_book ===
@@ -192,7 +384,7 @@ out 0.1
 Держи.
 
 # sid: sasha_smiling
-То что надо, спасибо. Так, мне нужна глава про отладку...
+Это оно, спасибо. Так, мне нужна глава про отладку...
 
 # snd: typing.wav
 # sid: sasha_neutral
@@ -431,7 +623,7 @@ damir up 1
 
 # spd: 10
 # snd: glitch.ogg
-оЖиДаеТСя ПоДКЛюЧеееееНиееее
+оЖиДаеТСя ПоДКЛюЧееНие
 # spd: 10
 # snd: glitch.ogg
 0x42 0xA5 0xBC
@@ -445,13 +637,13 @@ damir left
 
 # spd: 10
 # snd: glitch.ogg
-оБуЧеНие ЗаВеРШеНо. ЗаПуСТиТЬ?
+оБуЧеНие ЗаВеРШеНо. ЗаПуСТиТЬ СиСТеМу?
 # spd: 10
 # snd: glitch.ogg
 0x11 0x9C 0xA6
 # spd: 10
 # snd: glitch.ogg
-ТРеБуеТСя ВВоД. ТРеБуеТСя ВВоД. ТРеБуеТСя ВВоД. 
+ТРеБуеТСя ВВоД. ТРеБуеТСя ВВоД.
 
 # cts: wait
 1
@@ -479,7 +671,7 @@ damir up
 
 # spd: 10
 # snd: glitch.ogg
-ПоДКЛюЧиТСя К ТРеНиРоВоЧНоЙ МоДеЛи? 0x55
+ПоДКЛюЧиТСя К ТРеНиРоВоЧНоЙ СиСТеМе? 0x55
 
 # sid: damir_bored
 # loc: right
@@ -526,9 +718,26 @@ out 0.1
 # loc: right
 Саша? Лида? Дамир?..
 
+# cts: turn 
+vera left
+# cts: wait 
+1
+# cts: turn 
+vera right
+# cts: wait 
+1
+# cts: turn 
+vera up
+# cts: wait 
+1
+# cts: turn 
+vera down
+# cts: wait 
+1
+
 # sid: vera_questioning
 # loc: right
-Странно, все ушли куда-то. Не могли же они разойтись по домам и не разбудить меня?
+Странно, все куда-то ушли. Не могли же они разойтись по домам и не разбудить меня?
 
 # sid: vera_neutral
 # loc: right

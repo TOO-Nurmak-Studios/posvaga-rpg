@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://4s4do4mg3bel"]
+[gd_scene load_steps=35 format=3 uid="uid://dqroeaugleken"]
 
 [ext_resource type="Script" path="res://explore_scene/Scripts/LocationManager.gd" id="1_oqmeq"]
 [ext_resource type="PackedScene" uid="uid://clr6m243e5eig" path="res://explore_scene/Scenes/NPC.tscn" id="2_7600q"]
@@ -7,6 +7,7 @@
 [ext_resource type="SpriteFrames" uid="uid://c7kd5ij530u31" path="res://sprites/map/Zavlab.tres" id="5_pl5ue"]
 [ext_resource type="SpriteFrames" uid="uid://cqgbd40ox1kfj" path="res://sprites/map/Lida.tres" id="6_sptcn"]
 [ext_resource type="SpriteFrames" uid="uid://cujrv4kcy70yt" path="res://sprites/map/Damir.tres" id="7_8bmh3"]
+[ext_resource type="Texture2D" uid="uid://bm6j0ph1h14uj" path="res://explore_scene/Assets/Institute_2.png" id="10_fcvvd"]
 [ext_resource type="PackedScene" uid="uid://csl0t86w6bvox" path="res://explore_scene/Scenes/SimpleInteractible.tscn" id="16_qrqcu"]
 [ext_resource type="Texture2D" uid="uid://bloessegf8p4p" path="res://explore_scene/Assets/Institute_3.png" id="17_ihtg1"]
 [ext_resource type="PackedScene" uid="uid://dgipy14v4a35t" path="res://explore_scene/Scenes/Teleport.tscn" id="18_vp22v"]
@@ -25,6 +26,92 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dg044")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ir63i"]
+atlas = ExtResource("10_fcvvd")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ccuoh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ir63i")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wovqx"]
+size = Vector2(25, 45)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cetq7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o72qq"]
+size = Vector2(44, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6qhor"]
+atlas = ExtResource("10_fcvvd")
+region = Rect2(480, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mq7ye"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6qhor")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tmygg"]
+radius = 2.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a2grg"]
+atlas = ExtResource("10_fcvvd")
+region = Rect2(512, 69, 32, 23)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bkcet"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a2grg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_33mmi"]
+atlas = ExtResource("10_fcvvd")
+region = Rect2(416, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e82ra"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_33mmi")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mw8xk"]
+atlas = ExtResource("10_fcvvd")
+region = Rect2(352, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hu1e5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mw8xk")
 }],
 "loop": true,
 "name": &"default",
@@ -84,7 +171,7 @@ script = ExtResource("1_oqmeq")
 z_index = 1
 position = Vector2(-537, -246)
 dialog_resource = ExtResource("3_rbfvd")
-dialog_vars = Array[String](["found_command_book_for_sasha"])
+dialog_vars = Array[String](["found_command_book_for_sasha", "got_wrong_book_1", "got_wrong_book_2", "got_wrong_book_3", "got_wrong_book_4"])
 dialog_knot = "talk_sasha"
 starting_direction = Vector2(0, -1)
 
@@ -120,22 +207,156 @@ starting_direction = Vector2(0, 1)
 sprite_frames = ExtResource("7_8bmh3")
 animation = &"walk_up"
 
-[node name="CorrectBook" parent="." instance=ExtResource("16_qrqcu")]
+[node name="ZavlabBook" parent="." instance=ExtResource("16_qrqcu")]
 z_index = 1
-position = Vector2(-605, -160)
+y_sort_enabled = false
+position = Vector2(-621, -225)
 dialog_resource = ExtResource("3_rbfvd")
-dialog_vars = Array[String](["found_command_book_for_sasha"])
-dialog_knot = "correct_book"
-visibility_flag = "found_command_book_for_sasha"
+dialog_knot = "zavlab_book"
 invert_visibility_flag = true
 
-[node name="CollisionShape2D" parent="CorrectBook" index="0"]
+[node name="CollisionShape2D" parent="ZavlabBook" index="0"]
 position = Vector2(-1.44749, 1.017)
 shape = SubResource("CircleShape2D_c1oij")
 
-[node name="AnimatedSprite2D" parent="CorrectBook" index="1"]
+[node name="AnimatedSprite2D" parent="ZavlabBook" index="1"]
+z_index = 1
+y_sort_enabled = true
 position = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_20thn")
+
+[node name="VeraNotes" parent="." instance=ExtResource("16_qrqcu")]
+z_index = 1
+position = Vector2(-465, -157)
+dialog_resource = ExtResource("3_rbfvd")
+dialog_knot = "vera_notes"
+invert_visibility_flag = true
+
+[node name="CollisionShape2D" parent="VeraNotes" index="0"]
+position = Vector2(0.55251, 4.017)
+shape = SubResource("CircleShape2D_c1oij")
+
+[node name="AnimatedSprite2D" parent="VeraNotes" index="1"]
+position = Vector2(-7, 5)
+sprite_frames = SubResource("SpriteFrames_ccuoh")
+
+[node name="BookShelf2" parent="." instance=ExtResource("16_qrqcu")]
+z_index = 2
+position = Vector2(-455, -305)
+dialog_resource = ExtResource("3_rbfvd")
+dialog_vars = Array[String](["found_command_book_for_sasha"])
+dialog_knot = "book_shelf_2"
+
+[node name="CollisionShape2D" parent="BookShelf2" index="0"]
+position = Vector2(-0.5, -17.5)
+shape = SubResource("RectangleShape2D_wovqx")
+
+[node name="AnimatedSprite2D" parent="BookShelf2" index="1"]
+position = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_cetq7")
+
+[node name="BookShelf" parent="." instance=ExtResource("16_qrqcu")]
+z_index = 2
+position = Vector2(-502, -308)
+dialog_resource = ExtResource("3_rbfvd")
+dialog_knot = "book_shelf_1"
+
+[node name="CollisionShape2D" parent="BookShelf" index="0"]
+position = Vector2(-0.5, -17.5)
+shape = SubResource("RectangleShape2D_wovqx")
+
+[node name="AnimatedSprite2D" parent="BookShelf" index="1"]
+position = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_cetq7")
+
+[node name="BookPile" parent="." instance=ExtResource("16_qrqcu")]
+z_index = 2
+position = Vector2(-433, -157)
+dialog_resource = ExtResource("3_rbfvd")
+dialog_vars = Array[String](["got_wrong_book_5"])
+dialog_knot = "book_pile"
+
+[node name="CollisionShape2D" parent="BookPile" index="0"]
+position = Vector2(3, 2)
+shape = SubResource("RectangleShape2D_o72qq")
+
+[node name="AnimatedSprite2D" parent="BookPile" index="1"]
+position = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_cetq7")
+
+[node name="WrongBook1" parent="." instance=ExtResource("16_qrqcu")]
+z_index = 2
+position = Vector2(-621, -153)
+scale = Vector2(-1, 1)
+dialog_resource = ExtResource("3_rbfvd")
+dialog_vars = Array[String](["got_wrong_book_1"])
+dialog_knot = "wrong_book_1"
+visibility_flag = "got_wrong_book_1"
+invert_visibility_flag = true
+
+[node name="CollisionShape2D" parent="WrongBook1" index="0"]
+position = Vector2(-1.44749, 1.017)
+shape = SubResource("CircleShape2D_c1oij")
+
+[node name="AnimatedSprite2D" parent="WrongBook1" index="1"]
+position = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_mq7ye")
+
+[node name="WrongBook2" parent="." instance=ExtResource("16_qrqcu")]
+z_index = 1
+position = Vector2(-430, -188)
+dialog_resource = ExtResource("3_rbfvd")
+dialog_vars = Array[String](["got_wrong_book_2"])
+dialog_knot = "wrong_book_2"
+visibility_flag = "got_wrong_book_2"
+invert_visibility_flag = true
+
+[node name="CollisionShape2D" parent="WrongBook2" index="0"]
+z_index = 2
+y_sort_enabled = true
+position = Vector2(-2.44749, 5.017)
+shape = SubResource("CircleShape2D_tmygg")
+
+[node name="AnimatedSprite2D" parent="WrongBook2" index="1"]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(-7, 4)
+sprite_frames = SubResource("SpriteFrames_bkcet")
+
+[node name="WrongBook3" parent="." instance=ExtResource("16_qrqcu")]
+z_index = 1
+position = Vector2(-399, -208)
+dialog_resource = ExtResource("3_rbfvd")
+dialog_vars = Array[String](["got_wrong_book_3"])
+dialog_knot = "wrong_book_3"
+visibility_flag = "got_wrong_book_3"
+invert_visibility_flag = true
+
+[node name="CollisionShape2D" parent="WrongBook3" index="0"]
+position = Vector2(-4.44749, 8.017)
+shape = SubResource("CircleShape2D_c1oij")
+
+[node name="AnimatedSprite2D" parent="WrongBook3" index="1"]
+y_sort_enabled = true
+position = Vector2(-1, 0)
+sprite_frames = SubResource("SpriteFrames_e82ra")
+
+[node name="WrongBook4" parent="." instance=ExtResource("16_qrqcu")]
+z_index = 1
+position = Vector2(-501, -162)
+dialog_resource = ExtResource("3_rbfvd")
+dialog_vars = Array[String](["got_wrong_book_4"])
+dialog_knot = "wrong_book_4"
+visibility_flag = "got_wrong_book_4"
+invert_visibility_flag = true
+
+[node name="CollisionShape2D" parent="WrongBook4" index="0"]
+position = Vector2(-5.44749, 9.017)
+shape = SubResource("CircleShape2D_c1oij")
+
+[node name="AnimatedSprite2D" parent="WrongBook4" index="1"]
+position = Vector2(-3, 10)
+sprite_frames = SubResource("SpriteFrames_hu1e5")
 
 [node name="Door" parent="." instance=ExtResource("16_qrqcu")]
 z_index = 1
@@ -180,7 +401,7 @@ layer_1/modulate = Color(1, 1, 1, 1)
 layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
-layer_1/tile_data = PackedInt32Array(-589856, 1441796, 4, -589854, 1048580, 0, -786458, 1703940, 3)
+layer_1/tile_data = PackedInt32Array()
 layer_2/name = "interior"
 layer_2/enabled = true
 layer_2/modulate = Color(1, 1, 1, 1)
@@ -194,7 +415,7 @@ layer_3/modulate = Color(1, 1, 1, 1)
 layer_3/y_sort_enabled = true
 layer_3/y_sort_origin = 16
 layer_3/z_index = 1
-layer_3/tile_data = PackedInt32Array(-983070, 1310724, 4, -720927, 2228228, 2, -720930, 2228228, 2, -720924, 2097156, 4, -852007, 1835012, 4, -1048607, 2097156, 2, -1048604, 2097156, 2, -1048610, 2097156, 2)
+layer_3/tile_data = PackedInt32Array(-983070, 1310724, 4, -720927, 2228228, 2, -720930, 2228228, 2, -1048607, 2097156, 2, -1048604, 2097156, 2, -1048610, 2097156, 2)
 
 [node name="Player" parent="." groups=["Player"] instance=ExtResource("20_plkre")]
 z_index = 1
@@ -213,6 +434,14 @@ color = Color(0, 0, 0, 1)
 [editable path="Zavlab"]
 [editable path="Lida"]
 [editable path="Damir"]
-[editable path="CorrectBook"]
+[editable path="ZavlabBook"]
+[editable path="VeraNotes"]
+[editable path="BookShelf2"]
+[editable path="BookShelf"]
+[editable path="BookPile"]
+[editable path="WrongBook1"]
+[editable path="WrongBook2"]
+[editable path="WrongBook3"]
+[editable path="WrongBook4"]
 [editable path="Door"]
 [editable path="Teleport"]

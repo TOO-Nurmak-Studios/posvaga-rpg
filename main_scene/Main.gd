@@ -42,7 +42,6 @@ func _game_start():
 	SceneTransition.fade_in(5)
 	_change_scene({SceneTransition.SceneDataType.PACKED_SCENE: default_start_scene}, Mode.EXPLORATION)
 	EventBus.dialog_start.emit(start_dialog)
-	#SceneTransition.fade_out(0.02)
 
 func _init_state():
 	var vera = CharacterState.new(100, 100, [], null, null, null)
