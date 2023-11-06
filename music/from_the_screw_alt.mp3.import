@@ -2,7 +2,7 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-uid="uid://by6b2ukm53a0s"
+uid="uid://bbgy8moan0y3k"
 path="res://.godot/imported/from_the_screw_alt.mp3-d7425c475a1d2d3dca53bbbd6af9050f.mp3str"
 
 [deps]
@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/from_the_screw_alt.mp3-d7425c475a1d2d3dca53bb
 [params]
 
 loop=true
-loop_offset=0.0
-bpm=0.0
+loop_offset=0
+bpm=0
 beat_count=0
 bar_beats=4
