@@ -21,7 +21,9 @@ radius = 3.0
 y_sort_enabled = true
 position = Vector2(567, 254)
 script = ExtResource("1_8vph8")
-music_file_name = "rain_interior.ogg"
+music_file_name = "."
+env_file_name = "rain_interior.mp3"
+env_volume = "-15"
 
 [node name="Map" type="TileMap" parent="."]
 y_sort_enabled = true

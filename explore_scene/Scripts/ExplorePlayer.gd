@@ -42,6 +42,11 @@ func _process_sprint_released():
 	footsteps_player.set_no_sprint()
 
 func _process_movement(delta, new_velocity):
+	
+	# наверное это мой самый тупой костыль в этом проекте
+	if !EventBus.player_input_enabled:
+		new_velocity = Vector2.ZERO
+	
 	velocity = new_velocity.normalized() * speed * delta;
 	move_and_collide(velocity)
 	play_animation(velocity)
@@ -65,12 +70,14 @@ func _getInteractibleTarget():
 
 # для диалогов, которые стартуют без инициативы от игрока
 func _process_dialog_start(_dialog_data: DialogData):
+	EventBus.player_input_enabled = false
 	is_interacting = true
 	_process_movement(0, direction)
 
 func _process_interaction():
 	var target = _getInteractibleTarget()
 	if target != null && target.interaction_enabled && !is_interacting:
+		EventBus.player_input_enabled = false
 		is_interacting = true
 		interact_icon.hide()
 		_turn_to_face_target(target)
