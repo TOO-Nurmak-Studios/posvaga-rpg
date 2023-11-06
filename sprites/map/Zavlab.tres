@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=31 format=3 uid="uid://bf2yv7fm6c32t"]
+[gd_resource type="SpriteFrames" load_steps=31 format=3 uid="uid://c7kd5ij530u31"]
 
 [ext_resource type="Texture2D" uid="uid://bl1jbr1hbb4y7" path="res://sprites/map/zavlab_front.png" id="1_0edif"]
 [ext_resource type="Texture2D" uid="uid://c6rseeykk62l7" path="res://sprites/map/zavlab_side.png" id="2_f3bfd"]

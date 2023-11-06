@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=31 format=3 uid="uid://bflns03ts78dm"]
+[gd_resource type="SpriteFrames" load_steps=31 format=3 uid="uid://c1l78xcmxqwia"]
 
 [ext_resource type="Texture2D" uid="uid://c762huwmff7i" path="res://sprites/map/sasha_front.png" id="1_dte4h"]
 [ext_resource type="Texture2D" uid="uid://8tkr3i4galm6" path="res://sprites/map/sasha_side.png" id="2_xt23o"]

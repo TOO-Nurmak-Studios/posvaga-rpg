@@ -16,8 +16,10 @@ signal printing_finished()
 @onready var speaker_name_long_frame = $SpeakerNameLongFrame
 @onready var text_label = $TextLabel
 @onready var sound_player = $PrintSoundPlayer
+@onready var animation_player: AnimationPlayer = $AnimationPlayer 
 
 var full_text: String
+var show_continue_icon_on_finish: bool = true
 var seconds_before_next_symbol: float
 var is_printing: bool
 var print_sound_path: String
@@ -35,7 +37,10 @@ func set_print_sound_path(_print_sound_path: String):
 		sound_player.stream = load(_print_sound_path)
 		print_sound_path = _print_sound_path
 
-func new_replica(replica: ReplicaData):
+func new_replica(replica: ReplicaData, _show_continue_icon_on_finish: bool = true):
+	
+	show_continue_icon_on_finish = _show_continue_icon_on_finish
+	animation_player.play("continue_icon_hide")
 	
 	if replica.speaker != null:
 		speaker_name_label.text = replica.speaker.name
@@ -66,6 +71,7 @@ func clear():
 
 func print_text():
 	var prev_char = ''
+	
 	for char in full_text:
 		await get_tree().create_timer(get_delay(prev_char, char)).timeout
 		if !is_space(char) && !is_punctiation(char):
@@ -74,11 +80,19 @@ func print_text():
 			return
 		text_label.text += char
 		prev_char = char
+	
+	if show_continue_icon_on_finish:
+		animation_player.play("continue_icon_play")
+	
 	is_printing = false
 	printing_finished.emit()
 	
 func show_full_text():
 	text_label.text = full_text
+	
+	if show_continue_icon_on_finish:
+		animation_player.play("continue_icon_play")
+	
 	is_printing = false
 	printing_finished.emit()
 

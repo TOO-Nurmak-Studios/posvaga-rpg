@@ -1,6 +1,7 @@
 extends Node
 
 # костыль, нужно будет поменять. когда добавим смену персонажа
+# влияет на портрет, отображамый при выборах в диалоге
 var main_speaker_id = "vera_neutral"
 
 var speakers_data = {

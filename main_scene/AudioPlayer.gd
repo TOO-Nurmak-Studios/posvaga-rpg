@@ -124,6 +124,7 @@ func stop_music_and_call(down_seconds: float, callable: Callable):
 
 func do_stop_music_and_call(callable: Callable):
 	music_player.stop()
+	music_player.volume_db = min_volume
 	current_music_file = ""
 	current_music_position = 0.0
 	callable.call()
@@ -132,10 +133,14 @@ func do_stop_music_and_call(callable: Callable):
 ## sound
 
 
-func play_sound(sound_file: String):
+func play_sound(sound_file: String, volume: String):
+	
+	var actual_volume = float_or_default(volume, use_default_volume_symbol, default_sound_volume)
+	
 	if sound_player.playing:
 		sound_player.stop()
 	sound_player.stream = load(sound_path_prefix + sound_file)
+	sound_player.volume_db = actual_volume
 	sound_player.play()
 
 
@@ -205,6 +210,7 @@ func stop_env_and_call(down_seconds: float, callable: Callable):
 
 func do_stop_env_and_call(callable: Callable):
 	env_player.stop()
+	env_player.volume_db = min_volume
 	current_env_file = ""
 	current_env_position = 0.0
 	callable.call()

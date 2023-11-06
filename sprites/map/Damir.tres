@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=31 format=3 uid="uid://cey1jjp7ccxi3"]
+[gd_resource type="SpriteFrames" load_steps=31 format=3 uid="uid://cujrv4kcy70yt"]
 
 [ext_resource type="Texture2D" uid="uid://bsnh5ye6gdkjc" path="res://sprites/map/damir_front.png" id="1_efpft"]
 [ext_resource type="Texture2D" uid="uid://v88gfegg2nv5" path="res://sprites/map/damir_side.png" id="2_ojojo"]
