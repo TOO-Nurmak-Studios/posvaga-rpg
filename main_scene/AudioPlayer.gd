@@ -42,6 +42,7 @@ func _ready():
 	EventBus.music_stop.connect(stop_music)
 	EventBus.music_replace.connect(replace_music)
 	EventBus.music_replace_back.connect(replace_back_music)
+	EventBus.music_play_and_replace_back.connect(play_and_replace_back_music)
 	EventBus.sound_play.connect(play_sound)
 	EventBus.env_play_new.connect(play_new_env)
 	EventBus.env_play.connect(play_env)
@@ -102,9 +103,15 @@ func stop_music(down_seconds: float):
 func replace_music(new_music: String):
 	prev_music_file = current_music_file
 	play_new_music(new_music, ".", ".", ".")
-
+	
+func play_and_replace_back_music(new_music: String):
+	play_new_music(new_music, ".", ".", ".")
+	await music_player.finished
+	replace_back_music()	
+		
 func replace_back_music():
 	if prev_music_file == "":
+		pause_music()
 		return
 	var music_to_play = prev_music_file
 	prev_music_file = ""
@@ -142,6 +149,7 @@ func play_sound(sound_file: String, volume: String):
 	sound_player.stream = load(sound_path_prefix + sound_file)
 	sound_player.volume_db = actual_volume
 	sound_player.play()
+		
 
 
 ## env

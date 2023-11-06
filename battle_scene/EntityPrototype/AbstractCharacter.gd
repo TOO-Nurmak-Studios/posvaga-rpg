@@ -67,16 +67,18 @@ func die():
 	await play_death_animation()
 	queue_free()
 	
-func play_death_animation():
+func _death_animation():
 	if !sprite.sprite_frames.has_animation("death"):
 		return
-		
 	sprite.stop()
-	sprite.play("death")	
+	sprite.play("death")
+	await sprite.animation_finished
+	
+func play_death_animation():	
 	if death_sound != null:
 		attack_audio.stream = death_sound
 		attack_audio.play()
-	await sprite.animation_finished
+	await _death_animation()
 
 func get_type() -> CharacterType:
 	return CharacterType.UNKNOWN 

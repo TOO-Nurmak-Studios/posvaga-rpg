@@ -11,7 +11,8 @@ func init_vars(text, font_size):
 func _ready():
 	self.mouse_entered.connect(_on_mouse_enter)
 	self.mouse_exited.connect(_on_mouse_exit)
-	self.text = _text
+	if !disabled:
+		self.text = _text
 	self.add_theme_font_size_override("font_size", _font_size)
 
 func _on_mouse_enter():

@@ -77,16 +77,23 @@ func _on_body_entered(body):
 		EventBus.dialog_start.emit(dialog_data)
 		await EventBus.dialog_finished
 	if is_battle_scene_enabled:
-		EventBus.music_play_new.emit(battle_music_filename)
-		EventBus.battle_request.emit(_battle_scene)
-		var result = await EventBus.battle_scene_end
-		while result != EventBus.BattleEndType.VICTORY:
-			EventBus.dialog_start.emit(try_again_dialog_data)
-			await EventBus.dialog_finished
-			EventBus.battle_request.emit(_battle_scene)
-			result = await EventBus.battle_scene_end
-		EventBus.music_stop.emit()
+		var result = await _start_battle()
+		if result == EventBus.BattleEndType.DEFEAT:
+			await _on_defeat()
 		if after_battle_dialog_data != null:
 			EventBus.dialog_start.emit(after_battle_dialog_data)
 			await EventBus.dialog_finished
 	EventBus.player_interaction_ended.emit()
+
+func _on_defeat():
+	var result = EventBus.BattleEndType.DEFEAT
+	while result != EventBus.BattleEndType.VICTORY:
+		EventBus.dialog_start.emit(try_again_dialog_data)
+		await EventBus.dialog_finished
+		result = await _start_battle()
+
+func _start_battle():
+	EventBus.music_replace.emit(battle_music_filename)
+	EventBus.battle_request.emit(_battle_scene)
+	return await EventBus.battle_scene_end
+		

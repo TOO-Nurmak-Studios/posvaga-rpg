@@ -431,7 +431,6 @@ color = Color(0, 0, 0, 1)
 [node name="Zavlab" parent="." instance=ExtResource("10_cmuvg")]
 z_index = 1
 position = Vector2(-411, 298)
-dialog_vars = null
 dialog_knot = null
 interaction_enabled = null
 char_name = null

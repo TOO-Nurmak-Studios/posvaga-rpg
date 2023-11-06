@@ -188,7 +188,6 @@ offset = Vector2(0, -30)
 z_index = 1
 position = Vector2(-628, 415)
 dialog_resource = ExtResource("6_5mlkl")
-dialog_vars = Array[String](["had_optional_cockroach_fight"])
 dialog_knot = "optional_cockroach_fight"
 visibility_flag = "had_optional_cockroach_fight"
 invert_visibility_flag = true

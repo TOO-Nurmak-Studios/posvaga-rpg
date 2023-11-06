@@ -154,7 +154,6 @@ sprite_frames = SubResource("SpriteFrames_gmedy")
 z_index = 1
 position = Vector2(157, -6)
 dialog_resource = ExtResource("7_ak4m5")
-dialog_vars = Array[String](["had_second_cockroach_fight"])
 dialog_knot = "hallway_cockroaches"
 visibility_flag = "had_second_cockroach_fight"
 invert_visibility_flag = true
@@ -164,6 +163,7 @@ is_battle_scene_enabled = true
 battle_scene_type = 1
 battle_scene_players = Array[int]([0])
 battle_scene_enemies = Array[int]([2])
+battle_music_filename = "from_the_screw.mp3"
 
 [node name="CollisionShape2D" parent="CockroachesFight" index="0"]
 position = Vector2(19, -1.125)

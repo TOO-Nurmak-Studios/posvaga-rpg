@@ -46,6 +46,7 @@ signal cutscene_change_scene(path: String)
 
 # audio
 signal music_play_new(file: String, down_seconds: String, up_seconds: String, volume: String)
+signal music_play_and_replace_back(file: String)
 signal music_play()
 signal music_pause()
 signal music_stop(down_seconds: String)

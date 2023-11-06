@@ -396,6 +396,7 @@ zavlab
 === hallway_cockroaches ===
 
 ~ had_second_cockroach_fight = true
+~ lab_has_book = true
 
 # sid: vera_neutral
 # loc: right

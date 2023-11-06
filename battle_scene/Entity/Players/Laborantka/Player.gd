@@ -31,7 +31,7 @@ func _try_add_book():
 func get_type() -> CharacterType:
 	return CharacterType.PLAYER 
 	
-func play_death_animation():
+func _death_animation():
 	sprite.material = shader.duplicate()
 	var sh_tween = get_tree().create_tween()
 	sh_tween.tween_property(sprite.material, "shader_parameter/progress", 1, 2)

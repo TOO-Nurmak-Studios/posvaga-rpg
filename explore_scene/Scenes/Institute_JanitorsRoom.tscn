@@ -49,7 +49,6 @@ color = Color(0, 0, 0, 0.509804)
 z_index = 1
 position = Vector2(-602, -311)
 dialog_resource = ExtResource("3_hrtm2")
-dialog_vars = Array[String](["had_first_cockroach_fight"])
 dialog_knot = "janitors_room_cockroach"
 visibility_flag = "had_first_cockroach_fight"
 invert_visibility_flag = true
@@ -58,8 +57,8 @@ is_battle_scene_enabled = true
 is_battle_dialogue_enabled = true
 battle_dialog_triggers = Array[int]([0, 1, 2])
 battle_dialog_knots = Array[String](["first_cockroach_on_start", "first_cockroach_on_first_attack", "first_cockroach_on_second_attack"])
-battle_music_filename = "hey_now.mp3"
-battle_scene_players = Array[int]([0, 0])
+battle_music_filename = "from_the_screw_alt.mp3"
+battle_scene_players = Array[int]([0])
 battle_scene_enemies = Array[int]([3])
 
 [node name="CollisionShape2D" parent="CockroachInteractible" index="0"]

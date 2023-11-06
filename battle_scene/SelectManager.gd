@@ -135,6 +135,8 @@ func set_select_state(new_state: SelectState):
 				if moved_players.has(selected_player()):
 					select(Select.NEXT)
 				selected_player().select()
+			if selected_enemy() != null:
+				selected_enemy().unselect()	
 
 func selected_player() -> AbstractCharacter:
 	#return selected_char[CharType.PLAYER]

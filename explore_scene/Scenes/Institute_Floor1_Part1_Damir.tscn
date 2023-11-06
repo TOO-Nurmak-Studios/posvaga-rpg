@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dl4uacvvm7hiu" path="res://explore_scene/Assets/black_gradient.png" id="2_6w22t"]
 [ext_resource type="TileSet" uid="uid://yjq3qcumf26f" path="res://explore_scene/Assets/Institute.tres" id="4_fh0j8"]
 [ext_resource type="PackedScene" uid="uid://cpyg0dy7ijwm2" path="res://explore_scene/Scenes/player.tscn" id="5_7s0tl"]
-[ext_resource type="SpriteFrames" uid="uid://cey1jjp7ccxi3" path="res://sprites/map/Damir.tres" id="5_sk12b"]
+[ext_resource type="SpriteFrames" uid="uid://cujrv4kcy70yt" path="res://sprites/map/Damir.tres" id="5_sk12b"]
 [ext_resource type="PackedScene" uid="uid://csl0t86w6bvox" path="res://explore_scene/Scenes/SimpleInteractible.tscn" id="6_xwwo5"]
 [ext_resource type="Resource" uid="uid://cuti6wqk8m383" path="res://dialog_scene/ink/institute.ink.json" id="7_f6px6"]
 

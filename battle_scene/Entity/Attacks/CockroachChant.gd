@@ -41,7 +41,9 @@ func _calculate_position(attacker: Cockroach, small_cockroach: SmallCockroach):
 	var new_spawn_size = small_cockroach.sprite.sprite_frames.get_frame_texture("idle", 0).get_size() * small_cockroach.scale
 	var spawn_point = attacker_size * 0.5 + new_spawn_size * 0.5 + Vector2(spawn_distance, spawn_distance)
 	while true:
-		var angle = rand.randf_range(1.57, 4.71)
+		rand.randomize()
+		var deg = rand.randf_range(115, 155)# * (rand.randi_range(0, 1) * 2 - 1)
+		var angle = deg_to_rad(deg)
 		var new_spawn = spawn_point.rotated(angle)
 		if !get_viewport().get_visible_rect().has_point(spawner_position + new_spawn):
 			continue

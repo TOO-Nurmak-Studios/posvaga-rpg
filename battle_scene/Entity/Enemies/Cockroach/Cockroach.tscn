@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bgybbtokpmwlg"]
+[gd_scene load_steps=35 format=3 uid="uid://bgybbtokpmwlg"]
 
 [ext_resource type="Script" path="res://battle_scene/Entity/Enemies/Cockroach/Cockroach.gd" id="1_8o6um"]
 [ext_resource type="PackedScene" uid="uid://qy81h3pjkt1f" path="res://battle_scene/EntityPrototype/HealthNode.tscn" id="2_jicok"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://c0rru4u0va64y" path="res://sfx/battle_scene/big_cockroach_spawn.wav" id="3_njckr"]
 [ext_resource type="Shader" path="res://battle_scene/HUD/Shaders/outline_shader.gdshader" id="3_r122x"]
 [ext_resource type="Texture2D" uid="uid://djhcvuq6cctaq" path="res://sprites/Enemies/big_cockroach/bite1_1 (1).png" id="3_wa7gi"]
+[ext_resource type="AudioStream" uid="uid://bfjmuof0augqo" path="res://sfx/battle_scene/small_cockroach_death.wav" id="4_i2xl6"]
 [ext_resource type="Texture2D" uid="uid://d2gtd3nliih07" path="res://sprites/Enemies/big_cockroach/bite2.png" id="4_m70lu"]
 [ext_resource type="Texture2D" uid="uid://d25dm2g0y2ca5" path="res://sprites/Enemies/big_cockroach/death2.png" id="4_u0ucp"]
 [ext_resource type="Texture2D" uid="uid://dg6ttvvmebt2x" path="res://sprites/Enemies/big_cockroach/death3.png" id="5_2nlna"]
@@ -184,6 +185,7 @@ script = ExtResource("1_8o6um")
 attack_stream = ExtResource("2_qetuw")
 spawn_stream = ExtResource("3_njckr")
 char_name = "Большой кокроч"
+death_sound = ExtResource("4_i2xl6")
 
 [node name="HealthNode" parent="." instance=ExtResource("2_jicok")]
 position = Vector2(-64, -64)

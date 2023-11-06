@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://daury0h1nbxnw"]
+[gd_scene load_steps=44 format=3 uid="uid://daury0h1nbxnw"]
 
 [ext_resource type="Script" path="res://battle_scene/Entity/Players/Laborantka/Player.gd" id="1_t3ib5"]
 [ext_resource type="AudioStream" uid="uid://buq2vpsig0boa" path="res://sfx/battle_scene/lab_kick.wav" id="2_7p0fr"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://dfvnym4wjybhk" path="res://sfx/battle_scene/lab_book_throw.wav" id="4_x5jo1"]
 [ext_resource type="Texture2D" uid="uid://c02ydfbrnc3fx" path="res://sprites/Players/Laborantka/idle/12.png" id="5_82f6m"]
 [ext_resource type="AudioStream" uid="uid://bqxjme8c3hwfr" path="res://sfx/battle_scene/lab_book_impact.wav" id="5_t0uqc"]
+[ext_resource type="AudioStream" uid="uid://bhtars0yddwp0" path="res://sfx/battle_scene/lab_death.wav" id="6_xecj7"]
 [ext_resource type="Texture2D" uid="uid://hhowpykjo65g" path="res://sprites/Players/Laborantka/kick/1.png" id="7_3ix2s"]
 [ext_resource type="Texture2D" uid="uid://d320jygqbnnky" path="res://sprites/Players/Laborantka/walk/1.png" id="7_326bl"]
 [ext_resource type="Texture2D" uid="uid://d3nbsuvpux0rf" path="res://sprites/Players/Laborantka/walk/2.png" id="8_bgl8g"]
@@ -202,6 +203,7 @@ def_stream = ExtResource("3_yvf0o")
 book_stream = ExtResource("4_x5jo1")
 book_impact_stream = ExtResource("5_t0uqc")
 char_name = "Лаборантка"
+death_sound = ExtResource("6_xecj7")
 
 [node name="HealthNode" parent="." instance=ExtResource("2_83v14")]
 position = Vector2(-52, -50)

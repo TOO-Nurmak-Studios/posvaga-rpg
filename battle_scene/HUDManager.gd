@@ -105,7 +105,7 @@ func _action_pressed():
 
 func _action_back_pressed():
 	if current_state == State.SELECT_ENEMY:
-		change_state(State.SELECT_ATTACK)
+		change_state(State.SELECT_PLAYER)
 	return	
 	
 func _attack_pressed(i: int):
@@ -285,6 +285,8 @@ func _create_attack_menu(character: AbstractCharacter):
 		attack.cooldown_end.connect(button.enable_button)
 		button.add_theme_font_override("font", font)
 		button.add_to_group("button")
+		if attack._cooldown != 0:
+			button.disable_button(attack._cooldown)
 		button_children.append(button)
 		#current_attack_container.button_container.add_child.call_deferred(button)
 	current_attack_container.init(button_children)
