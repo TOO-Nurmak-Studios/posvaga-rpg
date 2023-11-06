@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://explore_scene/Scripts/LocationManager.gd" id="1_oqmeq"]
 [ext_resource type="PackedScene" uid="uid://clr6m243e5eig" path="res://explore_scene/Scenes/NPC.tscn" id="2_7600q"]
 [ext_resource type="Resource" uid="uid://cv6etewqsabw" path="res://dialog_scene/ink/institute_start.ink.json" id="3_rbfvd"]
-[ext_resource type="SpriteFrames" uid="uid://bflns03ts78dm" path="res://sprites/map/Sasha.tres" id="4_115d2"]
-[ext_resource type="SpriteFrames" uid="uid://bf2yv7fm6c32t" path="res://sprites/map/Zavlab.tres" id="5_pl5ue"]
-[ext_resource type="SpriteFrames" uid="uid://bty2rmw0cgdd2" path="res://sprites/map/Lida.tres" id="6_sptcn"]
-[ext_resource type="SpriteFrames" uid="uid://cey1jjp7ccxi3" path="res://sprites/map/Damir.tres" id="7_8bmh3"]
+[ext_resource type="SpriteFrames" uid="uid://c1l78xcmxqwia" path="res://sprites/map/Sasha.tres" id="4_115d2"]
+[ext_resource type="SpriteFrames" uid="uid://c7kd5ij530u31" path="res://sprites/map/Zavlab.tres" id="5_pl5ue"]
+[ext_resource type="SpriteFrames" uid="uid://cqgbd40ox1kfj" path="res://sprites/map/Lida.tres" id="6_sptcn"]
+[ext_resource type="SpriteFrames" uid="uid://cujrv4kcy70yt" path="res://sprites/map/Damir.tres" id="7_8bmh3"]
 [ext_resource type="Texture2D" uid="uid://bm6j0ph1h14uj" path="res://explore_scene/Assets/Institute_2.png" id="10_fcvvd"]
 [ext_resource type="PackedScene" uid="uid://csl0t86w6bvox" path="res://explore_scene/Scenes/SimpleInteractible.tscn" id="16_qrqcu"]
 [ext_resource type="Texture2D" uid="uid://bloessegf8p4p" path="res://explore_scene/Assets/Institute_3.png" id="17_ihtg1"]
@@ -195,7 +195,6 @@ sprite_frames = ExtResource("5_pl5ue")
 z_index = 1
 position = Vector2(-489, -246)
 dialog_resource = ExtResource("3_rbfvd")
-dialog_vars = Array[String](["talked_to_lida"])
 dialog_knot = "talk_lida"
 starting_direction = Vector2(0, -1)
 
@@ -206,7 +205,6 @@ sprite_frames = ExtResource("6_sptcn")
 z_index = 1
 position = Vector2(-536, -193)
 dialog_resource = ExtResource("3_rbfvd")
-dialog_vars = Array[String](["talked_to_damir"])
 dialog_knot = "talk_damir"
 starting_direction = Vector2(0, 1)
 

@@ -79,6 +79,7 @@ func start(_dialog_data: DialogData):
 		var var_val = GameState.vars.get(var_name)
 		if var_val != null && ink_player.get_variable(var_name) != null: # проверяем, что в стори такая переменная заранее объявлена
 			ink_player.set_variable(var_name, var_val)
+	
 	_lock_player()
 	show()
 	

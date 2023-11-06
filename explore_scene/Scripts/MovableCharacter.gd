@@ -7,7 +7,7 @@ var directions = [NormalizedDirection.LEFT, NormalizedDirection.RIGHT, Normalize
 @export var char_name: String = ""
 
 @export var default_speed: float = 50
-@export var sprint_speed_modifier: float = 1.5
+@export var sprint_speed_modifier: float = 1.4
 @export var starting_direction = Vector2.ZERO
 
 @onready var animation_node: AnimatedSprite2D = $AnimatedSprite2D as AnimatedSprite2D

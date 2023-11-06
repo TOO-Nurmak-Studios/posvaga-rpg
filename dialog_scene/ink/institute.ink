@@ -2,6 +2,7 @@ VAR tried_stairs_doors = false
 VAR called_for_friends = false
 VAR had_first_cockroach_fight = false
 VAR heard_voices = false
+VAR hallway_blocked = false
 VAR eavesdroped_conversation = false
 VAR had_second_cockroach_fight = false
 VAR had_optional_cockroach_fight = false
@@ -23,14 +24,14 @@ VAR lab_has_book = false
 
 # sid: vera_neutral
 # loc: right
-Может, они на первом этаже? Или решили выйти на улицу, несмотря на дождь?..
+Может, они на первом этаже? Или решили выйти на улицу?..
 
 -> END
 
 
 === room_201 ===
 
-Кабинет 201. Личный кабинет Владимира Николаевича.
+Кабинет 201. Личный кабинет Владимира Николаевича, заведующего лабораторией экспериментального геомоделирования.
 
 Дверь закрыта.
 -> END
@@ -129,6 +130,10 @@ VAR lab_has_book = false
 
 === stairs_door_alternative ===
 Проход к лестинце закрыт. Нужен ключ.
+
+# sid: vera_neutral
+# loc: right
+Стоит поискать ключ в подсобном помещении.
 ->END
 
 
@@ -211,6 +216,7 @@ VAR lab_has_book = false
 
 === voices ===
 ~ heard_voices = true
+~ hallway_blocked = true
 
 # sid: vera_doubting
 # loc: right
@@ -222,6 +228,10 @@ VAR lab_has_book = false
 Рядом точно кто-то есть. Но на ребят не похоже...
 
 -> END
+
+
+=== hallway_stop ===
+-> downstairs_stop
 
 
 === downstairs_stop ===
@@ -246,6 +256,7 @@ VAR lab_has_book = false
 
 === director_zavlab_conversation ===
 ~ eavesdroped_conversation = true
+~ hallway_blocked = false
 
 ...вынужден повторить: это черезвычайное происшествие, медлить нельзя...
 
@@ -253,10 +264,11 @@ VAR lab_has_book = false
 # loc: right
 (Владимир Николаевич? Я думала, он давно ушёл домой...)
 
-# mus: accumulator.mp3
+# mus: accumulator_alt.mp3
 # sid: zavlab_shouting
 Иосиф Юлианыч, послушайте. На кону нечто большее, чем успех проекта...
 
+# spd: 15
 # sid: director_neutral
 Я всё понимаю. Но стоит избегать поспешных решений.
 
@@ -274,6 +286,7 @@ VAR lab_has_book = false
 # sid: zavlab_scared
 И он может попытаться подключить кого-то, что ещё хуже...
 
+# spd: 15
 # sid: director_concerned
 Но ведь вы приняли сдерживающие меры первого уровня?
 
@@ -283,6 +296,7 @@ VAR lab_has_book = false
 # sid: zavlab_scared
 Сейчас я предлагаю немедленное уничтожение...
 
+# spd: 16
 # sid: director_concerned
 Исключено. Мы не можем себе этого позволить - особенно за день до встречи с партийным руководством.
 
@@ -295,18 +309,19 @@ VAR lab_has_book = false
 # sid: director_concerned
 Изолируйте программу, не допустив потери данных и оборудования. Обученную модель нужно сохранить для прототипа.
 
+# spd: 14
 # sid: director_angry
 И... о произошедшем не должен знать никто.
 
 # sid: director_angry
-Есть ли кто-то в здании кто-то кроме нас?
+Есть ли в здании кто-нибудь, кроме нас?
 
 # sid: vera_scared
 # loc: right
 !!!
 
 # sid: zavlab_scared
-Э... нет, никого не должно быть. И-и выходы все заблокированы в рамках мер первого уровня.
+Э... нет, никого не должно быть. И-и выходы были заблокированы в рамках мер первого уровня.
 
 # sid: director_concerned
 Отлично. Значит, обойдется без жертв.
@@ -352,16 +367,24 @@ door close
 zavlab right 16 sprint
 # cts: remv
 zavlab
+# mus: . 2
 # cts: wait
 2
+
 
 # sid: vera_scared
 # loc: right
 ...
-# mus: .
 # sid: vera_scared
 # loc: right
 Фууух...
+
+# cts: wait
+1
+# cts: turn
+vera right
+# cts: wait
+1
 
 # sid: vera_scared
 # loc: right
@@ -477,15 +500,21 @@ in 0.25
 -> END
 
 === battle_failed ===
-
-К сожалению, вы проиграли. Попробуйте еще раз.
+Вы проиграли! Попробуйте еще раз...
 -> END
 
 === first_cockroach_on_start ===
 
+# sid: vera_bored
+# loc: right
+Он всё ещё не сдвинулся с места... Пора его раздавить!
+
 В сражении вы по очереди с противником применяете разные способности.
-Нажмите стрелку вправо для перехода в режим выбора способностей.
-Способности можно выбирать с помощью стрелок.
+
+Для перехода в режим выбора способностей нажмите стрелку "вправо".
+
+Способности можно выбирать с помощью стрелок "вниз" и "вверх".
+
 Попробуйте атаковать врага, выбрав способность "Пинок". 
 -> END
 

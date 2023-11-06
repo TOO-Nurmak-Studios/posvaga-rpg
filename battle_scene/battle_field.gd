@@ -9,7 +9,7 @@ var _dialogue
 var shader = preload("res://battle_scene/HUD/Shaders/ShaderBlur.tres")
 
 # battle start constants
-const start_time = 1
+const start_time = 1.5
 const start_scale = 0.5
 
 @onready var select_manager: SelectManager = $SubViewport/SelectManager as SelectManager
@@ -74,7 +74,7 @@ func play_battle_start_effect():
 	tween.tween_property(sprite, "scale", Vector2(1, 1), start_time)
 	tween.tween_callback(sprite.queue_free)
 	tween.tween_callback(sprite_before_battle.queue_free)
-	tween.tween_interval(1.0)
+	tween.tween_interval(2.0)
 	tween.tween_callback(launch_battle)
 	add_child(sprite)
 

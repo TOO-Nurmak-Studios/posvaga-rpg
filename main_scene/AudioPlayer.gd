@@ -58,12 +58,13 @@ func play_new_music(
 					up_seconds: String,
 					volume: String):
 	
-	if music_file == current_music_file:
-		return
-	
 	var actual_down_seconds = float_or_default(down_seconds, use_default_down_seconds_symbol, default_down_seconds)
 	var actual_up_seconds = float_or_default(up_seconds, use_default_up_seconds_symbol, default_up_seconds)
 	var actual_volume = float_or_default(volume, use_default_volume_symbol, default_music_volume)
+	
+	if music_file == current_music_file:
+		music_player.volume_db = actual_volume
+		return
 	
 	if music_file == no_music_symbol || music_file == null || music_file.is_empty():
 		stop_music(actual_down_seconds)
@@ -161,12 +162,13 @@ func play_new_env(
 					up_seconds: String,
 					volume: String):
 	
-	if env_file == current_env_file:
-		return
-	
 	var actual_down_seconds = float_or_default(down_seconds, use_default_down_seconds_symbol, default_down_seconds)
 	var actual_up_seconds = float_or_default(up_seconds, use_default_up_seconds_symbol, default_up_seconds)
 	var actual_volume = float_or_default(volume, use_default_volume_symbol, default_env_volume)
+	
+	if env_file == current_env_file:
+		env_player.volume_db = actual_volume
+		return
 	
 	if env_file == no_env_symbol || env_file == null || env_file.is_empty():
 		stop_env(actual_down_seconds)

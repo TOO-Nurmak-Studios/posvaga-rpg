@@ -21,7 +21,10 @@ size = Vector2(32, 20)
 y_sort_enabled = true
 position = Vector2(567, 254)
 script = ExtResource("1_6u1w0")
-music_file_name = "sorcerers_puppet.mp3"
+music_file_name = "horror_ambience.ogg"
+music_volume = "-5"
+env_file_name = "rain_interior.mp3"
+env_volume = "-30"
 
 [node name="Sprite2D3" type="Sprite2D" parent="."]
 z_index = 10
@@ -53,6 +56,10 @@ visibility_flag = "tried_stairs_doors"
 position = Vector2(-0.500001, -136.003)
 rotation = 0.0
 scale = Vector2(0.15625, 0.0937236)
+
+[node name="CollisionShape2D" parent="Teleport_JanitorsRoom" index="1"]
+z_index = 1
+position = Vector2(-0.5, 8)
 
 [node name="Teleport_OtherFloorpart" parent="." groups=["Teleport"] instance=ExtResource("2_nwupr")]
 z_index = 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://djfy7hf3ancjl"]
+[gd_scene load_steps=49 format=3 uid="uid://djfy7hf3ancjl"]
 
 [ext_resource type="Script" path="res://explore_scene/Scripts/LocationManager.gd" id="1_h12uj"]
 [ext_resource type="PackedScene" uid="uid://dgipy14v4a35t" path="res://explore_scene/Scenes/Teleport.tscn" id="3_sqm0o"]
@@ -19,6 +19,9 @@ size = Vector2(64, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_61646"]
 size = Vector2(32, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_83ca0"]
+size = Vector2(25, 13)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x6j70"]
 size = Vector2(30, 12)
@@ -290,6 +293,8 @@ animations = [{
 y_sort_enabled = true
 position = Vector2(567, 254)
 script = ExtResource("1_h12uj")
+env_file_name = "rain_interior.mp3"
+env_volume = "-26"
 
 [node name="Teleport_Hallway" parent="." groups=["Teleport"] instance=ExtResource("3_sqm0o")]
 z_index = 1
@@ -358,6 +363,17 @@ invert_visibility_flag = true
 position = Vector2(0, 0)
 shape = SubResource("RectangleShape2D_wjtsl")
 
+[node name="HallwayStop" parent="." instance=ExtResource("6_s7mi7")]
+z_index = 1
+position = Vector2(176, 334)
+dialog_resource = ExtResource("7_1dr4r")
+dialog_knot = "hallway_stop"
+visibility_flag = "hallway_blocked"
+
+[node name="CollisionShape2D" parent="HallwayStop" index="0"]
+position = Vector2(0, 0)
+shape = SubResource("RectangleShape2D_wjtsl")
+
 [node name="ToiletDoor" parent="." instance=ExtResource("6_s7mi7")]
 z_index = 1
 position = Vector2(0, 381)
@@ -387,10 +403,12 @@ visibility_flag = "heard_voices"
 invert_visibility_flag = true
 
 [node name="CollisionShape2D" parent="HeardVoices" index="0"]
-position = Vector2(9.5, -2.1875)
-scale = Vector2(2, 1)
+position = Vector2(18.5, -2.1875)
+scale = Vector2(3, 1)
+shape = SubResource("RectangleShape2D_83ca0")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 z_index = 11
 offset_left = -949.0
 offset_top = -655.0
@@ -444,6 +462,7 @@ sprite_frames = SubResource("SpriteFrames_mfkee")
 [editable path="Teleport_Hallway"]
 [editable path="Teleport_Downstairs"]
 [editable path="OtherFloorPartStop"]
+[editable path="HallwayStop"]
 [editable path="ToiletDoor"]
 [editable path="Room209"]
 [editable path="HeardVoices"]
