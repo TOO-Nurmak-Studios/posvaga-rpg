@@ -4,6 +4,7 @@ class_name BattleField
 var battle_background: BattleBackground
 var _players
 var _enemies
+var _dialogue
 
 var shader = preload("res://battle_scene/HUD/Shaders/ShaderBlur.tres")
 
@@ -16,11 +17,13 @@ const start_scale = 0.5
 @onready var swp: SubViewport = $SubViewport as SubViewport
 @onready var swp_sprite: Sprite2D = $ViewportSprite as Sprite2D
 @onready var battle_manager: BattleManager = $SubViewport/BattleManager as BattleManager
+@onready var dialogue_manager: BattleDialogueManager = $SubViewport/BattleDialogueManager as BattleDialogueManager
 
-func init(back: BattleBackground, players, enemies):
+func init(back: BattleBackground, players, enemies, dialogue: Dictionary):
 	battle_background = back
 	_players = players
 	_enemies = enemies
+	_dialogue = dialogue
 	
 func _ready():
 	swp.add_child(battle_background)
@@ -42,6 +45,7 @@ func _ready():
 	select_manager.start()
 	battle_manager.start()
 	hud_manager.start()
+	dialogue_manager.init(_dialogue)
 	
 	play_battle_start_effect()
 	EventBus.battle_scene_fade_away.connect(play_battle_end_effect)
@@ -70,11 +74,16 @@ func play_battle_start_effect():
 	tween.tween_property(sprite, "scale", Vector2(1, 1), start_time)
 	tween.tween_callback(sprite.queue_free)
 	tween.tween_callback(sprite_before_battle.queue_free)
-	tween.tween_callback(hud_manager.enable_player_movement)
-	tween.tween_callback(battle_manager.start_next_round)
+	tween.tween_interval(1.0)
+	tween.tween_callback(launch_battle)
 	add_child(sprite)
 
-func play_battle_end_effect():
+func launch_battle():
+	hud_manager.enable_player_movement()
+	battle_manager.start_next_round()
+	EventBus.emit_battle_scene_start()
+
+func play_battle_end_effect(result):
 	await RenderingServer.frame_post_draw
 	var sprite_end_battle = Sprite2D.new() as Sprite2D
 	sprite_end_battle.position = get_viewport().get_visible_rect().size / 2
@@ -92,4 +101,5 @@ func play_battle_end_effect():
 	tween.tween_interval(start_time)
 	tween.tween_property(sprite_end_battle, "scale", Vector2(start_scale, start_scale), start_time)
 	tween.tween_callback(sprite_end_battle.queue_free)
-	tween.tween_callback(EventBus.emit_battle_scene_end)
+	tween.tween_callback(EventBus.emit_battle_scene_end.bind(result))
+	#tween.tween_callback(queue_free)

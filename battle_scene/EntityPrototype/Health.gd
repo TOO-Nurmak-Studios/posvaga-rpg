@@ -19,7 +19,6 @@ func remove_health(i: int):
 	health_changed.emit(old_hp, health)
 	if old_hp > 0 && health <= 0:
 		zero_health.emit()
-	pass	
 	
 func add_damage_reduction(dmg_red: float):
 	health_bar.enable_defense()

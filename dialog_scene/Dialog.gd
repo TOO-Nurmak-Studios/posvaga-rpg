@@ -10,7 +10,7 @@ const back_change_color_seconds = 0.3
 @export var speakers_bottom: float = 360
 @export var speakers_speed: float = 2000
 
-@onready var ink_player = $InkPlayer
+@onready var ink_player = $InkPlayer as InkPlayer
 @onready var replicas_box = $ReplicasBox
 @onready var choices_box = $ChoicesBox
 @onready var color_rect = $ColorRect
@@ -39,7 +39,7 @@ func _ready():
 	# для отладки самой сцены стартуем сразу,
 	# иначе показываем только при вызове start
 	if get_tree().current_scene == self:
-		var test_dialog = DialogData.new(ink_file, [])
+		var test_dialog = DialogData.new(ink_file)
 		start(test_dialog)
 
 
@@ -75,11 +75,14 @@ func start(_dialog_data: DialogData):
 		ink_player.choose_path(dialog_data.starting_knot)
 	
 	# загружаем игровые переменные в инк
-	for var_name in dialog_data.var_names:
+	#for var_name in dialog_data.var_names:
+	#	var var_val = GameState.vars.get(var_name)
+	#	if var_val != null:
+	#		ink_player.set_variable(var_name, var_val)
+	for var_name in GameState.vars:
 		var var_val = GameState.vars.get(var_name)
 		if var_val != null:
 			ink_player.set_variable(var_name, var_val)
-
 	_lock_player()
 	show()
 	
@@ -291,7 +294,11 @@ func finish():
 	hide_current_speakers()
 	
 	# выгружаем игровые переменные в глобальный стейт
-	for var_name in dialog_data.var_names:
+	#for var_name in dialog_data.var_names:
+	#	var var_val = ink_player.get_variable(var_name)
+	#	GameState.set_var(var_name, var_val)
+	
+	for var_name in get_vars():
 		var var_val = ink_player.get_variable(var_name)
 		GameState.set_var(var_name, var_val)
 	
@@ -319,3 +326,7 @@ func _unlock_player():
 ## TODO: for tests, remove
 func _on_option_chosen(option_id):
 	print(option_id)
+
+func get_vars() -> Dictionary: # Dictionary<String, InkObject>
+	# по-мужски залезаем через два прайват поля чтобы вытащить ебучие переменные
+	return ink_player._story.variables_state._global_variables

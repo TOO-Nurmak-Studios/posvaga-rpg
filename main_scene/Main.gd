@@ -13,7 +13,7 @@ const default_start_scene = preload("res://explore_scene/Scenes/Institute_LabRoo
 const default_start_dialog = preload("res://dialog_scene/ink/institute_start.ink.json")
 
 var start_scene: Resource
-var start_dialog = DialogData.new(default_start_dialog, [])
+var start_dialog = DialogData.new(default_start_dialog)
 
 func init(_start_scene_name: String):
 	if _start_scene_name != null && _start_scene_name != "":
@@ -68,7 +68,7 @@ func _cutscene_change_scene(scene_path: String):
 func _battle(scene_data: Dictionary):
 	_change_scene(scene_data, Mode.BATTLE)
 
-func _battle_finished():
+func _battle_finished(_a):
 	current_exploration_scene.show()
 	current_exploration_scene.set_process(true)
 	current_exploration_scene.set_physics_process(true)
@@ -110,7 +110,8 @@ func _change_scene(
 		current_battle_scene = BattleScene.instantiate_battle_scene(
 			new_scene_data[SceneTransition.SceneDataType.BATTLE_BACK_TYPE],
 			new_scene_data[SceneTransition.SceneDataType.BATTLE_PLAYER_DICT],
-			new_scene_data[SceneTransition.SceneDataType.BATTLE_ENEMY_DICT]
+			new_scene_data[SceneTransition.SceneDataType.BATTLE_ENEMY_DICT],
+			new_scene_data[SceneTransition.SceneDataType.BATTLE_DIALOGUE]
 		)
 		add_child(current_battle_scene)
 		

@@ -1,6 +1,8 @@
 extends Node
 class_name BattleManager
 
+const pause_after_dialogue = 0.5
+
 var all_characters: Array[AbstractCharacter]
 @onready var select_manager: SelectManager = $"../SelectManager" as SelectManager
 @onready var hud_manager: HUDManager = $"../HUDManager" as HUDManager
@@ -8,6 +10,8 @@ var enemies: Array[Node]
 var allies: Array[Node]
 
 var current_move: int = -1
+var is_game_paused: bool = false
+var is_move_interrupted: bool = false
 
 func start():
 	enemies = get_tree().get_nodes_in_group("enemy")
@@ -26,6 +30,8 @@ func start():
 		)
 
 	EventBus.attack_ended.connect(_on_attack_end)
+	EventBus.dialog_start.connect(stop_game)
+	EventBus.dialog_finished.connect(continue_game)
 	pass 
 
 func _on_attack_end(attacker: AbstractCharacter, attacked: Array[AbstractCharacter], attack: Attack):
@@ -35,7 +41,7 @@ func _on_attack_end(attacker: AbstractCharacter, attacked: Array[AbstractCharact
 		attack.start_cooldown()
 		var enemies_left = select_manager.enemy_amount()
 		if enemies_left == 0:
-			_finish_battle()
+			_finish_battle(EventBus.BattleEndType.VICTORY)
 			return
 			
 		select_manager.mark_selected_player_moved()
@@ -56,7 +62,7 @@ func _on_attack_end(attacker: AbstractCharacter, attacked: Array[AbstractCharact
 		
 		var players_left = select_manager.players_amount()
 		if players_left == 0:
-			_finish_battle()
+			_finish_battle(EventBus.BattleEndType.DEFEAT)
 			return
 			
 		if select_manager.player_moves_left() <= 0:
@@ -84,10 +90,13 @@ func _check_for_new_enemies():
 			new_enemies.append(enemy)
 	return new_enemies
 
-func _finish_battle():
-	EventBus.emit_battle_scene_fade_away()
+func _finish_battle(result):
+	EventBus.emit_battle_scene_fade_away(result)
 
 func next_move():
+	if is_game_paused:
+		is_move_interrupted = true
+		return
 	for enemy in enemies:
 		if !enemy.has_moved && enemy.moves_left() == 0:
 			enemy.has_moved = true
@@ -105,4 +114,15 @@ func start_next_round():
 	for player in allies:
 		player.decrement_attack_cooldown()
 	next_move()
+	
+		
+func stop_game(_a):
+	is_game_paused = true
+
+func continue_game():
+	is_game_paused = false
+	if is_move_interrupted:
+		is_move_interrupted = false
+		await get_tree().create_timer(pause_after_dialogue).timeout
+		next_move()
 	

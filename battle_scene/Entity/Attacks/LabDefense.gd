@@ -7,8 +7,8 @@ extends Attack
 func _init():
 	attack_name = "Защита"
 	attack_type = Attack.AttackType.ON_SELF
-	attack_tooltip = "Нажмите Enter для применения."
-	attack_description = "Помолиться Аллаху для уменьшения входящего урона."
+	attack_tooltip = "Нажмите Enter для применения, вернуться к выбору атаки - Esc."
+	attack_description = "Помолиться для уменьшения входящего урона."
 	attack_postmessage = str("%s защищается от %s.")
 	self.cooldown = atk_cooldown
 	

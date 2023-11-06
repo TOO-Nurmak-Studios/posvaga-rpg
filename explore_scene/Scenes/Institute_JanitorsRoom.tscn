@@ -55,8 +55,12 @@ visibility_flag = "had_first_cockroach_fight"
 invert_visibility_flag = true
 after_battle_dialog_knot = "janitors_room_cockroach_after_battle"
 is_battle_scene_enabled = true
-battle_scene_players = Array[int]([0])
-battle_scene_enemies = Array[int]([2])
+is_battle_dialogue_enabled = true
+battle_dialog_triggers = Array[int]([0, 1, 2])
+battle_dialog_knots = Array[String](["first_cockroach_on_start", "first_cockroach_on_first_attack", "first_cockroach_on_second_attack"])
+battle_music_filename = "hey_now.mp3"
+battle_scene_players = Array[int]([0, 0])
+battle_scene_enemies = Array[int]([3])
 
 [node name="CollisionShape2D" parent="CockroachInteractible" index="0"]
 position = Vector2(-1.5, 14.5)

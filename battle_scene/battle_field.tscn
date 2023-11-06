@@ -1,14 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://obv5cxfs5qx2"]
+[gd_scene load_steps=7 format=3 uid="uid://obv5cxfs5qx2"]
 
 [ext_resource type="Script" path="res://battle_scene/battle_field.gd" id="1_8qh5k"]
 [ext_resource type="Script" path="res://battle_scene/SelectManager.gd" id="3_3i5y2"]
 [ext_resource type="Script" path="res://battle_scene/BattleManager.gd" id="3_xgenn"]
 [ext_resource type="Script" path="res://battle_scene/HUDManager.gd" id="4_pi84k"]
+[ext_resource type="Script" path="res://battle_scene/BattleDialogueManager.gd" id="5_q40fe"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_7u3ua"]
 viewport_path = NodePath("SubViewport")
 
 [node name="BattleField" type="CanvasLayer"]
+layer = 0
 script = ExtResource("1_8qh5k")
 
 [node name="ViewportSprite" type="Sprite2D" parent="."]
@@ -30,3 +32,6 @@ script = ExtResource("3_3i5y2")
 
 [node name="HUDManager" type="Node" parent="SubViewport"]
 script = ExtResource("4_pi84k")
+
+[node name="BattleDialogueManager" type="Node" parent="SubViewport"]
+script = ExtResource("5_q40fe")

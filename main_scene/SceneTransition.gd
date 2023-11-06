@@ -7,7 +7,8 @@ enum SceneDataType {
 	PACKED_SCENE, 
 	BATTLE_BACK_TYPE, 
 	BATTLE_ENEMY_DICT, 
-	BATTLE_PLAYER_DICT
+	BATTLE_PLAYER_DICT,
+	BATTLE_DIALOGUE
 }
 
 func fade_in(custom_speed = 1.0):

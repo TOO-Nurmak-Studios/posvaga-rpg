@@ -9,7 +9,7 @@ var current_callable_on_finish: Callable
 func _init():
 	attack_name = "Бросок книги"
 	attack_type = Attack.AttackType.SINGLE
-	attack_tooltip = "Выбор врага: стрелки, удар: Enter."
+	attack_tooltip = "Выбор врага: стрелки, удар: Enter, вернуться к выбору атаки - Esc."
 	attack_postmessage = str("%s бросает книгу в %s, нанося ", book_damage, " урона.")
 	attack_description = "Кинуть вашу любимую часть Зорича в лицо врагу."
 	cooldown = 3

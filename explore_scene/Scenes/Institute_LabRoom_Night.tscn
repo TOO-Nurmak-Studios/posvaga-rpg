@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c750bpjgcwaqj"]
+[gd_scene load_steps=15 format=3 uid="uid://cl3mrkvqqskal"]
 
 [ext_resource type="Script" path="res://explore_scene/Scripts/LocationManager.gd" id="1_q0nkw"]
 [ext_resource type="Resource" uid="uid://cv6etewqsabw" path="res://dialog_scene/ink/institute_start.ink.json" id="3_qxtky"]
@@ -80,7 +80,6 @@ music_file_name = "horror_ambience.ogg"
 z_index = 1
 position = Vector2(-605, -160)
 dialog_resource = ExtResource("3_qxtky")
-dialog_vars = Array[String](["found_command_book_for_sasha"])
 dialog_knot = "correct_book"
 visibility_flag = "found_command_book_for_sasha"
 invert_visibility_flag = true

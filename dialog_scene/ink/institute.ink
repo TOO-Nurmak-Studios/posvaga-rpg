@@ -5,6 +5,7 @@ VAR heard_voices = false
 VAR eavesdroped_conversation = false
 VAR had_second_cockroach_fight = false
 VAR had_optional_cockroach_fight = false
+VAR lab_has_book = false
 
 -> janitors_room_cockroach
 
@@ -472,4 +473,29 @@ in 0.25
 # loc: right
 !!!!!!!!
 
+-> END
+
+=== battle_failed ===
+
+К сожалению, вы проиграли. Попробуйте еще раз.
+-> END
+
+=== first_cockroach_on_start ===
+
+В сражении вы по очереди с противником применяете разные способности.
+Нажмите стрелку вправо для перехода в режим выбора способностей.
+Способности можно выбирать с помощью стрелок.
+Попробуйте атаковать врага, выбрав способность "Пинок". 
+-> END
+
+=== first_cockroach_on_first_attack ===
+
+
+Для защиты от врага попробуйте выбрать способность "Защита". 
+Данная способность снижает урон от следующей атаки на 50%.
+-> END
+
+=== first_cockroach_on_second_attack ===
+
+На этом обучение кончается. Следите за вражескими атаками и правильно комбинируйте свои, чтобы достичь победы!
 -> END

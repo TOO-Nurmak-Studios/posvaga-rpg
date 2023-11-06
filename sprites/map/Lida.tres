@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=31 format=3 uid="uid://cqgbd40ox1kfj"]
+[gd_resource type="SpriteFrames" load_steps=31 format=3 uid="uid://bty2rmw0cgdd2"]
 
 [ext_resource type="Texture2D" uid="uid://dv4l2s427sbq7" path="res://sprites/map/lida_front.png" id="1_busk1"]
 [ext_resource type="Texture2D" uid="uid://jekas8ajopn3" path="res://sprites/map/lida_side.png" id="2_c4bmu"]

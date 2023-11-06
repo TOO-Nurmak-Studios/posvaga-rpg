@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://explore_scene/Scripts/StepOnInteractible.gd" id="1_rilu5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w7dk6"]
-size = Vector2(25, 7.5)
+size = Vector2(25, 13)
 
 [node name="Interactible" type="Area2D" groups=["Interactible"]]
 y_sort_enabled = true

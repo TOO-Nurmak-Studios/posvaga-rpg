@@ -1,7 +1,8 @@
 extends CharacterBody2D
 
+const battle_failed_knot = "battle_failed"
+
 @export var dialog_resource: InkResource
-@export var dialog_vars: Array[String]
 @export var dialog_knot: String
 @export var visibility_flag: String
 @export var invert_visibility_flag: bool
@@ -10,27 +11,39 @@ extends CharacterBody2D
 
 @export var is_battle_scene_enabled: bool = false
 @export var battle_scene_type: BattleScene.BattleSceneType
+@export var is_battle_dialogue_enabled: bool = false
+@export var battle_dialog_triggers: Array[BattleScene.BattleDialogueSignalType]
+@export var battle_dialog_knots: Array[String]
+@export var battle_music_filename: String
 @export var battle_scene_players: Array[BattleScene.SceneCharacterType]
 @export var battle_scene_enemies: Array[BattleScene.SceneCharacterType]
 var _battle_scene: Dictionary # <Main.SceneDataType, ?>
 
 @onready var collision_node: CollisionShape2D = $CollisionShape2D as CollisionShape2D
-@onready var animation_node:  = $AnimatedSprite2D as AnimatedSprite2D
+@onready var animation_node: AnimatedSprite2D = $AnimatedSprite2D as AnimatedSprite2D
 
 var dialog_data: DialogData
 var after_battle_dialog_data: DialogData
+var try_again_dialog_data: DialogData
 
 func _ready():
 	if dialog_resource != null:
-		dialog_data = DialogData.new(dialog_resource, dialog_vars, dialog_knot)
+		dialog_data = DialogData.new(dialog_resource, dialog_knot)
 	if is_battle_scene_enabled:
-			_battle_scene = {
-				SceneTransition.SceneDataType.BATTLE_BACK_TYPE: battle_scene_type,
-				SceneTransition.SceneDataType.BATTLE_ENEMY_DICT: battle_scene_enemies,
-				SceneTransition.SceneDataType.BATTLE_PLAYER_DICT: battle_scene_players
-			}
-			if dialog_data != null && after_battle_dialog_knot != "":
-				after_battle_dialog_data = DialogData.new(dialog_resource, dialog_vars, after_battle_dialog_knot)
+		var dialogue_data = {}
+		try_again_dialog_data = DialogData.new(dialog_resource, battle_failed_knot)
+		if is_battle_dialogue_enabled:
+			for i in range(battle_dialog_triggers.size()):
+				var trigger = battle_dialog_triggers[i]
+				dialogue_data[trigger] = DialogData.new(dialog_resource, battle_dialog_knots[i])
+		_battle_scene = {
+			SceneTransition.SceneDataType.BATTLE_BACK_TYPE: battle_scene_type,
+			SceneTransition.SceneDataType.BATTLE_ENEMY_DICT: battle_scene_enemies,
+			SceneTransition.SceneDataType.BATTLE_PLAYER_DICT: battle_scene_players,
+			SceneTransition.SceneDataType.BATTLE_DIALOGUE: dialogue_data
+		}
+		if dialog_data != null && after_battle_dialog_knot != "":
+			after_battle_dialog_data = DialogData.new(dialog_resource, after_battle_dialog_knot)
 	if visibility_flag != null && visibility_flag != "":
 		_update_visible()
 		EventBus.game_state_changed.connect(_update_visible)
@@ -68,8 +81,15 @@ func interact():
 		EventBus.dialog_start.emit(dialog_data)
 		await EventBus.dialog_finished
 	if is_battle_scene_enabled:
+		EventBus.music_replace.emit(battle_music_filename)
 		EventBus.battle_request.emit(_battle_scene)
-		await EventBus.battle_scene_end
+		var result = await EventBus.battle_scene_end
+		while result != EventBus.BattleEndType.VICTORY:
+			EventBus.dialog_start.emit(try_again_dialog_data)
+			await EventBus.dialog_finished
+			EventBus.battle_request.emit(_battle_scene)
+			result = await EventBus.battle_scene_end
+		EventBus.music_replace_back.emit()
 		if after_battle_dialog_data != null:
 			EventBus.dialog_start.emit(after_battle_dialog_data)
 			await EventBus.dialog_finished

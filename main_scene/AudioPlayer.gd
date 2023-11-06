@@ -32,22 +32,21 @@ var current_env_position: float = 0.0
 var tween_music: Tween
 var tween_env: Tween
 
+var prev_music_file: String
+
 
 func _ready():
 	EventBus.music_play_new.connect(play_new_music)
 	EventBus.music_play.connect(play_music)
 	EventBus.music_pause.connect(pause_music)
 	EventBus.music_stop.connect(stop_music)
+	EventBus.music_replace.connect(replace_music)
+	EventBus.music_replace_back.connect(replace_back_music)
 	EventBus.sound_play.connect(play_sound)
 	EventBus.env_play_new.connect(play_new_env)
 	EventBus.env_play.connect(play_env)
 	EventBus.env_pause.connect(pause_env)
 	EventBus.env_stop.connect(stop_env)
-
-
-func _process(delta):
-	pass
-
 
 ## music
 
@@ -100,6 +99,16 @@ func pause_music():
 func stop_music(down_seconds: float):
 	stop_music_and_call(down_seconds, do_nothing)
 
+func replace_music(new_music: String):
+	prev_music_file = current_music_file
+	play_new_music(new_music, ".", ".", ".")
+
+func replace_back_music():
+	if prev_music_file == "":
+		return
+	var music_to_play = prev_music_file
+	prev_music_file = ""
+	play_new_music(music_to_play, ".", ".", ".")
 
 func stop_music_and_call(down_seconds: float, callable: Callable):
 	if down_seconds == 0:

@@ -2,6 +2,7 @@ extends Node
 
 #input
 signal action_button_pressed()
+signal action_back_button_pressed()
 signal select_next_button_pressed()
 signal select_prev_button_pressed()
 signal select_left_button_pressed()
@@ -9,8 +10,10 @@ signal select_right_button_pressed()
 
 #battle scene
 signal attack_ended(attacker: AbstractCharacter, attacked: Array[AbstractCharacter], attack: Attack)
-signal battle_scene_fade_away()
-signal battle_scene_end()
+signal battle_scene_start()
+enum BattleEndType {VICTORY, DEFEAT}
+signal battle_scene_fade_away(result: BattleEndType)
+signal battle_scene_end(result: BattleEndType)
 
 #explore scene, player controls
 var player_input_enabled = true
@@ -46,6 +49,8 @@ signal music_play_new(file: String, down_seconds: String, up_seconds: String, vo
 signal music_play()
 signal music_pause()
 signal music_stop(down_seconds: String)
+signal music_replace(file: String)
+signal music_replace_back()
 signal sound_play(file: String)
 signal env_play_new(file: String, down_seconds: String, up_sedonds: String, volume: String)
 signal env_play()
@@ -75,6 +80,8 @@ func _process(delta):
 		select_right_button_pressed.emit()
 	if Input.is_action_just_pressed("debug_action_1"):
 		action_button_pressed.emit()
+	if Input.is_action_just_pressed("back"):
+		action_back_button_pressed.emit()
 
 	process_player_input(delta)
 
@@ -99,8 +106,11 @@ func process_player_input(delta):
 func emit_attack_ended(attacker: AbstractCharacter, attacked: Array[AbstractCharacter], attack: Attack):
 	attack_ended.emit(attacker, attacked, attack)
 
-func emit_battle_scene_fade_away():
-	battle_scene_fade_away.emit()
+func emit_battle_scene_start():
+	battle_scene_start.emit()
 	
-func emit_battle_scene_end():
-	battle_scene_end.emit()
+func emit_battle_scene_fade_away(result: BattleEndType):
+	battle_scene_fade_away.emit(result)
+
+func emit_battle_scene_end(result: BattleEndType):
+	battle_scene_end.emit(result)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c670wmatunme7"]
+[gd_scene load_steps=11 format=3 uid="uid://es6318oqph6i"]
 
 [ext_resource type="Script" path="res://explore_scene/Scripts/LocationManager.gd" id="1_ofxyj"]
 [ext_resource type="Texture2D" uid="uid://dl4uacvvm7hiu" path="res://explore_scene/Assets/black_gradient.png" id="2_bdo7s"]

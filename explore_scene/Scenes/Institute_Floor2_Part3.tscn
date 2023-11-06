@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://djfy7hf3ancjl"]
+[gd_scene load_steps=48 format=3 uid="uid://cuk07x0rrlubb"]
 
 [ext_resource type="Script" path="res://explore_scene/Scripts/LocationManager.gd" id="1_h12uj"]
 [ext_resource type="PackedScene" uid="uid://dgipy14v4a35t" path="res://explore_scene/Scenes/Teleport.tscn" id="3_sqm0o"]

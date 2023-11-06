@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bb8dg2qrkshyo"]
+[gd_scene load_steps=14 format=3 uid="uid://c0c70h1opujsx"]
 
 [ext_resource type="Script" path="res://explore_scene/Scripts/LocationManager.gd" id="1_awj2c"]
 [ext_resource type="TileSet" uid="uid://yjq3qcumf26f" path="res://explore_scene/Assets/Institute.tres" id="2_k7age"]

@@ -23,7 +23,9 @@ var attack_label: Label
 
 # state machine
 enum State {SELECT_PLAYER, SELECT_ATTACK, SELECT_ENEMY, SELECT_ALLY, NOTHING}
+var was_movement_disabled: bool	= false
 var current_state: State = State.NOTHING
+var previous_state: State = State.NOTHING
 var selected_attack: int = -1
 
 # must be called after battle manager and select manager! 
@@ -39,6 +41,7 @@ func start():
 	_create_move_timers()
 
 	EventBus.action_button_pressed.connect(_action_pressed)
+	EventBus.action_back_button_pressed.connect(_action_back_pressed)
 	EventBus.battle_scene_fade_away.connect(_on_battle_scene_fade_away)
 	EventBus.battle_scene_end.connect(_on_battle_scene_end)
 	EventBus.attack_ended.connect(_draw_attack_line)
@@ -46,6 +49,8 @@ func start():
 	EventBus.select_prev_button_pressed.connect(_select_prev)
 	EventBus.select_left_button_pressed.connect(_select_left)
 	EventBus.select_right_button_pressed.connect(_select_right)
+	EventBus.dialog_start.connect(disable_player_movement)
+	EventBus.dialog_finished.connect(enable_player_movement_dialog)
 	
 	select_manager.player_selected.connect(_create_attack_menu)
 	
@@ -82,12 +87,12 @@ func add_enemy(enemy: Enemy):
 	_create_health_bar(enemy.health)
 	_create_move_timer(enemy)
 
-func _on_battle_scene_fade_away():
+func _on_battle_scene_fade_away(_unused):
 	change_state(State.NOTHING)
 	tooltip_label.text = "Battle finished!"
 	tooltip_label.show()
 
-func _on_battle_scene_end():
+func _on_battle_scene_end(_unused):
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _action_pressed():
@@ -98,6 +103,11 @@ func _action_pressed():
 		current_attack_container.selected_button().pressed.emit()
 	return	
 
+func _action_back_pressed():
+	if current_state == State.SELECT_ENEMY:
+		change_state(State.SELECT_ATTACK)
+	return	
+	
 func _attack_pressed(i: int):
 	var attack = select_manager.selected_player().attacks[i]
 	selected_attack = i
@@ -110,11 +120,24 @@ func _attack_pressed(i: int):
 		change_state(State.NOTHING)
 		return
 		
+func disable_player_movement(_a):
+	if current_state == State.SELECT_PLAYER:
+		print("disable_player_movement_dialog")
+		change_state(State.NOTHING)
+		was_movement_disabled = true
+
+func enable_player_movement_dialog():
+	if was_movement_disabled:
+		print("enable_player_movement_dialog")
+		change_state(State.SELECT_PLAYER)
+		was_movement_disabled = false
 
 func enable_player_movement():
+	print("enable_player_movement")
 	change_state(State.SELECT_PLAYER)
 	
 func change_state(state: State):
+	previous_state = current_state
 	match state:
 		State.SELECT_ATTACK:
 			current_state = State.SELECT_ATTACK
@@ -176,7 +199,7 @@ func _create_health_bars():
 		
 func _create_health_bar(health_node: HealthNode):
 	var hp_bar: HealthBar = health_bar_scene.instantiate()
-	hp_bar.update_value(0, health_node.health)
+	hp_bar.value = health_node.health
 	hp_bar.max_value = health_node.health
 	health_node.health_changed.connect(hp_bar.update_value)
 	health_node.tree_exiting.connect(hp_bar.queue_free)
@@ -233,9 +256,12 @@ func _create_attack_menu(character: AbstractCharacter):
 	if current_attack_container != null:
 		current_attack_container.hide()
 	if attack_containers.has(character):
-		current_attack_container = attack_containers[character]
-		current_attack_container.show()
-		return
+		if attack_containers[character].buttons.size() != character.attacks.size():
+			attack_containers[character].queue_free()
+		else:
+			current_attack_container = attack_containers[character]
+			current_attack_container.show()
+			return
 	
 	var sprite = character.get_node("Sprite") as AnimatedSprite2D
 	var global_pos = sprite.global_position

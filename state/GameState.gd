@@ -1,5 +1,7 @@
 extends Node
 
+const LAB_HAS_BOOK = "lab_has_book"
+
 var vars: Dictionary = {}
 
 var curParty: PartyState
