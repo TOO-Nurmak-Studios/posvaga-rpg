@@ -43,7 +43,7 @@ func _ready():
 		start(test_dialog)
 
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("dialog_next"):
 		try_next()
 	if Input.is_action_just_pressed("dialog_focus_options") and waiting_for_choice:
@@ -75,13 +75,9 @@ func start(_dialog_data: DialogData):
 		ink_player.choose_path(dialog_data.starting_knot)
 	
 	# загружаем игровые переменные в инк
-	#for var_name in dialog_data.var_names:
-	#	var var_val = GameState.vars.get(var_name)
-	#	if var_val != null:
-	#		ink_player.set_variable(var_name, var_val)
 	for var_name in GameState.vars:
 		var var_val = GameState.vars.get(var_name)
-		if var_val != null:
+		if var_val != null && ink_player.get_variable(var_name) != null: # проверяем, что в стори такая переменная заранее объявлена
 			ink_player.set_variable(var_name, var_val)
 	_lock_player()
 	show()
@@ -105,27 +101,31 @@ func try_next():
 func next():
 	may_show_next = false
 	
-	if !ink_player.has_choices && !ink_player.can_continue:
+	var can_continue = ink_player.can_continue
+	var has_choices = ink_player.has_choices
+	
+	if !has_choices && !can_continue:
 		finish()
 		return
 
-	if ink_player.can_continue:
+	if can_continue:
 		var next_text = ink_player.continue_story()
 		var tags = ink_player.current_tags
-		await process_next_unit(next_text, tags)
+		has_choices = ink_player.has_choices		# обновлем, т.к. история продолжилась
+		await process_next_unit(next_text, tags, has_choices)
 
-	if ink_player.has_choices:
+	if has_choices:
 		await replicas_box.printing_finished
 		waiting_for_choice = true
 		choices_box.init(ink_player.current_choices)
 		## TODO: what if that is not main speaker who's choosing?
-		await process_next_speaker(speakers_data[main_speaker_id], ReplicaData.SpeakerLocation.DEFAULT, false)
+		await process_next_speaker(speakers_data[main_speaker_id], ReplicaData.SpeakerLocation.RIGHT, false)
 		choices_box.show()
 		
 	may_show_next = true
 
 
-func process_next_unit(text: String, tags: Array):
+func process_next_unit(text: String, tags: Array, has_choices: bool = false):
 	var parsed_tags = parse_tags(tags)
 	
 	var sound_tag = find_sound_tag(parsed_tags)
@@ -133,7 +133,7 @@ func process_next_unit(text: String, tags: Array):
 	var env_tag = find_env_tag(parsed_tags)
 	
 	if sound_tag != null:
-		process_next_sound(sound_tag.params[0])
+		process_next_sound(sound_tag.params)
 		parsed_tags.erase(sound_tag)
 		
 	if music_tag != null:
@@ -145,7 +145,7 @@ func process_next_unit(text: String, tags: Array):
 		parsed_tags.erase(env_tag)
 	
 	if parsed_tags.size() == 0 || parsed_tags[0].type != DialogTag.Type.CUTSCENE_STEP:
-		await process_next_replica(text, parsed_tags)
+		await process_next_replica(text, parsed_tags, has_choices)
 	else:
 		hide_current_speakers(true)
 		await process_next_cutscene_step(parsed_tags[0].params[0], text)
@@ -192,9 +192,11 @@ func process_next_cutscene_step(type: String, description: String):
 	EventBus.cutscene_step_start.emit(step)
 
 
-func process_next_sound(file: String):
-	EventBus.sound_play.emit(file)
-
+func process_next_sound(params: PackedStringArray):
+	var file: String = params[0] if !params.is_empty() else "."
+	var volume = params[1] if params.size() > 1 else "."
+	EventBus.sound_play.emit(file, volume)
+	
 
 func process_next_music(params: PackedStringArray):
 	var file: String = params[0] if !params.is_empty() else "."
@@ -216,14 +218,14 @@ func on_cutscene_step_finished():
 	next()
 
 
-func process_next_replica(replica_text: String, tags: Array[DialogTag]):
+func process_next_replica(replica_text: String, tags: Array[DialogTag], has_choices: bool = false):
 	if is_cutscene:
 		## TODO: make it smooth
 		show()
 		is_cutscene = false
 	
 	var replica = parse_next_replica(replica_text, tags)
-	replicas_box.new_replica(replica)
+	replicas_box.new_replica(replica, !has_choices)
 	await process_next_speaker(replica.speaker, replica.speaker_location, true)
 
 
@@ -294,10 +296,6 @@ func finish():
 	hide_current_speakers()
 	
 	# выгружаем игровые переменные в глобальный стейт
-	#for var_name in dialog_data.var_names:
-	#	var var_val = ink_player.get_variable(var_name)
-	#	GameState.set_var(var_name, var_val)
-	
 	for var_name in get_vars():
 		var var_val = ink_player.get_variable(var_name)
 		GameState.set_var(var_name, var_val)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://cuk07x0rrlubb"]
+[gd_scene load_steps=48 format=3 uid="uid://djfy7hf3ancjl"]
 
 [ext_resource type="Script" path="res://explore_scene/Scripts/LocationManager.gd" id="1_h12uj"]
 [ext_resource type="PackedScene" uid="uid://dgipy14v4a35t" path="res://explore_scene/Scenes/Teleport.tscn" id="3_sqm0o"]
@@ -382,7 +382,6 @@ shape = SubResource("RectangleShape2D_61646")
 z_index = 1
 position = Vector2(157, 394)
 dialog_resource = ExtResource("7_1dr4r")
-dialog_vars = Array[String](["heard_voices"])
 dialog_knot = "voices"
 visibility_flag = "heard_voices"
 invert_visibility_flag = true
@@ -403,7 +402,6 @@ color = Color(0, 0, 0, 0.156863)
 z_index = 1
 position = Vector2(-420, 352)
 dialog_resource = ExtResource("7_1dr4r")
-dialog_vars = Array[String](["eavesdroped_conversation"])
 dialog_knot = "director_office"
 
 [node name="CollisionShape2D" parent="Door" index="0"]

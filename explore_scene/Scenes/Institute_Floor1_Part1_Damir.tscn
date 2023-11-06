@@ -21,7 +21,6 @@ size = Vector2(64.5, 20)
 y_sort_enabled = true
 position = Vector2(567, 254)
 script = ExtResource("1_knkr1")
-music_file_name = "rain_interior.ogg"
 
 [node name="Sprite2D3" type="Sprite2D" parent="."]
 z_index = 10

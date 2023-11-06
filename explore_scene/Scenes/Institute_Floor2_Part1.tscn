@@ -95,7 +95,6 @@ position = Vector2(-594, -274)
 z_index = 1
 position = Vector2(176, -313)
 dialog_resource = ExtResource("7_m6fps")
-dialog_vars = Array[String](["tried_stairs_doors"])
 dialog_knot = "stairs_door"
 
 [node name="CollisionShape2D" parent="StairsDoor" index="0"]
@@ -106,7 +105,6 @@ shape = SubResource("RectangleShape2D_7hbgk")
 z_index = 1
 position = Vector2(176, -246)
 dialog_resource = ExtResource("7_m6fps")
-dialog_vars = Array[String](["tried_stairs_doors"])
 dialog_knot = "other_floor_part_stop"
 visibility_flag = "had_first_cockroach_fight"
 invert_visibility_flag = true
@@ -171,7 +169,6 @@ shape = SubResource("RectangleShape2D_61646")
 z_index = 1
 position = Vector2(-353, -277)
 dialog_resource = ExtResource("7_m6fps")
-dialog_vars = Array[String](["called_for_friends"])
 dialog_knot = "looking_for_friends"
 visibility_flag = "called_for_friends"
 invert_visibility_flag = true

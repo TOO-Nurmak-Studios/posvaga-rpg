@@ -1,4 +1,6 @@
 VAR found_command_book_for_sasha = false
+VAR talked_to_lida = false
+VAR talked_to_damir = false
 VAR got_wrong_book_1 = false
 VAR got_wrong_book_2 = false
 VAR got_wrong_book_3 = false
@@ -23,9 +25,9 @@ VAR got_wrong_book_5 = false
 
 # mus: a_star_called_sun.mp3
 # cts: fade 
-out 0.1
+out 0.03
 # cts: wait 
-4
+6
 
 # sid: damir_bored
 Как же меня всё это достало!
@@ -47,7 +49,7 @@ out 0.1
 Я-я не хочу оставаться тут на всю ночь...
 
 # cts: wait 
-1
+1.5
 # sid: damir_angry
 Да что б его, опять всё зависло!
 
@@ -64,9 +66,9 @@ out 0.1
 # sid: sasha_confused
 Сейчас разберёмся. Кажется, опять институская сеть перегружена.
 
-# snd: typing.wav
+# snd: typing.wav -10
 # sid: sasha_neutral
-Так...
+Так, как бы это проверить...
 
 # cts: wait 
 1
@@ -85,48 +87,62 @@ out 0.1
 
 
 === talk_damir ===
+{
+- not talked_to_damir:
 
-# sid: damir_bored
-И зачем я вообще пошёл в аспирантуру...
+    ~talked_to_damir = true
+    
+    # sid: damir_bored
+    И зачем я вообще пошёл в аспирантуру...
+    
+    # sid: vera_doubting
+    # loc: right
+    А в лабу зачем пошёл?
+    
+    # sid: damir_relaxed
+    Слишком много вопросов стоит перед советскими учеными!
 
-# sid: vera_neutral
-# loc: right
-А в лабу зачем пошёл?
-
-# sid: damir_relaxed
-Слишком много вопросов стоит перед советскими учеными!
-
-* [Да]
-
+- else:
+    # sid: vera_neutral
+    # loc: right
+    Вот ещё вопрос: не знаешь, где лежит книга с командами? Саша спрашивает.
+    
     # sid: damir_happy
-    # loc: left
-    Ага
-    ->END
-
-* [Нет]
-
-    # sid: damir_angry
-    # loc: left
-    РРРРР я жолбарыс
+    Ха-ха, да тут книги валяются по всему кабинету!
+    
+    # sid: damir_neutral
+    Может, она в той куче в углу? Я всё туда складываю...
+}
 
 ->END
 
 
 === talk_lida ===
-
-# sid: lida_neutral
-Я вбила почти все координаты на сегодня, и-и тут терминал завис...
-
-# sid: lida_scared
-Владимир Николаевич меня убьёт!!.
-
-# sid: vera_neutral
-# loc: right
-Не бойся, мы с ним как-нибудь справимся.
-
-# sid: vera_neutral
-# loc: right
-Но сначала нужно всё починить...
+{
+- not talked_to_lida:
+    ~ talked_to_lida = true
+    # sid: lida_neutral
+    Я вбила почти все координаты на сегодня, и-и тут терминал завис...
+    
+    # sid: lida_scared
+    Владимир Николаевич меня убьёт!!.
+    
+    # sid: vera_neutral
+    # loc: right
+    Не бойся, мы с ним как-нибудь справимся.
+    
+    # sid: vera_neutral
+    # loc: right
+    Но сначала нужно всё починить...
+    
+- else:
+    # sid: vera_doubting
+    # loc: right
+    Ты случайно не знаешь, где та книга, которую Саша просит найти?
+    
+    # sid: lida_neutral
+    Не знаю... Может, стоит проверить книжные полки? 
+}
 
 ->END
 
@@ -147,7 +163,7 @@ out 0.1
 Я могу перейти в режим отладки, но мои дальнейшие попытки тщетны. 
 
 # sid: sasha_neutral
-Ты не нашла книгу?
+Ты не нашла пособие с командами?
 
 # sid: vera_neutral
 # loc: right
@@ -169,7 +185,7 @@ out 0.1
 Это не та книга?
 
 # sid: sasha_angry
-Нет, совсем не та.
+Нет, совсем не та. Мне нужно пособие со списком команд.
 
 # sid: sasha_smiling
 Точно помню, что оставил её где-то у твоего стола. Уверенность абсолютная.
@@ -201,12 +217,13 @@ out 0.1
     # sid: vera_neutral
     # loc: right
     Надо поискать ещё.
-    ->END
+
+->END
 
 
 === wrong_book_2 ===
 
-Мулко, К.Т. Информационная безопасность в контексте актуальных уязвимостей компьютерных систем / БГУИР, – 264 с. : ил.
+Мулко, К.Т. Информационная безопасность в контексте актуальных уязвимостей компьютерных систем / БГУИР, - 264 с. : ил.
 
 Взять книгу?
 
@@ -224,7 +241,8 @@ out 0.1
     # sid: vera_neutral
     # loc: right
     Надо поискать ещё.
-    ->END
+
+->END
 
 
 === wrong_book_3 ===
@@ -247,7 +265,8 @@ out 0.1
     # sid: vera_neutral
     # loc: right
     Надо поискать ещё.
-    ->END
+    
+->END
 
 
 === wrong_book_4 ===
@@ -270,7 +289,8 @@ out 0.1
     # sid: vera_neutral
     # loc: right
     Надо поискать ещё.
-    ->END
+    
+->END
 
 
 === wrong_book_5 ===
@@ -293,7 +313,8 @@ out 0.1
     # sid: vera_neutral
     # loc: right
     Надо поискать ещё.
-    ->END
+    
+->END
 
 
 === zavlab_book ===
@@ -374,7 +395,8 @@ out 0.1
     # sid: vera_neutral
     # loc: right
     Надо поискать ещё.
-    ->END
+    
+->END
 
 
 === talk_sasha_got_book ===
@@ -386,7 +408,7 @@ out 0.1
 # sid: sasha_smiling
 Это оно, спасибо. Так, мне нужна глава про отладку...
 
-# snd: typing.wav
+# snd: typing.wav -10
 # sid: sasha_neutral
 Ага, значит так, и вот так.....
 
@@ -504,7 +526,7 @@ sasha down
 # cts: turn 
 lida down
 # cts: turn 
-vera up
+vera down
 # cts: turn 
 damir up
 #cts: wait
@@ -555,7 +577,7 @@ door close
 # cts: wait 
 1
 # cts: move 
-vera down 3
+vera down 3.5
 # cts: turn 
 sasha up
 # cts: turn 
@@ -596,10 +618,11 @@ vera down
 
 # cts: fade
 in 0.25
-# mus: .
+# mus: . 2
 # cts: wait
 3
 
+# env: rain_interior.mp3 0 0 -15
 # cts: scen
 Institute_Floor1_Part1_Damir
 
@@ -623,10 +646,10 @@ damir up 1
 
 # spd: 10
 # snd: glitch.ogg
-оЖиДаеТСя ПоДКЛюЧееНие
+\\\\оЖиДаеТСя ПоДКЛюЧееНие...
 # spd: 10
 # snd: glitch.ogg
-0x42 0xA5 0xBC
+\\\\0x42 0xA5 0xBC
 
 # cts: wait
 1
@@ -635,15 +658,16 @@ damir left
 # cts: wait
 1
 
+# mus: further_down.mp3 0 0 -9
 # spd: 10
 # snd: glitch.ogg
-оБуЧеНие ЗаВеРШеНо. ЗаПуСТиТЬ СиСТеМу?
+\\\\оБуЧеНие ЗаВеРШеНо. ЗаПуСТиТЬ СиСТеМу?
 # spd: 10
 # snd: glitch.ogg
-0x11 0x9C 0xA6
+\\\\0x11 0x9C 0xA6
 # spd: 10
 # snd: glitch.ogg
-ТРеБуеТСя ВВоД. ТРеБуеТСя ВВоД.
+\\\\ТРеБуеТСя ВВоД.
 
 # cts: wait
 1
@@ -663,15 +687,15 @@ damir up
 
 # spd: 10
 # snd: glitch.ogg
-ТРеБуеТСя ВВоД.
+\\\\ТРеБуеТСя ВВоД.
 
 # spd: 10
 # snd: glitch.ogg
-ТРеБуеТСя ВВоД.
+\\\\ТРеБуеТСя ВВоД.
 
 # spd: 10
 # snd: glitch.ogg
-ПоДКЛюЧиТСя К ТРеНиРоВоЧНоЙ СиСТеМе? 0x55
+\\\\ПоДКЛюЧиТСя К ТРеНиРоВоЧНоЙ СиСТеМе? 0x55
 
 # sid: damir_bored
 # loc: right
@@ -686,14 +710,16 @@ damir up 1
 # snd: door_open.wav
 # cts: fade
 in 0.25
+# mus: . 6 
 # cts: wait
-5
+6
 
 -> wake_up
 
 
 === wake_up ===
 
+# env: horror_ambience.ogg 1 10 -7
 # cts: scen
 Institute_LabRoom_Night
 
