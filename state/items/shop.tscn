@@ -1,0 +1,139 @@
+[gd_scene load_steps=7 format=3 uid="uid://drhe4igjj052c"]
+
+[ext_resource type="Script" path="res://state/items/Shop.gd" id="1_l6s3d"]
+[ext_resource type="Texture2D" uid="uid://1xf7kqje15uy" path="res://sprites/dialog/dialog_small_long_frame.png" id="2_dor3j"]
+[ext_resource type="FontFile" uid="uid://dsg3v8pxmy0f8" path="res://fonts/monogram-extended.ttf" id="3_dkh2a"]
+[ext_resource type="Texture2D" uid="uid://diuq47w4p125h" path="res://sprites/dialog/dialog_big_frame.png" id="4_ym4jv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ntl7k"]
+font = ExtResource("3_dkh2a")
+font_size = 32
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_wqhl4"]
+font = ExtResource("3_dkh2a")
+font_size = 32
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="inventory_manager" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_l6s3d")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.501961)
+
+[node name="ItemNameLongFrame" type="Sprite2D" parent="."]
+position = Vector2(495, 330)
+texture = ExtResource("2_dor3j")
+
+[node name="ItemNameLabel" type="Label" parent="."]
+offset_left = 30.0
+offset_top = 315.0
+offset_right = 610.0
+offset_bottom = 357.0
+text = "Sample text"
+label_settings = SubResource("LabelSettings_ntl7k")
+horizontal_alignment = 2
+
+[node name="ItemCostLongFrame" type="Sprite2D" parent="."]
+position = Vector2(495, 285)
+texture = ExtResource("2_dor3j")
+
+[node name="ItemCostLabel" type="Label" parent="."]
+offset_left = 30.0
+offset_top = 270.0
+offset_right = 610.0
+offset_bottom = 312.0
+text = "0
+"
+label_settings = SubResource("LabelSettings_ntl7k")
+horizontal_alignment = 2
+
+[node name="ItemCountLongFrame" type="Sprite2D" parent="."]
+position = Vector2(145, 330)
+texture = ExtResource("2_dor3j")
+
+[node name="ItemCountLabel" type="Label" parent="."]
+offset_left = 30.0
+offset_top = 315.0
+offset_right = 610.0
+offset_bottom = 357.0
+text = "0"
+label_settings = SubResource("LabelSettings_ntl7k")
+
+[node name="GoldLongFrame" type="Sprite2D" parent="."]
+position = Vector2(145, 285)
+texture = ExtResource("2_dor3j")
+
+[node name="GoldLabel" type="Label" parent="."]
+offset_left = 30.0
+offset_top = 270.0
+offset_right = 610.0
+offset_bottom = 312.0
+text = "0"
+label_settings = SubResource("LabelSettings_ntl7k")
+
+[node name="ItemDescriptionFrame" type="Sprite2D" parent="."]
+position = Vector2(320, 410)
+texture = ExtResource("4_ym4jv")
+
+[node name="ItemDescriptionLabel" type="Label" parent="."]
+offset_left = 30.0
+offset_top = 365.0
+offset_right = 610.0
+offset_bottom = 452.0
+text = "Sample text"
+label_settings = SubResource("LabelSettings_wqhl4")
+autowrap_mode = 2
+
+[node name="CloseButton" type="Button" parent="."]
+offset_left = 425.0
+offset_top = 420.0
+offset_right = 615.0
+offset_bottom = 454.0
+theme_override_fonts/font = ExtResource("3_dkh2a")
+theme_override_font_sizes/font_size = 32
+text = "Назад
+"
+
+[node name="AddButton" type="Button" parent="."]
+offset_left = 25.0
+offset_top = 420.0
+offset_right = 215.0
+offset_bottom = 454.0
+theme_override_fonts/font = ExtResource("3_dkh2a")
+theme_override_font_sizes/font_size = 32
+text = "Добавить"
+
+[node name="PrevButton" type="Button" parent="."]
+offset_left = 225.5
+offset_top = 420.0
+offset_right = 320.5
+offset_bottom = 454.0
+theme_override_fonts/font = ExtResource("3_dkh2a")
+theme_override_font_sizes/font_size = 32
+text = "<"
+
+[node name="NextButton" type="Button" parent="."]
+offset_left = 322.5
+offset_top = 420.0
+offset_right = 417.5
+offset_bottom = 454.0
+theme_override_fonts/font = ExtResource("3_dkh2a")
+theme_override_font_sizes/font_size = 32
+text = ">"
+
+[node name="ItemSprite" type="Sprite2D" parent="."]
+position = Vector2(320, 120)
+
+[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="AddButton" to="." method="_on_add_button_pressed"]
+[connection signal="pressed" from="PrevButton" to="." method="_on_prev_button_pressed"]
+[connection signal="pressed" from="NextButton" to="." method="_on_next_button_pressed"]

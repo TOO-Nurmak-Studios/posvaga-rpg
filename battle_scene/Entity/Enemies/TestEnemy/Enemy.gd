@@ -30,7 +30,7 @@ func get_type() -> CharacterType:
 	
 func do_move(enemies: Array[Node], allies: Array[Node]):
 	var enemy_index = rand.randi_range(0, enemies.size() - 1)
-	attack(prepared_attack_index, enemies[enemy_index])
+	attack(attacks[prepared_attack_index], enemies[enemy_index])
 	
 func set_enemy_thinking():
 	move_timer.set_thinking()

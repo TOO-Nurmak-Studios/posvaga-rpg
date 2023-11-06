@@ -68,8 +68,9 @@ signal game_vars_changed()
 # поменялось состояние (енам)
 signal game_state_changed()
 
-# inventory
-signal item_use(type_id: String)
+# inventory & shop
+signal shop_open()
+signal shop_closed()
 
 #scene transitions
 signal teleport_request(scene: Resource, player_position: Vector2, player_direction: Vector2)

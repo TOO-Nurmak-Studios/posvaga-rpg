@@ -16,6 +16,9 @@ extends Node2D
 var in_flight_attack: Callable
 var is_dead = false
 
+# Item to Attack
+var available_item_attacks: Dictionary = {}
+
 enum CharacterType {UNKNOWN, PLAYER, ENEMY}
 
 signal death(dead_char: AbstractCharacter)
@@ -24,9 +27,11 @@ func _ready():
 	health.zero_health.connect(mark_dead)
 	for attack in attacks:
 		add_sibling.call_deferred(attack)
+	for item_id in available_item_attacks:
+		add_sibling.call_deferred(available_item_attacks[item_id])
 
-func attack(index: int, enemy_to_attack):
-	await attacks[index].attack(self, enemy_to_attack, gunpoint)
+func attack(attack: Attack, enemy_to_attack):
+	await attack.attack(self, enemy_to_attack, gunpoint)
 
 func get_animation_duration(anim_name: StringName):
 	var frames: int = sprite.sprite_frames.get_frame_count(anim_name)
