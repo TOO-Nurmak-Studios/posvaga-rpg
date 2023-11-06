@@ -12,7 +12,11 @@ var has_book = false
 var shader = preload("res://battle_scene/HUD/Shaders/ShaderDeath.tres")
 
 func _init():
-	attacks = [LabKick.new(), LabDefense.new()]
+	attacks = [LabKick.new(), LabDefense.new(), InventoryOpen.new()]
+	available_item_attacks = {
+		"liho" : LabLiho.new(),
+		"syrok": LabSyrok.new()
+	}
 
 func _ready():
 	super._ready()

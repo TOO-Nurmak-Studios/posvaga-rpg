@@ -1,7 +1,7 @@
 class_name Attack
 extends Node
 
-enum AttackType {SINGLE, MULTIPLE, ON_SELF, ON_ALLY}
+enum AttackType {SINGLE, MULTIPLE, ON_SELF, ON_ALLY, INVENTORY_OPEN}
 
 @export var attack_type: AttackType
 @export var attack_name: String
@@ -28,6 +28,8 @@ func attack(attacker: AbstractCharacter, attacked, gunpoint: Marker2D = null):
 			return
 		AttackType.MULTIPLE:
 			await _attack_multiple(attacker, attacked, gunpoint)
+			return
+		AttackType.INVENTORY_OPEN:
 			return
 
 func _attack_single(_attacker: AbstractCharacter, _char: AbstractCharacter, _gunpoint: Marker2D):

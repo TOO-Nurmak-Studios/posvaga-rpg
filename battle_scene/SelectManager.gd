@@ -114,8 +114,8 @@ func remove_player(player: AbstractCharacter):
 	players().erase(player)
 	moved_players.erase(player)
 
-func on_shoot_pressed(attack_index: int):
-	selected_player().attack(attack_index, selected_enemy())
+func on_shoot_pressed(attack: Attack):
+	selected_player().attack(attack, selected_enemy())
 	
 func set_select_state(new_state: SelectState):
 	select_state = new_state

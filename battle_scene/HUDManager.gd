@@ -17,16 +17,19 @@ var font: Resource = preload("res://fonts/monogram-extended.ttf")
 var main_scene: Node
 var attack_containers: Dictionary # <Player, AttackContainer>
 var current_attack_container: AttackContainer
+var inventory_container: AttackContainer
 var tooltip_label: Label
 var attack_label: Label
 @onready var select_manager: SelectManager = $"../SelectManager" as SelectManager
 
 # state machine
-enum State {SELECT_PLAYER, SELECT_ATTACK, SELECT_ENEMY, SELECT_ALLY, NOTHING}
+enum State {SELECT_PLAYER, SELECT_ATTACK, SELECT_ENEMY, SELECT_ALLY, SELECT_ITEM, NOTHING}
 var was_movement_disabled: bool	= false
 var current_state: State = State.NOTHING
 var previous_state: State = State.NOTHING
-var selected_attack: int = -1
+var selected_attack: Attack
+
+var current_character: AbstractCharacter
 
 # must be called after battle manager and select manager! 
 func start():
@@ -58,11 +61,17 @@ func _select_next():
 	if current_state == State.SELECT_ATTACK:
 		current_attack_container.select_next_button(AttackContainer.Select.NEXT)
 		return
+	if current_state == State.SELECT_ITEM:
+		inventory_container.select_next_button(AttackContainer.Select.NEXT)
+		return
 	select_manager.select_next()
 
 func _select_prev():
 	if current_state == State.SELECT_ATTACK:
 		current_attack_container.select_next_button(AttackContainer.Select.PREV)
+		return
+	if current_state == State.SELECT_ITEM:
+		inventory_container.select_next_button(AttackContainer.Select.PREV)
 		return
 	select_manager.select_prev()
 	
@@ -104,8 +113,10 @@ func _action_pressed():
 	if current_state == State.SELECT_ENEMY:
 		select_manager.on_shoot_pressed(selected_attack)
 		change_state(State.NOTHING)
-	if current_state == State.SELECT_ATTACK:
+	elif current_state == State.SELECT_ATTACK:
 		current_attack_container.selected_button().pressed.emit()
+	elif current_state == State.SELECT_ITEM:
+		inventory_container.selected_button().pressed.emit()
 	return	
 
 func _action_back_pressed():
@@ -115,12 +126,27 @@ func _action_back_pressed():
 	
 func _attack_pressed(i: int):
 	var attack = select_manager.selected_player().attacks[i]
-	selected_attack = i
-	if attack.attack_type == Attack.AttackType.SINGLE:
-		change_state(State.SELECT_ENEMY)
-		tooltip_label.text = select_manager.selected_player().attacks[i].attack_tooltip
+	selected_attack = attack
+	_process_selected_attack()
+
+func _item_pressed(item: Item):
+	ItemsManager.get_current_inventory().remove(item.id)
+	selected_attack = select_manager.selected_player().available_item_attacks[item.id]
+	_process_selected_attack()
+
+func _close_inventory():
+	change_state(State.SELECT_PLAYER)
+
+func _process_selected_attack():
+	if selected_attack.attack_type == Attack.AttackType.INVENTORY_OPEN:
+		change_state(State.SELECT_ITEM)
+		tooltip_label.text = selected_attack.attack_tooltip
 		return
-	if attack.attack_type == Attack.AttackType.ON_SELF:
+	if selected_attack.attack_type == Attack.AttackType.SINGLE:
+		change_state(State.SELECT_ENEMY)
+		tooltip_label.text = selected_attack.attack_tooltip
+		return
+	if selected_attack.attack_type == Attack.AttackType.ON_SELF:
 		select_manager.on_shoot_pressed(selected_attack)
 		change_state(State.NOTHING)
 		return
@@ -144,6 +170,14 @@ func enable_player_movement():
 func change_state(state: State):
 	previous_state = current_state
 	match state:
+		State.SELECT_ITEM:
+			current_state = State.SELECT_ITEM
+			select_manager.set_select_state(SelectManager.SelectState.DISABLED)
+			current_attack_container.hide()
+			tooltip_label.show()
+			_create_inventory_menu()
+			inventory_container.enable()
+			return
 		State.SELECT_ATTACK:
 			current_state = State.SELECT_ATTACK
 			select_manager.set_select_state(SelectManager.SelectState.DISABLED)
@@ -155,20 +189,25 @@ func change_state(state: State):
 			select_manager.set_select_state(SelectManager.SelectState.PLAYER)
 			_create_attack_menu(select_manager.selected_player())
 			current_attack_container.disable()
+			if inventory_container != null:
+				inventory_container.hide()
 			tooltip_label.hide()
 			return
 		State.SELECT_ENEMY:
 			current_state = State.SELECT_ENEMY
 			select_manager.set_select_state(SelectManager.SelectState.ENEMY)
 			current_attack_container.hide()
+			inventory_container.hide()
 			tooltip_label.show()
 			return
 		State.NOTHING:
 			current_state = State.NOTHING
-			selected_attack = -1
+			selected_attack = null
 			select_manager.set_select_state(SelectManager.SelectState.DISABLED)
 			if current_attack_container != null:
 				current_attack_container.hide()
+			if inventory_container != null:
+				inventory_container.hide()
 			if tooltip_label != null:
 				tooltip_label.hide()
 			return
@@ -255,7 +294,63 @@ func _create_attack_label():
 	attack_label.hide()
 	add_sibling.call_deferred(attack_label)
 
+func _calc_container_position() -> Vector2:
+	var sprite = current_character.get_node("Sprite") as AnimatedSprite2D
+	var global_pos = sprite.global_position
+	var rect2size = sprite.sprite_frames.get_frame_texture("idle", 0).get_size() * sprite.scale * current_character.scale
+	return global_pos + Vector2(rect2size.x / 2, 0) + attack_container_offset
+
+func _create_inventory_menu():
+	if select_manager.select_state == SelectManager.SelectState.DISABLED:
+		if current_state != State.SELECT_ITEM:
+			return
+		
+	var inventory: Inventory = ItemsManager.get_current_inventory()
+	
+	if inventory_container != null:
+		inventory_container.hide()
+		if inventory_container.buttons.size() != inventory.size():
+			inventory_container.queue_free()
+		else:
+			inventory_container.show()
+			return
+	
+	var inventory_menu_position = _calc_container_position()
+	
+	inventory_container = container_scene.instantiate() as AttackContainer
+	inventory_container.position = inventory_menu_position
+	inventory_container.button_selected.connect(func(i): 
+		item_in_container_selected(inventory_container, i)
+	)
+	
+	var button_children = []
+	
+	var items = inventory.items
+	for item_id in items:
+		var stack: ItemsStack = items[item_id]
+		var item: Item = stack.example_item
+		var button: KeyboardButton = button_scene.instantiate() as KeyboardButton
+		button.init_vars(item.item_name, 16)
+		button.scale = Vector2(1, 2) 
+		button.pressed.connect(_item_pressed.bind(item))
+		button.add_theme_font_override("font", font)
+		button.add_to_group("button")
+		button_children.append(button)
+	
+	var back_button: KeyboardButton = button_scene.instantiate() as KeyboardButton
+	back_button.init_vars("Назад", 16)
+	back_button.scale = Vector2(1, 2) 
+	back_button.pressed.connect(_close_inventory.bind())
+	back_button.add_theme_font_override("font", font)
+	back_button.add_to_group("button")
+	button_children.append(back_button)
+	
+	inventory_container.init(button_children)
+	add_sibling.call_deferred(inventory_container)
+	inventory_container.ready.connect(on_inventory_container_ready)
+
 func _create_attack_menu(character: AbstractCharacter):
+	current_character = character
 	if select_manager.select_state == SelectManager.SelectState.DISABLED:
 		return
 	if current_attack_container != null:
@@ -268,10 +363,7 @@ func _create_attack_menu(character: AbstractCharacter):
 			current_attack_container.show()
 			return
 	
-	var sprite = character.get_node("Sprite") as AnimatedSprite2D
-	var global_pos = sprite.global_position
-	var rect2size = sprite.sprite_frames.get_frame_texture("idle", 0).get_size() * sprite.scale * character.scale
-	var attack_menu_position = global_pos + Vector2(rect2size.x / 2, 0) + attack_container_offset
+	var attack_menu_position = _calc_container_position()
 	
 	current_attack_container = container_scene.instantiate() as AttackContainer
 	current_attack_container.position = attack_menu_position
@@ -294,13 +386,31 @@ func _create_attack_menu(character: AbstractCharacter):
 			button.disable_button(attack._cooldown)
 		button_children.append(button)
 		#current_attack_container.button_container.add_child.call_deferred(button)
+	
 	current_attack_container.init(button_children)
 	add_sibling.call_deferred(current_attack_container)
 	current_attack_container.ready.connect(fit_container_deferred.bind(current_attack_container))
 	attack_containers[character] = current_attack_container
 
+func item_in_container_selected(container: AttackContainer, i: int):
+	var buttons_size = inventory_container.buttons.size()
+	
+	if i == buttons_size - 1:
+		# last is back
+		container.label.text = str("Закрыть инвентарь.")
+		return
+	
+	var items = ItemsManager.get_current_items()
+	var stack: ItemsStack = items.get(items.keys()[i])
+	var item: Item = stack.example_item
+	container.label.text = str(item.item_name, "\n", item.description, "\n", stack.count, " шт.\n")
+
 func attack_in_container_selected(container: AttackContainer, attack: Attack):
 	container.label.text = str(attack.attack_name, "\n", attack.attack_description, "\n")
+
+func on_inventory_container_ready():
+	fit_container_deferred(inventory_container)
+	_select_next()
 
 func fit_container_deferred(container: AttackContainer):
 	container.fit_container.call_deferred()

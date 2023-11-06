@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dwipxeek4aq0q"]
+[gd_scene load_steps=7 format=3 uid="uid://dwipxeek4aq0q"]
 
 [ext_resource type="Script" path="res://main_scene/Main.gd" id="1_pvdqy"]
 [ext_resource type="PackedScene" uid="uid://clah0tnwu35b8" path="res://dialog_scene/dialog.tscn" id="2_c1bjn"]
+[ext_resource type="PackedScene" uid="uid://drhe4igjj052c" path="res://state/items/shop.tscn" id="3_csbbd"]
 [ext_resource type="PackedScene" uid="uid://i4ni7ofuasr" path="res://dialog_scene/cutscene_manager.tscn" id="3_tyco7"]
 [ext_resource type="PackedScene" uid="uid://dyko4lfujsxkc" path="res://main_scene/audio_player.tscn" id="4_4sudp"]
 [ext_resource type="PackedScene" uid="uid://dfyj7opedrdpc" path="res://main_scene/pause/pause.tscn" id="5_t4x66"]
@@ -11,6 +12,9 @@ script = ExtResource("1_pvdqy")
 
 [node name="pause" parent="." instance=ExtResource("5_t4x66")]
 layer = 5
+
+[node name="shop" parent="." instance=ExtResource("3_csbbd")]
+layer = 4
 
 [node name="Dialog" parent="." instance=ExtResource("2_c1bjn")]
 

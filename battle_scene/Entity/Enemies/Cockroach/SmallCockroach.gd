@@ -22,6 +22,9 @@ func bite(animation_name: String):
 	sprite.play("idle")
 
 func _on_damage_taken(damage: int, source_nullable: AbstractCharacter = null):
+	if source_nullable == null:
+		return
+	
 	var source_pos = source_nullable.position
 	var self_pos = position
 	var dmg_vec = source_pos.direction_to(self_pos) 
