@@ -2,7 +2,7 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-uid="uid://o1q0isb27vvi"
+uid="uid://dona10v1hr5fm"
 path="res://.godot/imported/feel_like_home.mp3-0f05bcb55317a77a14bc1d210e7e6ce8.mp3str"
 
 [deps]
@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/feel_like_home.mp3-0f05bcb55317a77a14bc1d210e
 [params]
 
 loop=true
-loop_offset=0.0
-bpm=0.0
+loop_offset=0
+bpm=0
 beat_count=0
 bar_beats=4
