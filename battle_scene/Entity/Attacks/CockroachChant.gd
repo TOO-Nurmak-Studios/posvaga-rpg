@@ -5,12 +5,11 @@ var small_cockroach_scene: PackedScene = preload("res://battle_scene/Entity/Enem
 
 @export var chant_length: float = 1
 @export var atk_cooldown: int = 2
-@export var spawn_distance: int = 4
 
-@onready var rand = RandomNumberGenerator.new()
+@onready var rand = BetterRandNumGen.new()
 
 func _init():
-	attack_name = "Cockroach Chany"
+	attack_name = "Cockroach Chant"
 	attack_type = Attack.AttackType.SINGLE
 	attack_tooltip = "Select enemy with arrows, press enter to attack."
 	attack_description = "Common cockroach bite"
@@ -24,7 +23,6 @@ func _attack_single(attacker: AbstractCharacter, _char: AbstractCharacter, gunpo
 	attacker.play_spawn_effect()
 	
 	var new_cockroach = small_cockroach_scene.instantiate() as SmallCockroach
-	_calculate_position(attacker, new_cockroach)
 	
 	new_cockroach.ready.connect(_calculate_position.bind(attacker, new_cockroach))
 	add_sibling(new_cockroach)
@@ -38,10 +36,11 @@ func _calculate_position(attacker: Cockroach, small_cockroach: SmallCockroach):
 	var spawner_position = attacker.position
 	var attacker_size = attacker.sprite.sprite_frames.get_frame_texture("idle", 0).get_size() * attacker.scale
 	var new_spawn_size = small_cockroach.sprite.sprite_frames.get_frame_texture("idle", 0).get_size() * small_cockroach.scale
-	var spawn_point = attacker_size * 0.5 + new_spawn_size * 0.5 + Vector2(spawn_distance, spawn_distance)
+	var spawn_point = attacker_size * 0.5 + new_spawn_size * 0.5 + Vector2(
+		rand.randi_range(10, 150), 0)
+	spawn_point.y = 0
 	while true:
-		rand.randomize()
-		var deg = rand.randf_range(115, 155)# * (rand.randi_range(0, 1) * 2 - 1)
+		var deg = 160 + 3 * rand.randi_range(0, 10) # 160 - 190
 		var angle = deg_to_rad(deg)
 		var new_spawn = spawn_point.rotated(angle)
 		if !get_viewport().get_visible_rect().has_point(spawner_position + new_spawn):

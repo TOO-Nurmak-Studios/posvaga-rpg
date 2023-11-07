@@ -164,6 +164,7 @@ animations = [{
 scale = Vector2(0.75, 0.75)
 script = ExtResource("1_lhnyy")
 attack_stream = ExtResource("2_0itto")
+attack_cooldown = 100
 char_name = "Малый кокроч"
 death_sound = ExtResource("3_68nin")
 

@@ -20,11 +20,7 @@ func _init():
 func _attack_single(attacker: AbstractCharacter, char: AbstractCharacter, gunpoint: Marker2D):
 	var animation_name	
 	if attacker.sprite.sprite_frames.has_animation("bite_funny"):
-		var rand_int = randi_range(0, 3)
-		if rand_int != 0:
-			animation_name = "bite_normal"
-		else:
-			animation_name = "bite_funny"
+		animation_name = "bite_funny"
 	else:
 		animation_name = "bite_normal"
 	var start_position = attacker.position

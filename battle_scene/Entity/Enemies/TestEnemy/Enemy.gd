@@ -1,11 +1,16 @@
 class_name Enemy
 extends AbstractCharacter
 
-@onready var rand = RandomNumberGenerator.new()
+@onready var rand = BetterRandNumGen.new()
 
 var move_timer: MoveTimer
 var prepared_attack_index: int
 var has_moved: bool = false
+
+var _weights = []
+var _total_weight
+var _single_attack: bool = false
+var _same_weights: bool = false
 
 func _init():
 	attacks = [TripleShotAttack.new()]
@@ -13,6 +18,12 @@ func _init():
 func _ready():
 	super._ready()
 	sprite.play("idle")
+	if _weights.is_empty():
+		for attack in attacks:
+			_weights.push_back(1)
+	_total_weight = _weights.reduce(func(acc, next): return acc + next, 0)
+	_single_attack = attacks.size() == 1
+	_same_weights = _weights.all(func(x): return x == _weights[0])
 
 func get_type() -> CharacterType:
 	return CharacterType.ENEMY 
@@ -25,9 +36,27 @@ func set_enemy_thinking():
 	move_timer.set_thinking()
 	
 func prepare_random_attack():
-	var attack_index = rand.randi_range(0, attacks.size() - 1)
+	var attack_index
+	if _single_attack:
+		attack_index = 0
+	elif _same_weights:
+		attack_index = rand.randi_range(0, attacks.size() - 1)
+	else:
+		attack_index = _generate_weight_based_index()
+
 	_start_timer_for_attack(attacks[attack_index])
 	prepared_attack_index = attack_index
+	
+func _generate_weight_based_index():
+	var random_weight = rand.randi_range(1, _total_weight)
+	var tmp_weight = 0
+	var attack_index = 0
+	var last_weight = 0
+	for i in range(0, attacks.size()):
+		tmp_weight += _weights[i]
+		if (last_weight < random_weight && random_weight <= tmp_weight):
+			return i
+		last_weight = tmp_weight	
 	
 func _start_timer_for_attack(attack: Attack):
 	move_timer.set_moves_amount(attack.cooldown)
