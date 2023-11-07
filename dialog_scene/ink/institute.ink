@@ -4,6 +4,7 @@ VAR had_first_cockroach_fight = false
 VAR heard_voices = false
 VAR hallway_blocked = false
 VAR eavesdroped_conversation = false
+VAR visited_first_floor = false
 VAR had_second_cockroach_fight = false
 VAR had_optional_cockroach_fight = false
 VAR should_start_optional_cockroach_fight = false
@@ -131,10 +132,6 @@ VAR lab_has_book = false
 
 === stairs_door_alternative ===
 Проход к лестинце закрыт. Нужен ключ.
-
-# sid: vera_neutral
-# loc: right
-Стоит поискать ключ в подсобном помещении.
 ->END
 
 
@@ -390,6 +387,19 @@ vera right
 # sid: vera_scared
 # loc: right
 Что-то не так. Надеюсь, с ребятами всё хорошо...
+
+-> END
+
+
+=== first_floor_first_time ===
+~ visited_first_floor = true
+# sid: vera_neutral
+# loc: right
+Отлично, я на первом этаже.
+
+# sid: vera_sad
+# loc: right
+Повезло, что он торопился, и не закрыл дверь...
 
 -> END
 
