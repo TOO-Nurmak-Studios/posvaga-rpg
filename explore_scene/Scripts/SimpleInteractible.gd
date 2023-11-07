@@ -10,6 +10,7 @@ const battle_failed_knot = "battle_failed"
 @export var interaction_enabled: bool = true
 
 @export var is_battle_scene_enabled: bool = false
+@export var battle_flag: String
 @export var battle_scene_type: BattleScene.BattleSceneType
 @export var is_battle_dialogue_enabled: bool = false
 @export var battle_dialog_triggers: Array[BattleScene.BattleDialogueSignalType]
@@ -80,7 +81,7 @@ func interact():
 	if dialog_data != null:
 		EventBus.dialog_start.emit(dialog_data)
 		await EventBus.dialog_finished
-	if is_battle_scene_enabled:
+	if is_battle_scene_enabled && (battle_flag == "" || GameState.vars.get(battle_flag, false)):
 		var result = await _start_battle()
 		if result == EventBus.BattleEndType.DEFEAT:
 			await _on_defeat()

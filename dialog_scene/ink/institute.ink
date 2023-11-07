@@ -6,6 +6,7 @@ VAR hallway_blocked = false
 VAR eavesdroped_conversation = false
 VAR had_second_cockroach_fight = false
 VAR had_optional_cockroach_fight = false
+VAR should_start_optional_cockroach_fight = false
 VAR lab_has_book = false
 
 -> janitors_room_cockroach
@@ -181,7 +182,7 @@ VAR lab_has_book = false
 
 # sid: vera_neutral
 # loc: right
-Отлично, теперь в институте на одного таракана меньше.
+Отлично, теперь в институте на двух тараканов меньше.
 
 # sid: vera_neutral
 # loc: right
@@ -392,47 +393,124 @@ vera right
 
 -> END
 
-=== optional_cockroach_fight ===
 
-~ had_optional_cockroach_fight = true
+=== optional_cockroach_fight ===
 
 # sid: vera_neutral
 # loc: right
-ОПЦИОНАЛЬНАЯ ЛИ ЭТО БИТВА? ДА КТО Б ЕГО ЗНАЛ
+Опять тараканы... Похоже, они выползают, когда в коридорах выключают свет.
+
+# sid: vera_questioning
+# loc: right
+Может, стоит просто пройти мимо? Дезинсекция института не входит в мои обязанности.
+
+Этот таракан не чувствует страха. Он готов идти до конца.
+
+Как с ним поступить?
 
 * [Напасть]
 
-    # sid: vera_neutral
+    ~ had_optional_cockroach_fight = true
+    ~ should_start_optional_cockroach_fight = true
+
+    # sid: vera_bored
     # loc: right
-    АРРРРРР
+    В бой!
     ->END
 
 * [Уйти]
 
+    ~ should_start_optional_cockroach_fight = false
+
     # sid: vera_neutral
     # loc: right
-    Ну ладно ладно... ХОТЯЯЯЯ
+    Живи... пока.
 
+-> END
+
+
+=== optional_cockroach_fight_start ===
+
+# sid: vera_scared
+# loc: right
+Чёрт... Да сколько же их тут?
+-> END
+
+
+=== optional_cockroach_fight_finish ===
+
+# sid: vera_bored
+# loc: right
+Чёртово гнездо... 
+
+# sid: vera_neutral
+# loc: right
+Надеюсь, после этого они начнут меня бояться.
 -> END
 
 
 === hallway_cockroaches ===
 
 ~ had_second_cockroach_fight = true
+
+# sid: vera_doubting
+# loc: right
+Кхм... Так...
+
+# sid: vera_angry
+# loc: right
+Ночью тараканы становятся настолько наглыми, что даже не убегают от меня!
+
+# sid: vera_angry
+# loc: right
+Придётся прорываться с боем.
+
+-> END
+
+
+=== hallway_cockroaches_start_battle ===
+
+~ lab_has_book = false
+
+# sid: vera_scared
+# loc: right
+Это ещё кто?
+
+# sid: vera_scared
+# loc: right
+Кажется, другие тараканы его слушаются...
+
+-> END
+
+
+=== hallway_cockroaches_second_attack ===
+
 ~ lab_has_book = true
 
-# sid: vera_neutral
+# sid: vera_doubting
 # loc: right
-ДРАКА С ТАРАКАНАМИ! ДААААА
+Их не так-то просто раздавить. Нужно попробовать что-то ещё.
+
+# sid: vera_questioning
+# loc: right
+Хм. Нет ли у меня с собой чего-нибудь тяжёлого...
 
 -> END
 
 
 === hallway_cockroaches_after_battle ===
 
-# sid: vera_neutral
+# sid: vera_doubting
 # loc: right
-Отлично, теперь в институте на одного таракана меньше.
+Это... Было... Непросто.
+
+# sid: vera_bored
+# loc: right
+Выход уже совсем рядом. Надо поскорее выбраться отсюда.
+
+# sid: vera_sad
+# loc: right
+Куда же подевались ребята...
 
 -> END
 
@@ -499,19 +577,20 @@ in 0.25
 
 -> END
 
+
 === battle_failed ===
-Вы проиграли! Попробуйте еще раз...
+На этот раз тараканы победили... Попробуйте еще раз!
 -> END
 
 === first_cockroach_on_start ===
 
 # sid: vera_bored
 # loc: right
-Он всё ещё не сдвинулся с места... Пора его раздавить!
+Ага, он ещё и не один... Пора их раздавить.
 
-В сражении вы по очереди с противником применяете разные способности.
+В сражении вы и ваши противники действуете по очереди.
 
-Для перехода в режим выбора способностей нажмите стрелку "вправо".
+Для перехода в меню способностей нажмите стрелку "вправо".
 
 Способности можно выбирать с помощью стрелок "вниз" и "вверх".
 
@@ -520,12 +599,24 @@ in 0.25
 
 === first_cockroach_on_first_attack ===
 
+Таймер над врагом показывает количество ходов до его следующего действия.
 
-Для защиты от врага попробуйте выбрать способность "Защита". 
-Данная способность снижает урон от следующей атаки на 50%.
+Для защиты от вражеских атак можно использовать способность "Защита". 
+
+Эта способность наполовину снизит урон от следующей атаки по вашему персонажу.
 -> END
 
 === first_cockroach_on_second_attack ===
 
-На этом обучение кончается. Следите за вражескими атаками и правильно комбинируйте свои, чтобы достичь победы!
+Некоторым способностям требуется время на восстановление - используйте их с умом.
+
+На этом обучение завершено. Следите за вражескими атаками и правильно комбинируйте свои, чтобы достичь победы в дальнейших битвах!
+
+-> END
+
+=== first_cockroach_on_first_enemy_attack ===
+
+# sid: vera_scared
+# loc: right
+Ай! Больно...
 -> END

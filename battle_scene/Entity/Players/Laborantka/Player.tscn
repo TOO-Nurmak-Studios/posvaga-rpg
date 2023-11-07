@@ -202,7 +202,7 @@ kick_stream = ExtResource("2_7p0fr")
 def_stream = ExtResource("3_yvf0o")
 book_stream = ExtResource("4_x5jo1")
 book_impact_stream = ExtResource("5_t0uqc")
-char_name = "Лаборантка"
+char_name = "Вера"
 death_sound = ExtResource("6_xecj7")
 
 [node name="HealthNode" parent="." instance=ExtResource("2_83v14")]

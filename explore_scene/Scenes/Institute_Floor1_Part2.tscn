@@ -65,7 +65,6 @@ z_index = 1
 position = Vector2(180, 103)
 
 [node name="ColorRect" type="ColorRect" parent="."]
-visible = false
 z_index = 11
 offset_left = -949.0
 offset_top = -655.0
@@ -162,7 +161,10 @@ after_battle_dialog_knot = "hallway_cockroaches_after_battle"
 is_battle_scene_enabled = true
 battle_scene_type = 1
 battle_scene_players = Array[int]([0])
-battle_scene_enemies = Array[int]([2])
+battle_scene_enemies = Array[int]([2, 1, 2])
+is_battle_dialogue_enabled = true
+battle_dialog_triggers = Array[int]([0, 2, 7])
+battle_dialog_knots = Array[String](["hallway_cockroaches_start_battle", "hallway_cockroaches_second_player_attack", "hallway_cockroaches_fifth_cockroach_attack"])
 battle_music_filename = "from_the_screw.mp3"
 
 [node name="CollisionShape2D" parent="CockroachesFight" index="0"]

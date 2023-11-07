@@ -183,6 +183,7 @@ trail_lifetime = 0.03
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_1b20q")
+scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_86saj")
 animation = &"idle"
 frame_progress = 0.857555

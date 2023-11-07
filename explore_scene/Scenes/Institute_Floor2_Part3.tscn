@@ -408,7 +408,6 @@ scale = Vector2(3, 1)
 shape = SubResource("RectangleShape2D_83ca0")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-visible = false
 z_index = 11
 offset_left = -949.0
 offset_top = -655.0

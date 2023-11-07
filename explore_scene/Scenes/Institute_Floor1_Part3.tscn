@@ -175,6 +175,7 @@ dialog_resource = ExtResource("6_5mlkl")
 dialog_knot = "room_108"
 
 [node name="CollisionShape2D" parent="Room108" index="0"]
+z_index = 1
 position = Vector2(5, 30)
 shape = SubResource("RectangleShape2D_x6j70")
 
@@ -191,10 +192,16 @@ dialog_resource = ExtResource("6_5mlkl")
 dialog_knot = "optional_cockroach_fight"
 visibility_flag = "had_optional_cockroach_fight"
 invert_visibility_flag = true
+after_battle_dialog_knot = "optional_cockroach_fight_finish"
 is_battle_scene_enabled = true
+battle_flag = "should_start_optional_cockroach_fight"
 battle_scene_type = 1
+is_battle_dialogue_enabled = true
+battle_dialog_triggers = Array[int]([0])
+battle_dialog_knots = Array[String](["optional_cockroach_fight_start"])
+battle_music_filename = "from_the_screw.mp3"
 battle_scene_players = Array[int]([0])
-battle_scene_enemies = Array[int]([2])
+battle_scene_enemies = Array[int]([3, 3, 3, 3, 3])
 
 [node name="CollisionShape2D" parent="CockroachInteractible" index="0"]
 position = Vector2(-2, 3.5)
