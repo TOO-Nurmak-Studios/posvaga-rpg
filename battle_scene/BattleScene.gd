@@ -15,12 +15,13 @@ func get_battle_scene(type: BattleSceneType):
 
 	return battle_scene_uni.instantiate()
 
-enum SceneCharacterType {LABORANTKA, COCK_BIG, COCK_SMALL, COCK_TUTOR, PLAYER}
+enum SceneCharacterType {LABORANTKA, COCK_BIG, COCK_SMALL, COCK_TUTOR, PLAYER, GOBLIN}
 
 var scene_character_big_cock = preload("res://battle_scene/Entity/Enemies/Cockroach/Cockroach.tscn")
 var scene_character_small_cock = preload("res://battle_scene/Entity/Enemies/Cockroach/SmallCockroach.tscn")
 var scene_character_tutor_cock = preload("res://battle_scene/Entity/Enemies/Cockroach/SmallTutorialCockroach.tscn")
 var scene_character_lab = preload("res://battle_scene/Entity/Players/Laborantka/Player.tscn")
+var scene_character_goblin = preload("res://battle_scene/Entity/Enemies/Goblin/Goblin.tscn")
 
 func get_character(type: SceneCharacterType) -> AbstractCharacter:
 	match type:
@@ -32,6 +33,8 @@ func get_character(type: SceneCharacterType) -> AbstractCharacter:
 			return scene_character_tutor_cock.instantiate()
 		SceneCharacterType.COCK_SMALL:
 			return scene_character_small_cock.instantiate()
+		SceneCharacterType.GOBLIN:
+			return scene_character_goblin.instantiate()
 
 	return scene_character_lab.instantiate()
 

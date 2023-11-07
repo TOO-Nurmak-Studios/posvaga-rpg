@@ -80,7 +80,11 @@ func _attack_ended(attacker: AbstractCharacter, attacked: Array[AbstractCharacte
 func _draw_attack_line(attacker: AbstractCharacter, attacked: Array[AbstractCharacter], attack: Attack):
 	if attack != null:
 		var attacked_str = ", ".join(attacked.map(func(a): return a.char_name))
-		attack_label.text = attack.attack_postmessage % [attacker.char_name, attacked_str]
+		attack_label.text = attack.attack_postmessage.format({
+				"attacker": attacker.char_name, 
+				"attacked": attacked_str, 
+				"damage": attacked.reduce(func(accum, char): return accum + char.health.last_damage, 0)
+			})
 		attack_label.show()
 
 func add_enemy(enemy: Enemy):

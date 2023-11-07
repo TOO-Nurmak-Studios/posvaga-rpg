@@ -14,7 +14,7 @@ func _init():
 	attack_type = Attack.AttackType.SINGLE
 	attack_tooltip = "Select enemy with arrows, press enter to attack."
 	attack_description = "Common cockroach bite"
-	attack_postmessage = str("%s призывает маленького кокроча. %s пугается.")
+	attack_postmessage = str("{attacker} призывает маленького кокроча.")
 	self.cooldown = atk_cooldown
 	
 func _attack_single(attacker: AbstractCharacter, _char: AbstractCharacter, gunpoint: Marker2D):
@@ -24,8 +24,7 @@ func _attack_single(attacker: AbstractCharacter, _char: AbstractCharacter, gunpo
 	attacker.play_spawn_effect()
 	
 	var new_cockroach = small_cockroach_scene.instantiate() as SmallCockroach
-	#new_cockroach.scale = Vector2(0.5, 0.5)
-	#_calculate_position(attacker, new_cockroach)
+	_calculate_position(attacker, new_cockroach)
 	
 	new_cockroach.ready.connect(_calculate_position.bind(attacker, new_cockroach))
 	add_sibling(new_cockroach)

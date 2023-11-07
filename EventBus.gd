@@ -17,6 +17,7 @@ signal battle_scene_end(result: BattleEndType)
 
 #explore scene, player controls
 var player_input_enabled = true
+var player_in_battle = false
 
 signal player_move_pressed(delta: float, vector: Vector2)
 signal player_sprint_pressed()
@@ -95,7 +96,7 @@ func process_player_input(delta):
 	# оставляем только сигналы на спринт, иначе может получится так,
 	# что игро забегает в диалог, игра не ловит отпущенный шифт,
 	# и после выхода из диалога персонажа в вечном спринте
-	if !player_input_enabled:
+	if !player_input_enabled || player_in_battle:
 		return
 	
 	if Input.is_action_just_pressed("ui_interact"):

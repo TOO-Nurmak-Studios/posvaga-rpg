@@ -6,6 +6,7 @@ extends Node2D
 @export var char_name: String = "Unnamed Character"
 @export var attacks: Array[Attack]
 @export var death_sound: AudioStream
+@export var select_border_width = 2
 
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var gunpoint: Marker2D = $Crosshair
@@ -34,7 +35,7 @@ func get_animation_duration(anim_name: StringName):
 
 func select():
 	var sh = self.sprite.material as ShaderMaterial
-	sh.set_shader_parameter("width", 1)
+	sh.set_shader_parameter("width", select_border_width)
 
 func unselect():
 	var sh = self.sprite.material as ShaderMaterial

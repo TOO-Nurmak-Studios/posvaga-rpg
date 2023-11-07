@@ -160,7 +160,7 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="SmallCockroach" type="Node2D" groups=["enemy"]]
+[node name="SmallCockroach2" type="Node2D" groups=["enemy"]]
 script = ExtResource("1_buc07")
 attack_stream = ExtResource("2_v3a3m")
 attack_cooldown = 2
@@ -168,11 +168,11 @@ char_name = "Малый кокроч"
 death_sound = ExtResource("3_e3c28")
 
 [node name="HealthNode" parent="." instance=ExtResource("4_60g10")]
-position = Vector2(-64, 0)
+position = Vector2(-62.667, -59)
 health = 15
 
 [node name="BloodEmitter" type="GPUParticles2D" parent="."]
-position = Vector2(8, 34)
+position = Vector2(8, 4)
 emitting = false
 amount = 1000
 process_material = SubResource("ParticleProcessMaterial_wb641")
@@ -184,7 +184,8 @@ trail_lifetime = 0.03
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_1b20q")
-scale = Vector2(0.5, 0.5)
+position = Vector2(0, -23)
+scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_86saj")
 animation = &"idle"
 frame_progress = 0.857555

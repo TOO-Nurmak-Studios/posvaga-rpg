@@ -46,7 +46,7 @@ func _process_sprint_released():
 func _process_movement(delta, new_velocity):
 	
 	# наверное это мой самый тупой костыль в этом проекте
-	if !EventBus.player_input_enabled:
+	if !EventBus.player_input_enabled || EventBus.player_in_battle:
 		new_velocity = Vector2.ZERO
 	
 	velocity = new_velocity.normalized() * speed * delta;
@@ -78,13 +78,13 @@ func _process_dialog_start(_dialog_data: DialogData):
 	_process_movement(0, direction)
 
 
-func _process_battle_start(_dialog_data: DialogData):
-	EventBus.player_input_enabled = false
+func _process_battle_start():
+	EventBus.player_in_battle = true
 	is_interacting = true
 
 
 func _process_battle_ended(_result):
-	EventBus.player_input_enabled = true
+	EventBus.player_in_battle = false
 	is_interacting = false
 
 

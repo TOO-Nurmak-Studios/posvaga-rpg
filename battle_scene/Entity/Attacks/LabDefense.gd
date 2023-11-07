@@ -9,7 +9,7 @@ func _init():
 	attack_type = Attack.AttackType.ON_SELF
 	attack_tooltip = "Нажмите Enter для применения, вернуться к выбору атаки - Esc."
 	attack_description = "Встать в стойку для уменьшения входящего урона."
-	attack_postmessage = str("%s защищается от %s.")
+	attack_postmessage = str("{attacker} защищается.")
 	self.cooldown = atk_cooldown
 	
 func _attack_single(attacker: AbstractCharacter, _char: AbstractCharacter, gunpoint: Marker2D):
