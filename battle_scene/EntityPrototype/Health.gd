@@ -9,6 +9,7 @@ signal zero_health()
 
 var health_bar: HealthBar
 var damage_reduction: float = NO_DAMAGE_REDUCTION
+var last_damage = -1
 
 func remove_health(i: int):
 	var old_hp = health
@@ -16,6 +17,7 @@ func remove_health(i: int):
 		i *= damage_reduction
 		disable_damage_reduction()
 	health -= i
+	last_damage = i
 	health_changed.emit(old_hp, health)
 	if old_hp > 0 && health <= 0:
 		zero_health.emit()

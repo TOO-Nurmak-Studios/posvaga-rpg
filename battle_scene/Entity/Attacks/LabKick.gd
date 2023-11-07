@@ -9,7 +9,7 @@ func _init():
 	attack_type = Attack.AttackType.SINGLE
 	attack_tooltip = "Выбор врага: стрелки, удар: Enter, вернуться к выбору атаки - Esc."
 	attack_description = "Пнуть врага со всей силы."
-	attack_postmessage = str("%s пинает %s на ", damage, " урона.")
+	attack_postmessage = str("{attacker} пинает {attacked}, нанося {damage} урона.")
 	cooldown = 1
 	
 func _attack_single(attacker: AbstractCharacter, char: AbstractCharacter, gunpoint: Marker2D):

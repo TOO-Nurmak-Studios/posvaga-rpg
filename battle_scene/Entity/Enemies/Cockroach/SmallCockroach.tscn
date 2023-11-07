@@ -161,13 +161,14 @@ animations = [{
 }]
 
 [node name="SmallCockroach" type="Node2D" groups=["enemy"]]
+scale = Vector2(0.75, 0.75)
 script = ExtResource("1_lhnyy")
 attack_stream = ExtResource("2_0itto")
 char_name = "Малый кокроч"
 death_sound = ExtResource("3_68nin")
 
 [node name="HealthNode" parent="." instance=ExtResource("2_1sy2k")]
-position = Vector2(-64, 0)
+position = Vector2(-62.6667, -50)
 health = 10
 
 [node name="BloodEmitter" type="GPUParticles2D" parent="."]
