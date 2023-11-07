@@ -82,7 +82,9 @@ animations = [{
 y_sort_enabled = true
 position = Vector2(567, 254)
 script = ExtResource("1_622f6")
-music_file_name = "a_star_called_sun_v2.mp3"
+music_file_name = "sorcerers_puppet.mp3"
+env_file_name = "rain_interior.mp3"
+env_volume = "-26"
 
 [node name="Teleport_Hallway" parent="." groups=["Teleport"] instance=ExtResource("2_qyhho")]
 z_index = 1
@@ -136,7 +138,7 @@ layer_2/tile_data = PackedInt32Array()
 
 [node name="Player" parent="." groups=["Player"] instance=ExtResource("4_612ub")]
 z_index = 1
-position = Vector2(-380, 419)
+position = Vector2(177, 412)
 char_name = "Vera"
 
 [node name="ToiletDoor" parent="." instance=ExtResource("5_qdo3h")]
@@ -160,7 +162,6 @@ position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_61646")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-visible = false
 z_index = 11
 offset_left = -949.0
 offset_top = -655.0

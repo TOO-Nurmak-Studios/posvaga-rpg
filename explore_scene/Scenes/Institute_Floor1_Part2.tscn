@@ -38,6 +38,9 @@ size = Vector2(25, 7.5)
 y_sort_enabled = true
 position = Vector2(567, 254)
 script = ExtResource("1_awj2c")
+music_file_name = "sorcerers_puppet.mp3"
+env_file_name = "rain_interior.mp3"
+env_volume = "-26"
 
 [node name="Map" type="TileMap" parent="."]
 y_sort_enabled = true
@@ -70,7 +73,7 @@ offset_left = -949.0
 offset_top = -655.0
 offset_right = 412.0
 offset_bottom = 584.0
-color = Color(0, 0, 0, 0.196078)
+color = Color(0, 0, 0, 0.235294)
 
 [node name="Teleport_Up" parent="." groups=["Teleport"] instance=ExtResource("5_c534t")]
 z_index = 1

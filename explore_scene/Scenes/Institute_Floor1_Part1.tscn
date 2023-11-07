@@ -22,6 +22,8 @@ y_sort_enabled = true
 position = Vector2(567, 254)
 script = ExtResource("1_ofxyj")
 music_file_name = "horror_ambience.ogg"
+env_file_name = "rain_interior.mp3"
+env_volume = "-20"
 
 [node name="Sprite2D3" type="Sprite2D" parent="."]
 z_index = 10
