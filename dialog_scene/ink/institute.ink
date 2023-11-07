@@ -590,14 +590,13 @@ Fantasy_Start
 # cts: fade
 out 0.02
 
-# cts: wait
-4
-# snd: step_2.mp3 -25
+
 # cts: wait
 6
-# snd: .
+# cts: move
+ded down 15
 # cts: wait
-2
+4
 
 # sid: ded_smiling
 # spd: 12

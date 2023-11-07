@@ -65,7 +65,7 @@ script = ExtResource("1_tg1m2")
 offset_right = 641.0
 offset_bottom = 481.0
 mouse_filter = 2
-color = Color(0, 0, 0, 1)
+color = Color(0.0627451, 0.0627451, 0.0627451, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 method_call_mode = 1

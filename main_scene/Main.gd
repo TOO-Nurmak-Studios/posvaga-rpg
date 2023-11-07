@@ -33,6 +33,7 @@ func _ready():
 	
 	if start_scene != null:
 		_change_scene({SceneTransition.SceneDataType.PACKED_SCENE: start_scene}, Mode.EXPLORATION)
+		SceneTransition.fade_out()
 	else:
 		_game_start()
 
