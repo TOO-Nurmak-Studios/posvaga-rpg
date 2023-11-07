@@ -14,7 +14,7 @@ func _init():
 	attack_type = Attack.AttackType.SINGLE
 	attack_tooltip = "Select enemy with arrows, press enter to attack."
 	attack_description = "Common cockroach bite"
-	attack_postmessage = str("%s призывает маленького кокроча и пугает %s.")
+	attack_postmessage = str("%s призывает маленького кокроча. %s пугается.")
 	self.cooldown = atk_cooldown
 	
 func _attack_single(attacker: AbstractCharacter, _char: AbstractCharacter, gunpoint: Marker2D):
