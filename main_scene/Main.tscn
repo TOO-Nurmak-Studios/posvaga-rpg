@@ -1,12 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://v03kowxhlm0r"]
+[gd_scene load_steps=7 format=3 uid="uid://v03kowxhlm0r"]
 
 [ext_resource type="Script" path="res://main_scene/Main.gd" id="1_pvdqy"]
 [ext_resource type="PackedScene" uid="uid://clah0tnwu35b8" path="res://dialog_scene/dialog.tscn" id="2_c1bjn"]
 [ext_resource type="PackedScene" uid="uid://i4ni7ofuasr" path="res://dialog_scene/cutscene_manager.tscn" id="3_tyco7"]
+[ext_resource type="PackedScene" uid="uid://bewxnbc3shrdd" path="res://pause/credits.tscn" id="3_wshb3"]
 [ext_resource type="PackedScene" uid="uid://dyko4lfujsxkc" path="res://main_scene/audio_player.tscn" id="4_4sudp"]
+[ext_resource type="PackedScene" uid="uid://b6g6ifjvhn0j5" path="res://pause/pause.tscn" id="5_t4x66"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_pvdqy")
+
+[node name="pause" parent="." instance=ExtResource("5_t4x66")]
+
+[node name="credits" parent="." instance=ExtResource("3_wshb3")]
 
 [node name="Dialog" parent="." instance=ExtResource("2_c1bjn")]
 
