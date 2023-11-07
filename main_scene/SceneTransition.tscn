@@ -39,7 +39,7 @@ resource_name = "RESET"
 length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/path = NodePath("FadeRect:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
@@ -62,11 +62,10 @@ layer = 2
 script = ExtResource("1_tg1m2")
 
 [node name="FadeRect" type="ColorRect" parent="."]
-modulate = Color(1, 1, 1, 0)
 offset_right = 641.0
 offset_bottom = 481.0
 mouse_filter = 2
-color = Color(0.0313726, 0.0313726, 0.0313726, 1)
+color = Color(0, 0, 0, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 method_call_mode = 1

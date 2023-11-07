@@ -39,7 +39,6 @@ func _ready():
 # С этой функции будет начинаться вся игра
 # для дебага лучше менять логику в _ready()
 func _game_start():
-	SceneTransition.fade_in(5)
 	_change_scene({SceneTransition.SceneDataType.PACKED_SCENE: default_start_scene}, Mode.EXPLORATION)
 	EventBus.dialog_start.emit(start_dialog)
 
