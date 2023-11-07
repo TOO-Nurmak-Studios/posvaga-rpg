@@ -21,6 +21,8 @@ func init(_start_scene_name: String):
 
 
 func _ready():
+	await SceneTransition.fade_in()
+	
 	EventBus.teleport_request.connect(_teleport)
 	EventBus.battle_request.connect(_battle)
 	EventBus.battle_scene_end.connect(_battle_finished)
