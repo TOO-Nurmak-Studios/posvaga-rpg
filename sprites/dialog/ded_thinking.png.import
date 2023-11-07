@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bkn51u0pped7v"
-path="res://.godot/imported/Player Side Sheet.png-69db3c0770fe179192f2f54126e49796.ctex"
+uid="uid://bb35gj6xrcnuk"
+path="res://.godot/imported/ded_thinking.png-b33b861fc4d2720989207e24e39f7de2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://explore_scene/Assets/Player/Player Side Sheet.png"
-dest_files=["res://.godot/imported/Player Side Sheet.png-69db3c0770fe179192f2f54126e49796.ctex"]
+source_file="res://sprites/dialog/ded_thinking.png"
+dest_files=["res://.godot/imported/ded_thinking.png-b33b861fc4d2720989207e24e39f7de2.ctex"]
 
 [params]
 

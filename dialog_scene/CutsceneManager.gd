@@ -34,6 +34,8 @@ func process_cutscene_step(step: CutsceneStep):
 			process_remove(step.params)
 		CutsceneStep.Type.SCEN:
 			process_change_scene(step.params)
+		CutsceneStep.Type.EXIT:
+			process_exit()
 
 
 func on_step_finished():
@@ -83,3 +85,6 @@ func process_remove(params: PackedStringArray):
 func process_change_scene(params: PackedStringArray):
 	var scene_name = params[0] as String
 	EventBus.cutscene_change_scene.emit(scene_path_prefix + scene_name + scene_file_extension)
+
+func process_exit():
+	get_tree().quit()

@@ -433,7 +433,7 @@ vera right
 
 # sid: vera_scared
 # loc: right
-Чёрт... Да сколько же их тут?
+Чёрт... Почему их тут так много?
 -> END
 
 
@@ -470,8 +470,6 @@ vera right
 
 === hallway_cockroaches_start_battle ===
 
-~ lab_has_book = false
-
 # sid: vera_scared
 # loc: right
 Это ещё кто?
@@ -483,7 +481,7 @@ vera right
 -> END
 
 
-=== hallway_cockroaches_second_attack ===
+=== hallway_cockroaches_second_player_attack ===
 
 ~ lab_has_book = true
 
@@ -498,6 +496,15 @@ vera right
 -> END
 
 
+=== hallway_cockroaches_fifth_cockroach_attack ===
+
+# sid: vera_scared
+# loc: right
+Если вовремя не уничтожить мелких тараканов, их может стать слишком много...
+
+-> END
+
+
 === hallway_cockroaches_after_battle ===
 
 # sid: vera_doubting
@@ -507,10 +514,6 @@ vera right
 # sid: vera_bored
 # loc: right
 Выход уже совсем рядом. Надо поскорее выбраться отсюда.
-
-# sid: vera_sad
-# loc: right
-Куда же подевались ребята...
 
 -> END
 
@@ -545,8 +548,9 @@ vera right
 # spd: 10
 по...
 
+# snd: horror_stinger_impact.ogg -10
 # spd: 10
-п-помогиитее.......
+п-помогиитее...............
 
 # sid: vera_doubting
 # loc: right
@@ -575,11 +579,63 @@ in 0.25
 # loc: right
 !!!!!!!!
 
+# env: . 5
+# cts: wait
+8
+
+# cts: scen
+Fantasy_Start
+
+# mus: feel_like_home.mp3 0 6
+# cts: fade
+out 0.02
+
+# cts: wait
+4
+# snd: step_2.mp3 -25
+# cts: wait
+6
+# snd: .
+# cts: wait
+2
+
+# sid: ded_smiling
+# spd: 12
+Добро пожаловать в наши земли, герой!
+
+# sid: ded_smiling
+# spd: 12
+. . . . .
+
+# sid: ded_neutral
+# spd: 12
+Ах, если бы ты только знал, как долго мы ждали тебя...
+
+
+# cts: wait
+1
+
+# cts: fade
+in 0.02
+
+# env: . 10
+# mus: . 10
+# cts: wait
+6
+
+Продолжение следует...
+
+<здесь будет ответ на задание квеста>
+
+# cts: exit
+.
+
 -> END
 
 
 === battle_failed ===
-На этот раз тараканы победили... Попробуйте еще раз!
+~ lab_has_book = false
+На этот раз тараканы победили...<br>Нужно попробовать ещё раз!
 -> END
 
 === first_cockroach_on_start ===
