@@ -1,6 +1,6 @@
 class_name CutsceneStep
 
-enum Type { FADE, WAIT, MOVE, TURN, ANIM, REMV, SCEN }
+enum Type { FADE, WAIT, MOVE, TURN, ANIM, REMV, SCEN, EXIT }
 
 var type: Type
 var params: PackedStringArray
@@ -21,5 +21,7 @@ func _init(_type: String, _description: String):
 			type = Type.REMV
 		"scen":
 			type = Type.SCEN
+		"exit":
+			type = Type.EXIT
 	
 	params = _description.replace("\n", "").split(" ")

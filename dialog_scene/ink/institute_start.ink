@@ -646,7 +646,7 @@ damir up 1
 
 # spd: 10
 # snd: glitch.ogg
-\\\\оЖиДаеТСя ПоДКЛюЧееНие...
+\\\\оЖиДаеТСя ПоДКЛюЧеНие...
 # spd: 10
 # snd: glitch.ogg
 \\\\0x42 0xA5 0xBC
@@ -712,7 +712,10 @@ damir up 1
 in 0.25
 # mus: . 6 
 # cts: wait
-6
+1
+# snd: horror_stinger_drum.ogg -10
+# cts: wait
+5
 
 -> wake_up
 

@@ -6,6 +6,7 @@ const sound_path_prefix = "res://sfx/"
 
 const no_music_symbol = "."
 const no_env_symbol = "."
+const no_sound_symbol = "."
 
 const use_default_volume_symbol = "."
 const use_default_down_seconds_symbol = "."
@@ -147,6 +148,10 @@ func play_sound(sound_file: String, volume: String):
 	
 	if sound_player.playing:
 		sound_player.stop()
+	
+	if sound_file == no_sound_symbol:
+		return
+	
 	sound_player.stream = load(sound_path_prefix + sound_file)
 	sound_player.volume_db = actual_volume
 	sound_player.play()

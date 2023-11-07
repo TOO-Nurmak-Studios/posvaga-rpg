@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2j6cf5ctielj"
-path="res://.godot/imported/Player Back Sheet.png-59fa12cfa37a90921176813f5f5b1261.ctex"
+uid="uid://buci7sl4xaumx"
+path="res://.godot/imported/Settlement.png-62e47cd1cdbd6d21f30b360a05d64583.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://explore_scene/Assets/Player/Player Back Sheet.png"
-dest_files=["res://.godot/imported/Player Back Sheet.png-59fa12cfa37a90921176813f5f5b1261.ctex"]
+source_file="res://explore_scene/Assets/Settlement.png"
+dest_files=["res://.godot/imported/Settlement.png-62e47cd1cdbd6d21f30b360a05d64583.ctex"]
 
 [params]
 

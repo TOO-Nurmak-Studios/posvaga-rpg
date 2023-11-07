@@ -45,4 +45,9 @@ var speakers_data = {
 		"director_concerned"  : SpeakerData.new("director_concerned", "Иосиф Юлианович", true, -0.2),
 		"director_determined" : SpeakerData.new("director_determined", "Иосиф Юлианович", true, -0.2),
 		"director_scared"     : SpeakerData.new("director_scared", "Иосиф Юлианович", true, -0.2),
+		
+		"ded_neutral"         : SpeakerData.new("ded_neutral", "Старый мудрец", true, -0.3),
+		"ded_angry"           : SpeakerData.new("ded_angry", "Старый мудрец", true, -0.3),
+		"ded_thinking"        : SpeakerData.new("ded_thinking", "Старый мудрец", true, -0.3),
+		"ded_smiling"         : SpeakerData.new("ded_smiling", "Старый мудрец", true, -0.3),
 	}
