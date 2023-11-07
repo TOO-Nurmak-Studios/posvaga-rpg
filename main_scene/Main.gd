@@ -13,7 +13,7 @@ const default_start_scene = preload("res://explore_scene/Scenes/Institute_LabRoo
 const default_start_dialog = preload("res://dialog_scene/ink/institute_start.ink.json")
 
 var start_scene: Resource
-var start_dialog = DialogData.new(default_start_dialog, "wake_up")
+var start_dialog = DialogData.new(default_start_dialog)
 
 func init(_start_scene_name: String):
 	if _start_scene_name != null && _start_scene_name != "":
@@ -39,7 +39,7 @@ func _ready():
 # С этой функции будет начинаться вся игра
 # для дебага лучше менять логику в _ready()
 func _game_start():
-	#SceneTransition.fade_in(5)
+	SceneTransition.fade_in(5)
 	_change_scene({SceneTransition.SceneDataType.PACKED_SCENE: default_start_scene}, Mode.EXPLORATION)
 	EventBus.dialog_start.emit(start_dialog)
 

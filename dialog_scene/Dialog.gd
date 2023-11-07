@@ -112,7 +112,7 @@ func next():
 	if can_continue:
 		var next_text = ink_player.continue_story()
 		var tags = ink_player.current_tags
-		has_choices = ink_player.has_choices		# обновлем, т.к. история продолжилась
+		has_choices = ink_player.has_choices		# обновляем, т.к. история продолжилась
 		await process_next_unit(next_text, tags, has_choices)
 
 	if has_choices:
