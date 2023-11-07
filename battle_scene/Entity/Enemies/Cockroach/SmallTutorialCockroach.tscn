@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bwn55w0cdstl"]
+[gd_scene load_steps=34 format=3 uid="uid://dy40ed0qdj0fm"]
 
 [ext_resource type="Script" path="res://battle_scene/Entity/Enemies/Cockroach/SmallCockroach.gd" id="1_buc07"]
 [ext_resource type="AudioStream" uid="uid://drk1smc6lyynd" path="res://sfx/battle_scene/small_cockroach_bite.wav" id="2_v3a3m"]
@@ -184,6 +184,7 @@ trail_lifetime = 0.03
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_1b20q")
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_86saj")
 animation = &"idle"
 frame_progress = 0.857555

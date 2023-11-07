@@ -1,7 +1,7 @@
 extends Node
 
 enum BattleSceneType {PANTRY, UNIVERSITY}
-enum BattleDialogueSignalType {ON_BATTLE_START, ON_FIRST_ATTACK, ON_SECOND_ATTACK}
+enum BattleDialogueSignalType {ON_BATTLE_START, ON_FIRST_PLAYER_ATTACK, ON_SECOND_PLAYER_ATTACK, ON_FIRST_ENEMY_ATTACK, ON_SECOND_ENEMY_ATTACK, ON_THIRD_ENEMY_ATTACK, ON_FOURTH_ENEMY_ATTACK, ON_FIFTH_ENEMY_ATTACK}
 
 var battle_scene_pantry = preload("res://battle_scene/BattleBackgrounds/BattleBackgroundPantry.tscn")
 var battle_scene_uni = preload("res://battle_scene/BattleBackgrounds/BattleBackgroundUni.tscn")

@@ -23,7 +23,7 @@ position = Vector2(96, 417)
 position = Vector2(560, 254)
 
 [node name="Marker2D5" type="Marker2D" parent="." groups=["enemy_marker"]]
-position = Vector2(573, 323)
+position = Vector2(573, 364)
 
 [node name="Marker2D6" type="Marker2D" parent="." groups=["enemy_marker"]]
 position = Vector2(526, 413)

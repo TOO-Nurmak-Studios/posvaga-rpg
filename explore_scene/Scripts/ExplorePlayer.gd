@@ -18,6 +18,8 @@ func _ready():
 	EventBus.player_interaction_ended.connect(_process_interaction_ended)
 	EventBus.dialog_start.connect(_process_dialog_start)
 	EventBus.dialog_finished.connect(_process_interaction_ended)
+	EventBus.battle_scene_start.connect(_process_battle_start)
+	EventBus.battle_scene_end.connect(_process_battle_ended)
 
 
 func _process(_delta):
@@ -68,11 +70,23 @@ func _getInteractibleTarget():
 	
 	return interactibles[0]
 
+
 # для диалогов, которые стартуют без инициативы от игрока
 func _process_dialog_start(_dialog_data: DialogData):
 	EventBus.player_input_enabled = false
 	is_interacting = true
 	_process_movement(0, direction)
+
+
+func _process_battle_start(_dialog_data: DialogData):
+	EventBus.player_input_enabled = false
+	is_interacting = true
+
+
+func _process_battle_ended(_result):
+	EventBus.player_input_enabled = true
+	is_interacting = false
+
 
 func _process_interaction():
 	var target = _getInteractibleTarget()

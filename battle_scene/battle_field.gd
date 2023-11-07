@@ -89,7 +89,7 @@ func play_battle_end_effect(result):
 		await get_tree().create_timer(4).timeout
 	else:	
 		EventBus.music_play_and_replace_back.emit("defeat.wav")
-		await get_tree().create_timer(9).timeout
+		await get_tree().create_timer(6).timeout
 	await RenderingServer.frame_post_draw
 	var sprite_end_battle = Sprite2D.new() as Sprite2D
 	sprite_end_battle.position = get_viewport().get_visible_rect().size / 2

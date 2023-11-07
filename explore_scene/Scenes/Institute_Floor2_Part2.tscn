@@ -21,7 +21,8 @@ radius = 3.0
 y_sort_enabled = true
 position = Vector2(567, 254)
 script = ExtResource("1_8vph8")
-music_file_name = "."
+music_file_name = "horror_ambience.ogg"
+music_volume = "-8"
 env_file_name = "rain_interior.mp3"
 env_volume = "-15"
 

@@ -6,6 +6,7 @@ extends AbstractCharacter
 @export var book_stream: AudioStream
 @export var book_impact_stream: AudioStream
 
+var book_attack = LabThrowBook.new()
 var has_book = false
 
 var shader = preload("res://battle_scene/HUD/Shaders/ShaderDeath.tres")
@@ -22,11 +23,13 @@ func _ready():
 		EventBus.game_state_changed.connect(_try_add_book)
 
 func _try_add_book():
-	if !has_book && GameState.vars.has(GameState.LAB_HAS_BOOK) && GameState.vars.get(GameState.LAB_HAS_BOOK) == true:
-		var book = LabThrowBook.new()
-		attacks.push_back(book)
-		add_sibling(book)
+	if !has_book && GameState.vars.get(GameState.LAB_HAS_BOOK, false) == true:
+		attacks.push_back(book_attack)
+		add_sibling(book_attack)
 		has_book = true
+	elif has_book && GameState.vars.get(GameState.LAB_HAS_BOOK, false) == false:
+		book_attack.queue_free()
+		attacks.erase(book_attack)
 
 func get_type() -> CharacterType:
 	return CharacterType.PLAYER 

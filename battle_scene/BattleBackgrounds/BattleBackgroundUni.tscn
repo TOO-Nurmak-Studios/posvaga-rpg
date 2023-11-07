@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://btl1g0wdlp75o" path="res://sprites/fightSceneUniversity.png" id="1_gd4ku"]
 
 [node name="BattleBackgroundInst" type="Node2D"]
+position = Vector2(1, 0)
 script = ExtResource("1_a0n0o")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -27,3 +28,9 @@ position = Vector2(571, 316)
 
 [node name="Marker2D6" type="Marker2D" parent="." groups=["enemy_marker"]]
 position = Vector2(498, 400)
+
+[node name="Marker2D7" type="Marker2D" parent="." groups=["enemy_marker"]]
+position = Vector2(444, 285)
+
+[node name="Marker2D8" type="Marker2D" parent="." groups=["enemy_marker"]]
+position = Vector2(424, 358)
