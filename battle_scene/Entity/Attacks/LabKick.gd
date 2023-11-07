@@ -7,7 +7,7 @@ extends Attack
 func _init():
 	attack_name = "Пинок"
 	attack_type = Attack.AttackType.SINGLE
-	attack_tooltip = "Выбор врага: стрелки, удар: Enter, вернуться к выбору атаки - Esc."
+	attack_tooltip = "Выбор врага: вверх/вниз, удар: Enter, вернуться к выбору атаки - Esc/влево."
 	attack_description = "Пнуть врага со всей силы."
 	attack_postmessage = str("{attacker} пинает {attacked}, нанося {damage} урона.")
 	cooldown = 1

@@ -399,7 +399,7 @@ vera right
 
 # sid: vera_sad
 # loc: right
-Повезло, что он торопился, и не закрыл дверь...
+Повезло, что завлаб так торопился, что не закрыл дверь...
 
 -> END
 
@@ -408,15 +408,22 @@ vera right
 
 # sid: vera_neutral
 # loc: right
-Опять тараканы... Похоже, они выползают, когда в коридорах выключают свет.
+Опять тараканы... А рядом, похоже, их гнездо.
+
+{ not lab_has_book:
+    # sid: vera_scared
+    # loc: right
+    Лучше держаться от него подальше...
+    -> END
+}
 
 # sid: vera_questioning
 # loc: right
 Может, стоит просто пройти мимо? Дезинсекция института не входит в мои обязанности.
 
-Этот таракан не чувствует страха. Он готов идти до конца.
+Эти тараканы не чувствует страха. Они готовы идти до конца.
 
-Как с ним поступить?
+Как с ними поступить?
 
 * [Напасть]
 
@@ -434,26 +441,26 @@ vera right
 
     # sid: vera_neutral
     # loc: right
-    Живи... пока.
+    Живите... пока.
 
 -> END
 
 
 === optional_cockroach_fight_start ===
 
-# sid: vera_scared
+# sid: vera_angry
 # loc: right
-Чёрт... Почему их тут так много?
+Чёрт, как же их много...
 -> END
 
 
 === optional_cockroach_fight_finish ===
 
-# sid: vera_bored
+# sid: vera_angry
 # loc: right
-Чёртово гнездо... 
+Фух... Это был последний.
 
-# sid: vera_neutral
+# sid: vera_bored
 # loc: right
 Надеюсь, после этого они начнут меня бояться.
 -> END
@@ -465,7 +472,7 @@ vera right
 
 # sid: vera_doubting
 # loc: right
-Кхм... Так...
+Так... Ладно...
 
 # sid: vera_angry
 # loc: right
