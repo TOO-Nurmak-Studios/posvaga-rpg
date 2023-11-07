@@ -71,6 +71,12 @@ signal item_use(type_id: String)
 signal teleport_request(scene: Resource, player_position: Vector2, player_direction: Vector2)
 signal battle_request(battle_data: Dictionary)
 
+#pause
+signal pause_start()
+signal pause_finish()
+signal credits_show()
+signal credits_hide()
+
 func _process(delta):
 	if Input.is_action_just_pressed("select_next"):
 		select_next_button_pressed.emit()
