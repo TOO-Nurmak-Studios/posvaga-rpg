@@ -31,7 +31,7 @@ var selected_attack: int = -1
 # must be called after battle manager and select manager! 
 func start():
 	main_scene = get_parent()
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
 	_create_attack_menu(select_manager.selected_player())
 	_flip_enemies()
@@ -97,7 +97,8 @@ func _on_battle_scene_fade_away(_unused):
 	tooltip_label.show()
 
 func _on_battle_scene_end(_unused):
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	pass
 
 func _action_pressed():
 	if current_state == State.SELECT_ENEMY:

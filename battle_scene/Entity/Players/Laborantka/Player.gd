@@ -20,7 +20,7 @@ func _ready():
 	unselect()
 	_try_add_book()
 	if !has_book:
-		EventBus.game_state_changed.connect(_try_add_book)
+		EventBus.game_vars_changed.connect(_try_add_book)
 
 func _try_add_book():
 	if !has_book && GameState.vars.get(GameState.LAB_HAS_BOOK, false) == true:

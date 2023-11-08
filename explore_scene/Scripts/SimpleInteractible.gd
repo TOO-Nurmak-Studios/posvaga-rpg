@@ -47,7 +47,7 @@ func _ready():
 			after_battle_dialog_data = DialogData.new(dialog_resource, after_battle_dialog_knot)
 	if visibility_flag != null && visibility_flag != "":
 		_update_visible()
-		EventBus.game_state_changed.connect(_update_visible)
+		EventBus.game_vars_changed.connect(_update_visible)
 	if animation_node != null:
 		animation_node.play("default")
 		EventBus.cutscene_animation_start.connect(try_animation_for_cutscene)

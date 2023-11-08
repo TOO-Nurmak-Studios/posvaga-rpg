@@ -14,7 +14,7 @@ func _ready():
 	_loaded_scene = load(scene_name)
 	if visibility_flag != null && visibility_flag != "":
 		_update_visible()
-		EventBus.game_state_changed.connect(_update_visible)
+		EventBus.game_vars_changed.connect(_update_visible)
 
 func _on_body_entered(body):
 	if body != null && body.is_in_group("Player"):
