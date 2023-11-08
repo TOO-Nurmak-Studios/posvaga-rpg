@@ -19,6 +19,11 @@ const start_scale = 0.5
 @onready var battle_manager: BattleManager = $SubViewport/BattleManager as BattleManager
 @onready var dialogue_manager: BattleDialogueManager = $SubViewport/BattleDialogueManager as BattleDialogueManager
 
+@export var victory_file_name = "victory.wav"
+@export var victory_volume = 3
+@export var defeat_file_name = "defeat.wav"
+@export var defeat_volume = 0
+
 func init(back: BattleBackground, players, enemies, dialogue: Dictionary):
 	battle_background = back
 	_players = players
@@ -85,10 +90,10 @@ func launch_battle():
 
 func play_battle_end_effect(result):
 	if result == EventBus.BattleEndType.VICTORY:
-		EventBus.music_play_and_replace_back.emit("victory.wav")
+		EventBus.music_play_and_replace_back.emit(victory_file_name, victory_volume)
 		await get_tree().create_timer(4).timeout
 	else:	
-		EventBus.music_play_and_replace_back.emit("defeat.wav")
+		EventBus.music_play_and_replace_back.emit(defeat_file_name, defeat_volume)
 		await get_tree().create_timer(6).timeout
 	await RenderingServer.frame_post_draw
 	var sprite_end_battle = Sprite2D.new() as Sprite2D

@@ -220,7 +220,7 @@ VAR lab_has_book = false
 # loc: right
 Кажется, я что-то слышу... Голоса!
 
-# mus: horror_mystery.ogg
+# mus: horror_mystery.ogg . . -9
 # sid: vera_scared
 # loc: right
 Рядом точно кто-то есть. Но на ребят не похоже...
@@ -353,12 +353,12 @@ vera left 4 sprint
 vera down
 # cts: wait
 1
-# snd: door_open.wav
+# snd: door_open.wav -3
 # cts: anim
 door open
 # cts: move
 zavlab down 7 sprint
-# snd: door_close.mp3
+# snd: door_close.mp3 -3
 # cts: anim
 door close
 # cts: move
@@ -565,7 +565,7 @@ vera right
 # spd: 10
 по...
 
-# snd: horror_stinger_impact.ogg -10
+# snd: horror_stinger_impact.ogg -12
 # spd: 10
 п-помогиитее...............
 
@@ -578,7 +578,7 @@ vera right
 # loc: right
 .....
 
-# snd: door_open.wav
+# snd: door_open.wav -3
 # cts: fade
 in 0.25
 

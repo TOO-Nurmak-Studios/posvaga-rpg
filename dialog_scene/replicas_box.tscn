@@ -116,7 +116,7 @@ label_settings = SubResource("LabelSettings_c8sbr")
 
 [node name="PrintSoundPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_hpr6n")
-volume_db = -30.0
+volume_db = -25.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

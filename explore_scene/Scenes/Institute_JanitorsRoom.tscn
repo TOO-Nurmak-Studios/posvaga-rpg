@@ -59,6 +59,7 @@ is_battle_dialogue_enabled = true
 battle_dialog_triggers = Array[int]([0, 1, 2, 3])
 battle_dialog_knots = Array[String](["first_cockroach_on_start", "first_cockroach_on_first_attack", "first_cockroach_on_second_attack", "first_cockroach_on_first_enemy_attack"])
 battle_music_filename = "from_the_screw_alt.mp3"
+battle_music_volume = -9.0
 battle_scene_players = Array[int]([0])
 battle_scene_enemies = Array[int]([3, 3])
 

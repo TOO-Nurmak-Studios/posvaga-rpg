@@ -169,6 +169,7 @@ is_battle_dialogue_enabled = true
 battle_dialog_triggers = Array[int]([0, 2, 7])
 battle_dialog_knots = Array[String](["hallway_cockroaches_start_battle", "hallway_cockroaches_second_player_attack", "hallway_cockroaches_fifth_cockroach_attack"])
 battle_music_filename = "from_the_screw.mp3"
+battle_music_volume = -9.0
 
 [node name="CollisionShape2D" parent="CockroachesFight" index="0"]
 position = Vector2(19, -1.125)

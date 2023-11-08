@@ -218,7 +218,7 @@ position = Vector2(41, -39)
 
 [node name="Audio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("36_3i64n")
-volume_db = 15.0
+volume_db = 12.0
 max_polyphony = 3
 
 [node name="AttackAudio" type="AudioStreamPlayer2D" parent="."]

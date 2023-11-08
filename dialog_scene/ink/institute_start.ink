@@ -441,7 +441,7 @@ out 0.03
 # cts: wait
 1
 # mus: .
-# snd: door_open.wav
+# snd: door_open.wav -3
 # cts: anim
 door open
 # cts: wait
@@ -458,7 +458,7 @@ vera left
 damir left
 # cts: wait
 1
-# mus: hey_now.mp3
+# mus: hey_now.mp3 . . -9
 # cts: move
 zavlab down 6
 # cts: turn 
@@ -519,7 +519,7 @@ zavlab up
 # cts: move
 zavlab up 12 sprint
 # mus: .
-# snd: door_close.mp3
+# snd: door_close.mp3 -3
 # cts: anim
 door close
 # cts: wait
@@ -569,12 +569,12 @@ damir left 4.6
 vera left
 # cts: move 
 damir up 12
-# snd: door_open.wav
+# snd: door_open.wav -3
 # cts: anim
 door open
 # cts: move 
 damir up 7
-# snd: door_close.mp3
+# snd: door_close.mp3 -3
 # cts: anim
 door close
 # cts: wait 
@@ -648,10 +648,10 @@ damir up 1
 2
 
 # spd: 10
-# snd: glitch.ogg
+# snd: glitch.ogg -5
 \\\\оЖиДаеТСя ПоДКЛюЧеНие...
 # spd: 10
-# snd: glitch.ogg
+# snd: glitch.ogg -5
 \\\\0x42 0xA5 0xBC
 
 # cts: wait
@@ -661,15 +661,15 @@ damir left
 # cts: wait
 1
 
-# mus: onboard.mp3 0 0 -8
+# mus: onboard.mp3 0 0 -12
 # spd: 10
-# snd: glitch.ogg
+# snd: glitch.ogg -5
 \\\\оБуЧеНие ЗаВеРШеНо. ЗаПуСТиТЬ СиСТеМу?
 # spd: 10
-# snd: glitch.ogg
+# snd: glitch.ogg -5
 \\\\0x11 0x9C 0xA6
 # spd: 10
-# snd: glitch.ogg
+# snd: glitch.ogg -5
 \\\\ТРеБуеТСя ВВоД.
 
 # cts: wait
@@ -689,15 +689,15 @@ damir up
 1
 
 # spd: 10
-# snd: glitch.ogg
+# snd: glitch.ogg 0
 \\\\ТРеБуеТСя ВВоД.
 
 # spd: 10
-# snd: glitch.ogg
+# snd: glitch.ogg 0
 \\\\ТРеБуеТСя ВВоД.
 
 # spd: 10
-# snd: glitch.ogg
+# snd: glitch.ogg 0
 \\\\ПоДКЛюЧиТСя К ТРеНиРоВоЧНоЙ СиСТеМе? 0x55
 
 # sid: damir_bored
@@ -710,7 +710,7 @@ damir up
 
 # cts: move 
 damir up 1
-# snd: door_open.wav
+# snd: door_open.wav -3
 # cts: fade
 in 0.25
 # mus: . 6 

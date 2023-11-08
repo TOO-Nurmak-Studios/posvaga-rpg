@@ -50,11 +50,11 @@ signal cutscene_change_scene(path: String)
 
 # audio
 signal music_play_new(file: String, down_seconds: String, up_seconds: String, volume: String)
-signal music_play_and_replace_back(file: String)
+signal music_play_and_replace_back(file: String, volume: float)
 signal music_play()
 signal music_pause()
 signal music_stop(down_seconds: String)
-signal music_replace(file: String)
+signal music_replace(file: String, volume: float)
 signal music_replace_back()
 signal sound_play(file: String, volume: String)
 signal env_play_new(file: String, down_seconds: String, up_sedonds: String, volume: String)

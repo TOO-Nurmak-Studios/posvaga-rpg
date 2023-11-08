@@ -34,6 +34,7 @@ var tween_music: Tween
 var tween_env: Tween
 
 var prev_music_file: String
+var prev_music_volume: float
 
 
 func _ready():
@@ -105,14 +106,16 @@ func pause_music():
 func stop_music(down_seconds: float):
 	stop_music_and_call(down_seconds, do_nothing)
 
-func replace_music(new_music: String):
+func replace_music(new_music: String, new_volume: float):
 	prev_music_file = current_music_file
-	play_new_music(new_music, ".", ".", ".")
+	prev_music_volume = music_player.volume_db
+	play_new_music(new_music, ".", ".", str(new_volume))
 	
-func play_and_replace_back_music(new_music: String):
-	play_new_music(new_music, ".", ".", ".")
+func play_and_replace_back_music(new_music: String, volume: float):
+	prev_music_volume = music_player.volume_db
+	play_new_music(new_music, ".", ".", str(volume))
 	await music_player.finished
-	replace_back_music()	
+	replace_back_music()
 		
 func replace_back_music():
 	if prev_music_file == "":
@@ -120,7 +123,7 @@ func replace_back_music():
 		return
 	var music_to_play = prev_music_file
 	prev_music_file = ""
-	play_new_music(music_to_play, ".", ".", ".")
+	play_new_music(music_to_play, ".", ".", str(prev_music_volume))
 
 func stop_music_and_call(down_seconds: float, callable: Callable):
 	if down_seconds == 0:

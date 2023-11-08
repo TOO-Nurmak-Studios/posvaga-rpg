@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cuycdtt3185d3"]
+[gd_scene load_steps=34 format=3 uid="uid://dbe3m8qdqqhvx"]
 
 [ext_resource type="Script" path="res://battle_scene/Entity/Enemies/Cockroach/SmallCockroach.gd" id="1_lhnyy"]
 [ext_resource type="AudioStream" uid="uid://drk1smc6lyynd" path="res://sfx/battle_scene/small_cockroach_bite.wav" id="2_0itto"]
@@ -195,7 +195,7 @@ position = Vector2(28, -4)
 
 [node name="Audio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("28_0s5de")
-volume_db = 5.0
+volume_db = -5.0
 pitch_scale = 1.15
 max_polyphony = 3
 

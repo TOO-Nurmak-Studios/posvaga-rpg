@@ -16,6 +16,7 @@ const battle_failed_knot = "battle_failed"
 @export var battle_dialog_triggers: Array[BattleScene.BattleDialogueSignalType]
 @export var battle_dialog_knots: Array[String]
 @export var battle_music_filename: String
+@export var battle_music_volume: float = -7
 @export var battle_scene_players: Array[BattleScene.SceneCharacterType]
 @export var battle_scene_enemies: Array[BattleScene.SceneCharacterType]
 var _battle_scene: Dictionary # <Main.SceneDataType, ?>
@@ -98,7 +99,7 @@ func _on_defeat():
 		result = await _start_battle()
 
 func _start_battle():
-	EventBus.music_replace.emit(battle_music_filename)
+	EventBus.music_replace.emit(battle_music_filename, battle_music_volume)
 	EventBus.battle_request.emit(_battle_scene)
 	return await EventBus.battle_scene_end
 		
