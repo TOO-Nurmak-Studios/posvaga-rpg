@@ -27,6 +27,8 @@ signal player_interact_pressed()
 signal player_interaction_ended()
 
 #dialog
+var dialog_input_enabled = true
+
 signal dialog_start(dialog_data: DialogData)
 signal dialog_finished()
 

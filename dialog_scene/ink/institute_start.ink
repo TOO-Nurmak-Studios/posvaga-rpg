@@ -23,6 +23,9 @@ VAR got_wrong_book_5 = false
 # spd: 12
 Ноябрь, 19XX год. Город N.<br>Институт прикладной геоинформатики.
 
+# cts: wait
+1
+
 # mus: a_star_called_sun.mp3
 # cts: fade 
 out 0.03

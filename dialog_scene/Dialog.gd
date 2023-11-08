@@ -44,6 +44,8 @@ func _ready():
 
 
 func _process(_delta):
+	if !EventBus.dialog_input_enabled:
+		return
 	if Input.is_action_just_pressed("dialog_next"):
 		try_next()
 	if Input.is_action_just_pressed("dialog_focus_options") and waiting_for_choice:
@@ -129,9 +131,11 @@ func next():
 func process_next_unit(text: String, tags: Array, has_choices: bool = false):
 	var parsed_tags = parse_tags(tags)
 	
-	var sound_tag = find_sound_tag(parsed_tags)
-	var music_tag = find_music_tag(parsed_tags)
-	var env_tag = find_env_tag(parsed_tags)
+	var sound_tag = find_tag(parsed_tags, DialogTag.Type.SOUND)
+	var music_tag = find_tag(parsed_tags, DialogTag.Type.MUSIC)
+	var env_tag = find_tag(parsed_tags, DialogTag.Type.ENV)
+	
+	var stop_tag = find_tag(parsed_tags, DialogTag.Type.STOP)
 	
 	if sound_tag != null:
 		process_next_sound(sound_tag.params)
@@ -144,6 +148,9 @@ func process_next_unit(text: String, tags: Array, has_choices: bool = false):
 	if env_tag != null:
 		process_next_env(env_tag.params)
 		parsed_tags.erase(env_tag)
+	
+	if stop_tag != null:
+		EventBus.dialog_input_enabled = false
 	
 	if parsed_tags.size() == 0 || parsed_tags[0].type != DialogTag.Type.CUTSCENE_STEP:
 		await process_next_replica(text, parsed_tags, has_choices)
@@ -161,24 +168,9 @@ func parse_tags(tags: Array) -> Array[DialogTag]:
 		
 	return parsed
 
-
-func find_sound_tag(tags: Array[DialogTag]):
+func find_tag(tags: Array[DialogTag], type: DialogTag.Type):
 	for tag in tags:
-		if tag.type == DialogTag.Type.SOUND:
-			return tag
-	return null
-
-
-func find_music_tag(tags: Array[DialogTag]):
-	for tag in tags:
-		if tag.type == DialogTag.Type.MUSIC:
-			return tag
-	return null
-
-
-func find_env_tag(tags: Array[DialogTag]):
-	for tag in tags:
-		if tag.type == DialogTag.Type.ENV:
+		if tag.type == type:
 			return tag
 	return null
 
@@ -226,7 +218,7 @@ func process_next_replica(replica_text: String, tags: Array[DialogTag], has_choi
 		is_cutscene = false
 	
 	var replica = parse_next_replica(replica_text, tags)
-	replicas_box.new_replica(replica, !has_choices)
+	replicas_box.new_replica(replica, !has_choices && EventBus.dialog_input_enabled)
 	await process_next_speaker(replica.speaker, replica.speaker_location, true)
 
 
