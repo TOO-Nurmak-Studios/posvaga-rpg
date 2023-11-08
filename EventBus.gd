@@ -7,6 +7,7 @@ signal select_next_button_pressed()
 signal select_prev_button_pressed()
 signal select_left_button_pressed()
 signal select_right_button_pressed()
+signal pause_button_pressed()
 
 #battle scene
 signal attack_ended(attacker: AbstractCharacter, attacked: Array[AbstractCharacter], attack: Attack)
@@ -60,8 +61,9 @@ signal env_pause()
 signal env_stop(down_seconds: String)
 
 # game state
-# пока один сигнал на всё - мб нужно будет распилить
-# ещё непонятно, как отслеживать, что этот сигнал всегда вызывается
+# поменялись переменные (флаги)
+signal game_vars_changed()
+# поменялось состояние (енам)
 signal game_state_changed()
 
 # inventory
@@ -74,10 +76,20 @@ signal battle_request(battle_data: Dictionary)
 #pause
 signal pause_start()
 signal pause_finish()
-signal credits_show()
-signal credits_hide()
+
+
+func _ready():
+	self.process_mode = PROCESS_MODE_ALWAYS
+
 
 func _process(delta):
+	if Input.is_action_just_pressed("pause"):
+		pause_button_pressed.emit()
+	
+	# если игра на паузе, обрабатываем только выход из паузы
+	if get_tree().paused:
+		return
+	
 	if Input.is_action_just_pressed("select_next"):
 		select_next_button_pressed.emit()
 	if Input.is_action_just_pressed("select_prev"):

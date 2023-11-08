@@ -54,7 +54,7 @@ func _ready():
 		
 	if visibility_flag != null && visibility_flag != "":
 		_update_visible()
-		EventBus.game_state_changed.connect(_update_visible)
+		EventBus.game_vars_changed.connect(_update_visible)
 	
 	if animation_node != null && animation_node.sprite_frames != null && animation_node.sprite_frames.has_animation("default"):
 		animation_node.play("default")

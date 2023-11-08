@@ -1,0 +1,221 @@
+[gd_scene load_steps=7 format=3 uid="uid://dfyj7opedrdpc"]
+
+[ext_resource type="Script" path="res://main_scene/pause/Pause.gd" id="1_ykvwa"]
+[ext_resource type="FontFile" uid="uid://dsg3v8pxmy0f8" path="res://fonts/monogram-extended.ttf" id="2_7khmx"]
+[ext_resource type="Texture2D" uid="uid://c6kt4xiokyt3t" path="res://sprites/help_button_small.png" id="3_sj6pg"]
+[ext_resource type="Texture2D" uid="uid://wdfkhschuu36" path="res://sprites/restart_button_small.png" id="4_be3fj"]
+[ext_resource type="Texture2D" uid="uid://d1yta1odndlro" path="res://sprites/help_button_small_hover.png" id="4_hjdhh"]
+[ext_resource type="Texture2D" uid="uid://bwfj46208ibik" path="res://sprites/restart_button_small_hover.png" id="6_dktjc"]
+
+[node name="pause" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_ykvwa")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.784314)
+
+[node name="GameTitleLabel" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -168.0
+offset_top = 24.0
+offset_right = 168.0
+offset_bottom = 79.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_7khmx")
+theme_override_font_sizes/font_size = 64
+text = "Проект «ИРТЫШ»"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TipsTitleLabel" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -168.0
+offset_top = 88.0
+offset_right = 168.0
+offset_bottom = 143.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_7khmx")
+theme_override_font_sizes/font_size = 32
+text = "Управление"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TipsLabel" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -97.0
+offset_right = 192.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_7khmx")
+theme_override_font_sizes/font_size = 16
+text = "Ходьба: WASD, стрелки
+Спринт: зажать Shift при ходьбе
+Взаимодействие: Enter, Space, E
+Следующая реплика: Enter, Space, E, стрелка вправо
+Выбор персонажа/способности/цели в бою: WASD, стрелки"
+vertical_alignment = 1
+
+[node name="CreditsNurmakLabel" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -244.5
+offset_top = 244.0
+offset_right = -76.5
+offset_bottom = 299.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_7khmx")
+theme_override_font_sizes/font_size = 32
+text = "Nurmak Studios"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CreditsNurmakList" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -217.0
+offset_top = 64.0
+offset_right = -115.0
+offset_bottom = 144.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_7khmx")
+theme_override_font_sizes/font_size = 16
+text = "Дмитрий Мажуга    
+Григорий Каварвев
+Даниил Белоглазов     
+Полина Попова     
+Екатерина Сараева"
+vertical_alignment = 1
+
+[node name="CreditsActorsLabel" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 78.0
+offset_top = 244.0
+offset_right = 200.0
+offset_bottom = 299.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_7khmx")
+theme_override_font_sizes/font_size = 32
+text = "В ролях"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CreditsActorsList1" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 43.0
+offset_top = 64.0
+offset_right = 150.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_7khmx")
+theme_override_font_sizes/font_size = 16
+text = "Полина Попова
+Виктор Ложников
+Олег Судоплатов
+Максим Большим"
+
+[node name="CreditsActorsList2" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 165.0
+offset_top = 65.0
+offset_right = 277.0
+offset_bottom = 161.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_7khmx")
+theme_override_font_sizes/font_size = 16
+text = "Бекарыс Абуов
+Елизавета Казакова
+Тигран Манасян 
+и другие..."
+
+[node name="BackButton" type="Button" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -95.0
+offset_top = 193.0
+offset_right = 95.0
+offset_bottom = 227.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_7khmx")
+theme_override_font_sizes/font_size = 32
+text = "Назад"
+
+[node name="PauseButton" type="TextureButton" parent="."]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -38.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 38.0
+grow_horizontal = 0
+texture_normal = ExtResource("3_sj6pg")
+texture_hover = ExtResource("4_hjdhh")
+
+[node name="BattleRestartButton" type="TextureButton" parent="."]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -68.0
+offset_top = 10.0
+offset_right = -40.0
+offset_bottom = 38.0
+grow_horizontal = 0
+texture_normal = ExtResource("4_be3fj")
+texture_hover = ExtResource("6_dktjc")
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+visible = false
+z_index = -1
+offset_right = 639.0
+offset_bottom = 480.0
+
+[connection signal="pressed" from="ColorRect/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="BattleRestartButton" to="." method="_on_pause_button_pressed"]
