@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dbe3m8qdqqhvx"]
+[gd_scene load_steps=34 format=3 uid="uid://cuycdtt3185d3"]
 
 [ext_resource type="Script" path="res://battle_scene/Entity/Enemies/Cockroach/SmallCockroach.gd" id="1_lhnyy"]
 [ext_resource type="AudioStream" uid="uid://drk1smc6lyynd" path="res://sfx/battle_scene/small_cockroach_bite.wav" id="2_0itto"]
@@ -164,7 +164,7 @@ animations = [{
 scale = Vector2(0.75, 0.75)
 script = ExtResource("1_lhnyy")
 attack_stream = ExtResource("2_0itto")
-attack_cooldown = 100
+attack_damage = 20
 char_name = "Малый кокроч"
 death_sound = ExtResource("3_68nin")
 

@@ -19,8 +19,7 @@ func _ready():
 	sprite.play("idle")
 	unselect()
 	_try_add_book()
-	if !has_book:
-		EventBus.game_vars_changed.connect(_try_add_book)
+	EventBus.game_vars_changed.connect(_try_add_book)
 
 func _try_add_book():
 	if !has_book && GameState.vars.get(GameState.LAB_HAS_BOOK, false) == true:
@@ -28,8 +27,8 @@ func _try_add_book():
 		add_sibling(book_attack)
 		has_book = true
 	elif has_book && GameState.vars.get(GameState.LAB_HAS_BOOK, false) == false:
-		book_attack.queue_free()
 		attacks.erase(book_attack)
+		has_book = false
 
 func get_type() -> CharacterType:
 	return CharacterType.PLAYER 

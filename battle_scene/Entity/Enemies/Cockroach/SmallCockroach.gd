@@ -8,15 +8,13 @@ extends Enemy
 @export var attack_damage = 10
 @export var attack_cooldown = 1
 
-func _init():
+func _ready():
 	var bite = CockroachBite.new()
 	bite.damage = attack_damage
 	bite.cooldown = attack_cooldown
 	attacks = [bite]
-
-func _ready():
 	super._ready()
-	
+
 func bite(animation_name: String):
 	play_attack_audio(attack_stream)
 	sprite.play(animation_name)

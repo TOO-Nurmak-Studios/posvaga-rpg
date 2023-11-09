@@ -486,7 +486,7 @@ vera right
 
 
 === hallway_cockroaches_start_battle ===
-
+~ lab_has_book = false
 # sid: vera_scared
 # loc: right
 Это ещё кто?
@@ -653,7 +653,6 @@ in 0.02
 
 
 === battle_failed ===
-~ lab_has_book = false
 На этот раз тараканы победили...<br>Нужно попробовать ещё раз!
 -> END
 
