@@ -9,7 +9,7 @@ var player: ExplorePlayer
 
 var current_battle_scene: Node
 
-const default_start_scene = preload("res://explore_scene/Scenes/Institute_LabRoom_Start.tscn")
+var default_start_scene = load("res://explore_scene/Scenes/Institute_LabRoom_Start.tscn")
 const default_start_dialog = preload("res://dialog_scene/ink/institute_start.ink.json")
 
 var start_scene: Resource

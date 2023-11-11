@@ -1,6 +1,6 @@
 [gd_scene load_steps=37 format=3 uid="uid://ijrcqxg8ovcl"]
 
-[ext_resource type="Script" path="res://explore_scene/Scripts/LocationManager.gd" id="1_oqmeq"]
+[ext_resource type="Script" path="res://explore_scene/Scripts/LocationManager.gd" id="1_s4e3e"]
 [ext_resource type="PackedScene" uid="uid://clr6m243e5eig" path="res://explore_scene/Scenes/NPC.tscn" id="2_7600q"]
 [ext_resource type="Resource" uid="uid://cv6etewqsabw" path="res://dialog_scene/ink/institute_start.ink.json" id="3_rbfvd"]
 [ext_resource type="SpriteFrames" uid="uid://c1l78xcmxqwia" path="res://sprites/map/Sasha.tres" id="4_115d2"]
@@ -171,7 +171,7 @@ animations = [{
 [node name="Institute_LabRoom_Start" type="Node2D"]
 y_sort_enabled = true
 position = Vector2(567, 254)
-script = ExtResource("1_oqmeq")
+script = ExtResource("1_s4e3e")
 
 [node name="Sasha" parent="." instance=ExtResource("2_7600q")]
 z_index = 1

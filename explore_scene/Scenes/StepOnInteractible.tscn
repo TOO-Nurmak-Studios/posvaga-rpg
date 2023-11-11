@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://l353l3owxbsk"]
+[gd_scene load_steps=4 format=3 uid="uid://l353l3owxbsk"]
 
 [ext_resource type="Script" path="res://explore_scene/Scripts/StepOnInteractible.gd" id="1_rilu5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w7dk6"]
 size = Vector2(25, 13)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8vmiy"]
 
 [node name="Interactible" type="Area2D" groups=["Interactible"]]
 y_sort_enabled = true
@@ -15,4 +17,4 @@ shape = SubResource("RectangleShape2D_w7dk6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, -6)
-animation = &""
+sprite_frames = SubResource("SpriteFrames_8vmiy")
