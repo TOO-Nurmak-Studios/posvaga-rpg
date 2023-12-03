@@ -14,7 +14,7 @@ config/name="project-irtysh"
 config/name_localized={
 "ru_RU": "Проект \"ИРТЫШ\""
 }
-run/main_scene="res://explore_scene/Scenes/Institute_LabRoom_Start.tscn"
+run/main_scene="res://main_scene/Main.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="res://sprites/splash.png"
@@ -31,6 +31,7 @@ BattleScene="*res://battle_scene/BattleScene.gd"
 DialogStaticInitializer="*res://dialog_scene/DialogStaticInitializer.gd"
 AudioPlayer="*res://main_scene/audio_player.tscn"
 ItemsManager="*res://state/items/ItemsManager.gd"
+RandomUtils="*res://state/RandomUtils.gd"
 
 [debug]
 

@@ -1,0 +1,1 @@
+{"inkVersion":21,"root":[[{"->":"item_found"},["done",{"#f":5,"#n":"g-0"}],null],"done",{"item_found":["^Получено: ","ev",{"VAR?":"item_name"},"out","/ev","^ x","ev",{"VAR?":"item_amount"},"out","/ev","^.","\n","end",{"#f":1}],"global decl":["ev","str","^предмет","/str",{"VAR=":"item_name"},0,{"VAR=":"item_amount"},"/ev","end",null],"#f":1}],"listDefs":{}}

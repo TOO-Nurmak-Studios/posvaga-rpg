@@ -1,4 +1,5 @@
-extends CharacterBody2D
+class_name SimpleInteractible
+extends StaticBody2D
 
 const battle_failed_knot = "battle_failed"
 
@@ -12,13 +13,13 @@ const battle_failed_knot = "battle_failed"
 @export var is_battle_scene_enabled: bool = false
 @export var battle_flag: String
 @export var battle_scene_type: BattleScene.BattleSceneType
+@export var battle_scene_players: Array[BattleScene.SceneCharacterType]
+@export var battle_scene_enemies: Array[BattleScene.SceneCharacterType]
 @export var is_battle_dialogue_enabled: bool = false
 @export var battle_dialog_triggers: Array[BattleScene.BattleDialogueSignalType]
 @export var battle_dialog_knots: Array[String]
 @export var battle_music_filename: String
 @export var battle_music_volume: float = -7
-@export var battle_scene_players: Array[BattleScene.SceneCharacterType]
-@export var battle_scene_enemies: Array[BattleScene.SceneCharacterType]
 var _battle_scene: Dictionary # <Main.SceneDataType, ?>
 
 @onready var collision_node: CollisionShape2D = $CollisionShape2D as CollisionShape2D
@@ -29,8 +30,10 @@ var after_battle_dialog_data: DialogData
 var try_again_dialog_data: DialogData
 
 func _ready():
+	
 	if dialog_resource != null:
 		dialog_data = DialogData.new(dialog_resource, dialog_knot)
+	
 	if is_battle_scene_enabled:
 		var dialogue_data = {}
 		try_again_dialog_data = DialogData.new(dialog_resource, battle_failed_knot)

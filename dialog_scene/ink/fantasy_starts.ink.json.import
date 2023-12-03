@@ -1,0 +1,15 @@
+[remap]
+
+importer="inkgd.ink.json"
+type="Resource"
+uid="uid://dhmgqfd17wxv4"
+path="res://.godot/imported/fantasy_starts.ink.json-a6ee1b929e63426a30ec228064936ee3.res"
+
+[deps]
+
+source_file="res://dialog_scene/ink/fantasy_starts.ink.json"
+dest_files=["res://.godot/imported/fantasy_starts.ink.json-a6ee1b929e63426a30ec228064936ee3.res"]
+
+[params]
+
+compress=true

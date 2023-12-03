@@ -38,7 +38,7 @@ func set_current_gold():
 
 
 func try_set_item(index: int):
-	var available_items = ItemsManager.get_available_items()
+	var available_items = ItemsManager.get_shop_items()
 	
 	if index >= available_items.size() or index < 0:
 		return
@@ -72,7 +72,7 @@ func _on_prev_button_pressed():
 
 
 func _on_add_button_pressed():
-	ItemsManager.get_current_inventory().put_and_pay(current_item, 1)
+	ItemsManager.get_current_inventory().put_and_pay(current_item)
 	try_set_item(current_item_index)
 	set_current_gold()
 

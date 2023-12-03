@@ -197,7 +197,8 @@ func change_state(state: State):
 			current_state = State.SELECT_ENEMY
 			select_manager.set_select_state(SelectManager.SelectState.ENEMY)
 			current_attack_container.hide()
-			inventory_container.hide()
+			if inventory_container != null:
+				inventory_container.hide()
 			tooltip_label.show()
 			return
 		State.NOTHING:

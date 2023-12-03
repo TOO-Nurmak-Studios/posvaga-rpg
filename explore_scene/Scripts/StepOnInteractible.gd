@@ -1,24 +1,14 @@
-class_name Main
 extends Area2D
 
 const battle_failed_knot = "battle_failed"
 
-@export var dialog_resource: Resource
+@export var dialog_resource: InkResource
 @export var dialog_knot: String
 @export var visibility_flag: String
 @export var invert_visibility_flag: bool
-@export var battle_scene_name: String
 @export var after_battle_dialog_knot: String
 @export var interaction_enabled: bool = true
 
-@onready var collision_node: CollisionShape2D = $CollisionShape2D as CollisionShape2D
-@onready var animation_node:  = $AnimatedSprite2D as AnimatedSprite2D
-
-var dialog_data: DialogData
-var after_battle_dialog_data: DialogData
-var try_again_dialog_data: DialogData
-
-# battle
 @export var is_battle_scene_enabled: bool = false
 @export var battle_scene_type: BattleScene.BattleSceneType
 @export var battle_scene_players: Array[BattleScene.SceneCharacterType] 
@@ -29,6 +19,13 @@ var try_again_dialog_data: DialogData
 @export var battle_music_filename: String
 @export var battle_music_volume: float = -7
 var _battle_scene: Dictionary # <Main.SceneDataType, ?>
+
+@onready var collision_node: CollisionShape2D = $CollisionShape2D as CollisionShape2D
+@onready var animation_node:  = $AnimatedSprite2D as AnimatedSprite2D
+
+var dialog_data: DialogData
+var after_battle_dialog_data: DialogData
+var try_again_dialog_data: DialogData
 
 func _ready():
 	body_entered.connect(_on_body_entered)

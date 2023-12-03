@@ -1,27 +1,40 @@
 extends Node
 
 var known_items: Dictionary = {} ## String to Item
-var available_items: Dictionary = {} ## String to Array[String]
 
-func add_available_item(party_key: String, item: Item):
+## Доступные в магазине предметы для пати
+var shop_items: Dictionary = {} ## String to Array[String]
+
+func get_item_by_type(type: Item.Type):
+	match type:
+		Item.Type.SYROK:
+			return Syrok.new()
+		Item.Type.LIHO:
+			return Liho.new()
+
+func _ready():
+	add_shop_item("irl", Syrok.new())
+	add_shop_item("irl", Liho.new())
+
+func add_shop_item(party_key: String, item: Item):
 	if not known_items.has(item.id):
 		known_items[item.id] = item
 	
-	if not available_items.has(party_key):
-		available_items[party_key] = [ item.id ]
+	if not shop_items.has(party_key):
+		shop_items[party_key] = [ item.id ]
 	else:
-		available_items[party_key].push_back(item.id)
+		shop_items[party_key].push_back(item.id)
 
-func get_available_items(party_key: String = ""):
+func get_shop_items(party_key: String = ""):
 	if party_key.is_empty():
 		party_key = GameState.curParty.key
 	
 	var result: Array[Item] = []
 	
-	if not available_items.has(party_key):
+	if not shop_items.has(party_key):
 		return result
 	
-	var item_ids: Array = available_items[party_key]
+	var item_ids: Array = shop_items[party_key]
 	
 	for item_id in item_ids:
 		var item = known_items.get(item_id)

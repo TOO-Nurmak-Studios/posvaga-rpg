@@ -159,7 +159,6 @@ dialog_resource = ExtResource("7_ak4m5")
 dialog_knot = "hallway_cockroaches"
 visibility_flag = "had_second_cockroach_fight"
 invert_visibility_flag = true
-battle_scene_name = "res://battle_scene/battle_field.tscn"
 after_battle_dialog_knot = "hallway_cockroaches_after_battle"
 is_battle_scene_enabled = true
 battle_scene_type = 1

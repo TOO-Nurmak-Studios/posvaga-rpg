@@ -19,7 +19,7 @@ func put(item: Item, count: int = 1):
 		items[id] = ItemsStack.new(item, count)
 
 
-func put_and_pay(item: Item, count: int):
+func put_and_pay(item: Item, count: int = 1):
 	remove_gold(item.cost * count)
 	put(item, count)
 

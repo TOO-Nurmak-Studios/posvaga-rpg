@@ -44,25 +44,21 @@ func _game_start():
 	_change_scene({SceneTransition.SceneDataType.PACKED_SCENE: default_start_scene}, Mode.EXPLORATION)
 	EventBus.dialog_start.emit(start_dialog)
 
+
 func _init_state():
 	var vera = CharacterState.new(100, 100, [], null, null, null)
 	var chapter_one_party = PartyState.new("irl", vera, null, null, Inventory.new())
 	GameState.irlParty = chapter_one_party
 	GameState.curParty = chapter_one_party
 	GameState.simParty = PartyState.new("sim", null, null, null, Inventory.new())
-	
-	# todo: remove from
-	ItemsManager.add_available_item("irl", Syrok.new())
-	ItemsManager.add_available_item("irl", Liho.new())
-	ItemsManager.get_current_inventory().add_gold(1000000)
-	EventBus.shop_open.emit()
-	# todo: remove to
+
 
 # игрок наступил на телепорт и переходит в новую сцену через фейд
 func _teleport(scene: Resource, player_pos: Vector2, player_dir: Vector2):
 	await SceneTransition.fade_in()
 	_change_scene({SceneTransition.SceneDataType.PACKED_SCENE: scene}, Mode.EXPLORATION, player_pos, player_dir)
 	SceneTransition.fade_out()
+
 
 # катсцена требует сменить сцену, меняем без фейда и постановки игрока, отправляем сигнал, блокируем игрока
 func _cutscene_change_scene(scene_path: String):

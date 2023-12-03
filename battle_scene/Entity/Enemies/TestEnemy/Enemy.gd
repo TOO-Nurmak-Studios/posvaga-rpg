@@ -48,16 +48,8 @@ func prepare_random_attack():
 	prepared_attack_index = attack_index
 	
 func _generate_weight_based_index():
-	var random_weight = rand.randi_range(1, _total_weight)
-	var tmp_weight = 0
-	var attack_index = 0
-	var last_weight = 0
-	for i in range(0, attacks.size()):
-		tmp_weight += _weights[i]
-		if (last_weight < random_weight && random_weight <= tmp_weight):
-			return i
-		last_weight = tmp_weight	
-	
+	return RandomUtils.generate_weight_based_index(_weights, _total_weight)
+
 func _start_timer_for_attack(attack: Attack):
 	move_timer.set_moves_amount(attack.cooldown)
 
