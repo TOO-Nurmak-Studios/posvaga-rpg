@@ -1,11 +1,11 @@
 [gd_scene load_steps=12 format=3 uid="uid://bbruyt65lcvvv"]
 
 [ext_resource type="Script" path="res://dialog_scene/ReplicasBox.gd" id="1_ncb7m"]
-[ext_resource type="Texture2D" uid="uid://diuq47w4p125h" path="res://sprites/dialog/dialog_big_frame.png" id="2_gyknf"]
 [ext_resource type="AudioStream" uid="uid://c20lxqajotb1r" path="res://sfx/text-blip-low.wav" id="2_hpr6n"]
+[ext_resource type="Texture2D" uid="uid://cc8wvhigdcvga" path="res://sprites/dialog/dialog_big_frame_green.png" id="2_icmr1"]
 [ext_resource type="FontFile" uid="uid://dsg3v8pxmy0f8" path="res://fonts/monogram-extended.ttf" id="2_yckqw"]
-[ext_resource type="Texture2D" uid="uid://lkkm0doofuq1" path="res://sprites/dialog/dialog_small_frame.png" id="3_cm752"]
-[ext_resource type="Texture2D" uid="uid://1xf7kqje15uy" path="res://sprites/dialog/dialog_small_long_frame.png" id="4_06oce"]
+[ext_resource type="Texture2D" uid="uid://3h2s248yg57n" path="res://sprites/dialog/dialog_small_frame_green.png" id="3_dn00b"]
+[ext_resource type="Texture2D" uid="uid://fsa3helyei57" path="res://sprites/dialog/dialog_small_long_frame_green.png" id="4_slwm0"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ygk3t"]
 font = ExtResource("2_yckqw")
@@ -76,16 +76,16 @@ script = ExtResource("1_ncb7m")
 
 [node name="TextFrame" type="Sprite2D" parent="."]
 position = Vector2(0, -45)
-texture = ExtResource("2_gyknf")
+texture = ExtResource("2_icmr1")
 
 [node name="SpeakerNameFrame" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(-199, -122)
-texture = ExtResource("3_cm752")
+texture = ExtResource("3_dn00b")
 
 [node name="SpeakerNameLongFrame" type="Sprite2D" parent="."]
 position = Vector2(-174, -122)
-texture = ExtResource("4_06oce")
+texture = ExtResource("4_slwm0")
 
 [node name="TextLabel" type="Label" parent="."]
 layout_mode = 1

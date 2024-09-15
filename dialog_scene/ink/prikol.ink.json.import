@@ -1,0 +1,15 @@
+[remap]
+
+importer="inkgd.ink.json"
+type="Resource"
+uid="uid://jkcvod6y38wb"
+path="res://.godot/imported/prikol.ink.json-e325bc40161d2e9d90c4563ecad6e337.res"
+
+[deps]
+
+source_file="res://dialog_scene/ink/prikol.ink.json"
+dest_files=["res://.godot/imported/prikol.ink.json-e325bc40161d2e9d90c4563ecad6e337.res"]
+
+[params]
+
+compress=true

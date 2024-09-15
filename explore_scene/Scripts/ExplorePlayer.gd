@@ -1,7 +1,7 @@
 class_name ExplorePlayer
 extends MovableCharacter
 
-const player_speed = 60
+const player_speed = 30
 
 @onready var interact_area = $Area2D
 @onready var interact_icon = $InteractIcon
@@ -50,7 +50,8 @@ func _process_movement(delta, new_velocity):
 		new_velocity = Vector2.ZERO
 	
 	velocity = new_velocity.normalized() * speed * delta;
-	move_and_collide(velocity)
+	if velocity != Vector2.ZERO:
+		move_and_collide(velocity)
 	play_animation(velocity)
 	footsteps_player.process_for(velocity)
 

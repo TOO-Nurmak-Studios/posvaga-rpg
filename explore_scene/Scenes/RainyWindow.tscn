@@ -212,7 +212,6 @@ libraries = {
 }
 
 [node name="Rain00" type="PointLight2D" parent="."]
-visible = false
 scale = Vector2(0.355469, 0.204102)
 energy = 0.35
 shadow_enabled = true
@@ -292,6 +291,7 @@ shadow_filter = 1
 texture = ExtResource("10_3k6um")
 
 [node name="Rain10" type="PointLight2D" parent="."]
+visible = false
 scale = Vector2(0.355469, 0.204102)
 energy = 0.35
 shadow_enabled = true

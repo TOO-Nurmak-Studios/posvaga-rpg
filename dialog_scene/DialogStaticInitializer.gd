@@ -2,7 +2,7 @@ extends Node
 
 # костыль, нужно будет поменять. когда добавим смену персонажа
 # влияет на портрет, отображамый при выборах в диалоге
-var main_speaker_id = "vera_neutral"
+var main_speaker_id = "ryan"
 
 var speakers_data = {
 	
@@ -50,4 +50,22 @@ var speakers_data = {
 		"ded_angry"           : SpeakerData.new("ded_angry", "Старый мудрец", true, -0.3),
 		"ded_thinking"        : SpeakerData.new("ded_thinking", "Старый мудрец", true, -0.3),
 		"ded_smiling"         : SpeakerData.new("ded_smiling", "Старый мудрец", true, -0.3),
+		
+		"ryan"         : SpeakerData.new("ryan", "Райан Гослинг", true, -0.3),
+		"danya"         : SpeakerData.new("ryan", "Даниил", true, -0.3),
+		
+		"dasha"         : SpeakerData.new("dasha", "Замдекана по уч. работе", true, 0.05),
+		"dasha1"         : SpeakerData.new("dasha", "Даша", true, 0.05),
+		
+		"nikita"         : SpeakerData.new("nikita", "Замдекана по внеуч. работе", true, -0.05),
+		"nikita1"         : SpeakerData.new("nikita", "Никита", true, -0.05),
+		
+		"ya"         : SpeakerData.new("ya", "Замдекана по неработе", true, -0.1),
+		"ya1"         : SpeakerData.new("ya", "Дима", true, -0.1),
+		
+		"dimas"         : SpeakerData.new("dimas", "Димас Камбалин", true, -0.1),
+		
+		"grisha"         : SpeakerData.new("grisha", "Гриша", true, 0.0),
+		
+		"natasha"         : SpeakerData.new("natasha", "Наташа", true, 0.1),
 	}

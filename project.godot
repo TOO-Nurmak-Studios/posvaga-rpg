@@ -10,11 +10,11 @@ config_version=5
 
 [application]
 
-config/name="project-irtysh"
+config/name="???"
 config/name_localized={
 "ru_RU": "Проект \"ИРТЫШ\""
 }
-run/main_scene="res://explore_scene/Scenes/Institute_LabRoom_Start.tscn"
+run/main_scene="res://main_scene/Main.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="res://sprites/splash.png"
@@ -165,4 +165,4 @@ pause={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-environment/defaults/default_clear_color=Color(0, 0, 0, 1)
+environment/defaults/default_clear_color=Color(0.00784314, 0.0235294, 0.054902, 1)

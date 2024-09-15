@@ -32,6 +32,8 @@ func process_cutscene_step(step: CutsceneStep):
 			process_animation(step.params)
 		CutsceneStep.Type.REMV:
 			process_remove(step.params)
+		CutsceneStep.Type.SHOW:
+			process_show(step.params)
 		CutsceneStep.Type.SCEN:
 			process_change_scene(step.params)
 		CutsceneStep.Type.EXIT:
@@ -80,6 +82,10 @@ func process_animation(params: PackedStringArray):
 func process_remove(params: PackedStringArray):
 	var object = params[0] as String
 	EventBus.cutscene_remove_object.emit(object)
+
+func process_show(params: PackedStringArray):
+	var object = params[0] as String
+	EventBus.cutscene_show_object.emit(object)
 
 
 func process_change_scene(params: PackedStringArray):

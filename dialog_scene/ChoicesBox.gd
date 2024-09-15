@@ -24,6 +24,10 @@ func _process(delta):
 	pass
 
 func init(_choice_options: Array):
+	option_buttons[0].hide()
+	option_buttons[1].hide()
+	option_buttons[2].hide()
+	
 	var options_num = _choice_options.size()
 	var rect_width = rect.size.x
 	var rect_height = rect.size.y

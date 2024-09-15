@@ -32,8 +32,17 @@ func _ready():
 	EventBus.cutscene_move_start.connect(try_move_for_cutscene)
 	EventBus.cutscene_turn_start.connect(try_turn_for_cutscene)
 	EventBus.cutscene_remove_object.connect(try_remove_for_cutscene)
+	EventBus.cutscene_show_object.connect(try_show_for_cutscene)
+	EventBus.cutscene_animation_start.connect(try_animation_for_cutscene)
 
 	footsteps_player.set_sprint_speed_modifier(sprint_speed_modifier)
+
+func try_show_for_cutscene(object: String):
+	# matchn() instead of == for case-insensitive comparison
+	if !char_name.matchn(object):
+		return
+	show()
+	EventBus.cutscene_step_finished.emit()
 
 func try_remove_for_cutscene(object: String):
 	# matchn() instead of == for case-insensitive comparison
@@ -41,6 +50,13 @@ func try_remove_for_cutscene(object: String):
 		return
 	self.call_deferred("queue_free")
 	EventBus.cutscene_step_finished.emit()
+
+func try_animation_for_cutscene(object_name: String, animation_name: String):
+	if !char_name.matchn(object_name):
+		return
+
+	animation_node.play(animation_name)
+	EventBus.cutscene_animation_finished.emit()
 
 func try_move_for_cutscene(object: String, direction: String, distance: int, sprint: bool):
 	# matchn() instead of == for case-insensitive comparison

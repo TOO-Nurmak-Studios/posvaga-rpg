@@ -1,12 +1,9 @@
 [gd_resource type="SpriteFrames" load_steps=31 format=3 uid="uid://cqgbd40ox1kfj"]
 
 [ext_resource type="Texture2D" uid="uid://dv4l2s427sbq7" path="res://sprites/map/lida_front.png" id="1_busk1"]
+[ext_resource type="Texture2D" uid="uid://boapens8w00kn" path="res://sprites/map/prikol/grisha.png" id="1_i4bjm"]
 [ext_resource type="Texture2D" uid="uid://jekas8ajopn3" path="res://sprites/map/lida_side.png" id="2_c4bmu"]
 [ext_resource type="Texture2D" uid="uid://n240qp5vl1ai" path="res://sprites/map/lida_back.png" id="3_rkg8h"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ge62c"]
-atlas = ExtResource("1_busk1")
-region = Rect2(0, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7vws0"]
 atlas = ExtResource("2_c4bmu")
@@ -116,7 +113,7 @@ region = Rect2(336, 48, 48, 48)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ge62c")
+"texture": ExtResource("1_i4bjm")
 }],
 "loop": true,
 "name": &"idle_down",

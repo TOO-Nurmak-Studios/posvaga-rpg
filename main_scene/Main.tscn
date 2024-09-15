@@ -15,6 +15,7 @@ layer = 5
 
 [node name="shop" parent="." instance=ExtResource("3_csbbd")]
 layer = 4
+visible = false
 
 [node name="Dialog" parent="." instance=ExtResource("2_c1bjn")]
 
